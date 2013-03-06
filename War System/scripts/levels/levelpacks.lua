@@ -1,0 +1,4 @@
+main.levelpacks = {
+		    "test", 
+		    "ekivators",
+		  }

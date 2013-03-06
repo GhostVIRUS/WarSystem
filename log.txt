@@ -1,0 +1,456 @@
+ZOD Engine started at Mon Jul 30 16:41:47 2012
+
+----------------------------------------------
+Tank: Zone of Death (1.52.4+) Unofficial release
+Created main app window
+Mounting file system...
+Localization init...
+windows common controls initialization
+OpenGL initialization...
+Init direct sound...
+init direct input
+Creating checker texture...
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 122
+Constructing the level
+scripting subsystem initialization
+GUI subsystem initialization
+Running startup script 'scripts/init.lua'
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 133
+timer: start;  now stop count is 0
+main window deactivated
+Jussell замочил своего врага Chricto
+Logan замочил своего врага Jussell
+Sterenj замочил своего врага Logan
+Phillip замочил своего врага Sterenj
+Phillip замочил своего врага Sterenj
+Chricto замочил своего врага Logan
+Phillip замочил своего врага Jussell
+Глупый Phillip совершил самоубийство
+Глупый Chricto совершил самоубийство
+Logan замочил своего врага Sterenj
+Logan замочил своего врага Phillip
+Глупый Logan совершил самоубийство
+Глупый Chricto совершил самоубийство
+Jussell замочил своего врага Logan
+Phillip замочил своего врага Chricto
+Phillip замочил своего врага Jussell
+Logan замочил своего врага Sterenj
+Chricto замочил своего врага Phillip
+Chricto замочил своего врага Logan
+Chricto замочил своего врага Sterenj
+Глупый Chricto совершил самоубийство
+Phillip замочил своего врага Chricto
+Logan замочил своего врага Sterenj
+Jussell замочил своего врага Logan
+Глупый Phillip совершил самоубийство
+Глупый Jussell совершил самоубийство
+Chricto замочил своего врага Logan
+Phillip замочил своего врага Jussell
+Phillip замочил своего врага Chricto
+Sterenj замочил своего врага Phillip
+Sterenj замочил своего врага Jussell
+Chricto замочил своего врага Logan
+Chricto замочил своего врага Sterenj
+Chricto замочил своего врага Phillip
+Глупый Jussell совершил самоубийство
+Глупый Logan совершил самоубийство
+Phillip замочил своего врага Logan
+Jussell замочил своего врага Sterenj
+Глупый Phillip совершил самоубийство
+Jussell замочил своего врага Chricto
+main window activated
+Logan замочил своего врага Sterenj
+Logan замочил своего врага Phillip
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Основная миссия добавлена.
+data/campaign//War System//scripts/levels/map01/functions.lua:156: 'end' expected (to close 'function' at line 64) near '<eof>'
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+TIMER! 1
+TIMER! 2
+...mpaign//War System//scripts/levels/map01/startup.lua:45: attempt to call field 'LetDamageOurWarrior' (a nil value)
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Основная миссия добавлена.
+TIMER! 1
+TIMER! 2
+...mpaign//War System//scripts/levels/map01/startup.lua:46: object of type 'ai' has no property 'on_damage'
+Подсказка: Это камера с оружием, для её открытия нужен код.
+main window deactivated
+main window activated
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Основная миссия добавлена.
+TIMER! 1
+TIMER! 2
+Подсказка: Это камера с оружием, для её открытия нужен код.
+Подсказка: Это КПП. Такая штука всегда стоит на домах и других постройках.
+Дополнительная миссия обновлена.
+Поселенец: Проезжай и доложи нашему командиру о своём присутствии.
+Поселенец: Не мешай контролировать территорию.
+TIMER! 1
+Дополнительная миссия выполнена.
+Дополнительная миссия добавлена.
+Дополнительная миссия выполнена.
+Дополнительная миссия добавлена.
+...ign//War System//scripts/levels/map01/screenplay.lua:50: object with name 'cklad' does not exist
+Подсказка: У поселенцев есть все на случай войны! Где они все это берут?
+Поселенец: Эй! Не стреляй по своим!!
+Поселенец: Ты что не понял?! Не стреляй по поселенцем!!!
+Поселенец: Последнее предупреждение! Хватит стрелять по своим!!!
+Командир поселенцев: Он предатель, бей его!
+Поселенец: У нас работы много.
+TIMER! 1
+Поселенец замочил своего врага Тестер
+...aign//War System//scripts/levels/map01/functions.lua:52: object with name 'ourplayer' does not exist
+Поселенец замочил своего врага Командир поселения
+main window deactivated
+main window activated
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Основная миссия добавлена.
+TIMER! 1
+TIMER! 2
+Подсказка: Это камера с оружием, для её открытия нужен код.
+Подсказка: Это КПП. Такая штука всегда стоит на домах и других постройках.
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+Дополнительная миссия обновлена.
+Поселенец: Проезжай и доложи нашему командиру о своём присутствии.
+Подсказка: У поселенцев есть все на случай войны! Где они все это берут?
+Дополнительная миссия выполнена.
+Дополнительная миссия добавлена.
+...ign//War System//scripts/levels/map01/screenplay.lua:52: object with name 'c_trig' does not exist
+Халос: ААААААААААААААА!!!!!!!!!!!
+Поселенец: Командир ждёт Вас.
+TIMER! 1
+Поселенец замочил своего врага Командир поселения
+Вы нашли мину
+Вы нашли ПЭРК
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Основная миссия добавлена.
+TIMER! 1
+TIMER! 2
+Подсказка: Это камера с оружием, для её открытия нужен код.
+Подсказка: Это КПП. Такая штука всегда стоит на домах и других постройках.
+Дополнительная миссия обновлена.
+Поселенец: Проезжай и доложи нашему командиру о своём присутствии.
+Подсказка: У поселенцев есть все на случай войны! Где они все это берут?
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Основная миссия добавлена.
+TIMER! 1
+TIMER! 2
+Подсказка: Это камера с оружием, для её открытия нужен код.
+Подсказка: Это КПП. Такая штука всегда стоит на домах и других постройках.
+Дополнительная миссия обновлена.
+Поселенец: Проезжай и доложи нашему командиру о своём присутствии.
+Подсказка: У поселенцев есть все на случай войны! Где они все это берут?
+Дополнительная миссия выполнена.
+Дополнительная миссия добавлена.
+Халос: ААААААААААААААА!!!!!!!!!!!
+Подсказка: Вы собрали 1 батарею.
+...aign//War System//scripts/levels/map01/functions.lua:72: attempt to call field 'Active' (a nil value)
+Поселенец замочил своего врага Командир поселения
+Screenshot 'screenshot0002.tga'
+main window deactivated
+main window activated
+> function level.WarriorsSetActive(act)
+	for i = 1, 4 do
+		if exists("ourwarrior"..i) then 
+			object("ourwarrior"..i).active = act
+			func.NPC.Action("ourwarrior"..i)
+		end
+	end
+end
+main window deactivated
+main window activated
+> level.WarriorsSetActive(0)
+...ata/campaign//War System//scripts/main/functions.lua:494: object with name 'ourwarrior3_act_trig1' does not exist
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+> function level.WarriorsSetActive(act)
+	for i = 1, 4 do
+		if exists("ourwarrior"..i) and i~=3 then 
+			object("ourwarrior"..i).active = act
+			func.NPC.Action("ourwarrior"..i)
+		end
+	end
+end
+> level.WarriorsSetActive(0)
+Поселенец: Доложи нашему командиру о своём присутствии.
+TIMER! 1
+Screenshot 'screenshot0003.tga'
+main window deactivated
+main window activated
+Screenshot 'screenshot0004.tga'
+Поселенец: Доложи нашему командиру о своём присутствии.
+TIMER! 1
+Поселенец: Не мешай контролировать территорию.
+main window deactivated
+main window activated
+TIMER! 1
+Поселенец: Командир ждёт Вас.
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Основная миссия добавлена.
+TIMER! 1
+TIMER! 2
+main window deactivated
+main window activated
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+data/campaign//War System//scripts/dialogs/map01.lua:92: '}' expected (to close '{' at line 87) near 'energycells'
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+data/campaign//War System//scripts/dialogs/map01.lua:120: '}' expected (to close '{' at line 1) near '<eof>'
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+data/campaign//War System//scripts/dialogs/map01.lua:120: unexpected symbol near '<eof>'
+main window deactivated
+main window activated
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Loading texture package 'scripts/textures.lua'
+Total number of loaded textures: 195
+Loading texture package 'grass.lua'
+Total number of loaded textures: 195
+Loading texture package 'campaign//War System//scripts/textures/map01.lua'
+WARNING: could not load texture 'campaign/War System/skins/player.tga' - Не удается найти указанный файл.
+
+Total number of loaded textures: 195
+Основная миссия добавлена.
+TIMER! 1
+TIMER! 2
+main window deactivated
+main window activated
+Подсказка: Это камера с оружием, для её открытия нужен код.
+Подсказка: Это КПП. Такая штука всегда стоит на домах и других постройках.
+Дополнительная миссия обновлена.
+Поселенец: Проезжай и доложи нашему командиру о своём присутствии.
+Подсказка: У поселенцев есть все на случай войны! Где они все это берут?
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+Дополнительная миссия выполнена.
+Дополнительная миссия добавлена.
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+...ata/campaign//War System//scripts/main/functions.lua:596: bad argument #1 to 'rawget' (table expected, got nil)
+...ata/campaign//War System//scripts/main/functions.lua:599: bad argument #1 to 'rawget' (table expected, got nil)
+Халос: ААААААААААААААА!!!!!!!!!!!
+Поселенец: Командир ждёт Вас.
+TIMER! 1
+Поселенец: У нас работы много.
+TIMER! 1
+main window deactivated
+main window activated
+> level.dialog.map01.damagespea
+nil
+> level.dialog.map01.damagespeaл
+nil
+Поселенец замочил своего врага Командир поселения
+> level.dialog.map01.damagespeak
+nil
+main window deactivated
+main window activated
+...ata/campaign//War System//scripts/main/functions.lua:602: bad argument #1 to 'rawget' (table expected, got nil)
+Поселенец: Командир ждёт Вас.
+Подсказка: Вы собрали 1 батарею.
+Тестер замочил своего врага Поселенец
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+Подсказка: Это какие-то руины.
+Вы нашли мину
+main window deactivated
+main window activated
+Вы нашли ПЭРК
+main window deactivated
+main window activated
+Тестер замочил своего врага Поселенец
+main window deactivated
+main window activated
+Тестер замочил своего врага Поселенец
+...ata/campaign//War System//scripts/main/functions.lua:518: object with name 'ourwarrior2_tank' does not exist
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+Вы нашли ПЭРК
+...ata/campaign//War System//scripts/main/functions.lua:389: object with name 'bonus_healthpack2' does not exist
+Вы нашли ПЭРК
+...ata/campaign//War System//scripts/main/functions.lua:389: object with name 'bonus_healthpack2' does not exist
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+> func.hpNum
+2
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+main window activated
+main window deactivated
+Shutting down GUI subsystem
+Shutting down the scripting subsystem
+Destroying the level
+free direct sound...
+Shutting down the renderer
+Saving config to 'config.cfg'
+Unmounting the file system
+Exit.

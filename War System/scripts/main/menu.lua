@@ -1,8 +1,8 @@
---Меню кампании War System
+--РњРµРЅСЋ РєР°РјРїР°РЅРёРё War System
 --By VIRUS
 
 ------------------------------------------------------------------------------------------
-------------------------------------ОСНОВНОЕ----------------------------------------------
+------------------------------------РћРЎРќРћР’РќРћР•----------------------------------------------
 ------------------------------------------------------------------------------------------
 
 function main.menu.Main(n)
@@ -13,7 +13,7 @@ function main.menu.Main(n)
 end
 
 function main.menu.Game(n)
-    main.menuservice.names="Новая игра|Загрузить|Режимы|Левелпаки|Назад"
+    main.menuservice.names="РќРѕРІР°СЏ РёРіСЂР°|Р—Р°РіСЂСѓР·РёС‚СЊ|Р РµР¶РёРјС‹|Р›РµРІРµР»РїР°РєРё|РќР°Р·Р°Рґ"
     main.menuservice.on_select="main.menu.Game(n)"
     main.menuservice.title="splash_game"
     main.menu.section = "game"
@@ -28,7 +28,7 @@ function main.menu.Game(n)
 end
 
 function main.menu.Stages(n)
-    main.menuservice.names="ДМ|Миссии|Левелпаки|Назад"
+    main.menuservice.names="Р”Рњ|РњРёСЃСЃРёРё|Р›РµРІРµР»РїР°РєРё|РќР°Р·Р°Рґ"
     main.menuservice.on_select="main.menu.Stages(n)"
     main.menuservice.title="splash_game"
     main.menu.section = "game"
@@ -42,7 +42,7 @@ function main.menu.Stages(n)
 end
 
 function main.menu.BackStart()
-        main.menuservice.names = "Игра|Игровые функции|Помощь"
+        main.menuservice.names = "РРіСЂР°|РРіСЂРѕРІС‹Рµ С„СѓРЅРєС†РёРё|РџРѕРјРѕС‰СЊ"
         main.menuservice.on_select = "main.menu.Main(n)"
         main.menuservice.title = "splash"
         main.menu.section = "menu"
@@ -57,7 +57,7 @@ function main.menu.NewGame()
 end
 
 function main.menu.GameOpt(n)
-    main.menuservice.names="Почта|Инвентарь|Задания|Читы|Назад"
+    main.menuservice.names="РџРѕС‡С‚Р°|РРЅРІРµРЅС‚Р°СЂСЊ|Р—Р°РґР°РЅРёСЏ|Р§РёС‚С‹|РќР°Р·Р°Рґ"
     main.menuservice.on_select="main.menu.GameOpt(n)"
     main.menuservice.title="splash_gf"
     main.menu.section = "gameopt"
@@ -72,7 +72,7 @@ function main.menu.GameOpt(n)
 end
 
 function main.menu.Cheats(n)
-    main.menuservice.names="Перезапуск|Предметы|Сюжетные|Godmode|Назад"
+    main.menuservice.names="РџРµСЂРµР·Р°РїСѓСЃРє|РџСЂРµРґРјРµС‚С‹|РЎСЋР¶РµС‚РЅС‹Рµ|Godmode|РќР°Р·Р°Рґ"
     main.menuservice.on_select="main.menu.Cheats(n)"
     main.menuservice.title="splash_gf"
     main.menu.section = "cheats"
@@ -103,9 +103,9 @@ function main.menu.CheatsItems(n)
                 	name="cheatbox", 
                 	text=item,
                 	on_select="if n ~= 3 then main.menu.CheatsItems(n) else main.levelpack.default = rawget(main.levelpacks, main.levelpack.botreduce) end",
-                	option1="Назад",
-                	option2="Вперёд",
-                	option3="Выбрать" } )
+                	option1="РќР°Р·Р°Рґ",
+                	option2="Р’РїРµСЂС‘Рґ",
+                	option3="Р’С‹Р±СЂР°С‚СЊ" } )
 end
 
 function main.menu.ReloadScripts()
@@ -122,7 +122,7 @@ function main.menu.ReloadScripts()
 end
 
 function main.menu.Help(n)
-    main.menuservice.names="Описание|Бонусы|Предметы|О кампании|Назад"
+    main.menuservice.names="РћРїРёСЃР°РЅРёРµ|Р‘РѕРЅСѓСЃС‹|РџСЂРµРґРјРµС‚С‹|Рћ РєР°РјРїР°РЅРёРё|РќР°Р·Р°Рґ"
     main.menuservice.on_select="main.menu.Help(n)"
     main.menuservice.title="splash_help"
     main.menu.section = "help"
@@ -137,15 +137,15 @@ function main.menu.Help(n)
 end
 
 function main.menu.Missions()
-        service("msgbox", {text="\n Основные задачи:\n" ..main.missions.mainMission.."\n Дополнительные задачи: \n"..main.missions.extraMission.."\n"})
+        service("msgbox", {text="\n РћСЃРЅРѕРІРЅС‹Рµ Р·Р°РґР°С‡Рё:\n" ..main.missions.mainMission.."\n Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ Р·Р°РґР°С‡Рё: \n"..main.missions.extraMission.."\n"})
 end
 
 ------------------------------------------------------------------------------------------
-------------------------------------ПОМОЩЬ------------------------------------------------
+------------------------------------РџРћРњРћР©Р¬------------------------------------------------
 ------------------------------------------------------------------------------------------
 
 function main.menu.History(n)
-        main.menuservice.names="Люди|Экиваторы|Дассоваторы|Лораторы|Назад"
+        main.menuservice.names="Р›СЋРґРё|Р­РєРёРІР°С‚РѕСЂС‹|Р”Р°СЃСЃРѕРІР°С‚РѕСЂС‹|Р›РѕСЂР°С‚РѕСЂС‹|РќР°Р·Р°Рґ"
         main.menuservice.on_select="main.menu.History(n)"
         main.menuservice.title="splash_history"
         main.menu.Refresh()
@@ -159,7 +159,7 @@ function main.menu.History(n)
                 main.menu.Refresh()
         elseif n == 4 then main.menuservice.title="splash_lorator"
                 main.menu.Refresh()
-        else main.menuservice.names="Описание|Бонусы|Предметы|О кампании|Назад"
+        else main.menuservice.names="РћРїРёСЃР°РЅРёРµ|Р‘РѕРЅСѓСЃС‹|РџСЂРµРґРјРµС‚С‹|Рћ РєР°РјРїР°РЅРёРё|РќР°Р·Р°Рґ"
                  main.menuservice.on_select="main.menu.Help(n)"
                  main.menuservice.title="splash_help"
                  main.menu.Refresh()
@@ -169,7 +169,7 @@ end
 
 
 function main.menu.Boosts(n)
-    main.menuservice.names="ПЭРК|Усилитель|Lam|Броня|Назад"
+    main.menuservice.names="РџР­Р Рљ|РЈСЃРёР»РёС‚РµР»СЊ|Lam|Р‘СЂРѕРЅСЏ|РќР°Р·Р°Рґ"
     main.menuservice.on_select="main.menu.Boosts(n)"
     main.menuservice.title="splash_boosts"
     main.menu.Refresh()
@@ -190,12 +190,12 @@ function main.menu.Boosts(n)
         else 
                         main.menu.BackHelp()
     end
---service("msgbox", {text=" ПЭРК - Портативный Электронный Регенерирующий Комплекс, \nсовременный механизм, практически моментально полностью чинит любую технику, \nпосле использования полностью разряжается и выходит их строя. \n Энергетический усилитель - улучшает любой тип оружия, \nделая его смертоносным для любого вида брони. \nСтарая разработка работает 20 секунд и выходит из строя после использования. \nВ секретных лабораториях ведутся разработки по улучшению усилителя. \n LAM - лёгкая портативная взрывчатка, имеет малый размер и вес. \nПлазмо-энергетический поток способен взрывать твёрдые и прочные предметы. \nЕсть возмоность разминирования."})
+--service("msgbox", {text=" РџР­Р Рљ - РџРѕСЂС‚Р°С‚РёРІРЅС‹Р№ Р­Р»РµРєС‚СЂРѕРЅРЅС‹Р№ Р РµРіРµРЅРµСЂРёСЂСѓСЋС‰РёР№ РљРѕРјРїР»РµРєСЃ, \nСЃРѕРІСЂРµРјРµРЅРЅС‹Р№ РјРµС…Р°РЅРёР·Рј, РїСЂР°РєС‚РёС‡РµСЃРєРё РјРѕРјРµРЅС‚Р°Р»СЊРЅРѕ РїРѕР»РЅРѕСЃС‚СЊСЋ С‡РёРЅРёС‚ Р»СЋР±СѓСЋ С‚РµС…РЅРёРєСѓ, \nРїРѕСЃР»Рµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РїРѕР»РЅРѕСЃС‚СЊСЋ СЂР°Р·СЂСЏР¶Р°РµС‚СЃСЏ Рё РІС‹С…РѕРґРёС‚ РёС… СЃС‚СЂРѕСЏ. \n Р­РЅРµСЂРіРµС‚РёС‡РµСЃРєРёР№ СѓСЃРёР»РёС‚РµР»СЊ - СѓР»СѓС‡С€Р°РµС‚ Р»СЋР±РѕР№ С‚РёРї РѕСЂСѓР¶РёСЏ, \nРґРµР»Р°СЏ РµРіРѕ СЃРјРµСЂС‚РѕРЅРѕСЃРЅС‹Рј РґР»СЏ Р»СЋР±РѕРіРѕ РІРёРґР° Р±СЂРѕРЅРё. \nРЎС‚Р°СЂР°СЏ СЂР°Р·СЂР°Р±РѕС‚РєР° СЂР°Р±РѕС‚Р°РµС‚ 20 СЃРµРєСѓРЅРґ Рё РІС‹С…РѕРґРёС‚ РёР· СЃС‚СЂРѕСЏ РїРѕСЃР»Рµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ. \nР’ СЃРµРєСЂРµС‚РЅС‹С… Р»Р°Р±РѕСЂР°С‚РѕСЂРёСЏС… РІРµРґСѓС‚СЃСЏ СЂР°Р·СЂР°Р±РѕС‚РєРё РїРѕ СѓР»СѓС‡С€РµРЅРёСЋ СѓСЃРёР»РёС‚РµР»СЏ. \n LAM - Р»С‘РіРєР°СЏ РїРѕСЂС‚Р°С‚РёРІРЅР°СЏ РІР·СЂС‹РІС‡Р°С‚РєР°, РёРјРµРµС‚ РјР°Р»С‹Р№ СЂР°Р·РјРµСЂ Рё РІРµСЃ. \nРџР»Р°Р·РјРѕ-СЌРЅРµСЂРіРµС‚РёС‡РµСЃРєРёР№ РїРѕС‚РѕРє СЃРїРѕСЃРѕР±РµРЅ РІР·СЂС‹РІР°С‚СЊ С‚РІС‘СЂРґС‹Рµ Рё РїСЂРѕС‡РЅС‹Рµ РїСЂРµРґРјРµС‚С‹. \nР•СЃС‚СЊ РІРѕР·РјРѕРЅРѕСЃС‚СЊ СЂР°Р·РјРёРЅРёСЂРѕРІР°РЅРёСЏ."})
 end
 
 
 function main.menu.Things(n)
-    main.menuservice.names="Батарея|Ключ-карта|Назад"
+    main.menuservice.names="Р‘Р°С‚Р°СЂРµСЏ|РљР»СЋС‡-РєР°СЂС‚Р°|РќР°Р·Р°Рґ"
     main.menuservice.on_select="main.menu.Things(n)"
     main.menuservice.title="splash_things"
     main.menu.Refresh()
@@ -212,38 +212,38 @@ function main.menu.Things(n)
 end
 
 function main.menu.About()
---user.menuservice.names="Назад"
+--user.menuservice.names="РќР°Р·Р°Рґ"
 --user.menuservice.on_select="user.About()"
 --user.menuservice.title="splash_about"
 --user.Refresh()
 --if n == nil then return end
---else user.menuservice.names="Описание|Бонусы|Предметы|О кампании|Назад"
+--else user.menuservice.names="РћРїРёСЃР°РЅРёРµ|Р‘РѕРЅСѓСЃС‹|РџСЂРµРґРјРµС‚С‹|Рћ РєР°РјРїР°РЅРёРё|РќР°Р·Р°Рґ"
 --     user.menuservice.on_select="user.Help(n)"
 --     user.menuservice.title="splash_help"
 --       user.Refresh()
 --end
 --end
     service("msgbox", {
-                text=" Кампания War System создавалась как дополнение к неофициалоной версии TZOD by Anti_Killer. \nВ ёе создании использовались самые необычные скрипты и решения, \nдля содания красочного нелинейного сюжета. \nРабота над ней велась очень долго и мы надеемся что она вам понравилась. \nВсе коментарии оставляйте на официальном форуме игры (zod.borda.ru) в теме кампании. \n\n     War System: Ekivator Campaign                     Version 1 alpha \n                                   By Sl@v@98 and VIRUS" } )
+                text=" РљР°РјРїР°РЅРёСЏ War System СЃРѕР·РґР°РІР°Р»Р°СЃСЊ РєР°Рє РґРѕРїРѕР»РЅРµРЅРёРµ Рє РЅРµРѕС„РёС†РёР°Р»РѕРЅРѕР№ РІРµСЂСЃРёРё TZOD by Anti_Killer. \nР’ С‘Рµ СЃРѕР·РґР°РЅРёРё РёСЃРїРѕР»СЊР·РѕРІР°Р»РёСЃСЊ СЃР°РјС‹Рµ РЅРµРѕР±С‹С‡РЅС‹Рµ СЃРєСЂРёРїС‚С‹ Рё СЂРµС€РµРЅРёСЏ, \nРґР»СЏ СЃРѕРґР°РЅРёСЏ РєСЂР°СЃРѕС‡РЅРѕРіРѕ РЅРµР»РёРЅРµР№РЅРѕРіРѕ СЃСЋР¶РµС‚Р°. \nР Р°Р±РѕС‚Р° РЅР°Рґ РЅРµР№ РІРµР»Р°СЃСЊ РѕС‡РµРЅСЊ РґРѕР»РіРѕ Рё РјС‹ РЅР°РґРµРµРјСЃСЏ С‡С‚Рѕ РѕРЅР° РІР°Рј РїРѕРЅСЂР°РІРёР»Р°СЃСЊ. \nР’СЃРµ РєРѕРјРµРЅС‚Р°СЂРёРё РѕСЃС‚Р°РІР»СЏР№С‚Рµ РЅР° РѕС„РёС†РёР°Р»СЊРЅРѕРј С„РѕСЂСѓРјРµ РёРіСЂС‹ (zod.borda.ru) РІ С‚РµРјРµ РєР°РјРїР°РЅРёРё. \n\n     War System: Ekivator Campaign                     Version 1 alpha \n                                   By Sl@v@98 and VIRUS" } )
 end
 
 function main.menu.BackHelp()
-        main.menuservice.names="Описание|Бонусы|Предметы|О кампании|Назад"
+        main.menuservice.names="РћРїРёСЃР°РЅРёРµ|Р‘РѕРЅСѓСЃС‹|РџСЂРµРґРјРµС‚С‹|Рћ РєР°РјРїР°РЅРёРё|РќР°Р·Р°Рґ"
         main.menuservice.on_select="main.menu.Help(n)"
         main.menuservice.title="splash_help"
 		main.menu.section="help"
         main.menu.Refresh()
 end
 ------------------------------------------------------------------------------------------
----------------------------------------ПОЧТА----------------------------------------------
+---------------------------------------РџРћР§РўРђ----------------------------------------------
 ------------------------------------------------------------------------------------------
 
---*Эта муть -  недоделанный PDA. Впоследствии возможно будет переделан. Пока пусть будет хотя бы такой. (31.10.10, Sl@v@98)
---*У меня вышла удачная попытка сделать почту. Она нормально высвечивает 1-ое сообщение. (02.10.10, Sl@v@98)
---*Почта готова! Большое спасибо Антикиллеру! Осталось только сделать, чтобы письма приходили и, конечно сами письма =) (08.10.10, Sl@v@98)
+--*Р­С‚Р° РјСѓС‚СЊ -  РЅРµРґРѕРґРµР»Р°РЅРЅС‹Р№ PDA. Р’РїРѕСЃР»РµРґСЃС‚РІРёРё РІРѕР·РјРѕР¶РЅРѕ Р±СѓРґРµС‚ РїРµСЂРµРґРµР»Р°РЅ. РџРѕРєР° РїСѓСЃС‚СЊ Р±СѓРґРµС‚ С…РѕС‚СЏ Р±С‹ С‚Р°РєРѕР№. (31.10.10, Sl@v@98)
+--*РЈ РјРµРЅСЏ РІС‹С€Р»Р° СѓРґР°С‡РЅР°СЏ РїРѕРїС‹С‚РєР° СЃРґРµР»Р°С‚СЊ РїРѕС‡С‚Сѓ. РћРЅР° РЅРѕСЂРјР°Р»СЊРЅРѕ РІС‹СЃРІРµС‡РёРІР°РµС‚ 1-РѕРµ СЃРѕРѕР±С‰РµРЅРёРµ. (02.10.10, Sl@v@98)
+--*РџРѕС‡С‚Р° РіРѕС‚РѕРІР°! Р‘РѕР»СЊС€РѕРµ СЃРїР°СЃРёР±Рѕ РђРЅС‚РёРєРёР»Р»РµСЂСѓ! РћСЃС‚Р°Р»РѕСЃСЊ С‚РѕР»СЊРєРѕ СЃРґРµР»Р°С‚СЊ, С‡С‚РѕР±С‹ РїРёСЃСЊРјР° РїСЂРёС…РѕРґРёР»Рё Рё, РєРѕРЅРµС‡РЅРѕ СЃР°РјРё РїРёСЃСЊРјР° =) (08.10.10, Sl@v@98)
 function main.menu.MailBox(n)
     if main.mail.letUseMail == 0 then
-        service("msgbox", {text="\nПочта не доступна вне начатой игры.\n" } )
+        service("msgbox", {text="\nРџРѕС‡С‚Р° РЅРµ РґРѕСЃС‚СѓРїРЅР° РІРЅРµ РЅР°С‡Р°С‚РѕР№ РёРіСЂС‹.\n" } )
     else
         if exists("mail_messagebox") == true then
             kill("mail_messagebox")
@@ -269,22 +269,22 @@ function main.menu.MailBox(n)
                 name="mail_messagebox", 
                 text=main.mail.message,
                 on_select="if n ~= 3 then main.menu.MailBox(n) end",
-                option1="Назад",
-                option2="Вперёд",
-                option3="Закрыть" } )
+                option1="РќР°Р·Р°Рґ",
+                option2="Р’РїРµСЂС‘Рґ",
+                option3="Р—Р°РєСЂС‹С‚СЊ" } )
     end
 end
 
 function main.mail.Message(messageNum)
         print(messageNum)
         if messageNum == nil then return
-        elseif messageNum > main.mail.letViewMessage then main.mail.message = "Пустое сообщение"
+        elseif messageNum > main.mail.letViewMessage then main.mail.message = "РџСѓСЃС‚РѕРµ СЃРѕРѕР±С‰РµРЅРёРµ"
         else
-                if messageNum == 1 then main.mail.message="\n                              Сообщение №1\n                        От кого: Завод по изготовлению машин \n                         Тема: Танк ЭКО-451 \n Здраствуйте, элитный боец Экиваторов!\n Для Вас мы изготовили специальный танк для поиска отстатков энергии.\n Танк ЭКО-5 обладает почти всеми новейшими технологиями для поиска энергии.\n Он имеет фиксированный прицел AI780, неоновый двигатель ZIP-200,\n антенну для почты TROO v6, новейшими боковыми защитными экранами QDM1,\n ГПКЗ-5 (Глобальную Противоснарядную Кормовую Защиту),\n индикаторы для поиска энергетичких батарей и мин,\n а также много места для перевозки большое количество батарей и не только.\n Пушкой Ваш танк не оснащаем для экономности. \n Если Вам её дадут, не забывайте о правилах стрельбы!"
-                elseif messageNum == 2 then main.mail.message = "\n                              Сообщение №2\n                        От кого: Генерал Орон \n                         Тема: Ваши функции \n Здраствуйте, солдат ЭВЭ. Я Генерал Орон, меня назначили вашим командиром.\n Я думаю, вы знаете о энергитическом кризисе и о наших временах после него. \n ЭВЭ послала вас добывать энергию на нашей планете. \n Как только вы найдёте энергию или ещё что-нибудь интересное, \n сообщите в нашу энергетическую службу или мне. \n В случае военных дейвствий слушайтесь ближайшего высшего бойца Экиваторов \n и свяжитесь со мной как можно быстрей. \n Вам разрешено вступать в контакт с местным населением.  \n При возможности найдите источники связи (спутниковая тарелка, например). " --почти как на уроках ОБЖ =D
-                elseif messageNum == 3 then main.mail.message = "\n                              Сообщение №3\n                        От кого: Сержант, командир боевого поселения, Халос \n                         Тема: Нападение\n Внимание всем бойцам! Было замечено нападение в виде подрыва защитной стены!\n И неизвестные войска продвигаются в поселение! Это не учебная тревога!\n Всем бригадам приготовиться к бою! Враг пока неизвестен,\n но сейчас защитить поселение!"
---              elseif messageNum == 4 then main.mail.message = "\n                              Сообщение №4\n                        От кого: Генерал Орон \n                         Тема: Нападение\n Здраствуйте, боец Экиваторов.\n Прежде всего, спасибо, что помогли сдержать нападение и сообщили мне.\n Такое нападение произошло не только у вас!\n Рядом с вами, в области 396, было совершено нападение на ЦЛГ и таможню\n и передвинута лазерная граница. Противник, насколько известено - повстанцы.\n Они захватили наш энергоблок и потом пошли дальше, напав на ваше поселение.\n Скоро у нас совсем не хватит энергии!\n Отберите энергоблок у повстанцев!"
-                elseif messageNum == 4 then main.mail.message = "\n                                        Сообщение №4\n                                  От кого: Sl@v@98 и VIRUS \n                                   Тема: Прохождение  \nСпасибо, что прошли демо-версию кампании War System. \n Мы её долго создавали, и мы надеемся, что вы прошли WS без дополнений к картам и своих скриптов. \n О багах сообщайте в тему кампании http://zod.borda.ru/?1-8-0-00000017-000-0-0-1288602334 \n Спасибо: \n- Insert'у - за игру \n- Morse - за помощь в скриптах \n- AntiKiller'у - за новую версию игры и помощь в скриптах \n Ждите полную версию кампании за Экиваторов! \n                          VIRUS (автор идеи, скриптер, мапер) и Sl@v@98 (скриптер, художник, мапер)."       
+                if messageNum == 1 then main.mail.message="\n                              РЎРѕРѕР±С‰РµРЅРёРµ в„–1\n                        РћС‚ РєРѕРіРѕ: Р—Р°РІРѕРґ РїРѕ РёР·РіРѕС‚РѕРІР»РµРЅРёСЋ РјР°С€РёРЅ \n                         РўРµРјР°: РўР°РЅРє Р­РљРћ-451 \n Р—РґСЂР°СЃС‚РІСѓР№С‚Рµ, СЌР»РёС‚РЅС‹Р№ Р±РѕРµС† Р­РєРёРІР°С‚РѕСЂРѕРІ!\n Р”Р»СЏ Р’Р°СЃ РјС‹ РёР·РіРѕС‚РѕРІРёР»Рё СЃРїРµС†РёР°Р»СЊРЅС‹Р№ С‚Р°РЅРє РґР»СЏ РїРѕРёСЃРєР° РѕС‚СЃС‚Р°С‚РєРѕРІ СЌРЅРµСЂРіРёРё.\n РўР°РЅРє Р­РљРћ-5 РѕР±Р»Р°РґР°РµС‚ РїРѕС‡С‚Рё РІСЃРµРјРё РЅРѕРІРµР№С€РёРјРё С‚РµС…РЅРѕР»РѕРіРёСЏРјРё РґР»СЏ РїРѕРёСЃРєР° СЌРЅРµСЂРіРёРё.\n РћРЅ РёРјРµРµС‚ С„РёРєСЃРёСЂРѕРІР°РЅРЅС‹Р№ РїСЂРёС†РµР» AI780, РЅРµРѕРЅРѕРІС‹Р№ РґРІРёРіР°С‚РµР»СЊ ZIP-200,\n Р°РЅС‚РµРЅРЅСѓ РґР»СЏ РїРѕС‡С‚С‹ TROO v6, РЅРѕРІРµР№С€РёРјРё Р±РѕРєРѕРІС‹РјРё Р·Р°С‰РёС‚РЅС‹РјРё СЌРєСЂР°РЅР°РјРё QDM1,\n Р“РџРљР—-5 (Р“Р»РѕР±Р°Р»СЊРЅСѓСЋ РџСЂРѕС‚РёРІРѕСЃРЅР°СЂСЏРґРЅСѓСЋ РљРѕСЂРјРѕРІСѓСЋ Р—Р°С‰РёС‚Сѓ),\n РёРЅРґРёРєР°С‚РѕСЂС‹ РґР»СЏ РїРѕРёСЃРєР° СЌРЅРµСЂРіРµС‚РёС‡РєРёС… Р±Р°С‚Р°СЂРµР№ Рё РјРёРЅ,\n Р° С‚Р°РєР¶Рµ РјРЅРѕРіРѕ РјРµСЃС‚Р° РґР»СЏ РїРµСЂРµРІРѕР·РєРё Р±РѕР»СЊС€РѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р±Р°С‚Р°СЂРµР№ Рё РЅРµ С‚РѕР»СЊРєРѕ.\n РџСѓС€РєРѕР№ Р’Р°С€ С‚Р°РЅРє РЅРµ РѕСЃРЅР°С‰Р°РµРј РґР»СЏ СЌРєРѕРЅРѕРјРЅРѕСЃС‚Рё. \n Р•СЃР»Рё Р’Р°Рј РµС‘ РґР°РґСѓС‚, РЅРµ Р·Р°Р±С‹РІР°Р№С‚Рµ Рѕ РїСЂР°РІРёР»Р°С… СЃС‚СЂРµР»СЊР±С‹!"
+                elseif messageNum == 2 then main.mail.message = "\n                              РЎРѕРѕР±С‰РµРЅРёРµ в„–2\n                        РћС‚ РєРѕРіРѕ: Р“РµРЅРµСЂР°Р» РћСЂРѕРЅ \n                         РўРµРјР°: Р’Р°С€Рё С„СѓРЅРєС†РёРё \n Р—РґСЂР°СЃС‚РІСѓР№С‚Рµ, СЃРѕР»РґР°С‚ Р­Р’Р­. РЇ Р“РµРЅРµСЂР°Р» РћСЂРѕРЅ, РјРµРЅСЏ РЅР°Р·РЅР°С‡РёР»Рё РІР°С€РёРј РєРѕРјР°РЅРґРёСЂРѕРј.\n РЇ РґСѓРјР°СЋ, РІС‹ Р·РЅР°РµС‚Рµ Рѕ СЌРЅРµСЂРіРёС‚РёС‡РµСЃРєРѕРј РєСЂРёР·РёСЃРµ Рё Рѕ РЅР°С€РёС… РІСЂРµРјРµРЅР°С… РїРѕСЃР»Рµ РЅРµРіРѕ. \n Р­Р’Р­ РїРѕСЃР»Р°Р»Р° РІР°СЃ РґРѕР±С‹РІР°С‚СЊ СЌРЅРµСЂРіРёСЋ РЅР° РЅР°С€РµР№ РїР»Р°РЅРµС‚Рµ. \n РљР°Рє С‚РѕР»СЊРєРѕ РІС‹ РЅР°Р№РґС‘С‚Рµ СЌРЅРµСЂРіРёСЋ РёР»Рё РµС‰С‘ С‡С‚Рѕ-РЅРёР±СѓРґСЊ РёРЅС‚РµСЂРµСЃРЅРѕРµ, \n СЃРѕРѕР±С‰РёС‚Рµ РІ РЅР°С€Сѓ СЌРЅРµСЂРіРµС‚РёС‡РµСЃРєСѓСЋ СЃР»СѓР¶Р±Сѓ РёР»Рё РјРЅРµ. \n Р’ СЃР»СѓС‡Р°Рµ РІРѕРµРЅРЅС‹С… РґРµР№РІСЃС‚РІРёР№ СЃР»СѓС€Р°Р№С‚РµСЃСЊ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹СЃС€РµРіРѕ Р±РѕР№С†Р° Р­РєРёРІР°С‚РѕСЂРѕРІ \n Рё СЃРІСЏР¶РёС‚РµСЃСЊ СЃРѕ РјРЅРѕР№ РєР°Рє РјРѕР¶РЅРѕ Р±С‹СЃС‚СЂРµР№. \n Р’Р°Рј СЂР°Р·СЂРµС€РµРЅРѕ РІСЃС‚СѓРїР°С‚СЊ РІ РєРѕРЅС‚Р°РєС‚ СЃ РјРµСЃС‚РЅС‹Рј РЅР°СЃРµР»РµРЅРёРµРј.  \n РџСЂРё РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РЅР°Р№РґРёС‚Рµ РёСЃС‚РѕС‡РЅРёРєРё СЃРІСЏР·Рё (СЃРїСѓС‚РЅРёРєРѕРІР°СЏ С‚Р°СЂРµР»РєР°, РЅР°РїСЂРёРјРµСЂ). " --РїРѕС‡С‚Рё РєР°Рє РЅР° СѓСЂРѕРєР°С… РћР‘Р– =D
+                elseif messageNum == 3 then main.mail.message = "\n                              РЎРѕРѕР±С‰РµРЅРёРµ в„–3\n                        РћС‚ РєРѕРіРѕ: РЎРµСЂР¶Р°РЅС‚, РєРѕРјР°РЅРґРёСЂ Р±РѕРµРІРѕРіРѕ РїРѕСЃРµР»РµРЅРёСЏ, РҐР°Р»РѕСЃ \n                         РўРµРјР°: РќР°РїР°РґРµРЅРёРµ\n Р’РЅРёРјР°РЅРёРµ РІСЃРµРј Р±РѕР№С†Р°Рј! Р‘С‹Р»Рѕ Р·Р°РјРµС‡РµРЅРѕ РЅР°РїР°РґРµРЅРёРµ РІ РІРёРґРµ РїРѕРґСЂС‹РІР° Р·Р°С‰РёС‚РЅРѕР№ СЃС‚РµРЅС‹!\n Р РЅРµРёР·РІРµСЃС‚РЅС‹Рµ РІРѕР№СЃРєР° РїСЂРѕРґРІРёРіР°СЋС‚СЃСЏ РІ РїРѕСЃРµР»РµРЅРёРµ! Р­С‚Рѕ РЅРµ СѓС‡РµР±РЅР°СЏ С‚СЂРµРІРѕРіР°!\n Р’СЃРµРј Р±СЂРёРіР°РґР°Рј РїСЂРёРіРѕС‚РѕРІРёС‚СЊСЃСЏ Рє Р±РѕСЋ! Р’СЂР°Рі РїРѕРєР° РЅРµРёР·РІРµСЃС‚РµРЅ,\n РЅРѕ СЃРµР№С‡Р°СЃ Р·Р°С‰РёС‚РёС‚СЊ РїРѕСЃРµР»РµРЅРёРµ!"
+--              elseif messageNum == 4 then main.mail.message = "\n                              РЎРѕРѕР±С‰РµРЅРёРµ в„–4\n                        РћС‚ РєРѕРіРѕ: Р“РµРЅРµСЂР°Р» РћСЂРѕРЅ \n                         РўРµРјР°: РќР°РїР°РґРµРЅРёРµ\n Р—РґСЂР°СЃС‚РІСѓР№С‚Рµ, Р±РѕРµС† Р­РєРёРІР°С‚РѕСЂРѕРІ.\n РџСЂРµР¶РґРµ РІСЃРµРіРѕ, СЃРїР°СЃРёР±Рѕ, С‡С‚Рѕ РїРѕРјРѕРіР»Рё СЃРґРµСЂР¶Р°С‚СЊ РЅР°РїР°РґРµРЅРёРµ Рё СЃРѕРѕР±С‰РёР»Рё РјРЅРµ.\n РўР°РєРѕРµ РЅР°РїР°РґРµРЅРёРµ РїСЂРѕРёР·РѕС€Р»Рѕ РЅРµ С‚РѕР»СЊРєРѕ Сѓ РІР°СЃ!\n Р СЏРґРѕРј СЃ РІР°РјРё, РІ РѕР±Р»Р°СЃС‚Рё 396, Р±С‹Р»Рѕ СЃРѕРІРµСЂС€РµРЅРѕ РЅР°РїР°РґРµРЅРёРµ РЅР° Р¦Р›Р“ Рё С‚Р°РјРѕР¶РЅСЋ\n Рё РїРµСЂРµРґРІРёРЅСѓС‚Р° Р»Р°Р·РµСЂРЅР°СЏ РіСЂР°РЅРёС†Р°. РџСЂРѕС‚РёРІРЅРёРє, РЅР°СЃРєРѕР»СЊРєРѕ РёР·РІРµСЃС‚РµРЅРѕ - РїРѕРІСЃС‚Р°РЅС†С‹.\n РћРЅРё Р·Р°С…РІР°С‚РёР»Рё РЅР°С€ СЌРЅРµСЂРіРѕР±Р»РѕРє Рё РїРѕС‚РѕРј РїРѕС€Р»Рё РґР°Р»СЊС€Рµ, РЅР°РїР°РІ РЅР° РІР°С€Рµ РїРѕСЃРµР»РµРЅРёРµ.\n РЎРєРѕСЂРѕ Сѓ РЅР°СЃ СЃРѕРІСЃРµРј РЅРµ С…РІР°С‚РёС‚ СЌРЅРµСЂРіРёРё!\n РћС‚Р±РµСЂРёС‚Рµ СЌРЅРµСЂРіРѕР±Р»РѕРє Сѓ РїРѕРІСЃС‚Р°РЅС†РµРІ!"
+                elseif messageNum == 4 then main.mail.message = "\n                                        РЎРѕРѕР±С‰РµРЅРёРµ в„–4\n                                  РћС‚ РєРѕРіРѕ: Sl@v@98 Рё VIRUS \n                                   РўРµРјР°: РџСЂРѕС…РѕР¶РґРµРЅРёРµ  \nРЎРїР°СЃРёР±Рѕ, С‡С‚Рѕ РїСЂРѕС€Р»Рё РґРµРјРѕ-РІРµСЂСЃРёСЋ РєР°РјРїР°РЅРёРё War System. \n РњС‹ РµС‘ РґРѕР»РіРѕ СЃРѕР·РґР°РІР°Р»Рё, Рё РјС‹ РЅР°РґРµРµРјСЃСЏ, С‡С‚Рѕ РІС‹ РїСЂРѕС€Р»Рё WS Р±РµР· РґРѕРїРѕР»РЅРµРЅРёР№ Рє РєР°СЂС‚Р°Рј Рё СЃРІРѕРёС… СЃРєСЂРёРїС‚РѕРІ. \n Рћ Р±Р°РіР°С… СЃРѕРѕР±С‰Р°Р№С‚Рµ РІ С‚РµРјСѓ РєР°РјРїР°РЅРёРё http://zod.borda.ru/?1-8-0-00000017-000-0-0-1288602334 \n РЎРїР°СЃРёР±Рѕ: \n- Insert'Сѓ - Р·Р° РёРіСЂСѓ \n- Morse - Р·Р° РїРѕРјРѕС‰СЊ РІ СЃРєСЂРёРїС‚Р°С… \n- AntiKiller'Сѓ - Р·Р° РЅРѕРІСѓСЋ РІРµСЂСЃРёСЋ РёРіСЂС‹ Рё РїРѕРјРѕС‰СЊ РІ СЃРєСЂРёРїС‚Р°С… \n Р–РґРёС‚Рµ РїРѕР»РЅСѓСЋ РІРµСЂСЃРёСЋ РєР°РјРїР°РЅРёРё Р·Р° Р­РєРёРІР°С‚РѕСЂРѕРІ! \n                          VIRUS (Р°РІС‚РѕСЂ РёРґРµРё, СЃРєСЂРёРїС‚РµСЂ, РјР°РїРµСЂ) Рё Sl@v@98 (СЃРєСЂРёРїС‚РµСЂ, С…СѓРґРѕР¶РЅРёРє, РјР°РїРµСЂ)."       
                 end
         end
 end
@@ -293,15 +293,15 @@ function main.mail.GetMail()
         pause(true)
         main.mail.letViewMessages = main.mail.letViewMessages + 1
 		main.mail.maxValue = main.mail.maxValue + 1
-        service("msgbox", {text="Вам на почту пришло сообщение. Нажмите esc для просмотра.", on_select="pause(false)"})
+        service("msgbox", {text="Р’Р°Рј РЅР° РїРѕС‡С‚Сѓ РїСЂРёС€Р»Рѕ СЃРѕРѕР±С‰РµРЅРёРµ. РќР°Р¶РјРёС‚Рµ esc РґР»СЏ РїСЂРѕСЃРјРѕС‚СЂР°.", on_select="pause(false)"})
 end
 
 ------------------------------------------------------------------------------------------
----------------------------------------ИНВЕНТАРЬ------------------------------------------
+---------------------------------------РРќР’Р•РќРўРђР Р¬------------------------------------------
 ------------------------------------------------------------------------------------------
 
 function main.menu.Inventory(n)
-    main.menuservice.names = "Предметы|Оружие|Назад"
+    main.menuservice.names = "РџСЂРµРґРјРµС‚С‹|РћСЂСѓР¶РёРµ|РќР°Р·Р°Рґ"
     main.menuservice.on_select = "main.menu.Inventory(n)"
     main.menuservice.title = "splash_gf"
     main.menu.section = "inventory"
@@ -318,16 +318,16 @@ function main.menu.InventoryWeapons(n)
 	local weap2 = main.player.weapon2 or ""
     service("msgbox", {
 		name="msbox", 
-		text="\nУ Вас в инвентаре на данный момент. \n\nЭнергетических усилителей оружия: "..func.ConvertWeap(weap1).." \nПЭРК: "..func.ConvertWeap(weap2).." \n\nЧто будете использовать?", 
+		text="\nРЈ Р’Р°СЃ РІ РёРЅРІРµРЅС‚Р°СЂРµ РЅР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚. \n\nР­РЅРµСЂРіРµС‚РёС‡РµСЃРєРёС… СѓСЃРёР»РёС‚РµР»РµР№ РѕСЂСѓР¶РёСЏ: "..func.ConvertWeap(weap1).." \nРџР­Р Рљ: "..func.ConvertWeap(weap2).." \n\nР§С‚Рѕ Р±СѓРґРµС‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ?", 
 		on_select="if exists('player_weap') then kill('player_weap') end; if n==2 then func.EquipWeap('"..weap1.."', 'player_weap', '"..const.playername.."_tank'); main.player.weapon = '"..weap1.."' elseif n==1 then func.EquipWeap('"..main.player.weapon.."', 'player_weap', '"..const.playername.."_tank') elseif n==3 then func.EquipWeap('"..weap2.."', 'player_weap', '"..const.playername.."_tank'); main.player.weapon = '"..weap2.."' end",  
-		option1 = "Выйти", 
+		option1 = "Р’С‹Р№С‚Рё", 
 		option2 = func.ConvertWeap(weap1), 
 		option3 = func.ConvertWeap(weap2)})
 end
 
 function main.menu.InventoryBoosts(n)
 	if main.inventory.letUseInventory == 1 then
-		main.menuservice.names="Усилитель(x"..main.inventory.numberBoo..")|ПЭРК(x"..main.inventory.numberHealthPack..")|Мина(x"..main.inventory.numberMine..")|Вперед|Назад"
+		main.menuservice.names="РЈСЃРёР»РёС‚РµР»СЊ(x"..main.inventory.numberBoo..")|РџР­Р Рљ(x"..main.inventory.numberHealthPack..")|РњРёРЅР°(x"..main.inventory.numberMine..")|Р’РїРµСЂРµРґ|РќР°Р·Р°Рґ"
 		main.menuservice.on_select="main.menu.InventoryBoosts(n)"
 		main.menuservice.title="splash_inventory"
 		main.menu.section="inv_boosts"
@@ -335,43 +335,43 @@ function main.menu.InventoryBoosts(n)
 		if n == nil then return end
 			if n == 1 then 
 				main.inventory.UseBoo()
-				main.menuservice.names="Усилитель(x"..main.inventory.numberBoo..")|ПЭРК(x"..main.inventory.numberHealthPack..")|Мина(x"..main.inventory.numberMine..")||Вперед|Назад"
+				main.menuservice.names="РЈСЃРёР»РёС‚РµР»СЊ(x"..main.inventory.numberBoo..")|РџР­Р Рљ(x"..main.inventory.numberHealthPack..")|РњРёРЅР°(x"..main.inventory.numberMine..")||Р’РїРµСЂРµРґ|РќР°Р·Р°Рґ"
 				main.menu.Refresh()
 			elseif n == 2 then 
 				main.inventory.UseHealthPack()
-				main.menuservice.names="Усилитель(x"..main.inventory.numberBoo..")|ПЭРК(x"..main.inventory.numberHealthPack..")|Мина(x"..main.inventory.numberMine..")||Вперед|Назад"
+				main.menuservice.names="РЈСЃРёР»РёС‚РµР»СЊ(x"..main.inventory.numberBoo..")|РџР­Р Рљ(x"..main.inventory.numberHealthPack..")|РњРёРЅР°(x"..main.inventory.numberMine..")||Р’РїРµСЂРµРґ|РќР°Р·Р°Рґ"
 				main.menu.Refresh()
 			elseif n == 3 then 
 				main.inventory.UseMine()
-				main.menuservice.names="Усилитель(x"..main.inventory.numberBoo..")|ПЭРК(x"..main.inventory.numberHealthPack..")|Мина(x"..main.inventory.numberMine..")||Вперед|Назад"
+				main.menuservice.names="РЈСЃРёР»РёС‚РµР»СЊ(x"..main.inventory.numberBoo..")|РџР­Р Рљ(x"..main.inventory.numberHealthPack..")|РњРёРЅР°(x"..main.inventory.numberMine..")||Р’РїРµСЂРµРґ|РќР°Р·Р°Рґ"
 				main.menu.Refresh()
 			else 
 				main.menu.Inventory()
---				main.menuservice.names="Почта|Инвентарь|Задания|Назад"
+--				main.menuservice.names="РџРѕС‡С‚Р°|РРЅРІРµРЅС‚Р°СЂСЊ|Р—Р°РґР°РЅРёСЏ|РќР°Р·Р°Рґ"
 --				main.menuservice.on_select="main.menu.GameOpt(n)"
 --				main.menuservice.title="splash_gf"
 --				main.menu.Refresh()
 		end
---            service("msgbox", {name="msbox", text="\nУ Вас в инвентаре на данный момент. \n\nЭнергетических усилителей оружия: "..numberBoo.." \nПЭРК: "..numberHealthPack.." \n\nЧто будете использовать?", on_select="if n==1 then user.UseBoo() elseif n==2 then user.UseHealthPack() end",  option2="ПЭРК", option3="Выйти", option1="Усилитель"})
+--            service("msgbox", {name="msbox", text="\nРЈ Р’Р°СЃ РІ РёРЅРІРµРЅС‚Р°СЂРµ РЅР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚. \n\nР­РЅРµСЂРіРµС‚РёС‡РµСЃРєРёС… СѓСЃРёР»РёС‚РµР»РµР№ РѕСЂСѓР¶РёСЏ: "..numberBoo.." \nРџР­Р Рљ: "..numberHealthPack.." \n\nР§С‚Рѕ Р±СѓРґРµС‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ?", on_select="if n==1 then user.UseBoo() elseif n==2 then user.UseHealthPack() end",  option2="РџР­Р Рљ", option3="Р’С‹Р№С‚Рё", option1="РЈСЃРёР»РёС‚РµР»СЊ"})
     elseif main.inventory.letUseInventory == 0 then   
-        service("msgbox", {text="\nИнвентарь не доступен вне начатой игры.\n"})
+        service("msgbox", {text="\nРРЅРІРµРЅС‚Р°СЂСЊ РЅРµ РґРѕСЃС‚СѓРїРµРЅ РІРЅРµ РЅР°С‡Р°С‚РѕР№ РёРіСЂС‹.\n"})
     end
 end
 
 function main.inventory.UseBoo()
-    if main.inventory.numberBoo > 0 and main.inventory.activateBoo == 0 then --Если у нас есть ЭУ и у нас они деактивированы, то..
-        main.inventory.activateBoo = 1 --..ЭУ активирован.
+    if main.inventory.numberBoo > 0 and main.inventory.activateBoo == 0 then --Р•СЃР»Рё Сѓ РЅР°СЃ РµСЃС‚СЊ Р­РЈ Рё Сѓ РЅР°СЃ РѕРЅРё РґРµР°РєС‚РёРІРёСЂРѕРІР°РЅС‹, С‚Рѕ..
+        main.inventory.activateBoo = 1 --..Р­РЈ Р°РєС‚РёРІРёСЂРѕРІР°РЅ.
                 main.inventory.numberBoo = main.inventory.numberBoo - 1
         pushcmd( function() actor("pu_booster", 0, 0, {name="bonus_boo"}) end, 0.1)
-        pushcmd( function() if exists("ourplayer_tank") then equip("ourplayer_tank", "bonus_boo") else if exists("bonus_boo") then kill("bonus_boo") main.inventory.activateBoo = 0  message("А быть читером не хорошо =)") end end end, 0.2)
-        pushcmd( function() pause(true) service("msgbox", {text="\nЭнергетический усилитель активирован.\n", on_select="pause(false)"}) end, 0.3)
-                pushcmd( function() message("Заряд усилителя исчерпан") end, 20.3)
+        pushcmd( function() if exists("ourplayer_tank") then equip("ourplayer_tank", "bonus_boo") else if exists("bonus_boo") then kill("bonus_boo") main.inventory.activateBoo = 0  message("Рђ Р±С‹С‚СЊ С‡РёС‚РµСЂРѕРј РЅРµ С…РѕСЂРѕС€Рѕ =)") end end end, 0.2)
+        pushcmd( function() pause(true) service("msgbox", {text="\nР­РЅРµСЂРіРµС‚РёС‡РµСЃРєРёР№ СѓСЃРёР»РёС‚РµР»СЊ Р°РєС‚РёРІРёСЂРѕРІР°РЅ.\n", on_select="pause(false)"}) end, 0.3)
+                pushcmd( function() message("Р—Р°СЂСЏРґ СѓСЃРёР»РёС‚РµР»СЏ РёСЃС‡РµСЂРїР°РЅ") end, 20.3)
         pushcmd( function() kill("bonus_boo") end, 21)
-                pushcmd( function() main.inventory.activateBoo = 0 end, 22) --После окончания его действия, мы можем вновь включить усилитель.
-        elseif main.inventory.activateBoo == 1 then --Если он у нас уже активирован, то..
-                service("msgbox", {text="\nЭнергетический усилитель у Вас уже активирован\n"}) --..он активирован =)
+                pushcmd( function() main.inventory.activateBoo = 0 end, 22) --РџРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ РµРіРѕ РґРµР№СЃС‚РІРёСЏ, РјС‹ РјРѕР¶РµРј РІРЅРѕРІСЊ РІРєР»СЋС‡РёС‚СЊ СѓСЃРёР»РёС‚РµР»СЊ.
+        elseif main.inventory.activateBoo == 1 then --Р•СЃР»Рё РѕРЅ Сѓ РЅР°СЃ СѓР¶Рµ Р°РєС‚РёРІРёСЂРѕРІР°РЅ, С‚Рѕ..
+                service("msgbox", {text="\nР­РЅРµСЂРіРµС‚РёС‡РµСЃРєРёР№ СѓСЃРёР»РёС‚РµР»СЊ Сѓ Р’Р°СЃ СѓР¶Рµ Р°РєС‚РёРІРёСЂРѕРІР°РЅ\n"}) --..РѕРЅ Р°РєС‚РёРІРёСЂРѕРІР°РЅ =)
         else
-        service("msgbox", {text="\nУ Вас нет усилителей\n"})
+        service("msgbox", {text="\nРЈ Р’Р°СЃ РЅРµС‚ СѓСЃРёР»РёС‚РµР»РµР№\n"})
         return main.inventory.numberBoo
     end
 end
@@ -383,17 +383,17 @@ function main.inventory.UseHealthPack()
         if exists("ourplayer_tank") then x, y = position("ourplayer_tank") end
             pushcmd( function() if exists("health")== false then actor("pu_health", x, y, { name="health" }) else end end, 0.1)
 --          pushcmd( function() pause(true) end, 0.2)
-            pushcmd( function() pause(true) service("msgbox", {text="\nПЭРК использован, танк починен.\n", on_select="pause(false)"}) end, 1)
+            pushcmd( function() pause(true) service("msgbox", {text="\nРџР­Р Рљ РёСЃРїРѕР»СЊР·РѕРІР°РЅ, С‚Р°РЅРє РїРѕС‡РёРЅРµРЅ.\n", on_select="pause(false)"}) end, 1)
             pushcmd( function() if exists("health")== true  then kill("health") end end, 3)
         else
-            service("msgbox", {text="\nУ Вас нет ПЭРК\n" } )
+            service("msgbox", {text="\nРЈ Р’Р°СЃ РЅРµС‚ РџР­Р Рљ\n" } )
             return main.inventory.numberHealthPack
 --          user.Refresh()
     end
 end
 
 function main.inventory.UseMine()
-    if main.inventory.numberMine > 0 and main.inventory.activateMine == 0 then --Если у нас есть мина и у нас они деактивированы, то..
+    if main.inventory.numberMine > 0 and main.inventory.activateMine == 0 then --Р•СЃР»Рё Сѓ РЅР°СЃ РµСЃС‚СЊ РјРёРЅР° Рё Сѓ РЅР°СЃ РѕРЅРё РґРµР°РєС‚РёРІРёСЂРѕРІР°РЅС‹, С‚Рѕ..
                 main.inventory.numberMine = main.inventory.numberMine - 1
                 main.inventory.activateMine = 1
                 if exists("ourplayer_tank") then  x, y = position("ourplayer_tank") end
@@ -405,10 +405,10 @@ function main.inventory.UseMine()
                                 name="mine_trig"..main.inventory.mineNum, 
                                 only_human=1, 
                                 on_leave="main.inventory.activateMine = 0; kill('mine'..main.inventory.mineNum); kill('mine_trig'..main.inventory.mineNum); actor('pu_mine',"..x..", "..y..", {on_pickup = 'func.MineDetonate(who)'})" } )
-        elseif main.inventory.activateMine == 1 then --Если она у нас уже активирована, то..
-                service("msgbox", {text="\nВы уже поставили здесь мину\n" } ) --..он активирована =)
+        elseif main.inventory.activateMine == 1 then --Р•СЃР»Рё РѕРЅР° Сѓ РЅР°СЃ СѓР¶Рµ Р°РєС‚РёРІРёСЂРѕРІР°РЅР°, С‚Рѕ..
+                service("msgbox", {text="\nР’С‹ СѓР¶Рµ РїРѕСЃС‚Р°РІРёР»Рё Р·РґРµСЃСЊ РјРёРЅСѓ\n" } ) --..РѕРЅ Р°РєС‚РёРІРёСЂРѕРІР°РЅР° =)
         else
-                service("msgbox", {text="\nУ Вас нет мин\n" } )
+                service("msgbox", {text="\nРЈ Р’Р°СЃ РЅРµС‚ РјРёРЅ\n" } )
         return main.inventory.numberMine
         end
 end
@@ -446,7 +446,7 @@ function main.inventory.SetNumMine(num)
     return main.inventory.numberMine
 end
 
---Вообще какого хрена здесь это делает?)). Slava98.
+--Р’РѕРѕР±С‰Рµ РєР°РєРѕРіРѕ С…СЂРµРЅР° Р·РґРµСЃСЊ СЌС‚Рѕ РґРµР»Р°РµС‚?)). Slava98.
 function main.menu.LevelPacks(n)
 	if exists("lp_messagebox") then kill("lp_messagebox") end
 	main.levelpack.botreduce = main.levelpack.botreduce or main.levelpack.GetNum()
@@ -460,11 +460,11 @@ function main.menu.LevelPacks(n)
 	else 
 		local lp = rawget(main.levelpack, rawget(main.levelpacks, main.levelpack.botreduce))
 		if type(lp) == "table" then 
-			if lp.name~=nil then main.levelpack.text=lp.name else main.levelpack.text = "Безымянный" end
-			if lp.description~=nil then main.levelpack.text = main.levelpack.text.."\nОписание: "..lp.description else main.levelpack.text = main.levelpack.text.."\nНет описания" end
-			if lp.type=="race" then main.levelpack.text = main.levelpack.text.."\nТип: Расовая кампания"
+			if lp.name~=nil then main.levelpack.text=lp.name else main.levelpack.text = "Р‘РµР·С‹РјСЏРЅРЅС‹Р№" end
+			if lp.description~=nil then main.levelpack.text = main.levelpack.text.."\nРћРїРёСЃР°РЅРёРµ: "..lp.description else main.levelpack.text = main.levelpack.text.."\nРќРµС‚ РѕРїРёСЃР°РЅРёСЏ" end
+			if lp.type=="race" then main.levelpack.text = main.levelpack.text.."\nРўРёРї: Р Р°СЃРѕРІР°СЏ РєР°РјРїР°РЅРёСЏ"
 --			elseif lp.type==
-			else main.levelpack.text = main.levelpack.text.."\nТип: Одиночный уровень" 
+			else main.levelpack.text = main.levelpack.text.."\nРўРёРї: РћРґРёРЅРѕС‡РЅС‹Р№ СѓСЂРѕРІРµРЅСЊ" 
 			end
 		end
 	end
@@ -472,12 +472,12 @@ function main.menu.LevelPacks(n)
                 	name="lp_messagebox", 
                 	text=main.levelpack.text,
                 	on_select="if n ~= 3 then main.menu.LevelPacks(n) else main.levelpack.default = rawget(main.levelpacks, main.levelpack.botreduce) end",
-                	option1="Назад",
-                	option2="Вперёд",
-                	option3="Выбрать" } )
+                	option1="РќР°Р·Р°Рґ",
+                	option2="Р’РїРµСЂС‘Рґ",
+                	option3="Р’С‹Р±СЂР°С‚СЊ" } )
 end
 ------------------------------------------------------------------------------------------
------------------------------------ТЕХНИЧЕСКИЕ ФУНКЦИИ------------------------------------
+-----------------------------------РўР•РҐРќРР§Р•РЎРљРР• Р¤РЈРќРљР¦РР------------------------------------
 ------------------------------------------------------------------------------------------
 
 function main.menu.Refresh()
@@ -496,5 +496,5 @@ end
 
 function main.menu.Demo()
         service("msgbox", {
-                                text="Эта функция на реконструкции.\nВозможно, она появится \nв следущей версии."})
+                                text="Р­С‚Р° С„СѓРЅРєС†РёСЏ РЅР° СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёРё.\nР’РѕР·РјРѕР¶РЅРѕ, РѕРЅР° РїРѕСЏРІРёС‚СЃСЏ \nРІ СЃР»РµРґСѓС‰РµР№ РІРµСЂСЃРёРё."})
 end

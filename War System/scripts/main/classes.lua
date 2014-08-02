@@ -177,10 +177,38 @@ classes.speak =
 --Это не нужно 100%
 classes["speak"] = tcopy(classes.player1)
 classes["speak"].inertia = 100000;
-classes["speak"].power[1] = 1; 
+classes["speak"].power[1] = 1;
 classes["speak"].power[2] = 2;
 classes["speak"].max_speed[1]=1;
 classes["speak"].max_speed[2]=2;
 
+--=============--
+--= Бомба =--
+--=============--
+
+classes.bomb =
+{
+  -- game properties --
+
+  display     = "Бомба",
+  health      = 1,
+  percussion  = 1,
+  fragility   = 10,
+
+
+  -- physical properties --
+
+  width     = 5,
+  length    = 10,
+
+  mass      = 0.5,
+  inertia   = 800.0,
+
+  dry_fric  = {450, 5000, 28},   -- dry friction: x,y,angular
+  vis_fric  = {2.0,  2.5,  0},   -- viscous friction: x,y,angular
+
+  power     = {900, 45},        -- engine power: linear,angular
+  max_speed = {200,  3.4},        -- max speed: linear, angular
+}
 
 --for i = 1, 100 classes["class"..i] = tcopy(classes.player1) end

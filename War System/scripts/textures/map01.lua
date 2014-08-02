@@ -175,7 +175,7 @@ return {
 { 
     file="campaign/War System/skins/ekivatorl_camouflage.tga",
     content={ 
-      ["skin/ekivatorl_camo"]={},
+      ["skin/ekivatorl_camouflage"]={xframes=4},
   }
 },
 { 
@@ -378,6 +378,12 @@ return {
    content={
       ["user/key"]={left=0, top=0, right=30, bottom=30, xframes=2, yframes=1},
    }
+},
+{ 
+    file="campaign/War System/textures/quest/bomb.tga",
+    content={ 
+      ["skin/bomb"]={},
+  }
 },
 --------------Powerups----------------
 { 

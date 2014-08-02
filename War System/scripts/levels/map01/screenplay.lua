@@ -1,393 +1,256 @@
-function level.CallTerminal()
-	func.dialog.Show("terminals", "map01", 3, "", "if n==1 then level.SettlerCall('speak') kill('d_trig') end", func.dialog.Read("terminals", "map01", 1), func.dialog.Read("terminals", "map01", 2))
-end
+-- РЎРєСЂРёРїС‚РѕРІС‹Рµ СЃС†РµРЅС‹ РїРµСЂРІРѕРіРѕ СѓСЂРѕРІРЅСЏ.
 
-function level.SettlerCall(action)
+-- Р¤СѓРЅРєС†РёРё СЂР°Р·РіРѕРІРѕСЂР° СЃ РїРѕСЃРµР»РµРЅС†РµРј, РѕС‚РєСЂС‹РІР°СЋС‰РёРј РґРІРµСЂСЊ.
+function level.screenplay.SettlerCall(action)
 	if action == "speak" then
-		func.NPC.StopAction("ourwarrior1", 0)
-        if level.unnamed_dead==1 then level.SettlerSpeak("on_dead_unnamed")
-        else
-                message (func.dialog.Read("promt", "map01", 2))
---              pushcmd(function() func.NPC.Action("ourwarrior1", nil, 31, 17, true) end, 0.1)
-				pushcmd(function() func.NPC.SetAim("ourwarrior1", 31, 17, "func.NPC.Action('ourwarrior1', nil, 955, 540, false); pushcmd(function() level.SettlerSpeak('hello') end, 1)", true, "", false, true) end, 0.1)
-        end	
+		func.NPC.StopWay("ourwarrior1")
+		func.object.Speak("ourwarrior1_tank", {"map01", "settler_cutSceneSpeaks", 7})
+		func.NPC.FollowWay("ourwarrior1", "settler_call")
 	elseif action == "open" then
-		func.MissionChange("extra", "change", func.dialog.Read("missions", "map01", 3))
+		func.MissionChange("extra", "change", func.Read({"map01", "missions", 3}))
 		pset("c_trig", "active", 1)
-		func.NPC.StopAction("ourwarrior1", 1)
-		level.door_boolean = true
-		level.screenplay.sidedoor_status = 0
+		level.screenplay.playerCanRideToSettle = true;
+		level.talk.settlerPart = 2;
 		level.Door("sidedoor_open")
---		level.Door("trig_move")
-		func.NPC.Action('ourwarrior1', nil, 955, 540, false)
---		func.LetBorderTriggerFollowingObject(1)
-		func.SetBorderTriggerToObject("ourwarrior2_tank", "speak", "func.NPC.SpeakToPlayer('ourwarrior2', 1)", "center", 0, 2, false, "", 1)
-        pushcmd( function() func.Message("settler_dlg", "map01", 6) end, 2)
-        pushcmd( function() func.NPC.Action("ourwarrior1") end, 3)
+		for i = 1, 4 do object("ourwarrior"..i).nick = func.Read({"map01", "nicks", 1}); end;
+        pushcmd(function() func.object.Speak("ourwarrior1_tank", {"map01", "settler_cutSceneSpeaks", 3}) end, 2)
+        pushcmd(function() func.NPC.FollowWay("ourwarrior1", "base_patrol1") end, 3)
 	elseif action == "angry_warrior" then
-		level.settlers_are_enemies = true
---		object("statue").health = 0; object("statue").max_health = 0 --Нахннада
-        func.NPC.Action("ourwarrior1") 
-        pset("c_trig", "active", 0)
-        func.MissionChange("extra", "add", func.dialog.Read("missions", "map01", 2))
+		func.MissionChange("extra", "add", func.Read({"map01", "missions", 2}))
+		level.settlersAreEnemies = true;
         pushcmd(function() 
-			pset("ourplayer","team", 2) 
-			for i = 1, 4 do pset("ourwarrior"..i,"level", 4) end
-			level.LetDamageOurWarrior(0)
+--			pset(const.playerName, "team", 2) -- РџРѕРєР° С‡С‚Рѕ СЃР»РµРґСѓРµС‚ Р·Р°РјР°Р·Р°С‚СЊ СЃРёРµ.
+			for i = 1, 4 do pset("ourwarrior"..i, "level", 4) end
+--			level.LetDamageOurWarrior(0)
 		end, 2)
-	end
+	end;
 end
 
-function level.GetMissionBoo()
-	func.MissionChange("extra", "complete", "")
-	func.MissionChange("extra", "add", func.dialog.Read("missions", "map01", 4))
-	level.screenplay.missionboo = 1
-	pset("b1", "max_health", 150)
-	pset("b2", "max_health", 150)
-	pset("b1", "health", 150)
-	pset("b2", "health", 150)	
-	if exists("statue_tank") then pset("statue_tank", "health", 500) end
-	kill("cklad")
-	for i = 1, 3 do kill("w"..i) end
-	pushcmd(function() pset("c_trig", "active", 1) end, 20)
-end
-
-function level.GetBoo(num)
-	if level.screenplay.missionboo == 0 then return end
-	func.Sound("energy")
-	kill("boo_trig"..num)
-	kill("boo"..num)
-	level.screenplay.energycells = level.screenplay.energycells + 1
-	message(func.dialog.Read("energycells", "map01", 1)..level.screenplay.energycells..func.dialog.Read("energycells", "map01", level.screenplay.energycells+1))
-	if level.screenplay.missionboo == 1 and level.screenplay.energycells == 4 and num ~= 4 then
-		func.MissionChange("extra", "complete", func.dialog.Read("missions", "map01", 5))
-		level.CommSpeak('exit')
-		level.screenplay.missionboo = 2
-	elseif level.screenplay.missinboo == 2 and num == 4 then
-		level.screenplay.missionboo = 3
-	end
-end
---[[
-function level.Attack(wow, i)
-
-		if wow == 1 then
-				level.Attack(0, "PsetBrickHealth")
-
-				ai_march("ourwarrior1", user.get32(37), user.get32(9))
-        
-				pushcmd(function() ai_march("ourwarrior1", user.get32(45), user.get32(10)) end, 5)
-				actor("trigger", user.get32(58), user.get32(5), { 
-						name="commactive",
-						on_enter="if who.name==\"enemy_tank1\" or who.name==\"enemy_tank2\" or who.name==\"enemy_tank2\" or who.name==\"enemy_tank3\" or who.name==\"enemy_tank4\" or who.name==\"boss_tank\" then user.CommActive() else end", 
-						radius=5 } )
-						
-				level.Attack(0, "EnemySpawn")
-				
-				pushcmd(function()
-										   ai_march("enemy1", user.get32(64), user.get32(28)) 
-                                           ai_march("enemy2", user.get32(68), user.get32(28)) 
-                                           ai_march("enemy3", user.get32(74), user.get32(22)) 
-                                           ai_march("enemy4", user.get32(74), user.get32(26)) 
-                                           ai_march("enemy_boss", user.get32(70), user.get32(25)) 
-				end, 5)
---				pushcmd(function() 
---										   pset("enemy1", "active", 0)
---                                         pset("enemy2", "active", 0)
---                                         pset("enemy3", "active", 0)
---                                         pset("enemy4", "active", 0)
---                                         pset("enemy_boss", "active", 0)
---				end, 3)
---				pushcmd(function() 
---										   pset("enemy1", "active", 0)
---										   pset("enemy2", "active", 0)
---										   pset("enemy3", "active", 0)
---										   pset("enemy4", "active", 0)
---										   pset("enemy_boss", "active", 0)
---				end, 7)
-				pushcmd(function() actor("user_sprite", user.get32(69), user.get32(24), {name="boss_bomb", texture="user/bomb", layer=1}) 
-						   pset("enemy_boss", "active", 0)
-				end, 10)
-				pushcmd(function() ai_march("enemy_boss", user.get32(72), user.get32(28)) end, 11)
-				pushcmd(function() pset("enemy_boss", "active", 0)  end, 12)
-				pushcmd(function() damage(5000, 'destr_br1')
-                           damage(5000, 'destr_br2')
-						   kill("boss_bomb")
-				end, 16)
-				pushcmd(function() 
-					   user.LetDamageOurWarrior(0)
-					   pset("enemy1", "active", 1)
-                       pset("enemy2", "active", 1)
-                       pset("enemy3", "active", 1)
-                       pset("enemy4", "active", 1)
-                       pset("enemy_boss", "active", 1)
-				end, 16)
-				pushcmd(function()
-                level.enemyattack.happened=1
-                pset("enemy1", "nick", "Противник")
-                pset("enemy2", "nick", "Противник")
-                pset("enemy3", "nick", "Противник")
-                pset("enemy4", "nick", "Противник")
-                pset("enemy_boss", "nick", "Главарь противников")
---              pset("ourwarrior1", "active", 1)
-                pset("ourwarrior2", "active", 1)
---              pset("ourwarrior3", "active", 1)
-                pset("ourwarrior4", "active", 1)
---              main.mail.letViewMessages = 3
---              main.mail.GetMail()
-                play"mus9"
-                main.missions.mainMission="1)Найдите энергон в этих местностях. \n2)Свяжитесь с Ороном и сообщите обстановку.\n3)Защитите боевое поселение Экиваторов от врагов!\n4)Сохраните сержанта Халоса!"
-				end, 17)
-				pushcmd(function()
-						message("Поселенец: Это ещё что?")
-						message("Комнадир поселенцев: Всем уничтожить атакующих!")
-				end, 19)
-				pushcmd(function()
-						main.mail.letViewMessages = 3
-						main.mail.GetMail()
-				end, 24)
-
-			
-		elseif i == "EnemySpawn" then
-			level.Attack(2,"Enemy1Spawn")
-			pushcmd(function() 
-                service ("ai", {
-                        name="enemy2", 
-                        vehname="enemy_tank2", 
-                        nick="Неизвестный воин", 
-                        class="rebel", 
-                        skin="rebel", 
-                        team=2, 
-                        on_die="level.DieEnemy(2)", 
-                        active=1 } ) 
-			end, 2)
-			pushcmd(function() actor("weap_cannon", 0, 0, {name="enemyweap2"}) end, 4.1)
-			pushcmd(function() equip("enemy_tank2", "enemyweap2" ) end, 4.2)
-
-			pushcmd(function() 
-                service ("ai", {
-                        name="enemy3", 
-                        vehname="enemy_tank3", 
-                        nick="Неизвестный воин", 
-                        class="rebel", 
-						skin="rebel2", 
-                        team=2, 
-                        on_die="level.DieEnemy(3)", 
-                        active=1 } ) 
-			end, 2)
-			pushcmd(function() actor("weap_autocannon", 0, 0, {name="enemyweap3"}) end, 4.1)
-			pushcmd(function() equip("enemy_tank3", "enemyweap3" ) end, 4.2)
-
-			pushcmd(function() 
-                service ("ai", {
-                        name="enemy4", 
-                        vehname="enemy_tank4", 
-                        nick="Неизвестный воин", 
-                        class="rebel", 
-                        skin="rebel2", 
-                        team=2, 
-                        on_die="level.DieEnemy(4)", 
-                        active=1 } ) 
-			end, 2)
-			pushcmd(function() actor("weap_minigun", 0, 0, {name="enemyweap4"}) end, 2.1)
-			pushcmd(function() equip("enemy_tank4", "enemyweap4" ) end, 4.2)
-
-			pushcmd(function() 
-                service ("ai", {
-                        name="enemy_boss", 
-                        vehname="boss_tank", 
-                        nick="Главарь воинов", 
-                        class="boss1", 
-                        skin="rebel_boss", 
-                        team=2, 
-                        on_die="level.DieEnemy(5)", 
-                        active=1 } ) 
-			end, 2)
-			pushcmd(function() actor("weap_plazma", 0, 0, {name="enemyweap5"}) end, 4.1)
-			pushcmd(function() equip("boss_tank", "enemyweap5" ) end, 4.2)
-
-			pushcmd(function()
-										   ai_march("enemy1", user.get32(64), user.get32(28)) 
-                                           ai_march("enemy2", user.get32(68), user.get32(28)) 
-                                           ai_march("enemy3", user.get32(74), user.get32(22)) 
-                                           ai_march("enemy4", user.get32(74), user.get32(26)) 
-                                           ai_march("enemy_boss", user.get32(70), user.get32(25)) 
-			end, 5.1)
-			pushcmd(function() 
-										   pset("enemy1", "active", 0)
-                                           pset("enemy2", "active", 0)
-                                           pset("enemy3", "active", 0)
-                                           pset("enemy4", "active", 0)
-                                           pset("enemy_boss", "active", 0)
-										   ai_stop("enemy1")
-										   ai_stop("enemy2")
-										   ai_stop("enemy3")
-							               ai_stop("enemy4")
-										   ai_stop("enemy_boss")
-			end, 5)
---			end, 4.5 3)
---			pushcmd(function() 
---										   pset("enemy1", "active", 0)
---										   pset("enemy2", "active", 0)
---										   pset("enemy3", "active", 0)
---										   pset("enemy4", "active", 0)
---										   pset("enemy_boss", "active", 0)
---			end, 7)
-
-		elseif i == "Enemy1Spawn" then
-			pushcmd(function() 
-                service ("ai", {
-                        name="enemy1", 
-                        vehname="enemy_tank1", 
-                        nick="Неизвестный воин", 
-                        class="rebel", 
-                        skin="rebel", 
-                        team=2, 	
-                        on_die="level.DieEnemy(1)", 
-                        active=1 } ) 
-			end, 2)
-			pushcmd(function() actor("weap_rockets", 0, 0, {name="enemyweap1"}) end, 4.1)
-			pushcmd(function() equip("enemy_tank1", "enemyweap1" ) end, 4.2)
-			pushcmd(function() 
-										   pset("enemy1", "active", 0)
-										   ai_stop("enemy1")
-			end, 5)			
-		elseif i == "PsetBrickHealth" then
-				pset("destr_br1","max_health", 2500)
-				pset("destr_br2","max_health", 2500)
-				pset("destr_br1","health", 2500)
-				pset("destr_br2","health", 2500)
-				
-		elseif i == "GetEnemyAttack" then		
-				sound("talk1")
-				message"Командир поселения: Это странно..."
-				pushcmd(function() message"Командир поселения: И стационарные установки не работают!" end, 2)
-				pushcmd(function() message"Командир поселения: Только пулемётная..." end, 4)
---    		    pushcmd(function() message"Командир поселения: Хорошо, что ещё защитные линии работают..." end, 6)
-				pushcmd(function() level.Attack(1) end, 20)
+-- Р­РєСЃРєР°РІР°С‚РѕСЂС‹ Рё С‚Р°РЅРє-СЂРѕР±РѕС‚.
+function level.screenplay.Statue(event, num)
+	if event == "damage" then
+		if level.screenplay.statueIsDamaged then return; end;
+		level.screenplay.statueIsDamaged = true;
+		level.screenplay.excavatorsCanStare = false;
+		kill("excstare_trig")
+		for i = 1, 3 do
+			func.ObjectPaste(level.objects["esc"..i])
+			object("esc"..i.."_tank").playername = "esc"..i;
+		end;
+		func.ObjectPaste(level.objects.statue)
+		object("statue_tank").playername = "statue";
+		object("statue").on_die = "level.screenplay.Statue('destroy')"..object("statue").on_die;
 		
-				
-		elseif wow == 3 then
-			if i == nil then
-			rioter=nil	
-			level.Attack(0, "EnemySpawn")
---			level.Attack(0, "Enemy1Spawn")
-			level.Attack(0, "PsetBrickHealth")
-			
-			pushcmd(function() 
-					   ai_march("enemy1", user.get32(66), user.get32(30)) 
-                       ai_march("enemy2", user.get32(70), user.get32(33)) 
-                       ai_march("enemy3", user.get32(72), user.get32(22)) 
-                       ai_march("enemy4", user.get32(74), user.get32(24)) 
-                       ai_march("enemy_boss", user.get32(65), user.get32(26))
-			end, 5.2)
-
-			pushcmd(function() rioter=0  end, 8)
-			
---			pushcmd(function() pset("enemy1", "active", 0)
---                             pset("enemy2", "active", 0)
---							   pset("enemy3", "active", 0)
---							   pset("enemy4", "active", 0)
---							   pset("enemy_boss", "active", 0)
---							   ai_stop("enemy1")
---							   ai_stop("enemy2")
---							   ai_stop("enemy3")
---							   ai_stop("enemy4")
---							   ai_stop("enemy_boss")
---			end, 5)
-			
-			pushcmd(function() actor("trigger", 1865, 811, {name="rioter_trig1", on_enter="level.rioterplay.SpeakEnemy(0)", only_human=1, radius=10}) end, 7)
-			
-			elseif i == "AttackWithPlayer" then
-					pushcmd(function() 
-							actor("trigger", user.get32(70), user.get32(25), { 
-									name="bomb_trigger", 
-									on_enter="if who.name==\"enemy_tank1\" then level.Attack(3, 'BotEnter') elseif who.name==\"ourplayer_tank\" then message'Главарь войнов: Не мешай!' else end" } ) 
-					end, 7)
-					pushcmd(function() ai_march("enemy1", user.get32(70), user.get32(25)) end, 7)
-					level.Attack(0, "Enemy1Spawn")
-					message("Задания обновлены.")
-					main.missions.extraMission = "1)Убейте командира поселения!"
-					main.missions.mainMission="1)Найдите энергон в этих местностях. \n2)Свяжитесь с Ороном и сообщите обстановку.\n3)Уничтожьте боевое поселение Экиваторов."
-					message("Главарь: Подготовься к нападению.")
-			        kill("trig15")
-			elseif i == "BotEnter" then
-					pushcmd(function() actor("user_sprite", user.get32(69), user.get32(24), {name="boss_bomb", texture="user/bomb", layer=1 } ) 
-							pset("enemy_boss", "active", 0)
-					end, 1)
-					pushcmd(function() message("Войн: Двигатель заглох!") end, 3)
-					pushcmd(function() 
-							local tank = object("enemy_tank1") 
-							tank.playername=""
-							kill("enemy1") 
-					end, 1)
-					pushcmd(function() actor("weap_rockets", user.get32(70), user.get32(25),  {name="rocket" } )
-									   damage(5000, 'destr_br1')
-									   damage(5000, 'destr_br2')
-									   damage(5000, 'enemy_tank1')
-									   kill("boss_bomb")
-									   kill("enemyweap1")
-									   kill("bomb_trigger")
-									   pset("ourwarrior1", "active", 1)
-									   pset("ourwarrior2", "active", 1)
-									   pset("ourwarrior4", "active", 1)
-					end, 11)          
-					pushcmd(function() message("Главарь: Подбери оружие! Все остальные - нападайте!") end, 12)
-					pushcmd(function() 
-					   pset("enemy2", "active", 1)
-                       pset("enemy3", "active", 1)
-                       pset("enemy4", "active", 1)
-                       pset("enemy_boss", "active", 1)
-                       play"mus9"
-					   pset("ourwarrior3", "active", 1)
-					end, 12)
-					pushcmd(function() message("Поселенец: Чё за...") end, 13)
-					pushcmd(function() message("Командир поселенцев: Всем уничтожить нападающих!!!") end, 14)
-					ai_march("ourwarrior1", user.get32(65), user.get32(17))
-					ai_march("ourwarrior2", user.get32(65), user.get32(20))
-					ai_march("ourwarrior3", user.get32(63), user.get32(15))
-					ai_march("ourwarrior4", user.get32(62), user.get32(19))
-					pset("movetrig1", "active", 0)
-                    pset("movetrig2", "active", 0)
-                    pset("movetrig3", "active", 0)
-                    pset("movetrig4", "active", 0)
-                    pset("movetrig5", "active", 0)
-                    pset("movetrig6", "active", 0)
-			elseif i == "OnDieWarriors" then
-					message("Задание выполнено.")
-					main.missions.mainMission='1)Найдите энергон в этих местностях. \n2)Свяжитесь с Ороном и сообщите обстановку.\n3)Уничтожьте боевое поселение Экиваторов.';
-					play"mus5"
-					pset("enemy_boss", "active", 0)
-					actor("trigger", user.get32(66), user.get32(2), { 
-									name="commboss_trig", 
-									on_enter="if level.rioterplay.bosscomm==1 then user.BossCommSpeak() end",
-									only_human=1} ) 		
-					pushcmd(function() ai_march("enemy_boss", user.get32(57), user.get32(9)) end, 1)
-					pushcmd(function() ai_march("enemy_boss", user.get32(69), user.get32(2)) end, 7)
---      			pushcmd(function() level.rioterplay.bosscomm=1 end, 1)
-					pushcmd(function() 
-									  actor("trigger", user.get32(69), user.get32(2), { 
-													   name="boss_trigger", 
-													   on_enter="if who.name==\"boss_tank\" then pushcmd(function() pset('boss_tank', 'rotation', 3.1) end, 2); level.rioterplay.bosscomm=1;kill('boss_trigger') else end" } ) 
-					end, 1)
-			end
-		end
+		func.NPC.Attack("attack", "statue", object(const.playerVehName), 0.2)
+		for i = 1, 3 do
+			func.NPC.Attack("attack", "esc"..i, object(const.playerVehName), 0.2) -- РќРµ РЅСЂР°РІРёС‚СЃСЏ РјРЅРµ СЌС‚Рѕ. Slava98. 11.09.13.
+--[[	for j = 1, 4 do
+				print("esc"..i.."_tank_enemydetect_trig"..j..".link")
+--				level.objects["esc"..i.."_tank_enemydetect_trig"..j].link.active = 1;
+--				level.objects["esc"..i.."_tank_enemydetect_leavetrig"..j].link.active = 1;
+				level.objects["esc"..i.."_tank_enemydetect_trig"..j].link.radius = 10; -- РЈРІРµР»РёС‡РёРІР°РµРј СЂР°РґРёСѓСЃ С‚СЂРёРіРіРµСЂРѕРІ. РћРЅ РѕС‡РµРЅСЊ Р±РѕР»СЊС€РѕР№.
+				level.objects["esc"..i.."_tank_enemydetect_leavetrig"..j].link.radius = 15;
+			end;]]
+		end;
+	elseif event == "creeper_boom" then
+		level.functions["esc"..num.."BlewUp"] = true;
+		func.GiveItem("bomb", "esc"..num)
+		if exists("esc"..num) then message("boom!"); func.inventory.UseBomb("esc"..num); end;
+	elseif event == "stare_on_player" then
+		if not level.screenplay.excavatorsCanStare or level.screenplay.statueIsDamaged then return; end;
+		local x1, y1 = position("esc"..num.."_tank");
+		local x2, y2 = position(const.playerVehName);
+		object("esc"..num.."_tank").rotation = func.GetRadians(x1, y1, x2, y2);
+		pushcmd(function() level.screenplay.Statue("stare_on_player", num) end, 0.01)
+	elseif event == "destroy" then
+		if level.screenplay.missionBoo == 1 then if func.CheckOfLuck(math.random(5, 7)) then func.GiveItem("healthpack", "statue") end; end;
+	end;
 end
-]]
 
-function level.Attack(n)
-	--Создаём врагов
+-- РЎРєСЂРёРїС‚ РІР·СЏС‚РёСЏ РїРѕСЃРµР»РµРЅС†РµРј РєР»СЋС‡-РєР°СЂС‚С‹.
+function level.screenplay.SettlerGetKey(a)
+	if a == "call" and level.screenplay.statueIsDamaged and level.screenplay.missionBoo == 1 and not level.screenplay.keyIsGot then
+		main.NPC.list["ourwarrior1"].attackMode = "not_leave_position";
+		main.NPC.list["ourwarrior1"].enemyDetectMode = false;
+		object("ourwarrior1").team = 2;
+		actor("trigger", 970, 909, {name="hidekeysettler_trig", on_enter="level.screenplay.SettlerGetKey('hide_settler')", radius=8, only_human=1})
+		func.NPC.StopWay("ourwarrior1")
+		setposition("ourwarrior1_tank", 800, 576)
+		func.NPC.SetAim("ourwarrior1", 6, 34, true, {on_enter="level.screenplay.SettlerGetKey('return')"})
+		kill("settlerkey_trig")
+		if not exists("key1") then
+			pushcmd(function() func.object.Speak("ourwarrior1_tank", {"map01", "settler_cutSceneSpeaks", 11}) end, 4)
+			pushcmd(function() func.object.Speak("ourwarrior1_tank", {"map01", "settler_cutSceneSpeaks", 12}) end, 7)
+		end;
+	elseif a == "return" then
+		func.NPC.SetAim("ourwarrior1", 26, 17, true, {on_enter="level.screenplay.SettlerGetKey('hide_settler')"})
+	elseif a == "hide_settler" then
+		-- РџРѕСЃРµР»РµРЅРµС† Рё РєР»СЋС‡ С‚РµР»РµРїРѕСЂС‚РёСЂСѓСЋС‚СЃСЏ С‚СѓРґР°, РіРґРµ РѕРЅРё РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ.
+		if #main.NPC.list["ourwarrior1"].visibleEnemies ~= 0 then main.NPC.list["ourwarrior1"].visibleEnemies = {}; end;
+		main.NPC.list["ourwarrior1"].attackMode = "chase";
+		main.NPC.list["ourwarrior1"].enemyDetectMode = true;
+		object("ourwarrior1").team = 1;
+		setposition("ourwarrior1_tank", 1312, 352)
+		level.screenplay.keyWasGot = true;
+		func.NPC.FollowWay("ourwarrior1")
+		kill("hidekeysettler_trig")
+	end;
+end
+
+-- Р РµС‡СЊ РїРѕСЃРµР»РµРЅС†Р° РѕРєРѕР»Рѕ СЂСѓРёРЅ РїСЂРё СѓСЃР»РѕРІРёРё, С‡С‚Рѕ РўРµСЃС‚РµСЂ РµС‰С‘ РЅРµ Р±С‹Р» РІ РїРѕСЃРµР»РµРЅРёРё.
+function level.screenplay.SettlerNearRuins(a)
+	if a == "call" then
+		setposition("ourwarrior5_tank", 900, 900)
+		kill("settler_near_ruins_trig")
+		level.screenplay.SettlerNearRuins("loop")
+	elseif a == "loop" then
+		local x, y = position("ourplayer_tank");
+		func.NPC.SetAim("ourwarrior5", x - 64, y, "level.screenplay.SettlerNearRuins('talk')")
+		pushcmd(function()
+			if level.screenplay.ourwarrior5WasTalked ~= true then level.screenplay.SettlerNearRuins(a) end;
+		end, 1)
+	elseif a == "talk" then
+		level.screenplay.ourwarrior5WasTalked = true;
+		object("ourwarrior5").nick = func.Read("map01", "nicks", 8);
+		level.RanonSpeak(2)
+	elseif a == "goto_settle" then
+		func.Message({"map01", "ranon", 21})
+		func.NPC.SetWay("ourwarrior5", {{26, 33}, {26, 14}}, "level.screenplay.ranonIsNearSettle=true;", nil, nil, nil, true)
+		actor("trigger", 780, 556 , {name="settler_near_ruins_goto_settle_trig", only_human=1, radius=4, active=1, only_visible=1, on_enter="if level.screenplay.ranonIsNearSettle then level.screenplay.SettlerNearRuins('near_settle_part1'); kill(self) end"})
+	elseif a == "near_settle_part1" then
+		kill("settler_near_ruins_goto_settle_trig")
+		func.NPC.StopAction("ourwarrior1", 0)
+		pushcmd(function() func.NPC.SetAim("ourwarrior1", 31, 17, "func.NPC.Action('ourwarrior1', nil, 955, 540, false); pushcmd(function() level.screenplay.SettlerNearRuins('near_settle_part2') end, 1)", true, "", false, true) end, 1)
+	elseif a == "near_settle_part2" then
+		object("ourwarrior5").nick = func.Read("map01", "nicks", 5);
+		for i = 1, 6 do pushcmd(function() func.Message({"map01", "settler_and_unnamed_settler_dlg", i}) end, i*2-1) end
+		pushcmd(function() 
+			level.screenplay.playerMustPressPassword = true;
+			object("d_trig").active = 1; -- РќР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№.
+			func.NPC.SetWay("ourwarrior5", {{28, 28}, {77, 28}}, "setposition('ourwarrior5_tank', 129, 1649); ai_march('ourwarrior5', 129, 1649)", nil, nil, nil, true) 
+		end, 12)
+	elseif a == "go_away" then
+		func.NPC.SetWay("ourwarrior5", {{59, 34}, {27, 32}, {18, 18}, {3, 3}}, "setposition('ourwarrior5_tank', 129, 1649); ai_march('ourwarrior5', 129, 1649)", nil, nil, nil, true)
+	elseif a == "attack_player" then
+		func.GiveItem("boo", "ourwarrior5")
+		func.UseItem("boo", "ourwarrior5")
+		object("ourwarrior5").active = 1;
+		object("ourwarrior5").team = 2;
+		func.Message({"map01", "ranon", 27})
+	elseif a == "show_boss" then
+		func.NPC.Create("boss", func.Get32(77), func.Get32(34), 4, 2, 2, {skin="rebel_boss", class="boss1", nick=func.Read("map01", "nicks", 8)}, {currentWeap="weap_plazma"}, 2)
+		func.NPC.SetAim("ourwarrior5", 74, 33, "level.screenplay.SettlerNearRuins('talk_with_boss')", nil, nil, nil, true)
+	elseif a == "talk_with_boss" then
+		object("ourwarrior5").nick = func.Read("map01", "nicks", 5);
+		for i = 1, 11 do pushcmd(function() func.Message({"map01", "boss_and_ranon_dlg", i}) end, i*2-1) end;
+		pushcmd(function() 
+			level.screenplay.ourwarrior5WasTalked = false; -- Р”Р°-РґР°, РёСЃРїРѕР»СЊР·СѓСЋ РѕРґРЅСѓ РїРµСЂРµРјРµРЅРЅСѓСЋ РґР»СЏ СЂР°Р·РЅС‹С… С†РµР»РµР№.
+			func.NPC.SetAim("boss", 62, 28, "", nil, nil, nil, true)
+			level.screenplay.SettlerNearRuins("loop_after_talking_with_boss")
+		end, 22)
+	elseif a == "loop_after_talking_with_boss" then
+		local x, y = position("ourplayer_tank");
+		func.NPC.SetAim("ourwarrior5", x + 64, y + 64, "level.screenplay.SettlerNearRuins('give_rocket')")
+		pushcmd(function()
+			if level.screenplay.ourwarrior5WasTalked ~= true then level.screenplay.SettlerNearRuins(a) end;
+		end, 1)
+	elseif a == "give_rocket" then
+		level.screenplay.ourwarrior5WasTalked = true;
+		func.Message({"map01", "boss_and_ranon_dlg", 12})
+		func.EquipWeap("weap_rockets", const.playerName.."_weap", const.playerVehName)
+		level.screenplay.SettlerNearRuins("go_away")
+		message("Р—РґРµСЃСЊ РїСЂРёРµР·Р¶Р°РµС‚ РѕС‚СЂСЏРґ Рё РѕРЅ СЃ РёРіСЂРѕРєРѕРј Р°С‚Р°РєСѓРµС‚ Р±Р°Р·Сѓ.")
+	end;
+end
+
+function level.screenplay.BanditsAttack(event)
+	if event == "show" then
+		func.NPC.Create("bandit1", 2253, 1427, 2, 3, 2, {class="rebel", skin="rebel_camouflage", nick=func.Read("map01", "nicks", 7)}, {currentWeap="weap_autocannon"}, {enemyDetectMode=false})
+		func.NPC.Create("bandit2", 2153, 1527, 2, 3, 3, {class="rebel", skin="rebel", nick=func.Read("map01", "nicks", 7)}, {currentWeap="weap_minigun"}, {enemyDetectMode=false})
+--		actor("trigger", 2241, 1666, {name="bandit_activate_trig", radius=20, only_human=1, only_visible=0, on_enter="kill('bandit_activate_trig'); level.screenplay.BanditsAttack('dialog1')"})
+--		actor("trigger", 2241, 1666, {name="bandit_attack_trig", radius=10, only_human=1, only_visible=0, on_enter="kill('bandit_attack_trig'); level.screenplay.BanditsAttack('attack')"})
+		func.GiveItem("mine", "bandit2", 4)
+		if func.CheckOfLuck(math.random(5, 8)) then func.GiveItem("healthpack", "bandit1") end;
+		pushcmd(function()
+			for i = 1, 2 do 
+			object("bandit"..i.."_tank").on_damage = "if not level.screenplay.banditsAttackedPlayer then level.screenplay.BanditsAttack('attack') end; "..object("bandit"..i.."_tank").on_damage; 
+			object("bandit"..i).on_die= "level.screenplay.BanditsAttack('destroy'); "..object("bandit"..i).on_die;
+			end;
+		end, 2.1)
+	elseif event == "dialog1" then
+		if level.screenplay.banditsAttackedPlayer then return; end;
+		func.Message({"map01", "bandits", 1})
+		pushcmd(function() if not level.screenplay.banditsAttackedPlayer then func.Message({"map01", "bandits", 2}) end; end, 2)
+		pushcmd(function() if not level.screenplay.banditsAttackedPlayer then func.Message({"map01", "bandits", 3}) end; end, 8)
+		func.inventory.UseMine("bandit2")
+		func.NPC.SetAim("bandit2", 2035, 1591, "level.screenplay.BanditsAttack('dialog2')")
+	elseif event == "dialog2" then
+		if level.screenplay.banditsAttackedPlayer then return; end;
+		func.inventory.UseMine("bandit2")
+		func.NPC.SetAim("bandit2", 2217, 1647, "level.screenplay.BanditsAttack('dialog3')")
+	elseif event == "dialog3" then
+		if level.screenplay.banditsAttackedPlayer then return; end;
+		func.inventory.UseMine("bandit2")
+		func.Message({"map01", "bandits", 4})
+		func.NPC.SetAim("bandit2", 2317, 1547, "level.screenplay.BanditsAttack('dialog4')")
+	elseif event == "dialog4" then
+		if level.screenplay.banditsAttackedPlayer then return; end;
+		func.inventory.UseMine("bandit2")
+		func.Message({"map01", "bandits", 6})
+		func.NPC.SetWay("bandit1", {{2255, 979}, {1442, 980}, {983, 904}, {519, 1071}})
+		func.NPC.SetWay("bandit2", {{2213, 1174}, {1442, 1042}, {983, 1042}, {495, 908}})
+		pushcmd(function() func.Kill("bandit_attack_trig") end, 3)
+		pushcmd(function()
+			actor("trigger", 1387, 946, {name="bandit_ranon_attack_trig1", radius=14, only_human=1, only_visible=0, on_enter="level.screenplay.BanditsAttack('ranon_attack'); kill(self)"})
+			actor("trigger", 754, 1386, {name="bandit_ranon_attack_trig2", radius=18, only_human=1, only_visible=0, on_enter="level.screenplay.BanditsAttack('ranon_attack'); kill(self)"})
+		end, 5)
+	elseif event == "attack" then
+		level.screenplay.banditsAttackedPlayer = true;
+		if object("ourwarrior5").active ~= 1 then level.HideRanon() end;
+		func.Message({"map01", "bandits", 7})
+		for i = 1, 2 do object("bandit"..i).active = 1; end;
+		level.screenplay.BanditsAttack("attack_loop")
+	elseif event == "attack_loop" then
+		if exists("bandit1") or exists("bandit2") then
+			func.Message({"map01", "bandits", math.random(8, 10)})
+			pushcmd(function() level.screenplay.BanditsAttack("attack_loop") end, 10)
+		end;
+	elseif event == "ranon_attack" then
+		if level.screenplay.ranonAttackedBandits then return; end;
+		level.screenplay.ranonAttackedBandits = true;
+		object("ourwarrior5").nick = func.Read("map01", "nicks", 1);
+		func.NPC.SetAim("ourwarrior5", 389, 751, "func.GiveItem('boo', 'ourwarrior5'); func.UseItem('boo', 'ourwarrior5'); object('ourwarrior5').active = 1; level.screenplay.BanditsAttack('attack'); func.Message({'map01', 'settler_battlespeak', 1})")
+	elseif event == "destroy" then
+		pushcmd(function() 
+			if not exists("bandit1") and not exists("bandit2") and exists("ourwarrior5") then
+				if object("ourwarrior5").active == 1 then
+					object("ourwarrior5").active = 0;
+					func.GiveItem("healthpack", "ourwarrior5")
+					func.UseItem("healthpack", "ourwarrior5")
+					-- Р•СЃР»Рё РёРіСЂРѕРє РїРѕРґСЉРµРґРµС‚ Рє РїРѕСЃРµР»РµРЅС†Сѓ, С‚Рѕ РѕРЅ Р±СѓРґРµС‚ С‡С‚Рѕ-С‚Рѕ РіРѕРІРѕСЂРёС‚СЊ.
+					pushcmd(function() func.NPC.SetWay("ourwarrior5", {{1328, 1007}, {2185, 1017}, {2474, 1050}}, "level.HideRanon()") end, 2)
+				end;
+			end;
+		end)
+	end;
+end
+
+
+-- РђС‚Р°РєР° РїРѕРІСЃС‚Р°РЅС†РµРІ. РќСѓР¶РЅРѕ РїРµСЂРµРґРµР»Р°С‚СЊ, РёР±Рѕ РЅРµ СЂР°Р±РѕС‚Р°РµС‚.
+function level.screenplay.Attack(n)
+	--РЎРѕР·РґР°С‘Рј РІСЂР°РіРѕРІ
 	if n == nil then
 		local enemy_positions = {{75, 38}, {70, 38}, {65, 38}, {61, 36}, {67, 36}}
 		local enemy_weapons = {"rockets", "minigun", "minigun", "cannon", "cannon"}
 		for i = 1, 4 do
-			func.NPC.Create("enemy"..i, "", "Неизвестный войн", "boss1", "rebel", 2, "weap_"..enemy_weapons[i], 0, 1, func.Get32(enemy_positions[i][1]), func.Get32(enemy_positions[i][2]), 4, true) 
+			func.NPC.Create("enemy"..i, "", "РќРµРёР·РІРµСЃС‚РЅС‹Р№ РІРѕР№РЅ", "boss1", "rebel", 2, "weap_"..enemy_weapons[i], 0, 1, func.Get32(enemy_positions[i][1]), func.Get32(enemy_positions[i][2]), 4--[[, true СЂР°Р±РѕС‚Р°РµС‚ РЅРµРєРѕСЂРµРєС‚РЅРѕ, Р»Р°РіР°РµС‚]]) 
 		end
-		func.NPC.Create("boss", "", "Неизвестный войн", "boss1", "rebel_boss", 2, "weap_plazma", 0, 2, func.Get32(77), func.Get32(34), 4, true) 
-	if level.screenplay.missoinboo == 3 and level.screenplay.missionplate == 0 and level.screenplay.was_enemyattack == 0 then level.Attack("boss_gotobomb") end
-	--Теперь делаем сценарий
+		func.NPC.Create("boss", "", "РќРµРёР·РІРµСЃС‚РЅС‹Р№ РІРѕР№РЅ", "boss1", "rebel_boss", 2, "weap_plazma", 0, 2, func.Get32(77), func.Get32(34), 4--[[, true Р°РЅР°Р»РѕРіРёС‡РЅРѕ]]) 
+	if level.screenplay.missoinboo == 3 and level.screenplay.missionKey == 0 and level.screenplay.wasEnemyAttack == 0 then level.screenplay.Attack("boss_gotobomb") end
+	--РўРµРїРµСЂСЊ РґРµР»Р°РµРј СЃС†РµРЅР°СЂРёР№
 	elseif n == "boss_gotobomb" then
 		pushcmd(function()
-			func.NPC.SetAim("boss", 70, 25, "level.Attack('boss_setbomb')", true, "", false, true)
+			func.NPC.SetAim("boss", 70, 25, "level.screenplay.Attack('boss_setbomb')", true, "", false, true)
 		end, 2)
 		
 	elseif n == "boss_setbomb" then
@@ -400,12 +263,25 @@ function level.Attack(n)
 		pushcmd(function() 
 			kill("boss_bomb") 
 			for i = 1, 2 do pset("destr_br"..i, "max_health", 1); func.Destroy("destr_br"..i) end
+			level.screenplay.Attack("base_alert")
 		end, 12)
 	end
 end
 
-function level.HiddenTurretActivate()
-	kill("hiddenturret_trig")
-	actor("turret_minigun", 923, 1529, {name = "hiddenturret1", dir = 4.71239})
-	actor("turret_minigun", 460, 1529, {name = "hiddenturret2", dir = 4.71239})
+-- РќРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ Рё РЅРµ Р±СѓРґРµС‚.
+function level.DoorRepairerCall()
+	pushcmd(function()
+		kill("saron1")
+		for i = 1, 3 do kill("a"..i) end
+		func.NPC.Create("door_repairer", "", "Р РµРјРѕРЅС‚РЅРёРє", "ekivator1", "eskavator", 1, "none", 1, 1, 1851, 51, 1.5708)
+	end, 0.1)
+	pushcmd(function() 
+		func.NPC.SetAim("door_repairer", 55, 17, "func.NPC.Action('door_repairer', nil, 30, 18, true)", true, "", false, true)
+	end, 2.5)
+	pushcmd(function() 
+		func.ObjectPaste(level.objects.saron1)
+		func.ObjectPaste(level.objects.a1)
+		func.ObjectPaste(level.objects.a2)
+		func.ObjectPaste(level.objects.a3)
+	end, 4)
 end

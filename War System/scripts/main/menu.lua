@@ -615,7 +615,7 @@ function main.menu.Inventory()
 		func.ListBox(func.Read({"main", "inventory", 2, {height=charTab.height, maxHeight=charTab.maxHeight}}), {{stringTab={func.Read({"main", "inventory", 5}), func.Read({"main", "menu", 17}), func.Read({"main", "menu", 24}), func.Read({"main", "menu", 30})}, funcTab={"main.menu.InventoryKeys(); main.menu.inventoryChosedString = 1", "main.menu.InventoryWeapons(); main.menu.inventoryChosedString = 2", "main.menu.InventoryPlayerInfo(); main.menu.inventoryChosedString = 3", "main.menu.inventoryChosedString = 4"}, chosedStringNum=main.menu.inventoryChosedString}}, nil, "inventorybox")	
 	end;
 	
-	pushcmd(function() func.Kill("inventorybox") end, 0.001)
+	pushcmd(function() func.KillIfExists("inventorybox") end, 0.001)
 end
 
 function main.menu.ItemInfo(item)
@@ -674,7 +674,7 @@ function main.menu.ItemInfo(item)
 	
 	func.ListBox(table.concat(text), {{stringTab=stringTab, funcTab=funcTab}}, nil, "inventorybox")
 	
-	pushcmd(function() func.Kill("inventorybox") end, 0.001)
+	pushcmd(function() func.KillIfExists("inventorybox") end, 0.001)
 end
 
 function main.menu.InventoryKeys()
@@ -733,7 +733,7 @@ function main.menu.Devices()
 	end;
 	func.ListBox(func.Read({"main", "devices", 10}, {"main", "devices", 11, {energyConsumption = charTab.energyConsumption}}), {{stringTab={getLineName(6, "activating", charTab.devices.isActivated['minedetector']), getLineName(7, "activating", charTab.devices.isActivated['energydetector']), getLineName(8, "activating", charTab.devices.isActivated['arc']), getLineName(9, "preparing"), func.Read({"main", "menu", 30})}, funcTab={function(n) main.menu.devicesChosedString = n; main.characters[const.playerName].devices.isActivated['minedetector'] = not main.characters[const.playerName].devices.isActivated['minedetector']; main.menu.Devices() end, function(n) main.menu.devicesChosedString = n; main.characters[const.playerName].devices.isActivated['energydetector'] = not main.characters[const.playerName].devices.isActivated['energydetector']; main.menu.Devices() end, function(n) main.menu.devicesChosedString = n; main.characters[const.playerName].devices.isActivated['arc'] = not main.characters[const.playerName].devices.isActivated['arc']; main.menu.Devices() end, function(n) main.menu.devicesChosedString = n; if autofireEfficiency < 100 then func.MsgBox({'main', 'msg_notices', 30}, 'noticebox') else menu.main.Demo() end; main.menu.Devices() end, function(n) main.menu.devicesChosedString = n; --[[main.menu.Show('gameopt_page"..main.gameOptPage.."')]] end}, chosedStringNum=main.menu.devicesChosedString, "inventorybox"}});
 
-	pushcmd(function() func.Kill("listbox") end, 0.001)
+	pushcmd(function() func.KillIfExists("listbox") end, 0.001)
 end
 
 ------------------------------------------------------------------------------------------

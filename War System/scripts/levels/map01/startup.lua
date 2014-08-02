@@ -33,6 +33,14 @@ level.functions = {
 	settleEnemy = "", -- Имя врага поселения. Не используется и вообще лучше использовать надо было массив, наверное.
 	settlersAreEnemies = false, -- Враждебно ли относятся к игроку поселенцы.
 	settlersNearSettleNum = 0, -- Число поселенцев у входа в поселение.
+	infolinkHealth = {
+		settle = 10, -- Количество жизней у инфолинка на въезде в базу.
+		tunnels = 10, -- Количество жизней у инфолинка на въезде в туннели под базой.
+		ruins = 10, -- Количество жизней у инфолинка на складе в руинах.		
+	},
+	infolinkSettleHealth = 200, -- Количество жизней у инфолинка на въезде в базу.
+	infolinkTunnelsHealth = 200, -- Количество жизней у инфолинка на въезде в туннели под базой.
+	infolinkRuinsHealth = 200, -- Количество жизней у инфолинка на складе в руинах.
 };
 level.objects = {};
 level.zones = {
@@ -124,6 +132,10 @@ actor("trigger", 2200, 1000, {name="settler_near_ruins_trig", only_human=1, radi
 actor("trigger", 2098, 69, {name="change_halos_name_trig", only_human=1, radius=2, active=1, on_enter="object('ourwarrior3').nick = func.Read({'map01', 'nicks', 2}); kill(self)"})
 actor("trigger", 1998, 1703, {name="teleport_ranon_trig1", only_human=1, radius=10, active=1, on_enter="setposition('ourwarrior5_tank', 72, 586); object(self).active=0;"})
 actor("trigger", 799, 544, {name="settler_is_out_settle_trig", radius=3, active=1, on_enter="for i = 1, 4 do if object(who).playername == 'ourwarrior'..i then local npcTab = main.NPC.list[object(who).playername]; npcTab.currentWay = 'settler_return'; end; end"})
+actor("trigger", 855, 420, {name="infolink_settle_trig", on_shot="level.InfolinkOnDamage('settle')"})
+actor("trigger", 655, 245, {name="infolink_tunnels_trig", on_shot="level.InfolinkOnDamage('tunnels')"})
+actor("trigger", 788, 1229, {name="infolink_ruins_trig", on_shot="level.InfolinkOnDamage('ruins')"})
+
 
 pushcmd(function() 
 	func.player.Create({class="player1", skin="ekivatorl", nick=func.Read({"map01", "nicks", 6})}, 1, 3, 80, 80, 0.785398, {faction="uew", rank=3}) --Только теперь создаём игрока.

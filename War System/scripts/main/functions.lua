@@ -12,8 +12,9 @@ function func.Explosion(x, y, times, spd, dangerous, dam)
 	
 	local times = times or 1;
 	local spd = spd or 0;
-	local dangerous = dangerous or true;
+	local dangerous;
 	local dam = dam or 1000;
+	if dangerous == nil then dangerous = true; end;
 	for i = 0, times - 1 do
 		pushcmd(function() 
 			actor("user_object", x, y, {name="exploder"});
@@ -21,7 +22,7 @@ function func.Explosion(x, y, times, spd, dangerous, dam)
 			if dangerous == true then 
 			actor("trigger", x, y, {name="exp_"..x.."_"..y.."_trig1", on_enter="damage("..dam..", who.name)", only_human=0, radius=2, only_visible=0}) 
 			actor("trigger", x, y, {name="exp_"..x.."_"..y.."_trig2", on_enter="damage("..dam.."/2, who.name)", only_human=0, radius=3, only_visible=0})
-			actor("trigger", x, y, {name="exp_"..x.."_"..y.."_trig3", on_enter="damage("..dam.."/10, who.name)", only_human=0, radius=4, only_visible=0}) 
+			actor("trigger", x, y, {name="exp_"..x.."_"..y.."_trig3", on_enter="damage("..dam.."/5, who.name)", only_human=0, radius=4, only_visible=0}) 
 			end;
 		end, 0 + i / 100*spd)
 		pushcmd(function()
@@ -113,7 +114,10 @@ function func.UnGet32(...)
 	return unpack(args);
 end
 
--- Расчитывает угол в радианах от одних координат к другим (возвращает его). VIRUS. Переделал. Slava98. Теперь объекты тут вообще не причём, думаю, так будет лучше. Slava98. 26.02.14. Вспомнил тригонометрию, урезал функцию в 8 раз. VIRUS.
+-- Расчитывает угол в радианах от одних координат к другим (возвращает его). VIRUS.
+-- Переделал. Slava98.
+-- Теперь объекты тут вообще не причём, думаю, так будет лучше. Slava98. 26.02.14.
+-- Вспомнил тригонометрию, урезал функцию в 8 раз. VIRUS.
 -- Маленькое исправление. Asqwel (Fluffle Puff / Артур)
 function func.GetRadians(x1, y1, x2, y2)
 -- Обработчик ошибок (написать).
@@ -131,7 +135,7 @@ function func.GetRadians(x1, y1, x2, y2)
 end
 
 -- Обратная функция. Slava98. 26.02.14.
--- Написана. Asqwel (Fluffle Puff / Артур). 27.02.14.
+-- Написана Asqwel (Fluffle Puff / Артур). 27.02.14.
 function func.GetCoords(x1, y1, dir, length)
 -- Обработчик ошибок (написать).
 
@@ -140,13 +144,36 @@ function func.GetCoords(x1, y1, dir, length)
 	return x2, y2;
 end
 
-function func.GetDistance(obj1, obj2)
+-- Возвращает дистанцию между двумя точкками (в пикселях). Slava98.
+function func.GetDistance(x1, y1, x2, y2)
 -- Обработчик ошибок (написать).
 
-	local x1, y1 = position(obj1);
-	local x2, y2 = position(obj2);
-	
 	return math.sqrt((x1 - x2)^2 + (y1 - y2)^2);
+end
+
+-- Возвращает таблицу с координатами всех точек вокруг данной точки в определённом радиусе (в клетках). Slava98.
+function func.GetCicle(x, y, radius, isHollow, ignoreObstacles, ignoreMinus)
+-- Обработчик ошибок (написать).
+	
+	local ignoreObstacles; -- Игнорировать ли препятствия. Изначально false.
+	local ignoreMinus; -- Игнорировать ли отрицательные координаты. Изначально true.
+	local x1, y1 = x - radius, y - radius; -- Координаты верхней левой точки квадрата, в который вписан наш круг.
+	local x2, y2 = x + radius, y + radius; -- Координаты нижней правой точки того квадрата.
+	local sin45 = 0,5*math.sqrt(2);
+	local squaresNum = 2*math.pi()*radius;
+	if isHollow == nil then isHollow = true; end;
+	if ignoreMinus == nil then ignoreMinus = true; end;
+	if ignoreObstacles == nil then ignoreObstacles = true; end;
+	
+	for layer = radius, 1 do
+		for x1 = 1, squaresNum do
+			for y1 = 1, squaresNum do
+				local x2, y2 = math.sqrt(radius^2 - x^2), math.sqrt(radius^2 - y^2);
+				
+			end;
+		end;
+	if isHollow then break; end;
+	end;
 end
 
 -- Двигает объект в любом направлении. VIRUS. Modified by Assassin (Артур).
@@ -221,6 +248,18 @@ function func.object.SetRotation(objName, rotation, frequency)
 	return frequency*alpha/(math.pi/90); -- Возвращает время, за которое будет совершён поворот. Slava98. 01.03.14.
 end
 
+function func.object.GetRightDirection(dir1, dir2)
+-- Обработчик ошибок (написать).
+
+	local k = 1;
+	local alpha = dir1 - dir2;
+	
+	if math.abs(alpha) > math.pi then k = k * -1; end;     
+	if alpha < 0 then k = k * -1; end;
+	
+	return k;
+end
+
 -- Постепенно разворачивает объект. *Переделать. Slava98. 10.02.14.
 -- Криво? Asqwel (Fluffle Puff / Артур).
 -- Попытка переделать для нужной системы коордиант. Asqwel (Fluffle Puff / Артур), Slava98. 01.03.14.
@@ -271,11 +310,45 @@ function func.Destroy(obj)
 	end;
 end
 
--- Убирает объект, если он не существует. Не выдаёт ошибки. *Переписать, сделать так, чтобы не выдавал ошибки только с положительным аргументом takeOffWarning. Slava98. 11.01.14.
-function func.Kill(obj)
--- Обработчик ошибок (написать).
+-- Задаёт объекту имя с рандомным суффиксом.
+function func.MakeName(objType)
+	local name;
+	if objType then
+		name = objType..math.random(1, 10000);
+	else
+		name = tostring(math.random(1, 10000));
+	end;
+	if exists(name) then name = func.MakeName(objName, objType);
+	else return name;
+	end;
+end;
 
-	if exists(obj) then kill(obj) end;
+-- КОСТЫЛЬ. В отличие от exists, работает и на ссылки.
+function func.Exists(obj)
+-- Обработчик ошибок.
+	if type(obj) ~= "string" and type(obj) ~= "userdata" then error("bad argument #1 to 'func.Exists' (string or userdata expected, got "..type(objName)..")", 2) return; end;    
+
+	if type(obj) == "userdata" then
+		if not xpcall(function() if obj.name then end; end, 1) then return false; end;
+		if obj.name and obj.name ~= "" then
+			obj = obj.name;
+		else
+			local n; -- КОСТЫЛЬ!!!
+			while n == nil do
+				n = func.MakeName() -- Проблема с игроками и танками! Это просто выкинет игрока из танка.
+			end;
+			obj.name = n;
+			obj = obj.name;
+		end;
+	end;
+	return exists(obj);
+end
+
+-- Убирает объект, если он не существует. Не выдаёт ошибки. *Переписать, сделать так, чтобы не выдавал ошибки только с положительным аргументом takeOffWarning. Slava98. 11.01.14.
+function func.KillIfExists(obj)
+-- Обработчик ошибок.
+	if type(obj) ~= "string" and type(obj) ~= "userdata" then error("bad argument #1 to 'func.KillIfExists' (string or userdata expected, got "..type(objName)..")", 2) return; end;    
+	if func.Exists(obj) then kill(obj) end;
 end
 
 -- Пересоздаёт объект.
@@ -436,7 +509,7 @@ function func.spriteskin.Create(asName, spriteTab, asTab)
 		spriteTab.name = tankName.."_"..asName.."_spriteskin";
 	end;
 	
-	func.Kill(spriteTab.name)
+	func.KillIfExists(spriteTab.name)
 	object(tankName).skin = "null"; -- Делаем скин танка "пустым". Slava98. 02.01.14.
 	actor("user_sprite", x, y, spriteTab)
 	level.objects[asName] = asTab;
@@ -446,8 +519,191 @@ end
 
 -- Убирает скин. Slava98. 02.01.14.
 function func.spriteskin.Kill(asName)
-	func.Kill(level.objects[asName].objName)
+	func.KillIfExists(level.objects[asName].objName)
 	level.objects[asName] = nil;
+end
+
+---------------------------------------------------------------------------------------------------------------------
+------------------------------------------------ Снаряды ------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+
+function func.projectile.Create(projName, projTab, x, y)
+-- Обработчик ошибок (написать).
+
+	local projTab = func.UniteTables(
+		{
+			projType = projType or "", -- Тип снаряда. Необязательный параметр, нужный только для опознания снаряда.
+			textureTab = nil, -- Таблица с характеристиками декорации полёта. Если пустая, то снаряд невидим.
+			explosionTab = nil, -- Таблица с характеристиками декорации взрыва. Если пустая, то взрыв невидим.
+			trailTab = nil, -- Таблица с характеристиками декорации следа снаряда. Если пустая, то следов нет.
+			splashTab = nil, -- Таблица с характеристиками декорации частиц от столкновения со стеной. Если пустая, то частиц нет.
+			speed = 10, -- Скорость снаряда.
+			speedResidual = 1, -- Единицы скорости, которые теряет снаряд при столкновении с объектом.
+			width = 1, -- Ширина снаряда.
+			length = 1, -- Длина снаряда.
+			dir = 0, -- Направление снаряда.
+			damage = 50, -- Минимальный урон от снаряда.
+			damageResidual = 10, -- Единицы урона, которые теряет снаряд при столкновении с объектом.
+			numOfHits = 1, -- Количество столкновении для детонации снаряда.
+			homingFactor = 0, -- Коэфицент самонаведения.
+			target = "", -- Цель самонаводящегося снаряда. Если нет, находится автоматически.
+			sightRange = math.pi/2, -- Поле зрения снаряда для самонаведения.
+			trailWidth = 1, -- Длина текстуры следа снаряда.
+			lifeTime = 5, -- Время жизни снаряда. 0 - вечно.
+			splashTime = 3, -- Время жизни декорации частиц от столкновения со стеной.
+			detonateOnOwner = true, -- Взрывается ли снаряд, если столкнулся с хозяином. Только если хозяин имеется.
+			shootDown = false, -- Можно ли сбить снаряд.
+			health = 50, -- Здоровье снаряда, если shootDown.
+			healthResidual = 10, -- Здоровье, которое теряет снаряд при столкновении с объектом.
+			pushingPower = 1000, -- Сила, передающаяся объекту, с которым снаряд столкнулся.
+			pushingPowerResidual = 200, -- Сила, которую теряет снаряд при столкновении с объектом.
+			explosionRadius = 0, -- Радиус взрыва. 0 - урон наносится только цели.
+			onCreate = "", -- Вызывается при создании снаряда.
+			onDestroy = "", -- Вызывается при детонации снаряда.
+			onHit = "", -- Вызывается при столкновении с объектом.
+			onLoop = "", -- Вызывается при полёте снаряда.
+			owner = nil, -- Ссылка на владельца снаряда.
+		}, projTab)
+	local function MakeName() -- Задаёт снаряду имя с рандомным суффиксом.
+		local name;
+		if projTab.owner and projTab.owner.name then
+			name = projTab.owner.name.."_projectile"..projTab.projType..math.random(1, 10000);
+		else
+			name = "projectile"..projTab.projType..math.random(1, 10000);
+		end;
+		if exists(name) then MakeName()
+		else return name;
+		end;
+	end;
+	local projName = projName or MakeName();
+	local texture; -- Ссылка на текстуру.
+	local lifeIsOver; -- Прошло ли время жизни снаряда.
+	local trails = {}; -- Массив со ссылками на текстуры следов от снарядов.
+	local n = 0; -- Номер текущей иттерации в Loop.
+	local x1, y1;
+	local function Hit(objLink, obj)
+		local projTab = level.projectiles[projName];
+		local splash;
+		damage(projTab.damage, objLink)
+--		if func.Exists(objLink) then -- А нужно ли? Slava98. 01.08.14.
+			if obj == "tank" then
+--				func.tank.OnDamage(objLink, projTab) -- Такой функции ещё нет.
+			end;
+			if obj == "crate" or obj == "tank" and projTab.pushPower and projTab.pushingPower ~= 0 then
+				pushobj(objLink, projTab.dir, projTab.pushingPower)
+			end;
+--		end;
+		loadstring(projTab.onHit)()
+		if projTab.splashTab then 
+			splash = actor("user_sprite", x, y, projTab.splashTab);
+			pushcmd(function() func.KillIfExists(splash) end, projTab.splashTime)
+		end;
+		-- Снаряд теряет скорость, урон и силу после столкновения с объектами (если он может проходить сквозь них).
+		if projTab.numOfHits == 0 then return true; end;
+		projTab.damage = projTab.damage - projTab.damageResidual;
+		projTab.speed = projTab.speed - projTab.speedResidual;
+		projTab.pushingPower = projTab.pushingPower - projTab.pushingPowerResidual;
+		projTab.numOfHits = projTab.numOfHits - 1;
+	end;
+	local function Destroy()
+		local projTab = level.projectiles[projName];
+		local explosion; -- Ссылка на взрыв.
+		loadstring(projTab.onDestroy)()
+		if projTab.explosionTab then explosion = actor("user_sprite", x, y, projTab.explosionTab); explosion.layer = 1; end;
+		-- Удаление спрайта снаряда.
+		func.KillIfExists(texture)
+		-- Имитация взрывной волны.
+		if projTab.explosionRadius and projTab.explosionRadius > 0 then
+			-- !! Нужно сделать так, чтобы повреждались объекты.
+		end;
+		-- Удаление следов от снаряда.
+		for i = 1, #trails do
+			func.KillIfExists(trails[i])
+		end;
+		-- Отрисовка спрайта взрыва.
+		if projTab.explosionTab then
+			local timer = 10/projTab.explosionTab.animate or 1;
+			pushcmd(function() func.KillIfExists(explosion) end, timer)
+		end;
+	end;
+	local function Loop()
+		local projTab = level.projectiles[projName];
+		local x1, y1 = func.GetCoords(x, y, projTab.dir, 5);
+		-- Проверка таймера.
+		if lifeIsOver then Destroy() return; end;
+		-- Проверка нахождения снаряда на карте.
+		if x < 0 or y < 0 then Destroy() return; end;
+		-- Проверка препятствий.
+		-- Ради оптимизации идёт только каждые 3 пикселя.
+		if math.fmod(n, 3) == 0 then 
+			local supposedObjects = {"tank", "wall_concrete", "wall_brick", "user_object", "crate"};
+			for x2 = 1, projTab.length do
+				for y2 = 1, projTab.width do
+					if x2 == projTab.length or y2 == projTab.width or x2 == 1 or y2 == 1 then
+						for i, obj in pairs(supposedObjects) do
+							local x3, y3 = x1 + math.floor(x2 - 0.5*projTab.length), y1 + math.floor(y2 - 0.5*projTab.width);
+							local objLink = findobj(obj, x3, y3);
+							if objLink and not (projTab.owner and (objLink == projTab.owner or objLink.name == projTab.owner.name or objLink.name == projTab.owner)) then
+								if Hit(objLink, obj) then Destroy() return; end;
+							end;
+						end;
+						-- !! Проверка на столкновение с другим снарядом.
+					end;
+				end;
+			end;
+		end;
+		-- Поиск цели, если таковой нет изначально.
+		if projTab.homingFactor ~= 0 and projTab.target ~= "" then
+			-- !! Тут как-то нужно сделать, чтобы искался танк в поле зрения снаряда.
+		end;
+		-- Самонаведение.
+		if projTab.homingFactor ~= 0 and projTab.target ~= "" then
+			local x2, y2 = position(projTab.target); -- Позиция противника.
+			local dirToTarget = func.GetRadians(x, y, x2, y2); -- Угол поворота к противнику.
+			local k = func.object.GetRightDirection(projTab.dir, dirToTarget); -- Коэффицент правильного направления снаряда.
+			projTab.dir = projTab.dir + 0.1*k*projTab.homingFactor*math.pi/90;
+		end;
+		-- Передача личных данных текстуре из таблицы снаряда.
+		projTab.textureTab.rotation = projTab.dir;
+		texture.rotation = projTab.textureTab.rotation; -- КОСТЫЛЬ!!!
+--[[	for property, value in pairs(func.PropertiesToTable(texture)) do -- Пока закомментил, ибо оптимизировать func.PropertiesToTable не получается.
+			if projTab.textureTab[property] and texture[property] ~= projTab.textureTab[property] then
+				texture[property] = projTab.textureTab[property]; 
+			end;
+		end;]]
+		-- Выполнение заданных функций.
+		loadstring(projTab.onLoop)()
+		-- След от снаряда.
+		if n/projTab.trailWidth == math.ceil(n/projTab.trailWidth) and projTab.trailTab then
+			local trail;
+			trail = actor("user_sprite", x, y, projTab.trailTab);
+			trail.rotation = projTab.dir;
+			trail.layer = 1;
+			table.insert(trails, trail)
+		end;
+		-- Перемещение.
+		x, y = x1, y1;
+		setposition(texture, x, y)
+		n = n + 1;
+		pushcmd(Loop, 1/projTab.speed)
+	end;
+	
+	-- Если разработчик карты вдруг забудет сделать animate у взрыва, то следует ему это напомнить. 
+	if projTab.explosionTab and type(projTab.explosionTab.animate) ~= "number" then error("bad variable 'explosionTab.animate' in argument #2 to 'func.projectile.Create' (number expected, got "..type(projTab.explosionTab.animate).."): don't forget about explosion animate", 2) return; end; 
+
+	-- В некоторых случаях я больше не буду использовать имена. Slava98. 21.07.14.	
+--[[projTab.textureTab.name = projTab.textureTab.name or projName.."_sprite";
+	projTab.explosionTab.name = projTab.explosionTab.name or projName.."_explosion";
+	projTab.trailTab.name = projTab.trailTab.name or projName.."_trail";]]
+	
+	loadstring(projTab.onCreate)()
+	projTab.textureTab.layer = projTab.textureTab.layer or 5;
+	if projTab.textureTab then texture = actor("user_sprite", x, y, projTab.textureTab); end;
+	if projTab.lifeTime and projTab.lifeTime > 0 then pushcmd(function() lifeIsOver = true; end, projTab.lifeTime) end;
+	
+	level.projectiles[projName] = projTab;
+	Loop()
+	return projName;
 end
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -1181,8 +1437,8 @@ function func.inventory.DropBombActivated(character, bombTime)
 			on_leave="if func.ExistsCharacter('"..character.."') then main.characters['"..character.."'].inventory.isActivated['bomb'] = false; end; kill('"..character.."_bomb"..inventory.numberOfAcivatedBombs.."'); kill('"..character.."_bomb"..inventory.numberOfAcivatedBombs.."_trig'); func.ActorBomb('"..name.."', "..x..", "..y..")" } )
 	end)
 	pushcmd(function() debug.Print("| "..character.." dropped bomb activated on "..bombTime.." nanocicles") end)
-	pushcmd(function() if not exists(character) and (exists("bomb"..inventory.numberOfAcivatedBombs) or exists("bomb"..inventory.numberOfAcivatedBombs.."_trig")) then func.Kill("bomb"..inventory.numberOfAcivatedBombs); func.Kill("bomb"..inventory.numberOfAcivatedBombs.."_trig") end; end, 1)
-	pushcmd(function() pushcmd(function() if exists(name) then local x, y = position(name); func.Explosion(x, y, nil, nil, nil, 3000); func.Kill(name); end; end, bombTime) end)
+	pushcmd(function() if not exists(character) and (exists("bomb"..inventory.numberOfAcivatedBombs) or exists("bomb"..inventory.numberOfAcivatedBombs.."_trig")) then func.KillIfExists("bomb"..inventory.numberOfAcivatedBombs); func.KillIfExists("bomb"..inventory.numberOfAcivatedBombs.."_trig") end; end, 1)
+	pushcmd(function() pushcmd(function() if exists(name) then local x, y = position(name); func.Explosion(x, y, nil, nil, nil, 3000); func.KillIfExists(name); end; end, bombTime) end)
 	
 	return inventory.bombNum;
 end
@@ -1332,7 +1588,7 @@ function func.CharacterSetWeap(charName, weapType, withEquip)
 		end;
 	end;
 	
-	func.Kill(charName.."_weap")
+	func.KillIfExists(charName.."_weap")
 	
 -- Нацепляем пушку на танк, если он танк, хехе. Slava98. 31.12.13.
 	if charTab.charType == "npc" or "player" and withEquip then
@@ -1409,7 +1665,7 @@ function func.ExistsCharacter(character)
 	return func.Search(charTab, character);
 end
 
-function func.KillCharacter(name)
+function func.KillIfExistsCharacter(name)
 	local copy = main.characters[name];
 	main.characters[name] = nil;
 	return copy;
@@ -1447,7 +1703,7 @@ function func.SpawnTank(name, brainType, properties, x, y, team, spawnTeam, dir,
 		team = spawnTeam,
 		nick = properties.nick or "",
 --		on_damage = "func.OnDamage(who, self); "..properties.on_damage,
-		on_die = "level.OnDie('"..name.."'); func.inventory.DropAllItems('"..name.."'); func.KillCharacter('"..name.."'); func.Kill('"..name.."_weap'); func.Kill('"..name.."')",
+		on_die = "level.OnDie('"..name.."'); func.inventory.DropAllItems('"..name.."'); func.KillIfExistsCharacter('"..name.."'); func.KillIfExists('"..name.."_weap'); func.KillIfExists('"..name.."')",
 		active = 0,
 	};
 	
@@ -1717,7 +1973,7 @@ function func.NPC.SetAim(npcName, x, y, g32, trigTab, killAfterEnter, killAfterL
 		if type(trigTab.on_leave) == "string" then trigTab.on_leave = "if who == nil or who.name ~= '"..object(npcName).vehname.."' then return; end; "..Kill(killAfterLeave)..trigTab.on_leave; end;
 	
 	if g32 then x, y = func.Get32(x, y); end;
-	func.Kill(npcName.."_aimtrig")
+	func.KillIfExists(npcName.."_aimtrig")
 	ai_march(npcName, x, y)
 	actor("trigger", x, y, trigTab)
 	debug.Print("| "..npcName.."'s aim is ("..func.UnGet32(x)..", "..func.UnGet32(y)..")")
@@ -1796,12 +2052,12 @@ function func.NPC.FollowObject(npcName, objName, trigTab, frequency, dir, length
 		for i = 1, 4 do
 			CorrectTrigPosition(i)
 			trigTab.name = npcName.."_aimtrig"..i;
-			func.Kill(trigTab.name)
+			func.KillIfExists(trigTab.name)
 			actor("trigger", x, y, trigTab)
 		end;
 	else
 		trigTab.name = npcName.."_aimtrig";
-		func.Kill(trigTab.name)
+		func.KillIfExists(trigTab.name)
 		actor("trigger", x, y, trigTab)
 	end
 	main.NPC.list[npcName].followingObject = objName;
@@ -1854,7 +2110,9 @@ function func.NPC.EvaluateTarget(npcName, targetNum, atribute)
 		formatedEnemies.weapValue[targetNum] = func.EvaluateWeap(main.characters[targetName].currentWeap);
 		formatedEnemies.healthValue[targetNum] = object(object(targetName).vehname).health;
 		formatedEnemies.rankValue[targetNum] = main.characters[targetName].rank;
-		formatedEnemies.distanceValue[targetNum] = func.GetDistance(object(npcName).vehname, object(targetName).vehname);
+		local x1, y1 = object(npcName).vehname;
+		local x2, y2 = object(targetName).vehname;
+		formatedEnemies.distanceValue[targetNum] = func.GetDistance(x1, y1, x2, y2);
 	end;
 	-- Теперь задаём нужные нам переменные. Враги со средними характеристиками потом находятся методом исключения.
 	local maxWeap = formatedEnemies.weapValue[func.ArrayMax(formatedEnemies.weapValue)];
@@ -1970,7 +2228,9 @@ function func.NPC.Attack(f, npcName, who, frequency, n, targetIsDestroyed--[[, s
 		for charName, charTab in pairs(main.characters) do
 			if charTab.group == main.characters[npcName].group and charTab.charType == "npc" and object(charName).team then
 --				table.insert(bandmates, charName)
-				local distance = func.UnGet32(func.GetDistance(object(npcName).vehname, object(charName).vehname));
+				local x1, y1 = position(object(npcName).vehname);
+				local x2, y2 = position(object(charName).vehname);
+				local distance = func.UnGet32(func.GetDistance(x1, y1, x2, y2));
 				if npcTab.callAllies and main.NPC.list[charName].canBeCalledByAllies and distance <= npcTab.callAlliesMaxDistance and distance <= main.NPC.list[charName].callAlliesMaxDistance then
 					func.NPC.Attack("attack", charName, object(targetTank))
 				end;
@@ -2096,7 +2356,7 @@ function func.way.Kill(wayName)
 
 
 	for i = 1, level.ways[wayName].points do
-		func.Kill(wayName.."_waytrig"..i)
+		func.KillIfExists(wayName.."_waytrig"..i)
 	end;
 	level.ways[wayName] = nil;
 end
@@ -2237,7 +2497,7 @@ function func.player.ChoseWeap(weapType)
 	charTab.inventory.isSetWeap = true;
 	func.EquipWeap(charTab.currentWeap, const.playerName.."_weap", const.playerVehName)
 	
-	func.MsgBox(func.Read({"main", "msg_changeweap", 2, {weap = func.ConvertWeap(weapType)}}), {on_select="pause(false); local charTab = main.characters[const.playerName]; local weapons = charTab.inventory.weapons; local x, y = position(const.playerVehName); if n == 1 or n == 2 then --[[local oldWeap=func.ObjectCopy(const.playerName..'_weap'); func.Kill(const.playerName..'_weap'); func.ObjectPaste(oldWeap, '');]] local droppedWeap = weapons[n].weapType; pushcmd(function() actor(droppedWeap, x, y, {on_pickup='func.player.OnGetWeapon(self)'}) end, 0.1); table.remove(weapons, n); func.CharacterSetWeap(const.playerName, '"..weapType.."', charTab.currentWeap == weapons[n]); elseif n == 3 then actor('"..weapType.."', x, y, {on_pickup='func.player.OnGetWeapon(self)'}); end;", option1=func.ConvertWeap(weapons[1].weapType), option2=func.ConvertWeap(weapons[2].weapType), option3=func.Read({"main", "menu", 27})}, "weapbox")
+	func.MsgBox(func.Read({"main", "msg_changeweap", 2, {weap = func.ConvertWeap(weapType)}}), {on_select="pause(false); local charTab = main.characters[const.playerName]; local weapons = charTab.inventory.weapons; local x, y = position(const.playerVehName); if n == 1 or n == 2 then --[[local oldWeap=func.ObjectCopy(const.playerName..'_weap'); func.KillIfExists(const.playerName..'_weap'); func.ObjectPaste(oldWeap, '');]] local droppedWeap = weapons[n].weapType; pushcmd(function() actor(droppedWeap, x, y, {on_pickup='func.player.OnGetWeapon(self)'}) end, 0.1); table.remove(weapons, n); func.CharacterSetWeap(const.playerName, '"..weapType.."', charTab.currentWeap == weapons[n]); elseif n == 3 then actor('"..weapType.."', x, y, {on_pickup='func.player.OnGetWeapon(self)'}); end;", option1=func.ConvertWeap(weapons[1].weapType), option2=func.ConvertWeap(weapons[2].weapType), option3=func.Read({"main", "menu", 27})}, "weapbox")
 	pause(true)
 end
 
@@ -2645,7 +2905,7 @@ function func.MsgBox(text, msgTab, boxType)
 	
 	msgTab.text = text;
 	for i = 1, #msgTab do msgTab[i] = nil; end;
-	func.Kill(msgTab.name)
+	func.KillIfExists(msgTab.name)
 	
 --	pause(false)
 --	pushcmd(function() pause(true); service("msgbox", msgTab); end, 0.01)
@@ -2969,13 +3229,13 @@ function func.PropertiesToTable(metatable)
 -- Обработчик ошибок (написать).
 
 	local a = getmetatable(metatable);
-	local proptab = {};
+	local propTab = {};
 	local prop = "name";
 	while prop ~= nil do
-		rawset(proptab, prop, a.__index(metatable, prop))
+		rawset(propTab, prop, a.__index(metatable, prop))
 		prop = a.__next(metatable, prop);
 	end;
-	return proptab;
+	return propTab;
 end
 
 -- Позволяет из специального массива, созданного функцией func.Remember воссоздать объект (вспомнить объект). Slava98.

@@ -257,13 +257,14 @@ function level.OnDestroyCrateInTheSettle()
 end
 
 function level.InfolinkOnDamage(name)
-	if object("infolink_"..name.."_obj").health <= 900 and exists("infolink_"..name) then
-		local x, y = position("infolink_"..name.."_obj");
+	if level.functions.infolinkHealth[name] <= 0 and exists("infolink_"..name) then
+		local x, y = position("infolink_"..name);
+		level.functions.infolinkHealth[name] = level.functions.infolinkHealth[name] - 1;
 		kill("infolink_"..name)
-		kill("infolink_"..name.."_obj")
+		kill("infolink_"..name.."_trig")
 		actor("pu_mine", x, y, {name="infolink_temp_mine"})
 		actor("tank", x, y, {name="infolink_temp_tank", skin="null"})
-		pushcmd(function() func.Kill("infolink_temp_mine"); func.Kill("infolink_temp_tank") end, 0.1)
+		pushcmd(function() func.KillIfExists("infolink_temp_mine"); func.KillIfExists("infolink_temp_tank") end, 0.1)
 		
 		if name == "settle" then
 		
@@ -272,6 +273,8 @@ function level.InfolinkOnDamage(name)
 		elseif name == "tunnels" then
 			message("Вы сломали кнопку. Ай-яй-яй...")
 		end;
+	else
+		level.functions.infolinkHealth[name] = level.functions.infolinkHealth[name] - 1;
 	end;
 end
 

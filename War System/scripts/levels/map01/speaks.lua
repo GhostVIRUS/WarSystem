@@ -1,4 +1,4 @@
--- Диалоги первого уровня кампании ВС.
+-- Р”РёР°Р»РѕРіРё РїРµСЂРІРѕРіРѕ СѓСЂРѕРІРЅСЏ РєР°РјРїР°РЅРёРё Р’РЎ.
 
 function level.CommSpeak(part, a)
 	pset('c_trig', 'active', 0)
@@ -41,15 +41,15 @@ function level.CommSpeak(part, a)
 	elseif part == "exit" then 
 		pushcmd(function() 
 			pset('c_trig', 'active', 1)
---			if level.screenplay.missionBoo == 0 then --Не думаю, что это нужно. Slava98.
---          pset("c_trig", "on_enter", "level.CommSpeak(1, 1)") --Здесь потом другое будет. Slava98.
+--			if level.screenplay.missionBoo == 0 then --РќРµ РґСѓРјР°СЋ, С‡С‚Рѕ СЌС‚Рѕ РЅСѓР¶РЅРѕ. Slava98.
+--          pset("c_trig", "on_enter", "level.CommSpeak(1, 1)") --Р—РґРµСЃСЊ РїРѕС‚РѕРј РґСЂСѓРіРѕРµ Р±СѓРґРµС‚. Slava98.
 			if level.screenplay.missionBoo == 1 then
 				pset("c_trig", "on_enter", "level.CommSpeak(1, 1)")
 			elseif level.screenplay.missionBoo == 2 then
 				pset("c_trig", "on_enter", "level.CommSpeak(1, 2)")
 				level.screenplay.halosHasGotBoo = true;
 				level.screenplay.missionBoo = 3;
-				message("Конец играбельной части.")
+				message("РљРѕРЅРµС† РёРіСЂР°Р±РµР»СЊРЅРѕР№ С‡Р°СЃС‚Рё.")
 			elseif level.screenplay.halosHasGotBoo then
 				if level.functions.sidedoorStatus ~= 4 then
 					pset("c_trig", "on_enter", "level.CommSpeak(1, 5)")
@@ -59,7 +59,7 @@ function level.CommSpeak(part, a)
 			elseif level.screenplay.missionKey == 1 then
 --				pset("c_trig", "on_enter", "level.CommSpeak(1, 5)")
 				pset("c_trig", "active", 0)
-				kill("cklad") -- Надо переименовать. Определённо. Завтра займусь этим, если не пойду гулять с девушкой. Slava98. 25.08.13.
+				kill("cklad") -- РќР°РґРѕ РїРµСЂРµРёРјРµРЅРѕРІР°С‚СЊ. РћРїСЂРµРґРµР»С‘РЅРЅРѕ. Р—Р°РІС‚СЂР° Р·Р°Р№РјСѓСЃСЊ СЌС‚РёРј, РµСЃР»Рё РЅРµ РїРѕР№РґСѓ РіСѓР»СЏС‚СЊ СЃ РґРµРІСѓС€РєРѕР№. Slava98. 25.08.13.
 				for i = 1, 3 do kill("w"..i) end;
 			end;
 		end, 5)

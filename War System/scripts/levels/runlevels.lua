@@ -1,4 +1,4 @@
---dofile(const.scrDir.."/levels/levelpacks/.lua") Не работает ='(
+--dofile(const.scrDir.."/levels/levelpacks/.lua") РќРµ СЂР°Р±РѕС‚Р°РµС‚ ='(
 dofile(const.scrDir.."/levels/levelpacks.lua")
 for i = 1, table.maxn(main.levelpacks) do 
 	local levelpack = main.levelpacks[i] 
@@ -12,8 +12,8 @@ function main.levelpack.Run(lp)
 	main.levelpack.loaded = main.levelpack[lp];
 	main.levelpack.name = lp;
 	main.levelpack.level = 0;
---	if rawget(main.levelpack.loaded, "level1") == nil then func.PrintError("ТЫ ИЗДЕВАЕШЬСЯ?") return endujm
-	main.inventory.letUseInventory = true; -- Не уверен, что это правильно, но ладно. Slava98. 06.06.13.
+--	if rawget(main.levelpack.loaded, "level1") == nil then func.PrintError("РўР« РР—Р”Р•Р’РђР•РЁР¬РЎРЇ?") return endujm
+	main.inventory.letUseInventory = true; -- РќРµ СѓРІРµСЂРµРЅ, С‡С‚Рѕ СЌС‚Рѕ РїСЂР°РІРёР»СЊРЅРѕ, РЅРѕ Р»Р°РґРЅРѕ. Slava98. 06.06.13.
 	main.mail.letUseMail = true;
 	main.levelpack.Circle(lp)
 end
@@ -21,16 +21,16 @@ end
 function main.levelpack.Circle(lp)
 	main.levelpack.level = main.levelpack.level + 1
 	main.levelpack.map = main.levelpack.loaded["level"..main.levelpack.level];
-	if main.levelpack.map == nil then func.PrintError("Больше карт нет") return end
+	if main.levelpack.map == nil then func.PrintError("Р‘РѕР»СЊС€Рµ РєР°СЂС‚ РЅРµС‚") return end
 --	if exists("menu") then kill("menu") end
 	loadmap(const.mapsDir.."/"..main.levelpack.map..".map")
---	main.menuservice = service("menu", {title="splash", name="menu", names="Игра|Игровые функции|Помощь", on_select="main.menu.Main(n)" } )
+--	main.menuservice = service("menu", {title="splash", name="menu", names="РРіСЂР°|РРіСЂРѕРІС‹Рµ С„СѓРЅРєС†РёРё|РџРѕРјРѕС‰СЊ", on_select="main.menu.Main(n)" } )
 --	main.menu.section = "menu"
 	main.menuservice = service("menu", {name="menu"})
 	main.menu.Show("main")
-	conf.sv_nightmode = main.levelpack.default.nightmode --Думаю, будет настраиватся на уровне
-	func.Play("mus5") --Это тем более настраиваться на уровне будет
-	loadtheme(const.scrDir.."/textures/map01.lua") --Это тоже будет настраиваться на уровне
+	conf.sv_nightmode = main.levelpack.default.nightmode --Р”СѓРјР°СЋ, Р±СѓРґРµС‚ РЅР°СЃС‚СЂР°РёРІР°С‚СЃСЏ РЅР° СѓСЂРѕРІРЅРµ
+	func.Play("mus5") --Р­С‚Рѕ С‚РµРј Р±РѕР»РµРµ РЅР°СЃС‚СЂР°РёРІР°С‚СЊСЃСЏ РЅР° СѓСЂРѕРІРЅРµ Р±СѓРґРµС‚
+	loadtheme(const.scrDir.."/textures/map01.lua") --Р­С‚Рѕ С‚РѕР¶Рµ Р±СѓРґРµС‚ РЅР°СЃС‚СЂР°РёРІР°С‚СЊСЃСЏ РЅР° СѓСЂРѕРІРЅРµ
 	dofile(const.scrDir.."/levels/"..main.levelpack.map.."/startup.lua")
 	dofile(const.scrDir.."/levels/"..main.levelpack.map.."/screenplay.lua")
 	dofile(const.scrDir.."/levels/"..main.levelpack.map.."/speaks.lua")
@@ -39,7 +39,7 @@ function main.levelpack.Circle(lp)
 	pushcmd(function() main.menu.OpenCloseMenu() pause(true) end, 0.2)
 end
 
--- Возвращает номер текцщего левелпака. Slava98.
+-- Р’РѕР·РІСЂР°С‰Р°РµС‚ РЅРѕРјРµСЂ С‚РµРєС†С‰РµРіРѕ Р»РµРІРµР»РїР°РєР°. Slava98.
 function main.levelpack.GetNum()
 	for i = 1, table.maxn(main.levelpacks) do
 		if main.levelpacks[i] == main.levelpack.default then return i end

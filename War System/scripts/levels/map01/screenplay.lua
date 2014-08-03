@@ -1,6 +1,6 @@
--- РЎРєСЂРёРїС‚РѕРІС‹Рµ СЃС†РµРЅС‹ РїРµСЂРІРѕРіРѕ СѓСЂРѕРІРЅСЏ.
+-- Скриптовые сцены первого уровня.
 
--- Р¤СѓРЅРєС†РёРё СЂР°Р·РіРѕРІРѕСЂР° СЃ РїРѕСЃРµР»РµРЅС†РµРј, РѕС‚РєСЂС‹РІР°СЋС‰РёРј РґРІРµСЂСЊ.
+-- Функции разговора с поселенцем, открывающим дверь.
 function level.screenplay.SettlerCall(action)
 	if action == "speak" then
 		func.NPC.StopWay("ourwarrior1")
@@ -19,14 +19,14 @@ function level.screenplay.SettlerCall(action)
 		func.MissionChange("extra", "add", func.Read({"map01", "missions", 2}))
 		level.settlersAreEnemies = true;
         pushcmd(function() 
---			pset(const.playerName, "team", 2) -- РџРѕРєР° С‡С‚Рѕ СЃР»РµРґСѓРµС‚ Р·Р°РјР°Р·Р°С‚СЊ СЃРёРµ.
+--			pset(const.playerName, "team", 2) -- Пока что следует замазать сие.
 			for i = 1, 4 do pset("ourwarrior"..i, "level", 4) end
 --			level.LetDamageOurWarrior(0)
 		end, 2)
 	end;
 end
 
--- Р­РєСЃРєР°РІР°С‚РѕСЂС‹ Рё С‚Р°РЅРє-СЂРѕР±РѕС‚.
+-- Экскаваторы и танк-робот.
 function level.screenplay.Statue(event, num)
 	if event == "damage" then
 		if level.screenplay.statueIsDamaged then return; end;
@@ -43,12 +43,12 @@ function level.screenplay.Statue(event, num)
 		
 		func.NPC.Attack("attack", "statue", object(const.playerVehName), 0.2)
 		for i = 1, 3 do
-			func.NPC.Attack("attack", "esc"..i, object(const.playerVehName), 0.2) -- РќРµ РЅСЂР°РІРёС‚СЃСЏ РјРЅРµ СЌС‚Рѕ. Slava98. 11.09.13.
+			func.NPC.Attack("attack", "esc"..i, object(const.playerVehName), 0.2) -- Не нравится мне это. Slava98. 11.09.13.
 --[[	for j = 1, 4 do
 				print("esc"..i.."_tank_enemydetect_trig"..j..".link")
 --				level.objects["esc"..i.."_tank_enemydetect_trig"..j].link.active = 1;
 --				level.objects["esc"..i.."_tank_enemydetect_leavetrig"..j].link.active = 1;
-				level.objects["esc"..i.."_tank_enemydetect_trig"..j].link.radius = 10; -- РЈРІРµР»РёС‡РёРІР°РµРј СЂР°РґРёСѓСЃ С‚СЂРёРіРіРµСЂРѕРІ. РћРЅ РѕС‡РµРЅСЊ Р±РѕР»СЊС€РѕР№.
+				level.objects["esc"..i.."_tank_enemydetect_trig"..j].link.radius = 10; -- Увеличиваем радиус триггеров. Он очень большой.
 				level.objects["esc"..i.."_tank_enemydetect_leavetrig"..j].link.radius = 15;
 			end;]]
 		end;
@@ -67,7 +67,7 @@ function level.screenplay.Statue(event, num)
 	end;
 end
 
--- РЎРєСЂРёРїС‚ РІР·СЏС‚РёСЏ РїРѕСЃРµР»РµРЅС†РµРј РєР»СЋС‡-РєР°СЂС‚С‹.
+-- Скрипт взятия поселенцем ключ-карты.
 function level.screenplay.SettlerGetKey(a)
 	if a == "call" and level.screenplay.statueIsDamaged and level.screenplay.missionBoo == 1 and not level.screenplay.keyIsGot then
 		main.NPC.list["ourwarrior1"].attackMode = "not_leave_position";
@@ -85,7 +85,7 @@ function level.screenplay.SettlerGetKey(a)
 	elseif a == "return" then
 		func.NPC.SetAim("ourwarrior1", 26, 17, true, {on_enter="level.screenplay.SettlerGetKey('hide_settler')"})
 	elseif a == "hide_settler" then
-		-- РџРѕСЃРµР»РµРЅРµС† Рё РєР»СЋС‡ С‚РµР»РµРїРѕСЂС‚РёСЂСѓСЋС‚СЃСЏ С‚СѓРґР°, РіРґРµ РѕРЅРё РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ.
+		-- Поселенец и ключ телепортируются туда, где они должны быть.
 		if #main.NPC.list["ourwarrior1"].visibleEnemies ~= 0 then main.NPC.list["ourwarrior1"].visibleEnemies = {}; end;
 		main.NPC.list["ourwarrior1"].attackMode = "chase";
 		main.NPC.list["ourwarrior1"].enemyDetectMode = true;
@@ -97,7 +97,7 @@ function level.screenplay.SettlerGetKey(a)
 	end;
 end
 
--- Р РµС‡СЊ РїРѕСЃРµР»РµРЅС†Р° РѕРєРѕР»Рѕ СЂСѓРёРЅ РїСЂРё СѓСЃР»РѕРІРёРё, С‡С‚Рѕ РўРµСЃС‚РµСЂ РµС‰С‘ РЅРµ Р±С‹Р» РІ РїРѕСЃРµР»РµРЅРёРё.
+-- Речь поселенца около руин при условии, что Тестер ещё не был в поселении.
 function level.screenplay.SettlerNearRuins(a)
 	if a == "call" then
 		setposition("ourwarrior5_tank", 900, 900)
@@ -126,7 +126,7 @@ function level.screenplay.SettlerNearRuins(a)
 		for i = 1, 6 do pushcmd(function() func.Message({"map01", "settler_and_unnamed_settler_dlg", i}) end, i*2-1) end
 		pushcmd(function() 
 			level.screenplay.playerMustPressPassword = true;
-			object("d_trig").active = 1; -- РќР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№.
+			object("d_trig").active = 1; -- На всякий случай.
 			func.NPC.SetWay("ourwarrior5", {{28, 28}, {77, 28}}, "setposition('ourwarrior5_tank', 129, 1649); ai_march('ourwarrior5', 129, 1649)", nil, nil, nil, true) 
 		end, 12)
 	elseif a == "go_away" then
@@ -144,7 +144,7 @@ function level.screenplay.SettlerNearRuins(a)
 		object("ourwarrior5").nick = func.Read("map01", "nicks", 5);
 		for i = 1, 11 do pushcmd(function() func.Message({"map01", "boss_and_ranon_dlg", i}) end, i*2-1) end;
 		pushcmd(function() 
-			level.screenplay.ourwarrior5WasTalked = false; -- Р”Р°-РґР°, РёСЃРїРѕР»СЊР·СѓСЋ РѕРґРЅСѓ РїРµСЂРµРјРµРЅРЅСѓСЋ РґР»СЏ СЂР°Р·РЅС‹С… С†РµР»РµР№.
+			level.screenplay.ourwarrior5WasTalked = false; -- Да-да, использую одну переменную для разных целей.
 			func.NPC.SetAim("boss", 62, 28, "", nil, nil, nil, true)
 			level.screenplay.SettlerNearRuins("loop_after_talking_with_boss")
 		end, 22)
@@ -159,7 +159,7 @@ function level.screenplay.SettlerNearRuins(a)
 		func.Message({"map01", "boss_and_ranon_dlg", 12})
 		func.EquipWeap("weap_rockets", const.playerName.."_weap", const.playerVehName)
 		level.screenplay.SettlerNearRuins("go_away")
-		message("Р—РґРµСЃСЊ РїСЂРёРµР·Р¶Р°РµС‚ РѕС‚СЂСЏРґ Рё РѕРЅ СЃ РёРіСЂРѕРєРѕРј Р°С‚Р°РєСѓРµС‚ Р±Р°Р·Сѓ.")
+		message("Здесь приезжает отряд и он с игроком атакует базу.")
 	end;
 end
 
@@ -227,7 +227,7 @@ function level.screenplay.BanditsAttack(event)
 					object("ourwarrior5").active = 0;
 					func.GiveItem("healthpack", "ourwarrior5")
 					func.UseItem("healthpack", "ourwarrior5")
-					-- Р•СЃР»Рё РёРіСЂРѕРє РїРѕРґСЉРµРґРµС‚ Рє РїРѕСЃРµР»РµРЅС†Сѓ, С‚Рѕ РѕРЅ Р±СѓРґРµС‚ С‡С‚Рѕ-С‚Рѕ РіРѕРІРѕСЂРёС‚СЊ.
+					-- Если игрок подъедет к поселенцу, то он будет что-то говорить.
 					pushcmd(function() func.NPC.SetWay("ourwarrior5", {{1328, 1007}, {2185, 1017}, {2474, 1050}}, "level.HideRanon()") end, 2)
 				end;
 			end;
@@ -236,18 +236,18 @@ function level.screenplay.BanditsAttack(event)
 end
 
 
--- РђС‚Р°РєР° РїРѕРІСЃС‚Р°РЅС†РµРІ. РќСѓР¶РЅРѕ РїРµСЂРµРґРµР»Р°С‚СЊ, РёР±Рѕ РЅРµ СЂР°Р±РѕС‚Р°РµС‚.
+-- Атака повстанцев. Нужно переделать, ибо не работает.
 function level.screenplay.Attack(n)
-	--РЎРѕР·РґР°С‘Рј РІСЂР°РіРѕРІ
+	--Создаём врагов
 	if n == nil then
 		local enemy_positions = {{75, 38}, {70, 38}, {65, 38}, {61, 36}, {67, 36}}
 		local enemy_weapons = {"rockets", "minigun", "minigun", "cannon", "cannon"}
 		for i = 1, 4 do
-			func.NPC.Create("enemy"..i, "", "РќРµРёР·РІРµСЃС‚РЅС‹Р№ РІРѕР№РЅ", "boss1", "rebel", 2, "weap_"..enemy_weapons[i], 0, 1, func.Get32(enemy_positions[i][1]), func.Get32(enemy_positions[i][2]), 4--[[, true СЂР°Р±РѕС‚Р°РµС‚ РЅРµРєРѕСЂРµРєС‚РЅРѕ, Р»Р°РіР°РµС‚]]) 
+			func.NPC.Create("enemy"..i, "", "Неизвестный войн", "boss1", "rebel", 2, "weap_"..enemy_weapons[i], 0, 1, func.Get32(enemy_positions[i][1]), func.Get32(enemy_positions[i][2]), 4--[[, true работает некоректно, лагает]]) 
 		end
-		func.NPC.Create("boss", "", "РќРµРёР·РІРµСЃС‚РЅС‹Р№ РІРѕР№РЅ", "boss1", "rebel_boss", 2, "weap_plazma", 0, 2, func.Get32(77), func.Get32(34), 4--[[, true Р°РЅР°Р»РѕРіРёС‡РЅРѕ]]) 
+		func.NPC.Create("boss", "", "Неизвестный войн", "boss1", "rebel_boss", 2, "weap_plazma", 0, 2, func.Get32(77), func.Get32(34), 4--[[, true аналогично]]) 
 	if level.screenplay.missoinboo == 3 and level.screenplay.missionKey == 0 and level.screenplay.wasEnemyAttack == 0 then level.screenplay.Attack("boss_gotobomb") end
-	--РўРµРїРµСЂСЊ РґРµР»Р°РµРј СЃС†РµРЅР°СЂРёР№
+	--Теперь делаем сценарий
 	elseif n == "boss_gotobomb" then
 		pushcmd(function()
 			func.NPC.SetAim("boss", 70, 25, "level.screenplay.Attack('boss_setbomb')", true, "", false, true)
@@ -268,12 +268,12 @@ function level.screenplay.Attack(n)
 	end
 end
 
--- РќРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ Рё РЅРµ Р±СѓРґРµС‚.
+-- Не используется и не будет.
 function level.DoorRepairerCall()
 	pushcmd(function()
 		kill("saron1")
 		for i = 1, 3 do kill("a"..i) end
-		func.NPC.Create("door_repairer", "", "Р РµРјРѕРЅС‚РЅРёРє", "ekivator1", "eskavator", 1, "none", 1, 1, 1851, 51, 1.5708)
+		func.NPC.Create("door_repairer", "", "Ремонтник", "ekivator1", "eskavator", 1, "none", 1, 1, 1851, 51, 1.5708)
 	end, 0.1)
 	pushcmd(function() 
 		func.NPC.SetAim("door_repairer", 55, 17, "func.NPC.Action('door_repairer', nil, 30, 18, true)", true, "", false, true)

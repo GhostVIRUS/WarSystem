@@ -1,14 +1,14 @@
--- РљР»Р°СЃСЃС‹ РґР»СЏ РєР°РјРїР°РЅРёРё War System
+-- Классы для кампании War System
 
 --=================--
---= РРіСЂРѕРє: РўР°РЅРєв„–1 =--
+--= Игрок: Танк№1 =--
 --=================--
 
 classes.player1 =
 {
   -- game properties --
 
-  display     = "РРіСЂРѕРє",
+  display     = "Игрок",
   health      = 2000,
   percussion  = 10,
   fragility   = 1,
@@ -30,14 +30,14 @@ classes.player1 =
 }
 
 --======================--
---= Р‘РѕСЃСЃ РїРѕРІСЃС‚Р°РЅС†РµРІ в„–1 =--
+--= Босс повстанцев №1 =--
 --======================--
 
 classes.boss1 =
 {
   -- game properties --
 
-  display     = "РџРµСЂРІС‹Р№ Р±РѕСЃСЃ",
+  display     = "Первый босс",
   health      = 1775,
   percussion  = 10,
   fragility   = 1,
@@ -60,14 +60,14 @@ classes.boss1 =
 
 
 --======================--
---= Р­РєРёРІР°С‚oСЂ РїРѕСЃРµР»РµРЅРµС† =--
+--= Экиватoр поселенец =--
 --======================--
 
 classes.ekivator1 =
 {
   -- game properties --
 
-  display     = "Р­РєРёРІР°С‚РѕСЂ",
+  display     = "Экиватор",
   health      = 1200,
   percussion  = 10,
   fragility   = 1,
@@ -89,14 +89,14 @@ classes.ekivator1 =
 }
 
 --=============--
---= РџРѕРІСЃС‚Р°РЅРµС† =--
+--= Повстанец =--
 --=============--
 
 classes.rebel =
 {
   -- game properties --
 
-  display     = "РџРѕРІСЃС‚Р°РЅРµС†",
+  display     = "Повстанец",
   health      = 999,
   percussion  = 1,
   fragility   = 10,
@@ -118,14 +118,14 @@ classes.rebel =
 }
 
 --==========--
---= РљР°РјРµСЂР° =--
+--= Камера =--
 --==========--
 
 classes.camera =
 {
   -- game properties --
 
-  display     = "РљР°РјРµСЂР°",
+  display     = "Камера",
   health      = 0,
   percussion  = 0,
   fragility   = 0,
@@ -147,14 +147,14 @@ classes.camera =
 }
 
 --==========--
---= Р Р°Р·РіРѕРІРѕСЂРЅРёРє =--
+--= Разговорник =--
 --==========--
 
 classes.speak =
 {
   -- game properties --
 
-  display     = "Р Р°Р·РіРѕРІРѕСЂРЅРёРє",
+  display     = "Разговорник",
   health      = 100000,
   percussion  = 10,
   fragility   = 1,
@@ -174,7 +174,7 @@ classes.speak =
   power     = {1, 1},        -- engine power: linear,angular
   max_speed = {1,  1},        -- max speed: linear, angular
 }
---Р­С‚Рѕ РЅРµ РЅСѓР¶РЅРѕ 100%
+--Это не нужно 100%
 classes["speak"] = tcopy(classes.player1)
 classes["speak"].inertia = 100000;
 classes["speak"].power[1] = 1;
@@ -183,14 +183,14 @@ classes["speak"].max_speed[1]=1;
 classes["speak"].max_speed[2]=2;
 
 --=============--
---= Р‘РѕРјР±Р° =--
+--= Бомба =--
 --=============--
 
 classes.bomb =
 {
   -- game properties --
 
-  display     = "Р‘РѕРјР±Р°",
+  display     = "Бомба",
   health      = 1,
   percussion  = 1,
   fragility   = 10,

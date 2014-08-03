@@ -5,7 +5,7 @@ function level.CommSpeak(0, a)
 		func.dialog.Show("halos", "test", 1, "", "object('ourwarrior2_speak').active = 1; func.SetWeap('ourplayer_tank','weap_minigun')", "OK")
 --		service("msgbox", {
 --							on_select="object('ourwarrior2_speak').active = 1; func.SetWeap('ourplayer_tank','weap_minigun')", 
---							text="Халос: Спасибо, что спас меня от сошедшей с ума турели.\nВот, держи пулемёт и уничтожь те дураукие ящики.",  
+--							text="РҐР°Р»РѕСЃ: РЎРїР°СЃРёР±Рѕ, С‡С‚Рѕ СЃРїР°СЃ РјРµРЅСЏ РѕС‚ СЃРѕС€РµРґС€РµР№ СЃ СѓРјР° С‚СѓСЂРµР»Рё.\nР’РѕС‚, РґРµСЂР¶Рё РїСѓР»РµРјС‘С‚ Рё СѓРЅРёС‡С‚РѕР¶СЊ С‚Рµ РґСѓСЂР°СѓРєРёРµ СЏС‰РёРєРё.",  
 --							option1="1" } )
 	elseif a == 2 then
 		func.Message("halos", "test", 2)

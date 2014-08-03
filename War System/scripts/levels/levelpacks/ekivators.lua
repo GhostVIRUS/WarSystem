@@ -1,5 +1,5 @@
 main.levelpack.ekivators = {
-							name   = "Экиваторы",
+							name   = "РЃРєРёРІР°С‚РѕСЂС‹",
 							type   = "race",
 							intro  = "intro",
 							level1 = "map01",

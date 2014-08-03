@@ -1,9 +1,9 @@
--- Р¤СѓРЅРєС†РёРё РєР°РјРїР°РЅРёРё War System.
--- By Slava98, VIRUS, hmh, РђРЅС‚РёРєРёР»Р»РµСЂ.
+-- Функции кампании War System.
+-- By Slava98, VIRUS, hmh, Антикиллер.
 
--- Р’Р·СЂС‹РІ. РџСЂРёРјРµРЅСЏРµС‚СЃСЏ РґР»СЏ Р±РѕРјР±. РњРѕР¶РЅРѕ СЂРµРіСѓР»РёСЂРѕРІР°С‚СЊ С‚Р°Р№РјРµСЂ, РєРѕР»РёС‡РµСЃС‚РІРѕ РІР·СЂС‹РІРѕРІ Рё РµРіРѕ СѓСЂРѕРЅ РґР»СЏ С‚Р°РЅРєРѕРІ. РћСЃРЅРѕРІР°РЅР° РЅР° С„СѓРЅРєС†РёРё hmh.
+-- Взрыв. Применяется для бомб. Можно регулировать таймер, количество взрывов и его урон для танков. Основана на функции hmh.
 function func.Explosion(x, y, times, spd, dangerous, dam)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(x) ~= "number" then error("bad argument #1 to 'func.Explosion' (number expected, got "..type(x)..")", 2) end
 	if type(y) ~= "number" then error("bad argument #2 to 'func.Explosion' (number expected, got "..type(y)..")", 2) end
 	if type(times) ~= "number" and times ~= nil then error("bad argument #3 to 'func.Explosion' (number expected, got "..type(times)..")", 2) end
@@ -31,9 +31,9 @@ function func.Explosion(x, y, times, spd, dangerous, dam)
 	end;
 end
 
--- Р‘РѕРјР±Р°СЂРґРёСЂРѕРІРєР°. РћСЃРЅРѕРІР°РЅР° РЅР° С„СѓРЅРєС†РёРё hmh.
+-- Бомбардировка. Основана на функции hmh.
 function func.Bombard(x1, y1, x2, y2, times, spd, explo, explospd)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(x1) ~= "number" then error("bad argument #1 to 'func.Bombard' (number expected, got "..type(x1)..")", 2) end
 	if type(y1) ~= "number" then error("bad argument #2 to 'func.Bombard' (number expected, got "..type(y1)..")", 2) end
 	if type(x2) ~= "number" then error("bad argument #3 to 'func.Bombard' (number expected, got "..type(x2)..")", 2) end
@@ -55,9 +55,9 @@ function func.Bombard(x1, y1, x2, y2, times, spd, explo, explospd)
 	end;
 end 
 
--- Р‘РѕРјР±Р°СЂРґРёСЂРѕРІРєР° РїРѕР»РёРіРѕРЅР°. РћСЃРЅРѕРІР°РЅР° РЅР° С„СѓРЅРєС†РёРё hmh.
+-- Бомбардировка полигона. Основана на функции hmh.
 function func.Dangerzone(x1, y1, x2, y2, time, spd, isLinear, linspd)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(x1) ~= "number" then error("bad argument #1 to 'func.Dangerzone' (number expected, got "..type(x1)..")", 2) end;
 	if type(y1) ~= "number" then error("bad argument #2 to 'func.Dangerzone' (number expected, got "..type(y1)..")", 2) end;
 	if type(x2) ~= "number" then error("bad argument #3 to 'func.Dangerzone' (number expected, got "..type(x2)..")", 2) end;
@@ -93,7 +93,7 @@ function func.Dangerzone(x1, y1, x2, y2, time, spd, isLinear, linspd)
 	end;
 end
 
--- Р¤СѓРЅРєС†РёРё РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РѕРґРЅРёС… РєРѕРѕСЂРґРёРЅР°С‚ РўР—РћР”Р° РІ РґСЂСѓРіРёРµ. РћСЃРЅРѕРІР°РЅС‹ РЅР° С„СѓРЅРєС†РёРё РђРЅС‚РёРєРёР»Р»РµСЂР°. *РўРµРїРµСЂСЊ РїРѕР·РІРѕР»СЏСЋС‚ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РЅРµРѕРіСЂР°РЅРёС‡РµРЅРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р°СЂРіСѓРјРµРЅС‚РѕРІ. Slava98. 30.12.13.
+-- Функции преобразования одних координат ТЗОДа в другие. Основаны на функции Антикиллера. *Теперь позволяют обрабатывать неограниченное количество аргументов. Slava98. 30.12.13.
 function func.Get32(...)
 	local args = {...};
 	for i = 1, #args do
@@ -114,10 +114,10 @@ function func.UnGet32(...)
 	return unpack(args);
 end
 
--- Р Р°СЃС‡РёС‚С‹РІР°РµС‚ СѓРіРѕР» РІ СЂР°РґРёР°РЅР°С… РѕС‚ РѕРґРЅРёС… РєРѕРѕСЂРґРёРЅР°С‚ Рє РґСЂСѓРіРёРј (РІРѕР·РІСЂР°С‰Р°РµС‚ РµРіРѕ). VIRUS. РџРµСЂРµРґРµР»Р°Р». Slava98. РўРµРїРµСЂСЊ РѕР±СЉРµРєС‚С‹ С‚СѓС‚ РІРѕРѕР±С‰Рµ РЅРµ РїСЂРёС‡С‘Рј, РґСѓРјР°СЋ, С‚Р°Рє Р±СѓРґРµС‚ Р»СѓС‡С€Рµ. Slava98. 26.02.14. Р’СЃРїРѕРјРЅРёР» С‚СЂРёРіРѕРЅРѕРјРµС‚СЂРёСЋ, СѓСЂРµР·Р°Р» С„СѓРЅРєС†РёСЋ РІ 8 СЂР°Р·. VIRUS.
--- РњР°Р»РµРЅСЊРєРѕРµ РёСЃРїСЂР°РІР»РµРЅРёРµ. Asqwel (Fluffle Puff / РђСЂС‚СѓСЂ)
+-- Расчитывает угол в радианах от одних координат к другим (возвращает его). VIRUS. Переделал. Slava98. Теперь объекты тут вообще не причём, думаю, так будет лучше. Slava98. 26.02.14. Вспомнил тригонометрию, урезал функцию в 8 раз. VIRUS.
+-- Маленькое исправление. Asqwel (Fluffle Puff / Артур)
 function func.GetRadians(x1, y1, x2, y2)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local xCathetus = x2 - x1;
 	local yCathetus = y2 - y1;
@@ -131,10 +131,10 @@ function func.GetRadians(x1, y1, x2, y2)
 	end;
 end
 
--- РћР±СЂР°С‚РЅР°СЏ С„СѓРЅРєС†РёСЏ. Slava98. 26.02.14.
--- РќР°РїРёСЃР°РЅР°. Asqwel (Fluffle Puff / РђСЂС‚СѓСЂ). 27.02.14.
+-- Обратная функция. Slava98. 26.02.14.
+-- Написана. Asqwel (Fluffle Puff / Артур). 27.02.14.
 function func.GetCoords(x1, y1, dir, length)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local x2 = x1 + length * math.cos(dir);
 	local y2 = y1 + length * math.sin(dir);
@@ -142,7 +142,7 @@ function func.GetCoords(x1, y1, dir, length)
 end
 
 function func.GetDistance(obj1, obj2)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local x1, y1 = position(obj1);
 	local x2, y2 = position(obj2);
@@ -150,10 +150,10 @@ function func.GetDistance(obj1, obj2)
 	return math.sqrt((x1 - x2)^2 + (y1 - y2)^2);
 end
 
--- Р”РІРёРіР°РµС‚ РѕР±СЉРµРєС‚ РІ Р»СЋР±РѕРј РЅР°РїСЂР°РІР»РµРЅРёРё. VIRUS. Modified by Assassin (РђСЂС‚СѓСЂ).
--- Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЂРµРјСЏ, Р·Р° РєРѕС‚РѕСЂРѕРµ РѕР±СЉРµРєС‚ Р±СѓРґРµС‚ РґРІРёРіР°С‚СЊСЃСЏ. Slava98.
--- РРЎРџР РђР’РРўР¬ РљРћРЎРўР«Р›Р¬! VIRUS.
--- Р’РµСЂРѕСЏС‚РЅРѕ, РєРѕСЃС‚С‹Р»СЊ РёСЃРїСЂР°РІР»РµРЅ. Р¤СѓРЅРєС†РёСЏ func.StartMove СѓРґР°Р»РµРЅР° Р·Р° РЅРµРЅР°РґРѕР±РЅРѕСЃС‚СЊСЋ. Asqwel (Fluffle Puff / РђСЂС‚СѓСЂ). 27.02.2014.
+-- Двигает объект в любом направлении. VIRUS. Modified by Assassin (Артур).
+-- Возвращает время, за которое объект будет двигаться. Slava98.
+-- ИСПРАВИТЬ КОСТЫЛЬ! VIRUS.
+-- Вероятно, костыль исправлен. Функция func.StartMove удалена за ненадобностью. Asqwel (Fluffle Puff / Артур). 27.02.2014.
 function func.Move(name, x, y, g32, speed)
 	local x1, y1 = position(name);
 	local x2 = x;
@@ -179,10 +179,10 @@ function func.Move(name, x, y, g32, speed)
 	return hypotenuse/speed;
 end
 
--- РџРѕСЃС‚РµРїРµРЅРЅРѕ СЂР°Р·РІРѕСЂР°С‡РёРІР°РµС‚ РѕР±СЉРµРєС‚. *РџРµСЂРµРґРµР»Р°С‚СЊ. Slava98. 10.02.14.
--- РљСЂРёРІРѕ, РєРѕСЃС‚С‹Р»Рё, РїРµСЂРµРґРµР»Р°С‚СЊ РѕРїСЏС‚СЊ. Asqwel (Fluffle Puff / РђСЂС‚СѓСЂ).
+-- Постепенно разворачивает объект. *Переделать. Slava98. 10.02.14.
+-- Криво, костыли, переделать опять. Asqwel (Fluffle Puff / Артур).
 function func.object.SetRotation(objName, rotation, frequency)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(objName) ~= "string" then error("bad argument #1 to 'func.object.SetRotation' (string expected, got "..type(objName)..")", 2) return; end;    
 	if type(rotation) ~= "number" then error("bad argument #2 to 'func.object.SetRotation' (number expected, got "..type(rotation)..")", 2) return; end;  
 	if type(frequency) ~= "number" and frequency ~= nil then error("bad argument #3 to 'func.object.SetRotation' (number expected, got "..type(frequency)..")", 2) return; end;    
@@ -219,11 +219,11 @@ function func.object.SetRotation(objName, rotation, frequency)
 
 	Loop()
 	
-	return frequency*alpha/(math.pi/90); -- Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЂРµРјСЏ, Р·Р° РєРѕС‚РѕСЂРѕРµ Р±СѓРґРµС‚ СЃРѕРІРµСЂС€С‘РЅ РїРѕРІРѕСЂРѕС‚. Slava98. 01.03.14.
+	return frequency*alpha/(math.pi/90); -- Возвращает время, за которое будет совершён поворот. Slava98. 01.03.14.
 end
 
 function func.object.GetRightDirection(dir1, dir2)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local k = 1;
 	local alpha = dir1 - dir2;
@@ -234,11 +234,11 @@ function func.object.GetRightDirection(dir1, dir2)
 	return k;
 end
 
--- РџРѕСЃС‚РµРїРµРЅРЅРѕ СЂР°Р·РІРѕСЂР°С‡РёРІР°РµС‚ РѕР±СЉРµРєС‚. *РџРµСЂРµРґРµР»Р°С‚СЊ. Slava98. 10.02.14.
--- РљСЂРёРІРѕ? Asqwel (Fluffle Puff / РђСЂС‚СѓСЂ).
--- РџРѕРїС‹С‚РєР° РїРµСЂРµРґРµР»Р°С‚СЊ РґР»СЏ РЅСѓР¶РЅРѕР№ СЃРёСЃС‚РµРјС‹ РєРѕРѕСЂРґРёР°РЅС‚. Asqwel (Fluffle Puff / РђСЂС‚СѓСЂ), Slava98. 01.03.14.
+-- Постепенно разворачивает объект. *Переделать. Slava98. 10.02.14.
+-- Криво? Asqwel (Fluffle Puff / Артур).
+-- Попытка переделать для нужной системы коордиант. Asqwel (Fluffle Puff / Артур), Slava98. 01.03.14.
 function func.object.SetRotation(objName, rotation, frequency)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(objName) ~= "string" then error("bad argument #1 to 'func.object.SetRotation' (string expected, got "..type(objName)..")", 2) return; end;    
 	if type(rotation) ~= "number" then error("bad argument #2 to 'func.object.SetRotation' (number expected, got "..type(rotation)..")", 2) return; end;  
 	if type(frequency) ~= "number" and frequency ~= nil then error("bad argument #3 to 'func.object.SetRotation' (number expected, got "..type(frequency)..")", 2) return; end;    
@@ -266,10 +266,10 @@ function func.object.SetRotation(objName, rotation, frequency)
 	local beta;
 	if math.abs(alpha) > math.pi then beta = math.pi*2 - math.abs(alpha);
 	else beta = math.abs(alpha); end;
-	return (1/frequency)*(beta/(math.pi/90)); -- Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЂРµРјСЏ, Р·Р° РєРѕС‚РѕСЂРѕРµ Р±СѓРґРµС‚ СЃРѕРІРµСЂС€С‘РЅ РїРѕРІРѕСЂРѕС‚. Asqwel (Fluffle Puff / РђСЂС‚СѓСЂ), Slava98. 01.03.14.
+	return (1/frequency)*(beta/(math.pi/90)); -- Возвращает время, за которое будет совершён поворот. Asqwel (Fluffle Puff / Артур), Slava98. 01.03.14.
 end
 
--- РџРѕ-РґР°СЃСЃРѕРІР°С‚РѕСЂСЃРєРё СѓРЅРёС‡С‚РѕР¶Р°РµС‚ Р»СЋР±РѕР№ РѕР±СЉРµРєС‚. Slava98.
+-- По-дассоваторски уничтожает любой объект. Slava98.
 function func.Destroy(obj) 
 	if exists(obj) then
 		if objtype(obj)=="wall_concrete" then
@@ -284,16 +284,16 @@ function func.Destroy(obj)
 	end;
 end
 
--- РЈР±РёСЂР°РµС‚ РѕР±СЉРµРєС‚, РµСЃР»Рё РѕРЅ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚. РќРµ РІС‹РґР°С‘С‚ РѕС€РёР±РєРё. *РџРµСЂРµРїРёСЃР°С‚СЊ, СЃРґРµР»Р°С‚СЊ С‚Р°Рє, С‡С‚РѕР±С‹ РЅРµ РІС‹РґР°РІР°Р» РѕС€РёР±РєРё С‚РѕР»СЊРєРѕ СЃ РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Рј Р°СЂРіСѓРјРµРЅС‚РѕРј takeOffWarning. Slava98. 11.01.14.
+-- Убирает объект, если он не существует. Не выдаёт ошибки. *Переписать, сделать так, чтобы не выдавал ошибки только с положительным аргументом takeOffWarning. Slava98. 11.01.14.
 function func.Kill(obj)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if exists(obj) then kill(obj) end;
 end
 
--- РџРµСЂРµСЃРѕР·РґР°С‘С‚ РѕР±СЉРµРєС‚.
+-- Пересоздаёт объект.
 function func.object.Recreate(objName)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local objTab = func.ObjectCopy(objName);
 	kill(objName);
@@ -301,13 +301,13 @@ function func.object.Recreate(objName)
 end
 
 function func.object.Speak(objName, text, timer, texture)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 	if type(objName) ~= "string" then error("bad argument #1 to 'func.object.Speak' (string expected, got "..type(objName)..")", 2) end;
 	if type(text) ~= "string" and type(text) ~= "table" then error("bad argument #2 to 'func.object.Speak' (string or table expected, got "..type(text)..")", 2) end;
 	if type(timer) ~= "number" and timer then error("bad argument #3 to 'func.object.Speak' (number expected, got "..type(timer)..")", 2) end;
 	if type(texture) ~= "string" and texture then error("bad argument #4 to 'func.object.Speak' (string expected, got "..type(texture)..")", 2) end;
 	
--- РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Объявление локальных переменных.
 	local timer = timer or 3;
 	local texture = texture or "font_small";
 	local period = 0.001;
@@ -335,14 +335,14 @@ function func.object.Speak(objName, text, timer, texture)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
-------------------------------------------------- Р‘РѕСЂРґРµСЂ-С‚СЂРёРіРіРµСЂ ----------------------------------------------------
+------------------------------------------------- Бордер-триггер ----------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
--- РЎРѕР·РґР°С‘С‚ РіРёРїРѕС‚РµС‚РёС‡РµСЃРєРёР№ РѕР±СЉРєС‚ 'bordertrigger', РєРѕС‚РѕСЂС‹Р№ РІ СЃРІРѕСЋ РѕС‡РµСЂРµРґСЊ СЃРѕР·РґР°С‘С‚ С‚СЂРёРіРіРµСЂС‹ РІРѕРєСЂСѓРі РѕРїСЂРµРґРµР»С‘РЅРЅРѕРіРѕ РѕР±СЉРµРєС‚Р°. Slava98. 02.01.14.
+-- Создаёт гипотетический объкт 'bordertrigger', который в свою очередь создаёт триггеры вокруг определённого объекта. Slava98. 02.01.14.
 function func.object.borderTrigger.Create(btName, objName, trigTab, btTab)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
--- РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Объявление локальных переменных.
 	local btTab = func.UniteTables({
 		dir = 5,
 		length = 32,
@@ -352,7 +352,7 @@ function func.object.borderTrigger.Create(btName, objName, trigTab, btTab)
 	local multitriggerMode = false;
 	local trigName = trigTab.name;
 	local x, y;
-	local function CorrectTrigPosition(dir) -- Р­С‚Р° С„СѓРЅРєС†РёСЏ РїРѕР·РІРѕР»СЏРµС‚ СЃРґРІРёРЅСѓС‚СЊ С‚СЂРёРіРіРµСЂРЅР° РЅСѓР¶РЅРѕРµ РјР°РїРµСЂСѓ РјРµСЃС‚Рѕ. Slava98. 02.01.14.
+	local function CorrectTrigPosition(dir) -- Эта функция позволяет сдвинуть триггерна нужное маперу место. Slava98. 02.01.14.
 		if     dir == "right"  or dir == 1 then x = x + btTab.length;
 		elseif dir == "bottom" or dir == 2 then y = y + btTab.length;
 		elseif dir == "left"   or dir == 3 then x = x - btTab.length;
@@ -363,8 +363,8 @@ function func.object.borderTrigger.Create(btName, objName, trigTab, btTab)
 	local function Loop()
 		local btTab = level.objects[btName];
 		if not btTab or not exists(objName) then if func.object.borderTrigger.Exists(btName) then func.object.borderTrigger.Kill(btName) end; return; end;
-		if multitriggerMode then -- РћР±СЉРµРєС‚ РґРѕР»Р¶РµРЅ СѓРїСЂР°РІР»СЏС‚СЊ Рё РЅРµСЃРєРѕР»СЊРєРёРјРё С‚СЂРёРіРіРµСЂР°РјРё, СЌС‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ РїСЂРµРґСѓСЃРјРѕС‚СЂРµС‚СЊ. Slava98. 02.01.14.
-		btTab.objName = {}; -- Р’ РґР°РЅРЅРѕРј СЃР»СѓС‡Р°Рµ РїСЂРёРґС‘С‚СЃСЏ СЃРґРµР»Р°С‚СЊ РёРјСЏ РјР°СЃСЃРёРІРѕРј. Р­С‚Рѕ РЅРµ РєСЂРёС‚РёС‡РЅРѕ, РІСЃС‘ СЂР°РІРЅРѕ РјС‹ С‚РѕР»СЊРєРѕ РїСѓР±Р»РёРєСѓРµРј С‚СѓРґР° РґР°РЅРЅС‹Рµ. Slava98. 02.01.14.
+		if multitriggerMode then -- Объект должен управлять и несколькими триггерами, это необходимо предусмотреть. Slava98. 02.01.14.
+		btTab.objName = {}; -- В данном случае придётся сделать имя массивом. Это не критично, всё равно мы только публикуем туда данные. Slava98. 02.01.14.
 			for i = 1, 4 do
 				x, y = position(objName);
 				CorrectTrigPosition(i)
@@ -372,7 +372,7 @@ function func.object.borderTrigger.Create(btName, objName, trigTab, btTab)
 				btTab.objName[i] = trigName..i;
 			end;
 		else
-			x, y = position(objName); -- РћР±РЅРѕРІР»СЏРµРј РїРѕР·РёС†РёСЋ РѕР±СЉРµРєС‚Р°. Slava98. 02.01.14.
+			x, y = position(objName); -- Обновляем позицию объекта. Slava98. 02.01.14.
 			setposition(trigTab.name, x, y)
 			btTab.objName = trigTab.name;
 		end;
@@ -398,7 +398,7 @@ function func.object.borderTrigger.Create(btName, objName, trigTab, btTab)
 end
 
 function func.object.borderTrigger.Kill(btName)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if type(level.objects[btName].objName) == "string" and exists(level.objects[btName].objName) then kill(level.objects[btName].objName)
 	elseif type(level.objects[btName].objName) == "table" then for i = 1, 4 do if exists(level.objects[btName].objName[i]) then kill(level.objects[btName].objName[i]) end; end;
@@ -407,7 +407,7 @@ function func.object.borderTrigger.Kill(btName)
 end
 
 function func.object.borderTrigger.Exists(btName)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 	
 	if level.objects[btName] then return true;
 	else return false;
@@ -415,12 +415,12 @@ function func.object.borderTrigger.Exists(btName)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------ РђРЅРёРјРёСЂРѕРІР°РЅРЅС‹Р№ СЃРєРёРЅ --------------------------------------------------
+----------------------------------------------- Анимированный скин --------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------- 
 
--- РЎРѕР·РґР°С‘С‚ Р°РЅРёРјРёСЂРѕРІР°РЅРЅС‹Р№ СЃРєРёРЅ. Slava98. 02.01.14.
+-- Создаёт анимированный скин. Slava98. 02.01.14.
 function func.spriteskin.Create(asName, spriteTab, asTab)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).	
+-- Обработчик ошибок (написать).	
 	
 	local asTab = func.UniteTables({
 		frequency = 0.00001,
@@ -434,15 +434,15 @@ function func.spriteskin.Create(asName, spriteTab, asTab)
 	}, spriteTab);
 	local function Loop()
 		local asTab = level.objects[asName];
-		if not level.objects[asName] or not exists(tankName) then func.spriteskin.Kill(asName) return; end; -- Р•СЃР»Рё РѕР±СЉРµРєС‚Р° РЅРµС‚ (РѕРЅ СѓРґР°Р»С‘РЅ) РёР»Рё РЅРµС‚ С‚Р°РЅРєР°, С‚Рѕ С†РёРєР» РїСЂРµРєСЂР°С‰Р°РµС‚СЃСЏ. Slava98. 02.01.14.
-		x, y = position(tankName) -- РћР±РЅРѕРІРёРј РёРЅС„РѕСЂРјР°С†РёСЋ РЅР°СЃС‡С‘С‚ РїРѕР·РёС†РёРё С‚Р°РЅРєР°. Slava98. 02.01.14.
-		object(spriteTab.name).rotation = object(tankName).rotation -- Р РЅР°СЃС‡С‘С‚ СЂРѕС‚Р°С†РёРё С‚РѕР¶Рµ. Slava98. 02.01.14.
+		if not level.objects[asName] or not exists(tankName) then func.spriteskin.Kill(asName) return; end; -- Если объекта нет (он удалён) или нет танка, то цикл прекращается. Slava98. 02.01.14.
+		x, y = position(tankName) -- Обновим информацию насчёт позиции танка. Slava98. 02.01.14.
+		object(spriteTab.name).rotation = object(tankName).rotation -- И насчёт ротации тоже. Slava98. 02.01.14.
 		setposition(spriteTab.name, x, y)
 		asTab.objName = spriteTab.name;
 		pushcmd(Loop, asTab.frequency)
 	end;
 	
-	if asName == "" or nil then -- РќРµСЃРјРѕС‚СЂСЏ РЅР° С‚Рѕ, С‡С‚Рѕ СЏ СЃРѕРІСЃРµРј РЅРµ РїРѕРЅРёРјР°СЋ, Р·Р°С‡РµРј Р°РЅРёРјСЃРєРёРЅСѓ РёРјСЏ, РІРµРґСЊ Сѓ РєР°Р¶РґРѕРіРѕ С‚Р°РЅРєР° РѕРЅ Рё С‚Р°Рє РѕРґРёРЅ. РќСѓ РѕСЃС‚Р°РІРёРј, С‚Р°Рє СЃРєР°Р·Р°С‚СЊ, СЌС‚Рѕ С‚Р°Р»Р°РЅС‚Р»РёРІС‹Рј РјРѕРґРјРµР№РєРµСЂР°Рј, РєРѕС‚РѕСЂС‹Рµ, РІРѕР·РјРѕР¶РЅРѕ, СЃРјРѕРіР»Рё Р±С‹ С‡С‚Рѕ-РЅРёР±СѓРґСЊ СЃРґРµР»Р°С‚СЊ СЃ СЌС‚РёРј РёРЅС‚РµСЂРµСЃРЅРѕРµ. Slava98. 02.01.14.
+	if asName == "" or nil then -- Несмотря на то, что я совсем не понимаю, зачем анимскину имя, ведь у каждого танка он и так один. Ну оставим, так сказать, это талантливым модмейкерам, которые, возможно, смогли бы что-нибудь сделать с этим интересное. Slava98. 02.01.14.
 		spriteTab.name = tankName.."_spriteskin";
 		asName = tankName.."_spriteskin";
 	else
@@ -450,61 +450,61 @@ function func.spriteskin.Create(asName, spriteTab, asTab)
 	end;
 	
 	func.Kill(spriteTab.name)
-	object(tankName).skin = "null"; -- Р”РµР»Р°РµРј СЃРєРёРЅ С‚Р°РЅРєР° "РїСѓСЃС‚С‹Рј". Slava98. 02.01.14.
+	object(tankName).skin = "null"; -- Делаем скин танка "пустым". Slava98. 02.01.14.
 	actor("user_sprite", x, y, spriteTab)
 	level.objects[asName] = asTab;
 	
 	Loop()
 end
 
--- РЈР±РёСЂР°РµС‚ СЃРєРёРЅ. Slava98. 02.01.14.
+-- Убирает скин. Slava98. 02.01.14.
 function func.spriteskin.Kill(asName)
 	func.Kill(level.objects[asName].objName)
 	level.objects[asName] = nil;
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------- РЎРЅР°СЂСЏРґС‹ ------------------------------------------------------------
+------------------------------------------------ Снаряды ------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
 function func.projectile.Create(projName, projTab, x, y)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local projTab = func.UniteTables(
 		{
-			projType = projType or "", -- РўРёРї СЃРЅР°СЂСЏРґР°. РќРµРѕР±СЏР·Р°С‚РµР»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ, РЅСѓР¶РЅС‹Р№ С‚РѕР»СЊРєРѕ РґР»СЏ РѕРїРѕР·РЅР°РЅРёСЏ СЃРЅР°СЂСЏРґР°.
-			textureTab = nil, -- РўР°Р±Р»РёС†Р° СЃ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°РјРё РґРµРєРѕСЂР°С†РёРё РїРѕР»С‘С‚Р°. Р•СЃР»Рё РїСѓСЃС‚Р°СЏ, С‚Рѕ СЃРЅР°СЂСЏРґ РЅРµРІРёРґРёРј.
-			explosionTab = nil, -- РўР°Р±Р»РёС†Р° СЃ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°РјРё РґРµРєРѕСЂР°С†РёРё РІР·СЂС‹РІР°. Р•СЃР»Рё РїСѓСЃС‚Р°СЏ, С‚Рѕ РІР·СЂС‹РІ РЅРµРІРёРґРёРј.
-			trailTab = nil, -- РўР°Р±Р»РёС†Р° СЃ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°РјРё РґРµРєРѕСЂР°С†РёРё СЃР»РµРґР° СЃРЅР°СЂСЏРґР°. Р•СЃР»Рё РїСѓСЃС‚Р°СЏ, С‚Рѕ СЃР»РµРґРѕРІ РЅРµС‚.
-			splashTab = nil, -- РўР°Р±Р»РёС†Р° СЃ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°РјРё РґРµРєРѕСЂР°С†РёРё С‡Р°СЃС‚РёС† РѕС‚ СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ СЃРѕ СЃС‚РµРЅРѕР№. Р•СЃР»Рё РїСѓСЃС‚Р°СЏ, С‚Рѕ С‡Р°СЃС‚РёС† РЅРµС‚.
-			speed = 10, -- РЎРєРѕСЂРѕСЃС‚СЊ СЃРЅР°СЂСЏРґР°.
-			speedResidual = 1, -- Р•РґРёРЅРёС†С‹ СЃРєРѕСЂРѕСЃС‚Рё, РєРѕС‚РѕСЂС‹Рµ С‚РµСЂСЏРµС‚ СЃРЅР°СЂСЏРґ РїСЂРё СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё СЃ РѕР±СЉРµРєС‚РѕРј.
-			width = 1, -- РЁРёСЂРёРЅР° СЃРЅР°СЂСЏРґР°.
-			length = 1, -- Р”Р»РёРЅР° СЃРЅР°СЂСЏРґР°.
-			dir = 0, -- РќР°РїСЂР°РІР»РµРЅРёРµ СЃРЅР°СЂСЏРґР°.
-			damage = 50, -- РњРёРЅРёРјР°Р»СЊРЅС‹Р№ СѓСЂРѕРЅ РѕС‚ СЃРЅР°СЂСЏРґР°.
-			damageResidual = 10, -- Р•РґРёРЅРёС†С‹ СѓСЂРѕРЅР°, РєРѕС‚РѕСЂС‹Рµ С‚РµСЂСЏРµС‚ СЃРЅР°СЂСЏРґ РїСЂРё СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё СЃ РѕР±СЉРµРєС‚РѕРј.
-			numOfHits = 1, -- РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё РґР»СЏ РґРµС‚РѕРЅР°С†РёРё СЃРЅР°СЂСЏРґР°.
-			homingFactor = 0, -- РљРѕСЌС„РёС†РµРЅС‚ СЃР°РјРѕРЅР°РІРµРґРµРЅРёСЏ.
-			target = "", -- Р¦РµР»СЊ СЃР°РјРѕРЅР°РІРѕРґСЏС‰РµРіРѕСЃСЏ СЃРЅР°СЂСЏРґР°. Р•СЃР»Рё РЅРµС‚, РЅР°С…РѕРґРёС‚СЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё.
-			sightRange = math.pi/2, -- РџРѕР»Рµ Р·СЂРµРЅРёСЏ СЃРЅР°СЂСЏРґР° РґР»СЏ СЃР°РјРѕРЅР°РІРµРґРµРЅРёСЏ.
-			trailWidth = 1, -- Р”Р»РёРЅР° С‚РµРєСЃС‚СѓСЂС‹ СЃР»РµРґР° СЃРЅР°СЂСЏРґР°.
-			lifeTime = 0, -- Р’СЂРµРјСЏ Р¶РёР·РЅРё СЃРЅР°СЂСЏРґР°. 0 - РІРµС‡РЅРѕ.
-			splashTime = 3, -- Р’СЂРµРјСЏ Р¶РёР·РЅРё РґРµРєРѕСЂР°С†РёРё С‡Р°СЃС‚РёС† РѕС‚ СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ СЃРѕ СЃС‚РµРЅРѕР№.
-			detonateOnOwner = true, -- Р’Р·СЂС‹РІР°РµС‚СЃСЏ Р»Рё СЃРЅР°СЂСЏРґ, РµСЃР»Рё СЃС‚РѕР»РєРЅСѓР»СЃСЏ СЃ С…РѕР·СЏРёРЅРѕРј. РўРѕР»СЊРєРѕ РµСЃР»Рё С…РѕР·СЏРёРЅ РёРјРµРµС‚СЃСЏ.
-			shootDown = false, -- РњРѕР¶РЅРѕ Р»Рё СЃР±РёС‚СЊ СЃРЅР°СЂСЏРґ.
-			health = 50, -- Р—РґРѕСЂРѕРІСЊРµ СЃРЅР°СЂСЏРґР°, РµСЃР»Рё shootDown.
-			healthResidual = 10, -- Р—РґРѕСЂРѕРІСЊРµ, РєРѕС‚РѕСЂРѕРµ С‚РµСЂСЏРµС‚ СЃРЅР°СЂСЏРґ РїСЂРё СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё СЃ РѕР±СЉРµРєС‚РѕРј.
-			pushingPower = 1000, -- РЎРёР»Р°, РїРµСЂРµРґР°СЋС‰Р°СЏСЃСЏ РѕР±СЉРµРєС‚Сѓ, СЃ РєРѕС‚РѕСЂС‹Рј СЃРЅР°СЂСЏРґ СЃС‚РѕР»РєРЅСѓР»СЃСЏ.
-			pushingPowerResidual = 200, -- РЎРёР»Р°, РєРѕС‚РѕСЂСѓСЋ С‚РµСЂСЏРµС‚ СЃРЅР°СЂСЏРґ РїСЂРё СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё СЃ РѕР±СЉРµРєС‚РѕРј.
-			explosionRadius = 0, -- Р Р°РґРёСѓСЃ РІР·СЂС‹РІР°. 0 - СѓСЂРѕРЅ РЅР°РЅРѕСЃРёС‚СЃСЏ С‚РѕР»СЊРєРѕ С†РµР»Рё.
-			onCreate = "", -- Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё СЃРѕР·РґР°РЅРёРё СЃРЅР°СЂСЏРґР°.
-			onDestroy = "", -- Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РґРµС‚РѕРЅР°С†РёРё СЃРЅР°СЂСЏРґР°.
-			onHit = "", -- Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё СЃ РѕР±СЉРµРєС‚РѕРј.
-			onLoop = "", -- Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РїРѕР»С‘С‚Рµ СЃРЅР°СЂСЏРґР°.
-			owner = nil, -- РЎСЃС‹Р»РєР° РЅР° РІР»Р°РґРµР»СЊС†Р° СЃРЅР°СЂСЏРґР°.
+			projType = projType or "", -- Тип снаряда. Необязательный параметр, нужный только для опознания снаряда.
+			textureTab = nil, -- Таблица с характеристиками декорации полёта. Если пустая, то снаряд невидим.
+			explosionTab = nil, -- Таблица с характеристиками декорации взрыва. Если пустая, то взрыв невидим.
+			trailTab = nil, -- Таблица с характеристиками декорации следа снаряда. Если пустая, то следов нет.
+			splashTab = nil, -- Таблица с характеристиками декорации частиц от столкновения со стеной. Если пустая, то частиц нет.
+			speed = 10, -- Скорость снаряда.
+			speedResidual = 1, -- Единицы скорости, которые теряет снаряд при столкновении с объектом.
+			width = 1, -- Ширина снаряда.
+			length = 1, -- Длина снаряда.
+			dir = 0, -- Направление снаряда.
+			damage = 50, -- Минимальный урон от снаряда.
+			damageResidual = 10, -- Единицы урона, которые теряет снаряд при столкновении с объектом.
+			numOfHits = 1, -- Количество столкновении для детонации снаряда.
+			homingFactor = 0, -- Коэфицент самонаведения.
+			target = "", -- Цель самонаводящегося снаряда. Если нет, находится автоматически.
+			sightRange = math.pi/2, -- Поле зрения снаряда для самонаведения.
+			trailWidth = 1, -- Длина текстуры следа снаряда.
+			lifeTime = 0, -- Время жизни снаряда. 0 - вечно.
+			splashTime = 3, -- Время жизни декорации частиц от столкновения со стеной.
+			detonateOnOwner = true, -- Взрывается ли снаряд, если столкнулся с хозяином. Только если хозяин имеется.
+			shootDown = false, -- Можно ли сбить снаряд.
+			health = 50, -- Здоровье снаряда, если shootDown.
+			healthResidual = 10, -- Здоровье, которое теряет снаряд при столкновении с объектом.
+			pushingPower = 1000, -- Сила, передающаяся объекту, с которым снаряд столкнулся.
+			pushingPowerResidual = 200, -- Сила, которую теряет снаряд при столкновении с объектом.
+			explosionRadius = 0, -- Радиус взрыва. 0 - урон наносится только цели.
+			onCreate = "", -- Вызывается при создании снаряда.
+			onDestroy = "", -- Вызывается при детонации снаряда.
+			onHit = "", -- Вызывается при столкновении с объектом.
+			onLoop = "", -- Вызывается при полёте снаряда.
+			owner = nil, -- Ссылка на владельца снаряда.
 		}, projTab)
-	local function MakeName() -- Р—Р°РґР°С‘С‚ СЃРЅР°СЂСЏРґСѓ РёРјСЏ СЃ СЂР°РЅРґРѕРјРЅС‹Рј СЃСѓС„С„РёРєСЃРѕРј.
+	local function MakeName() -- Задаёт снаряду имя с рандомным суффиксом.
 		local name;
 		if projTab.owner.name then
 			name = projTab.owner.name.."_projectile"..projTab.projType..math.random(1, 10000);
@@ -516,16 +516,16 @@ function func.projectile.Create(projName, projTab, x, y)
 		end;
 	end;
 	local projName = projName or MakeName();
-	local texture; -- РЎСЃС‹Р»РєР° РЅР° С‚РµРєСЃС‚СѓСЂСѓ.
-	local lifeIsOver; -- РџСЂРѕС€Р»Рѕ Р»Рё РІСЂРµРјСЏ Р¶РёР·РЅРё СЃРЅР°СЂСЏРґР°.
-	local trails = {}; -- РњР°СЃСЃРёРІ СЃРѕ СЃСЃС‹Р»РєР°РјРё РЅР° С‚РµРєСЃС‚СѓСЂС‹ СЃР»РµРґРѕРІ РѕС‚ СЃРЅР°СЂСЏРґРѕРІ.
-	local n = 0; -- РќРѕРјРµСЂ С‚РµРєСѓС‰РµР№ РёС‚С‚РµСЂР°С†РёРё РІ Loop.
+	local texture; -- Ссылка на текстуру.
+	local lifeIsOver; -- Прошло ли время жизни снаряда.
+	local trails = {}; -- Массив со ссылками на текстуры следов от снарядов.
+	local n = 0; -- Номер текущей иттерации в Loop.
 	local function Loop()
 		local projTab = level.projectiles[projName];
 		local x1, y1 = func.GetCoords(x, y, projTab.dir, 1);
-		-- РџСЂРѕРІРµСЂРєР° С‚Р°Р№РјРµСЂР°.
+		-- Проверка таймера.
 		if lifeIsOver then Destroy() return; end;
-		-- РџСЂРѕРІРµСЂРєР° РїСЂРµРїСЏС‚СЃС‚РІРёР№.
+		-- Проверка препятствий.
 		local supposedObjects = {"tank", "wall_concrete", "wall_brick", "user_object", "crate"};
 		for x2 = 1, length do
 			for y2 = 1, width do
@@ -537,22 +537,22 @@ function func.projectile.Create(projName, projTab, x, y)
 							if Hit(objLink, obj) then Destroy() return; end;
 						end;
 					end;
-					-- !! РџСЂРѕРІРµСЂРєР° РЅР° СЃС‚РѕР»РєРЅРѕРІРµРЅРёРµ СЃ РґСЂСѓРіРёРј СЃРЅР°СЂСЏРґРѕРј.
+					-- !! Проверка на столкновение с другим снарядом.
 				end;
 			end;
 		end;
-		-- РџРѕРёСЃРє С†РµР»Рё, РµСЃР»Рё С‚Р°РєРѕРІРѕР№ РЅРµС‚ РёР·РЅР°С‡Р°Р»СЊРЅРѕ.
+		-- Поиск цели, если таковой нет изначально.
 		if projTab.homingFactor ~= 0 and projTab.target ~= "" then
-			-- !! РўСѓС‚ РєР°Рє-С‚Рѕ РЅСѓР¶РЅРѕ СЃРґРµР»Р°С‚СЊ, С‡С‚РѕР±С‹ РёСЃРєР°Р»СЃСЏ С‚Р°РЅРє РІ РїРѕР»Рµ Р·СЂРµРЅРёСЏ СЃРЅР°СЂСЏРґР°.
+			-- !! Тут как-то нужно сделать, чтобы искался танк в поле зрения снаряда.
 		end;
-		-- РЎР°РјРѕРЅР°РІРµРґРµРЅРёРµ
+		-- Самонаведение
 		if projTab.homingFactor ~= 0 and projTab.target ~= "" then
-			local x2, y2 = position(projTab.target); -- РџРѕР·РёС†РёСЏ РїСЂРѕС‚РёРІРЅРёРєР°
-			local dirToTarget = func.GetRadians(x, y, x2, y2); -- РЈРіРѕР» РїРѕРІРѕСЂРѕС‚Р° Рє РїСЂРѕС‚РёРІРЅРёРєСѓ.
-			local k = func.object.GetRightDirection(projTab.dir, dirToTarget); -- РљРѕСЌС„С„РёС†РµРЅС‚ РїСЂР°РІРёР»СЊРЅРѕРіРѕ РЅР°РїСЂР°РІР»РµРЅРёСЏ СЃРЅР°СЂСЏРґР°.
+			local x2, y2 = position(projTab.target); -- Позиция противника
+			local dirToTarget = func.GetRadians(x, y, x2, y2); -- Угол поворота к противнику.
+			local k = func.object.GetRightDirection(projTab.dir, dirToTarget); -- Коэффицент правильного направления снаряда.
 			projTab.dir = projTab.dir + 0.1*k*projTab.homingFactor*math.pi/90;
 		end;
-		-- РџРµСЂРµРґР°С‡Р° Р»РёС‡РЅС‹С… РґР°РЅРЅС‹С… С‚РµРєСЃС‚СѓСЂРµ РёР· С‚Р°Р±Р»РёС†С‹ СЃРЅР°СЂСЏРґР°.
+		-- Передача личных данных текстуре из таблицы снаряда.
 		projTab.textureTab.dir = projTab.dir;
 		for property, value in pairs(func.PropertiesToTable(object(projTab.textureTab.name))) do
 			local tzodTextureTab = object(projTab.textureTab.name);
@@ -560,14 +560,14 @@ function func.projectile.Create(projName, projTab, x, y)
 				object(projTab.textureTab.name)[property] = projTab.textureTab[property]; 
 			end;
 		end;
-		-- Р’С‹РїРѕР»РЅРµРЅРёРµ Р·Р°РґР°РЅРЅС‹С… С„СѓРЅРєС†РёР№.
+		-- Выполнение заданных функций.
 		loadstring(projTab.onLoop)()
-		-- РЎР»РµРґ РѕС‚ СЃРЅР°СЂСЏРґР°.
+		-- След от снаряда.
 		if n/projTab.trailWidth == math.ceil(n/projTab.trailWidth) and projTab.trailTab then 
 			trail = actor("user_sprite", x, y, projTab.trailTab);
 			table.insert(trails, trail)
 		end
-		-- РџРµСЂРµРјРµС‰РµРЅРёРµ.
+		-- Перемещение.
 		setposition(projTab.textureTab.name, x1, y1)
 		x, y = x1, y1;
 		n = n + 1;
@@ -586,7 +586,7 @@ function func.projectile.Create(projName, projTab, x, y)
 		loadstring(projTab.onHit)()
 		if projTab.splashTab then splash = actor("user_sprite", x, y, projTab.splashTab); end;
 		pushcmd(function() kill(splash) end, projTab.splashTime)
-		-- РЎРЅР°СЂСЏРґ С‚РµСЂСЏРµС‚ СЃРєРѕСЂРѕСЃС‚СЊ, СѓСЂРѕРЅ Рё СЃРёР»Сѓ РїРѕСЃР»Рµ СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ СЃ РѕР±СЉРµРєС‚Р°РјРё (РµСЃР»Рё РѕРЅ РјРѕР¶РµС‚ РїСЂРѕС…РѕРґРёС‚СЊ СЃРєРІРѕР·СЊ РЅРёС…).
+		-- Снаряд теряет скорость, урон и силу после столкновения с объектами (если он может проходить сквозь них).
 		if projTab.numOfHits == 0 then return true; end;
 		projTab.damage = projTab.damage - projTab.damageResidual;
 		projTab.speed = projTab.speed - projTab.speedResidual;
@@ -595,25 +595,25 @@ function func.projectile.Create(projName, projTab, x, y)
 	end;
 	local function Destroy()
 		local projTab = level.projectiles[projName];
-		local explosion; -- РЎСЃС‹Р»РєР° РЅР° РІР·СЂС‹РІ.
+		local explosion; -- Ссылка на взрыв.
 		loadstring(projTab.onDestroy)()
 		if projTab.explosionTab then explosion = actor("user_sprite", x1, y1, projTab.explosionTab); end;
-		-- РРјРёС‚Р°С†РёСЏ РІР·СЂС‹РІРЅРѕР№ РІРѕР»РЅС‹.
+		-- Имитация взрывной волны.
 		if projTab.explosionRadius and projTab.explosionRadius > 0 then
-			-- !! РќСѓР¶РЅРѕ СЃРґРµР»Р°С‚СЊ С‚Р°Рє, С‡С‚РѕР±С‹ РїРѕРІСЂРµР¶РґР°Р»РёСЃСЊ РѕР±СЉРµРєС‚С‹.
+			-- !! Нужно сделать так, чтобы повреждались объекты.
 		end;
-		-- РЈРґР°Р»РµРЅРёРµ СЃР»РµРґРѕРІ РѕС‚ СЃРЅР°СЂСЏРґР°.
+		-- Удаление следов от снаряда.
 		for i = 1, #trails do
 			kill(trails[i])
 		end;
-		-- РћС‚СЂРёСЃРѕРІРєР° СЃРїСЂР°Р№С‚Р° РІР·СЂС‹РІР°.
+		-- Отрисовка спрайта взрыва.
 			pushcmd(function() kill(explosion) end, 1/projTab.explosionTab.animate)
 	end;
 	
-	-- Р•СЃР»Рё СЂР°Р·СЂР°Р±РѕС‚С‡РёРє РєР°СЂС‚С‹ РІРґСЂСѓРі Р·Р°Р±СѓРґРµС‚ СЃРґРµР»Р°С‚СЊ animate Сѓ РІР·СЂС‹РІР°, С‚Рѕ СЃР»РµРґСѓРµС‚ РµРјСѓ СЌС‚Рѕ РЅР°РїРѕРјРЅРёС‚СЊ. 
+	-- Если разработчик карты вдруг забудет сделать animate у взрыва, то следует ему это напомнить. 
 	if projTab.explosionTab and type(projTab.explosionTab.animate) ~= "number" then error("bad variable 'explosionTab.animate' in argument #2 to 'func.projectile.Create' (number expected, got "..type(projTab.explosionTab.animate).."): don't forget about explosion animate", 2) return; end; 
 
-	-- Р’ РЅРµРєРѕС‚РѕСЂС‹С… СЃР»СѓС‡Р°СЏС… СЏ Р±РѕР»СЊС€Рµ РЅРµ Р±СѓРґСѓ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёРјРµРЅР°. Slava98. 21.07.14.	
+	-- В некоторых случаях я больше не буду использовать имена. Slava98. 21.07.14.	
 --[[projTab.textureTab.name = projTab.textureTab.name or projName.."_sprite";
 	projTab.explosionTab.name = projTab.explosionTab.name or projName.."_explosion";
 	projTab.trailTab.name = projTab.trailTab.name or projName.."_trail";]]
@@ -628,28 +628,28 @@ function func.projectile.Create(projName, projTab, x, y)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------ РџРѕР»РёРіРѕРЅС‹ ------------------------------------------------------------
------------------------------------ (Р·Р°РјРѕСЂРѕР¶РµРЅРѕ РЅР° РЅРµРѕРїСЂРµРґРµР»С‘РЅРЅС‹Р№ СЃСЂРѕРє) ---------------------------------------------
+----------------------------------------------- Полигоны ------------------------------------------------------------
+----------------------------------- (заморожено на неопределённый срок) ---------------------------------------------
 
 
---- GENIUS :D (РїРёСЃР°Р»РѕСЃСЊ РїРѕРґ The Prodigy) --- VIRUS ---
+--- GENIUS :D (писалось под The Prodigy) --- VIRUS ---
 
--- РЎРѕР·РґР°РµС‚ РЅРѕРІС‹Р№ РїРѕР»РёРіРѕРЅ
+-- Создает новый полигон
 function func.CreatePoligon(poligonName)
         local poligonName = poligonName or "poligon1"
 --      rawset(func.poligons, poligonName, {} )
-        func.poligons[poligonName] = {numOfSquares = 0} --Р”РѕР±Р°РІР»СЏРµРј РїРѕР»РёРіРѕРЅ СЃ Р·Р°РґР°РЅС‹Рј РёРјРµРЅРµРј РІ РјР°СЃСЃРёРІ РїРѕР»РёРіРѕРЅРѕРІ
+        func.poligons[poligonName] = {numOfSquares = 0} --Добавляем полигон с заданым именем в массив полигонов
 end
 
--- Р”РѕР±Р°РІР»СЏРµС‚ РѕР±Р»Р°СЃС‚СЊ РІС‹РґРµР»РµРЅРЅСѓСЋ С‚СЂРёРіРµСЂР°РјРё С‚РµСЂРёС‚РѕСЂРёСЋ  РІ РїРѕР»РёРіРѕРЅ
-function func.AddSquareToPoligon(poligonName, squareName, --[[trigNum,]] figure) -- figure (0 - РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє, 1 С‚СЂРµСѓРіРѕР»СЊРЅРёРє); squareName - РїСЂРµС„РёРєСЃ С‚СЂРёРіРµСЂРѕРІ, РєРѕС‚РѕСЂС‹Рµ Р·Р°РґР°СЋС‚ РґР°РЅРЅСѓСЋ С‚РµСЂСЂРёС‚РѕСЂРёСЋ.
+-- Добавляет область выделенную тригерами територию  в полигон
+function func.AddSquareToPoligon(poligonName, squareName, --[[trigNum,]] figure) -- figure (0 - прямоугольник, 1 треугольник); squareName - префикс тригеров, которые задают данную территорию.
         local poligonName = poligonName or "poligon1" 
         local trigNum = trigNum or 4
         local squareName = squareName or "square1"
         local figure = figure or 0
         
-        func.poligons[poligonName].numOfSquares = func.poligons[poligonName].numOfSquares + 1 --РћР±РЅРѕРІР»СЏРµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ С‚РµСЂСЂРёС‚РѕСЂРёР№ РІ РїРѕР»РёРіРѕРЅРµ
-        func.poligons[poligonName].poligonSquares[numOfSquares] = squareName --Р”РѕР±Р°РІР»СЏРµРј РёРјСЏ С‚РµСЂСЂРёС‚РѕСЂРёРё РІ РјР°СЃСЃРёРІ РїРѕР»РёРіРѕРЅР°
+        func.poligons[poligonName].numOfSquares = func.poligons[poligonName].numOfSquares + 1 --Обновляет количество территорий в полигоне
+        func.poligons[poligonName].poligonSquares[numOfSquares] = squareName --Добавляем имя территории в массив полигона
         
         if figure == 0 then
                 trigNum = 4
@@ -660,20 +660,20 @@ function func.AddSquareToPoligon(poligonName, squareName, --[[trigNum,]] figure)
 --      rawset(func.poligons[poligonName], squareName, {})
         for i = 1, trigNum do
                 local x, y = position(squareName..trigNum)
-                func.poligons[poligonName][squareName]["trig"..trigNum]["x"] = {x} --РљРѕРѕСЂРґРёРЅР°С‚С‹ С‚СЂРёРіРµСЂРѕРІ РїРѕ x
-                func.poligons[poligonName][squareName]["trig"..trigNum]["y"] = {y} --РљРѕРѕСЂРґРёРЅР°С‚С‹ С‚СЂРёРіРµСЂРѕРІ РїРѕ y
+                func.poligons[poligonName][squareName]["trig"..trigNum]["x"] = {x} --Координаты тригеров по x
+                func.poligons[poligonName][squareName]["trig"..trigNum]["y"] = {y} --Координаты тригеров по y
 --              rawset(func.poligons[poligonName][squareName..trigNum], "x", {x})
 --              rawset(func.poligons[poligonName][squareName..trigNum], "y", {y})
         end
 end
 
-function func.DeleteSquareFromPoligon(poligonName, squareName) --РќСѓР¶РЅРѕ РїСЂРёРґСѓРјР°С‚СЊ РєР°Рє СѓРґР°Р»СЏС‚СЊ РЅРµРЅСѓР¶РЅС‹Рµ С‚РµСЂСЂРёС‚РѕСЂРёРё РёР· РїРѕР»РёРіРѕРЅР°. РњРѕР¶РЅРѕ РїСЂРѕСЃС‚Рѕ РѕР±РЅСѓР»СЏС‚СЊ РёС… РёРјРµРЅР°, РЅРѕ РѕРЅРё РѕСЃС‚Р°РЅСѓС‚СЃСЏ Р·Р°СЂРµР·РµСЂРІРёСЂРѕРІР°РЅС‹РјРё.
+function func.DeleteSquareFromPoligon(poligonName, squareName) --Нужно придумать как удалять ненужные территории из полигона. Можно просто обнулять их имена, но они останутся зарезервироваными.
         
 end
 
---- РўСЂРёРіРµСЂ-РїРѕР»РёРіРѕРЅ (РјРµРіР°С‚СЂРёРіРµСЂ :D) ---
+--- Тригер-полигон (мегатригер :D) ---
 
--- РЎРѕР·РґР°РЅРёРµ РјРµРіР°С‚СЂРёРіРµСЂР°
+-- Создание мегатригера
 function func.CreateMegaTrig(poligonName, megaTrigName, on_enter, on_leave, only_human, only_bot)
         local poligonName = poligonName or "poligon1"
         local megaTrigNam = megaTrigNam or "megaTrig1"
@@ -684,7 +684,7 @@ function func.CreateMegaTrig(poligonName, megaTrigName, on_enter, on_leave, only
         func.megaTrigs[megaTrigName].only_bot = only_bot
 end
 
-function func.EditMegaTrig(poligonName, megaTrigName, on_enter, on_leave, only_human, only_bot) --Р’РѕС‚ РјРѕР¶РµС‚ РµС‘ РєР°Рє-С‚Рѕ РѕР±СЉРµРґРµРЅРёС‚СЊ СЃ РїСЂРµРґРµРґСѓС‰РµР№ РёР»Рё СѓРґР°Р»РёС‚СЊ?
+function func.EditMegaTrig(poligonName, megaTrigName, on_enter, on_leave, only_human, only_bot) --Вот может её как-то объеденить с предедущей или удалить?
         local poligonName = poligonName or "poligon1"
         local megaTrigNam = megaTrigNam or "megaTrig1"
         func.megaTrigs[megaTrigName].poligon = func.poligons[poligonName]
@@ -694,12 +694,12 @@ function func.EditMegaTrig(poligonName, megaTrigName, on_enter, on_leave, only_h
         func.megaTrigs[megaTrigName].only_bot = only_bot
 end
 
-function func.MegaTrigCheck(megaTrigName) --Р•СЃР»Рё С‚Р°РЅРє РїРѕРїР°РґР°РµС‚ РІ Р·РѕРЅСѓ РєР°РєРѕРіРѕ-Р»РёР±Рѕ РёР· РіСЂР°РЅРёС‡РЅС‹С… С‚СЂРёРіРµСЂРѕРІ РјРµРіР°С‚СЂРёРіРµСЂР° С‚Рѕ РІС‹Р·С‹РІР°РµС‚СЃСЏ СЌС‚Р° С„СѓРЅРєС†РёСЏ, РіРґРµ РїСЂРѕРёСЃС…РѕРґРёС‚ РїСЂРѕРІРµСЂРєР° РЅР° С‚Рѕ РІСЉРµС…Р°Р» С‚Р°РЅРє РІ Р·РѕРЅСѓ РјРµРіР°С‚СЂРёРіРµСЂР° РёР»Рё РЅРµС‚. РќСѓР¶РЅРѕ РїСЂРёРґСѓРјР°С‚СЊ РєР°Рє СЃРґРµР»Р°С‚СЊ РЅР° РІС‹РµР·Рґ СЃРѕР±С‹С‚РёРµ
-        --РўСѓС‚ Р±СѓРґРµС‚ РѕС‡РµРЅСЊ РјРЅРѕРіРѕ РєРѕРґР°.
+function func.MegaTrigCheck(megaTrigName) --Если танк попадает в зону какого-либо из граничных тригеров мегатригера то вызывается эта функция, где происходит проверка на то въехал танк в зону мегатригера или нет. Нужно придумать как сделать на выезд событие
+        --Тут будет очень много кода.
 end
 
 --[[
--- Р‘РѕР»РѕС‚Рѕ
+-- Болото
 function func.BuildSwamp(poligonName, trigNum, figure) 
         local poligonName = poligonName or "poligon1"
         local trigNum = trigNum or 4
@@ -711,15 +711,15 @@ function func.BuildSwamp(poligonName, trigNum, figure)
         end
 end
 ]]
---Р‘РѕР»РѕС‚Рѕ Р±СѓРґРµРј РґРµР»Р°С‚СЊ РїРѕСЃР»Рµ РјРµРіР°С‚СЂРёРіРµСЂРѕРІ. РўР°Рј Р±СѓРґРµС‚ С‡С‚Рѕ-С‚Рѕ РїРѕРґРѕР±РЅРѕРµ. РҐРѕС‚СЏ, РІСЃРµ Р¶Рµ, С‡СѓС‚СЊ СЃР»РѕР¶РЅРµРµ
+--Болото будем делать после мегатригеров. Там будет что-то подобное. Хотя, все же, чуть сложнее
 
 
 ---------------------------------------------------------------------------------------------------------------------
--------------------------------------------- РћСЂСѓР¶РёРµ Рё С‚Р°РЅРєРё ---------------------------------------------------------
+-------------------------------------------- Оружие и танки ---------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
--- Р§С‚Рѕ СЌС‚Рѕ Рё РґР»СЏ С‡РµРіРѕ РЅРµР·РЅР°СЋ. VIRUS
--- Р­С‚Рѕ РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ С‚Р°РЅРє РµР·РґРёР» Рё РїСЂРё СЃРјРµРЅРµ РѕСЂСѓР¶РёСЏ РµРіРѕ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РЅРµ РјРµРЅСЏР»РёСЃСЊ. Sl@v@98
+-- Что это и для чего незнаю. VIRUS
+-- Это для того, чтобы танк ездил и при смене оружия его характеристики не менялись. Sl@v@98
 
 function getvclass(cls, weap)
 	if weap then
@@ -737,7 +737,7 @@ function getvclass(cls, weap)
 end
 
 function func.EquipWeap(weapType, weapName, tankName)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(weapType) ~= "string" then error("bad argument #1 to 'func.EquipWeap' (string expected, got "..type(weapType)..")", 2) end;
 	if type(weapName) ~= "string" then error("bad argument #2 to 'func.EquipWeap' (string expected, got "..type(weapName)..")", 2) end;
 	if type(tankName) ~= "string" then error("bad argument #3 to 'func.EquipWeap' (string expected, got "..type(tankName)..")", 2) end;
@@ -745,10 +745,10 @@ function func.EquipWeap(weapType, weapName, tankName)
 --	if exists(weap) then kill(weap) end
 	if not exists(weapName) then actor(weapType, 0, 0, {name = weapName}) end
 	equip(tankName, weapName)
---	main.characters[object(tank).playername].current_weapon = weap; -- РЎРёРµ РґРѕР»Р¶РЅРѕ РЅР°СЃС‚СЂР°РёРІР°С‚СЊСЃСЏ СѓР¶Рµ РІ СЃР°РјРѕРј РїРµСЂСЃРѕРЅР°Р¶Рµ. Slava98. 30.12.13.
+--	main.characters[object(tank).playername].current_weapon = weap; -- Сие должно настраиваться уже в самом персонаже. Slava98. 30.12.13.
 end
 
--- РљРѕРЅРІРёСЂС‚РёСЂСѓРµС‚ РЅР°Р·РІР°РЅРёРµ РѕСЂСѓР¶РёСЏ РІ РєРѕРґРµ РІ С‚РµРєСЃС‚. Slava98.
+-- Конвиртирует название оружия в коде в текст. Slava98.
 function func.ConvertWeap(weap)
 	if weap == "weap_autocannon" then return func.Read({"main", "weap", 1});
 	elseif weap == "weap_bfg" then return func.Read({"main", "weap", 2});
@@ -766,12 +766,12 @@ function func.ConvertWeap(weap)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------ РџСЂРµРґРјРµС‚С‹ ------------------------------------------------------------
+----------------------------------------------- Предметы ------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
--- Р¤СѓРЅРєС†РёСЏ, РїРѕРєР°Р·С‹РІР°СЋС‰Р°СЏ (СЃРѕР·РґР°СЋС‰Р°СЏ) РїСЂРµРґРјРµС‚ РЅР° РєР°СЂС‚Рµ.
+-- Функция, показывающая (создающая) предмет на карте.
 function func.ShowItem(item, x, y, takable, texture, name)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(item) ~= "string" then error("bad argument #1 to 'func.ShowItem' (string expected, got "..type(item)..")", 2) end;
 	if type(x) ~= "number" then error("bad argument #2 to 'func.ShowItem' (number expected, got "..type(x)..")", 2) end;
 	if type(y) ~= "number" then error("bad argument #3 to 'func.ShowItem' (number expected, got "..type(y)..")", 2) end;
@@ -861,9 +861,9 @@ function func.ShowItem(item, x, y, takable, texture, name)
 	end;
 end
 
--- Р¤СѓРЅРєС†РёСЏ, РґР°СЋС‰Р°СЏ РїРµСЂСЃРѕРЅР°Р¶Сѓ РєР°РєРѕР№-Р»РёР±Рѕ РїСЂРµРґРјРµС‚.
+-- Функция, дающая персонажу какой-либо предмет.
 function func.GiveItem(item, character, num, sound, found, itemName)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(item) ~= "string" then error("bad argument #1 to 'func.GiveItem' (string expected, got "..type(item)..")", 2) end;
 	if type(character) ~= "string" then error("bad argument #2 to 'func.GiveItem' (string expected, got "..type(character)..")", 2) end;
 	if type(num) ~= "number" and num ~= nil then error("bad argument #3 to 'func.GiveItem' (number expected, got "..type(num)..")", 2) end;
@@ -871,15 +871,15 @@ function func.GiveItem(item, character, num, sound, found, itemName)
 	if type(found) ~= "boolean" and found ~= nil then error("bad argument #5 to 'func.GiveItem' (boolean expected, got "..type(found)..")", 2) end;
 	if not func.ExistsCharacter(character) then error("bad argument #2 to 'func.GiveItem' (character '"..character.."' does not exist)", 2) end;
 	
--- РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Объявление локальных переменных.
 	local num = num or 1;
 	local sound = sound or "pickup";
-	local found = found or false; -- Р’ РєРѕРЅСЃРѕР»Рё РїРёС€РµС‚СЃСЏ, С‡С‚Рѕ РїСЂРµРґРјРµС‚ Р±С‹Р» РґР°РЅ РёР»Рё РЅР°Р№РґРµРЅ.
-	local charTab = main.characters[character]; -- РўР°Р±Р»РёС†Р° РїРµСЂСЃРѕРЅР°Р¶Р°.
-	local dlgFirstMessageNum; -- РќРѕРјРµСЂ РЅР°С‡Р°Р»Р° СЃРѕРѕР±С‰РµРЅРёСЏ ("РІС‹ РЅР°С€Р»Рё" РёР»Рё "РІС‹ РІР·СЏР»Рё").
-	local dlgSecondMessageNum; -- РќРѕРјРµСЂ РєРѕРЅС†Р° СЃРѕРѕР±С‰РµРЅРёСЏ (СЃРѕСЃС‚РѕРёС‚ РёР· РЅР°Р·РІР°РЅРёСЏ РїСЂРµРґРјРµС‚Р°).
-	local dlgItemNum = num; -- РљРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРµРґРјРµС‚РѕРІ.
--- Р•СЃР»Рё РїСЂРµРґРјРµС‚ РЅРµ РІР»РµР·Р°РµС‚ РІ РёРЅРІРµРЅС‚Р°СЂСЊ, С‚Рѕ РІС‹СЃРІРµС‡РёРІР°РµС‚СЃСЏ РѕС€РёР±РєР°.
+	local found = found or false; -- В консоли пишется, что предмет был дан или найден.
+	local charTab = main.characters[character]; -- Таблица персонажа.
+	local dlgFirstMessageNum; -- Номер начала сообщения ("вы нашли" или "вы взяли").
+	local dlgSecondMessageNum; -- Номер конца сообщения (состоит из названия предмета).
+	local dlgItemNum = num; -- Количество предметов.
+-- Если предмет не влезает в инвентарь, то высвечивается ошибка.
 	if charTab.height + func.ShowItemHeight(item)*num > charTab.maxHeight then
 		if character == const.playerName and not main.inventory.playerKnowsAboutOverload then
 			main.inventory.playerKnowsAboutOverload = true;
@@ -888,13 +888,13 @@ function func.GiveItem(item, character, num, sound, found, itemName)
 		end;
 		return;
 	end;
--- РўРµРїРµСЂСЊ РЅСѓР¶РЅРѕ СѓРЅРёС‡С‚РѕР¶РёС‚СЊ С‚СЂРёРіРіРµСЂ СЃРѕ СЃРїСЂР°Р№С‚РѕРј Рё Р·Р°РїСѓСЃС‚РёС‚СЊ С„СѓРЅРєС†РёСЋ РЅР° СѓСЂРѕРІРЅРµ.
+-- Теперь нужно уничтожить триггер со спрайтом и запустить функцию на уровне.
 	if itemName then
 		kill(itemName);
 		kill(itemName.."_trig") 
 		level.OnPickup(itemName, item, character)
 	end;
--- Р”Р»СЏ РёРіСЂРѕРєР° РЅСѓР¶РЅРѕ РѕР±РЅРѕРІРёС‚СЊ Рё СЃРѕРѕС‚РІРµС‚СЃРІСѓСЋС‰РёР№ РїСѓРЅРєС‚ РІ РјРµРЅСЋ. 
+-- Для игрока нужно обновить и соответсвующий пункт в меню. 
 	if character == const.playerName then
 		if sound ~= "none" then func.Sound(sound) end;
 		pushcmd(function()
@@ -903,40 +903,40 @@ function func.GiveItem(item, character, num, sound, found, itemName)
 		end)
 	end;
 	if found then dlgFirstMessageNum = 1; else dlgFirstMessageNum = 2; end;
---	РўРµРїРµСЂСЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїСЂРµРґРјРµС‚Р° РЅСѓР¶РЅРѕ РїСЂРѕРїРёСЃР°С‚СЊ СЃРєСЂРёРїС‚ РґРѕР±Р°РІР»РµРЅРёСЏ РµРіРѕ РІ РёРЅРІРµРЅС‚Р°СЂСЊ.
+--	Теперь для каждого предмета нужно прописать скрипт добавления его в инвентарь.
 	local charTab = main.characters[character];
 	local inventory = charTab.inventory;
 	local items = inventory.items;
-	if dlgItemNum == 1 then dlgItemNum = ""; else dlgItemNum = dlgItemNum.." " end; -- РќРµ РЅСѓР¶РЅРѕ РїРёСЃР°С‚СЊ, С‡С‚Рѕ РјС‹ РІР·СЏР»Рё С‚РѕР»СЊРєРѕ 1, РЅР°РїСЂРёРјРµСЂ, РџР­Р Рљ. 
+	if dlgItemNum == 1 then dlgItemNum = ""; else dlgItemNum = dlgItemNum.." " end; -- Не нужно писать, что мы взяли только 1, например, ПЭРК. 
 	debug.Print("| "..character.." got "..dlgItemNum..item);
 --	table.insert(items, item)
 	if not func.Search(items, item) then items[item] = 0; end;
 	items[item] = items[item] + num;
 	if item == "healthpack" then
 		dlgSecondMessageNum = 6;
-		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Р’С‹ РЅР°С€Р»Рё РџР­Р Рљ.
+		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Вы нашли ПЭРК.
 	elseif item == "mine" then
 		if num == 1 then dlgSecondMessageNum = 3; elseif num > 1 and num < 5 then dlgSecondMessageNum = 5; else dlgSecondMessageNum = 4; end;
-		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Р’С‹ РЅР°С€Р»Рё РјРёРЅСѓ.
+		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Вы нашли мину.
 	elseif item == "bomb" then
 		if num == 1 then dlgSecondMessageNum = 7; elseif num > 1 and num < 5 then dlgSecondMessageNum = 9; else dlgSecondMessageNum = 8; end;
-		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Р’С‹ РЅР°С€Р»Рё Р±РѕРјР±Сѓ.
+		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Вы нашли бомбу.
 	elseif item == "boo" then
 		if num == 1 then dlgSecondMessageNum = 10; elseif num > 1 and num < 5 then dlgSecondMessageNum = 12; else dlgSecondMessageNum = 11; end;
-		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Р’С‹ РЅР°С€Р»Рё СЌРЅРµСЂРіРёС‚РёС‡РµСЃРєРёР№ СѓСЃРёР»РёС‚РµР»СЊ.
+		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Вы нашли энергитический усилитель.
 	elseif item == "battery" then
 		if num == 1 then dlgSecondMessageNum = 13; elseif num > 1 and num < 5 then dlgSecondMessageNum = 15; else dlgSecondMessageNum = 14; end;
-		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Р’С‹ РЅР°С€Р»Рё Р±Р°С‚Р°СЂРµРµС‡РєСѓ.
+		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Вы нашли батареечку.
 	elseif item == "superhealthpack" then
 		dlgSecondMessageNum = 28;
-		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Р’С‹ РЅР°С€Р»Рё РџР­Р Рљ-2.
+		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Вы нашли ПЭРК-2.
 	elseif item == "armor" then
 		if num == 1 then dlgSecondMessageNum = 19; elseif num > 1 and num < 5 then dlgSecondMessageNum = 21;  else dlgSecondMessageNum = 20; end;
-		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Р’С‹ РЅР°С€Р»Рё Р±СЂРѕРЅСЋ.
+		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Вы нашли броню.
 	elseif item == "armor" then
 		if num == 1 then dlgSecondMessageNum = 29; elseif num > 1 and num < 5 then dlgSecondMessageNum = 31;  else dlgSecondMessageNum = 30; end;
-		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Р’С‹ РЅР°С€Р»Рё Р›Р—Рљ.
-	elseif item == "credit" then -- Р’СЂСЏРґ Р»Рё С‚Р°РєРёРµ РєСЂРµРґРёС‚С‹ Р±СѓРґСѓС‚, РЅРѕ РІСЃС‘ Р¶Рµ.
+		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum})) end; -- Вы нашли ЛЗК.
+	elseif item == "credit" then -- Вряд ли такие кредиты будут, но всё же.
 		if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, "1 ", {"main", "msg_playerinfo", 3})) end;
 		func.AddCredits(1, character)
 	elseif item == "credits5" then
@@ -969,15 +969,15 @@ function func.GiveItem(item, character, num, sound, found, itemName)
 	for i = 1, 1000 do
 		if item == "key"..i then
 			if num == 1 then dlgSecondMessageNum = 16; elseif num > 1 and num < 5 then dlgSecondMessageNum = 18;  else dlgSecondMessageNum = 17; end;
-			if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum}, {"main", "keys", i}, ".")) end; -- Р’С‹ РЅР°С€Р»Рё РєСЂР°СЃРЅСѓСЋ РєР°СЂС‚РѕС‡РєСѓ.
+			if character == const.playerName then func.Message(func.Read({"main", "items", dlgFirstMessageNum}, dlgItemNum, {"main", "items", dlgSecondMessageNum}, {"main", "keys", i}, ".")) end; -- Вы нашли красную карточку.
 			table.insert(inventory.keys, i)
 		end;
 	end;
-	func.CheckHeight(character, true) -- Р’ РєРѕРЅС†Рµ РїСЂРѕРІРµСЂРёРј РІРјРµСЃС‚РёС‚РµР»СЊРЅРѕСЃС‚СЊ.
+	func.CheckHeight(character, true) -- В конце проверим вместительность.
 end
  
 function func.ConfiscateItem(item, character, num)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if main.characters[character].inventory.items[item] == nil then error("bad argument #1 to 'func.ConfiscateItem' (character '"..character.."' hasn't got item '"..item.."')", 2) end;
 	
@@ -993,12 +993,12 @@ function func.ConfiscateItem(item, character, num)
 	local items = main.characters[character].inventory.items;
 	debug.Print("| "..num.." "..item.." was stealed from "..character.."");
 	items[item] = items[item] - num;
-	func.CheckHeight(character, true) -- Р’ РєРѕРЅС†Рµ РїСЂРѕРІРµСЂРёРј РІРјРµСЃС‚РёС‚РµР»СЊРЅРѕСЃС‚СЊ.
+	func.CheckHeight(character, true) -- В конце проверим вместительность.
 end
  
--- Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё РїСЂРµРґРјРµС‚Р°. Р”СѓРјР°СЋ, СЃС‚РѕРёС‚ СЃРґРµР»Р°С‚СЊ РєР°Р¶РґРѕРјСѓ РїСЂРµРґРјРµС‚Сѓ РїРѕ СЃРІРѕРµР№ С„СѓРЅРєС†РёРё, Р° РЅРµ РґРµР»Р°С‚СЊ РѕРґРЅСѓ РѕРіСЂРѕРјРЅСѓСЋ. Slava98.
+-- Вызывается при использовании предмета. Думаю, стоит сделать каждому предмету по своей функции, а не делать одну огромную. Slava98.
 function func.UseItem(item, character)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС‰РёР±РѕРє.
+-- Обработчик ощибок.
 	if type(item) ~= "string" then error("bad argument #1 to 'func.UseItem' (string expected, got "..type(item)..")", 2) end;
 	if type(character) ~= "string" then error("bad argument #2 to 'func.UseItem' (string expected, got "..type(character)..")", 2) end;
 	if not func.ExistsCharacter(character) then error("bad argument #2 to 'func.UseItem' (character '"..character.."' isn't exist)", 2); end;
@@ -1021,12 +1021,12 @@ function func.UseItem(item, character)
 	end;
 	
 	if main.characters[character].inventory.items[item] ~= nil and main.characters[character].inventory.items[item] > 0 then debug.Print("| "..character.." is using "..item) end;
-	func.CheckHeight(character, true) -- Р’ РєРѕРЅС†Рµ РїСЂРѕРІРµСЂРёРј РІРјРµСЃС‚РёС‚РµР»СЊРЅРѕСЃС‚СЊ.
+	func.CheckHeight(character, true) -- В конце проверим вместительность.
 	return true;
 end
 
 function func.DropItem(item, charName)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС‰РёР±РѕРє.
+-- Обработчик ощибок.
 	if type(item) ~= "string" then error("bad argument #1 to 'func.DropItem' (string expected, got "..type(item)..")", 2) end;
 	if type(charName) ~= "string" then error("bad argument #2 to 'func.DropItem' (string expected, got "..type(charName)..")", 2) end;
 	if not func.ExistsCharacter(charName) then error("bad argument #2 to 'func.DropItem' (character '"..charName.."' isn't exist)", 2); end;
@@ -1051,7 +1051,7 @@ function func.DropItem(item, charName)
 		on_leave="kill('"..charName.."_item"..inventory.numberOfDroppedItems.."'); kill('"..charName.."_item"..inventory.numberOfDroppedItems.."_trig'); func.ShowItem('"..item.."',"..x..", "..y..")" } )
 end
 
--- Р’С‹СЃРІРµС‡РёРІР°РµС‚ РѕРєРѕС€РєРѕ СЃ РІРѕРїСЂРѕСЃРѕРј, СЃРєРѕР»СЊРєРѕ РІРµС‰РµР№ РјС‹ С…РѕС‚РёРј РІС‹РєРёРЅСѓС‚СЊ. Р¤СѓРЅРєС†РёСЏ С‚РѕР»СЊРєРѕ РґР»СЏ РёРіСЂРѕРєР°.
+-- Высвечивает окошко с вопросом, сколько вещей мы хотим выкинуть. Функция только для игрока.
 function func.DropItemsBox(item, num)
 	local itemNum = main.characters[const.playerName].inventory.items[item];
 	
@@ -1067,9 +1067,9 @@ function func.DropItemsBox(item, num)
 		option3 = ">"},	"inventorybox")
 end
 
--- РЎС‚Р°РІРёС‚ РїСЂРµРґРјРµС‚ РІ РѕС‡РµСЂРµРґСЊ.
+-- Ставит предмет в очередь.
 function func.PushItem(item, charName, num)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС‰РёР±РѕРє.
+-- Обработчик ощибок.
 	if type(item) ~= "string" then error("bad argument #1 to 'func.PushItem' (string expected, got "..type(item)..")", 2) end;
 	if type(charName) ~= "string" then error("bad argument #2 to 'func.PushItem' (string expected, got "..type(charName)..")", 2) end;
 	if not func.ExistsCharacter(charName) then error("bad argument #2 to 'func.PushItem' (character '"..charName.."' isn't exist)", 2); end;
@@ -1078,14 +1078,14 @@ function func.PushItem(item, charName, num)
 	local inventory = charTab.inventory;
 	local num = num or 1;
 	
-	if not item == "healthpack" and not item == "superhealthpack" and not item == "boo" and not item == "battery" then return; end; -- РЎС‚Р°РІРёС‚СЊ РІ РѕС‡РµСЂРµРґСЊ РјРѕР¶РЅРѕ С‚РѕР»СЊРєРѕ СЌС‚Рё РїСЂРµРґРјРµС‚С‹.
+	if not item == "healthpack" and not item == "superhealthpack" and not item == "boo" and not item == "battery" then return; end; -- Ставить в очередь можно только эти предметы.
 	if not inventory.numOfPushed[item] then inventory.numOfPushed[item] = 0; end;
 	inventory.numOfPushed[item] = inventory.numOfPushed[item] + num;
 	
 	return inventory.numOfPushed[item];
 end
 
--- Р’С‹СЃРІРµС‡РёРІР°РµС‚ РѕРєРѕС€РєРѕ СЃ РІРѕРїСЂРѕСЃРѕРј, СЃРєРѕР»СЊРєРѕ РІРµС‰РµР№ РјС‹ С…РѕС‚РёРј РїРѕСЃС‚Р°РІРёС‚СЊ РІ РѕС‡РµСЂРµРґСЊ. Р¤СѓРЅРєС†РёСЏ С‚РѕР»СЊРєРѕ РґР»СЏ РёРіСЂРѕРєР°.
+-- Высвечивает окошко с вопросом, сколько вещей мы хотим поставить в очередь. Функция только для игрока.
 function func.PushItemsBox(item, num)
 	local inventory = main.characters[const.playerName].inventory;
 	if not inventory.numOfPushed[item] then inventory.numOfPushed[item] = 0; end;
@@ -1104,7 +1104,7 @@ function func.PushItemsBox(item, num)
 		option3 = ">"},	"inventorybox")
 end
 
--- Р’С‹СЃРІРµС‡РёРІР°РµС‚ РѕРєРѕС€РєРѕ СЃ РІРѕРїСЂРѕСЃРѕРј, СЃРєРѕР»СЊРєРѕ РІРµС‰РµР№ РјС‹ С…РѕС‚РёРј РёР·СЉСЏС‚СЊ РёР· РѕС‡РµСЂРµРґРё. Р¤СѓРЅРєС†РёСЏ С‚РѕР»СЊРєРѕ РґР»СЏ РёРіСЂРѕРєР°.
+-- Высвечивает окошко с вопросом, сколько вещей мы хотим изъять из очереди. Функция только для игрока.
 function func.UnpushItemsBox(item, num)
 	local inventory = main.characters[const.playerName].inventory;
 	if not inventory.numOfPushed[item] then inventory.numOfPushed[item] = 0; end;
@@ -1124,7 +1124,7 @@ function func.UnpushItemsBox(item, num)
 end
 
 function func.ShowItemHeight(item)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).	
+-- Обработчик ошибок (написать).	
 	
 	if item == "ammo" then
 		return 0.5;
@@ -1154,7 +1154,7 @@ function func.CheckHeight(charName, withoutLooping)
 	if not withoutLooping then pushcmd(function() func.CheckHeight(charName) end, 0.1) end
 end
 
--- Р”РѕР±Р°РІР»СЏРµС‚ РўРµСЃС‚РµСЂСѓ РЅР° СЃС‡С‘С‚ РєСЂРµРґРёС‚С‹.
+-- Добавляет Тестеру на счёт кредиты.
 function func.AddCredits(num, character)
 	main.characters[character].credits = main.characters[character].credits + num;
 	return main.characters[character].credits;
@@ -1231,7 +1231,7 @@ function func.inventory.UseBoo(character)
 --	func.AddNumEy(-1, character)
 	if level.UseItem(character, "boo") then return; end;
 	inventory.items.boo = inventory.items.boo - 1;
-	inventory.isActivated["boo"] = true; -- Р­РЈ Р°РєС‚РёРІРёСЂРѕРІР°РЅ.
+	inventory.isActivated["boo"] = true; -- ЭУ активирован.
 	
 	pushcmd(function() actor("pu_booster", 0, 0, {name=character.."_boo"}) end, 0.1)
 	pushcmd(function() equip(object(character).vehname, character.."_boo") end, 0.2)
@@ -1249,7 +1249,7 @@ function func.inventory.UseBoo(character)
 			func.PushItem("boo", character, -1)
 			func.inventory.UseBoo(character)
 		end;
-	end, 22) -- РџРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ РµРіРѕ РґРµР№СЃС‚РІРёСЏ, РјС‹ РјРѕР¶РµРј РІРЅРѕРІСЊ РІРєР»СЋС‡РёС‚СЊ СѓСЃРёР»РёС‚РµР»СЊ.
+	end, 22) -- После окончания его действия, мы можем вновь включить усилитель.
 
 	main.menu.Inventory()
 	return main.characters[character].inventory.healthpackNum;
@@ -1431,87 +1431,87 @@ function func.inventory.DropAllItems(charName)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------- РџРµСЂСЃРѕРЅР°Р¶Рё ----------------------------------------------------------
+------------------------------------------------ Персонажи ----------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
-function func.CreateCharacter(charName, charTab) -- Р­С‚Р° С„СѓРЅРєС†РёСЏ РѕРґРёРЅР°РєРѕРІР°, РєР°Рє РґР»СЏ NPC, С‚Р°Рє Рё РґР»СЏ РёРіСЂРѕРєР°, Рё, РІРѕР·РјРѕР¶РЅРѕ, Р±СѓРґСѓС‰РёС… С…Р°СЂР°РєС‚РµСЂРѕРІ.
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+function func.CreateCharacter(charName, charTab) -- Эта функция одинакова, как для NPC, так и для игрока, и, возможно, будущих характеров.
+-- Обработчик ошибок.
 	if type(charName) ~= "string" then error("bad argument #1 to 'func.CreateCharacter' (string expected, got "..type(charName)..")", 2) end
 	if type(charTab) ~= "table" and charTab ~= nil then error("bad argument #2 to 'func.CreateCharacter' (table expected, got "..type(charTab)..")", 2) end	
 	if charTab == nil then charTab = {} end;
 	
 	local charTab = func.UniteTables({
-		faction = "unknown", -- Р¤СЂР°РєС†РёСЏ РїРµСЂСЃРѕРЅР°Р¶Р°.
-		rank = 0, -- Р Р°РЅРі РїРµСЂСЃРѕРЅР°Р¶Р°. Р’Р»РёСЏРµС‚ РЅР° РµРіРѕ Р·РЅР°С‡РёРјРѕСЃС‚СЊ.
-		group = "", -- Р“СЂСѓРїРїР° РїРµСЂСЃРѕРЅР°Р¶Р° РЅР° СѓСЂРѕРІРЅРµ.
-		charType = "unknown", -- РўРёРї РїРµСЂСЃРѕРЅР°Р¶Р°.
-		vehType = "tank", -- РўРёРї РјР°С€РёРЅС‹ РїРµСЂСЃРѕРЅР°Р¶Р°. 
-		ruleset = {}, -- РЎРёСЃС‚РµРјР° СЃРѕР·РґР°РЅРёСЏ РїРµСЂСЃРѕРЅР°Р¶Р°.
-		credits = 1000, -- РљСЂРµРґРёС‚С‹.
-		energy = 4500, -- РўРµРєСѓС‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЌРЅРµСЂРіРёРё РїРµСЂСЃРѕРЅР°Р¶Р°. РўСЂР°С‚РёС‚СЃСЏ 1 РµРґ. РІ СЃРµРє. РЅР° РѕР±С‹С‡РЅРѕР№ РєР°СЂС‚Рµ, 3 РµРґ. РІ СЃРµРє. РїСЂРё РїРµСЂРµРјРµС‰РµРЅРёРё РЅР° РіР»РѕР±Р°Р»СЊРЅРѕР№.
-		maxEnergy = 4500, -- Р­РЅРµСЂРіРёРё РІРјРµС‰Р°РµС‚СЃСЏ РІ РѕР±С‹С‡РЅРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶Р°.
-		energyConsumptionMainSystems = 1, -- Р—Р°С‚СЂР°С‚Р° СЌРЅРµСЂРіРёРё РІ СЃРµРєСѓРЅРґСѓ РЅР° РіР»Р°РІРЅС‹Рµ СЃРёСЃС‚РµРјС‹ (РґРІРёР¶РµРЅРёРµ, СЃС‚СЂРµР»СЊР±Р°).
+		faction = "unknown", -- Фракция персонажа.
+		rank = 0, -- Ранг персонажа. Влияет на его значимость.
+		group = "", -- Группа персонажа на уровне.
+		charType = "unknown", -- Тип персонажа.
+		vehType = "tank", -- Тип машины персонажа. 
+		ruleset = {}, -- Система создания персонажа.
+		credits = 1000, -- Кредиты.
+		energy = 4500, -- Текущее количество энергии персонажа. Тратится 1 ед. в сек. на обычной карте, 3 ед. в сек. при перемещении на глобальной.
+		maxEnergy = 4500, -- Энергии вмещается в обычного персонажа.
+		energyConsumptionMainSystems = 1, -- Затрата энергии в секунду на главные системы (движение, стрельба).
 		
-		currentWeap = "none", -- РўРµРєСѓС‰РµРµ РѕСЂСѓР¶РёРµ С‚Р°РЅРєР°.			--\
-		allowedWeapsNum = 2, -- РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РѕСЂСѓР¶РёСЏ.	---- Р’СЃС‘ СЌС‚Рѕ РґРѕР»Р¶РЅРѕ РїРѕР№С‚Рё РІ РѕР±СЉРµРєС‚ "РўР°РЅРє" РІ Р±СѓРґСѓС‰РµРј. Slava98. 30.12.13.
-		inventory = {}, -- РРЅРІРµРЅС‚Р°СЂСЊ С‚Р°РЅРєР°.						--/
-		devices = {}, -- РЈСЃС‚СЂРѕР№СЃС‚РІР° С‚Р°РЅРєР°.
-		maxHeight = 100, -- Р’РјРµСЃС‚РёС‚РµР»СЊРЅРѕСЃС‚СЊ С‚Р°РЅРєР°.
-		height = 1, -- Р—Р°РЅСЏС‚Рѕ РјРµСЃС‚Р° РІ С‚Р°РЅРєРµ.
+		currentWeap = "none", -- Текущее оружие танка.			--\
+		allowedWeapsNum = 2, -- Максимальное количество оружия.	---- Всё это должно пойти в объект "Танк" в будущем. Slava98. 30.12.13.
+		inventory = {}, -- Инвентарь танка.						--/
+		devices = {}, -- Устройства танка.
+		maxHeight = 100, -- Вместительность танка.
+		height = 1, -- Занято места в танке.
 	}, charTab);
 
-	-- Р•СЃР»Рё РѕРґРёРЅ РёР· Р°С‚СЂРёР±СѓС‚РѕРІ СЃРёСЃС‚РµРјС‹ РЅРµРїСЂР°РІРёР»СЊРЅС‹Р№, С‚Рѕ РѕРЅ СЃС‚Р°РЅРѕРІРёС‚СЃСЏ СЂР°РІРЅС‹Рј 5.
+	-- Если один из атрибутов системы неправильный, то он становится равным 5.
 	if type(charTab.ruleset.damage) ~= "number" or charTab.ruleset.damage > 10 or charTab.ruleset.damage < 1 then charTab.ruleset.damage = 5; end;
 	if type(charTab.ruleset.eloquence) ~= "number" or charTab.ruleset.eloquence > 10 or charTab.ruleset.eloquence < 1 then charTab.ruleset.eloquence = 5; end;
 	if type(charTab.ruleset.luck) ~= "number" or charTab.ruleset.luck > 10 or charTab.ruleset.luck < 1 then charTab.ruleset.luck = 5; end;
 	if type(charTab.ruleset.strategy) ~= "number" or charTab.ruleset.strategy > 10 or charTab.ruleset.strategy < 1 then charTab.ruleset.strategy = 5; end;
 
 	charTab.inventory = func.UniteTables(func.CopyTable(shape.inventory), charTab.inventory);
-	shape.inventory.weapons = func.CopyTable(shape.inventory.weapons); -- Р§С‚РѕР±С‹ РѕСЂСѓР¶РёСЏ РЅРµ Р±С‹Р»Рё РѕР±С‰РёРјРё. РЈ РќРђРЎ РќР• РљРћРњРњРЈРќРР—Рњ! Slava98.
-	shape.inventory.items = func.CopyTable(shape.inventory.items); -- РџСЂРµРґРјРµС‚С‹ С‚РѕР¶Рµ.
+	shape.inventory.weapons = func.CopyTable(shape.inventory.weapons); -- Чтобы оружия не были общими. У НАС НЕ КОММУНИЗМ! Slava98.
+	shape.inventory.items = func.CopyTable(shape.inventory.items); -- Предметы тоже.
 	charTab.devices = func.UniteTables(func.CopyTable(shape.devices), charTab.devices);
 	
-	if charTab.currentWeap ~= "none" then table.insert(charTab.inventory.weapons, {weapType=charTab.currentWeap, equipped=true}); end; -- РўРµРєСѓС‰РµРµ РѕСЂСѓР¶РёРµ РґРѕР±Р°РІР»СЏРµС‚СЃСЏ РІ СЃРїРёСЃРѕРє РѕСЂСѓР¶РёСЏ РїРµСЂСЃРѕРЅР°Р¶РµР№. Slava98. 30.12.13.
+	if charTab.currentWeap ~= "none" then table.insert(charTab.inventory.weapons, {weapType=charTab.currentWeap, equipped=true}); end; -- Текущее оружие добавляется в список оружия персонажей. Slava98. 30.12.13.
 	main.characters[charName] = charTab;
 	debug.Print("| "..charName.." was created")
 	
 	pushcmd(function() func.CharacterExpendEnergy(charName) end, 2.2)
 --[[if t == "ai" or t == "player_local" then service(t, char)
 	else	
--- Р’РґСЂСѓРі Р±СѓРґСѓС‚ РµС‰С‘ С‚РёРїС‹ С…Р°СЂР°РєС‚РµСЂРѕРІ, РЅР°РїСЂРёРјРµСЂ, СЂР°Р±РѕС‚Р°СЋС‰РёРµ СЃ РїРѕРјРѕС‰СЊСЋ С‚СЂРёРіРіРµСЂРѕРІ Рё РґРµРєРѕСЂР°С†РёРё, РІРјРµСЃС‚Рѕ СЃРµСЂРІРёСЃРѕРІ (Р¶РёРІРѕС‚РЅС‹Рµ, РјРёРЅРѕРјС‘С‚С‹). Slava98. 06.06.13.
-	end -- РҐРѕС‚СЏ С‚РѕРіРґР° Сѓ РЅРёС… РЅРµ Р±СѓРґРµС‚, РЅР°РїСЂРёРјРµСЂ, РѕСЂСѓР¶РёСЏ РёР»Рё РёРЅРІРµРЅС‚Р°СЂСЏ (РµСЃР»Рё Сѓ РјРёРЅРѕРјС‘С‚Р° РµС‰С‘ РџР­Р Рљ РјРѕР¶РµС‚ Р±С‹С‚СЊ, С‚Рѕ Сѓ Р¶РёРІРѕС‚РЅС‹С…, РЅРµ РґСѓРјР°СЋ).]]
+-- Вдруг будут ещё типы характеров, например, работающие с помощью триггеров и декорации, вместо сервисов (животные, миномёты). Slava98. 06.06.13.
+	end -- Хотя тогда у них не будет, например, оружия или инвентаря (если у миномёта ещё ПЭРК может быть, то у животных, не думаю).]]
 	return charTab;
 end
 
 function func.CharacterSetWeap(charName, weapType, withEquip)
--- РћР±СЂР°Р±РѕС‡С‚РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обрабочтик ошибок (написать).
 
--- РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Объявление локальных переменных.
 	local charTab = main.characters[charName];
 	local weapons = charTab.inventory.weapons;
 	local weapIsAlreadyInInventory;
 	local withEquip;
 	if withEquip == nil then withEquip = true; end;
 	
--- Р•СЃР»Рё С‚Р°РєРѕРµ РѕСЂСѓР¶РёРµ СѓР¶Рµ РµСЃС‚СЊ Рё РѕРЅРѕ РґР°Р¶Рµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРѕ, С‚Рѕ СЃРјС‹СЃР» Р±С‹Р»Рѕ РµРіРѕ СѓСЃС‚Р°РЅР°РІР»РёРІР°С‚СЊ? Slava98. 30.12.13.
+-- Если такое оружие уже есть и оно даже установлено, то смысл было его устанавливать? Slava98. 30.12.13.
 	if charTab.currentWeap == weapType then return; end; --error("bad argument #2 to 'func.CharacterEquipWeap' ('"..weapType.."' is already equipped on '"..charName.."')", 2) return; end;
 	
--- РЎРЅР°С‡Р°Р»Р° СЃР»РµРґСѓРµС‚ СѓР±СЂР°С‚СЊ С‚РµРєСѓС‰РµРµ РѕСЂСѓР¶РёРµ Рё Р·Р°СЃСѓРЅСѓС‚СЊ РµРіРѕ РІ РёРЅРІРµРЅС‚Р°СЂСЊ. Slava98. 30.12.13.
+-- Сначала следует убрать текущее оружие и засунуть его в инвентарь. Slava98. 30.12.13.
 	for i = 1, #weapons do
 		if weapons[i].weapType == weapType then weapIsAlreadyInInventory = true; weapons[i].equipped = true; end;
 		if weapons[i].equipped and weapons[i].weapType == charTab.currentWeap then weapons[i].equipped = false; end;
 	end;
 
--- Р•СЃР»Рё РѕСЂСѓР¶РёРµ СѓР¶Рµ РЅРµ РїРѕРјРµС‰Р°РµС‚СЃСЏ РІ С‚Р°РЅРє, С‚Рѕ РІС‹Р·С‹РІР°РµС‚СЃСЏ С„СѓРЅРєС†РёСЏ, РєРѕС‚РѕСЂР°СЏ СЂРµС€Р°РµС‚ СЌС‚Сѓ РїСЂРѕР±Р»РµРјСѓ (Сѓ РёРіСЂРѕРєР° - РѕРєРѕС€РєРѕ, Сѓ NPC - Р°Р»РіРѕСЂРёС‚Рј). Slava98. 31.12.13.
+-- Если оружие уже не помещается в танк, то вызывается функция, которая решает эту проблему (у игрока - окошко, у NPC - алгоритм). Slava98. 31.12.13.
 	if #weapons >= charTab.allowedWeapsNum and not weapIsAlreadyInInventory then 
-		if charTab.charType == "npc" then --func.NPC.ChoseWeapon(charName, weapType); return; -- РќР°Р·РІР°РЅРёСЏ Сѓ РїРµСЂСЃРѕРЅР°Р¶Р° Рё РёРіСЂРѕРєР°/NPC - РѕРґРёРЅР°РєРѕРІС‹Рµ. РњРЅРµ РєР°Р¶РµС‚СЃСЏ СЌС‚Рѕ РѕР№ РєР°Рє РЅРµРїСЂР°РІРёР»СЊРЅРѕ. Slava98. 30.12.13.
+		if charTab.charType == "npc" then --func.NPC.ChoseWeapon(charName, weapType); return; -- Названия у персонажа и игрока/NPC - одинаковые. Мне кажется это ой как неправильно. Slava98. 30.12.13.
 		elseif charTab.charType == "player" then func.player.ChoseWeap(weapType); return;
 		end;
 	end;
 	
 	func.Kill(charName.."_weap")
 	
--- РќР°С†РµРїР»СЏРµРј РїСѓС€РєСѓ РЅР° С‚Р°РЅРє, РµСЃР»Рё РѕРЅ С‚Р°РЅРє, С…РµС…Рµ. Slava98. 31.12.13.
+-- Нацепляем пушку на танк, если он танк, хехе. Slava98. 31.12.13.
 	if charTab.charType == "npc" or "player" and withEquip then
 		charTab.inventory.isSetWeap = true;
 		func.EquipWeap(weapType, charName.."_weap", object(charName).vehname)
@@ -1519,14 +1519,14 @@ function func.CharacterSetWeap(charName, weapType, withEquip)
 		error("bad argument #1 to 'func.CharacterEquipWeap' (in WS only 'npc' and 'player' character types are allowed)", 2)
 	end;
 	
--- РўРµРїРµСЂСЊ Р·Р°СЃРѕРІС‹РІР°РµРј РІ РёРЅРІРµРЅС‚Р°СЂСЊ Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅРѕРІРѕРµ РѕСЂСѓР¶РёРµ. Slava98. 30.12.13.
+-- Теперь засовываем в инвентарь и устанавливаем новое оружие. Slava98. 30.12.13.
 	charTab.currentWeap = weapType;
-	if weapIsAlreadyInInventory then return; end; -- РўРѕР»СЊРєРѕ РµСЃР»Рё РѕРЅРѕ РµС‰С‘ РЅРµ Р·Р°СЃСѓРЅСѓС‚Рѕ Рё РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРѕ. Slava98. 30.12.13.
+	if weapIsAlreadyInInventory then return; end; -- Только если оно ещё не засунуто и не установлено. Slava98. 30.12.13.
 	table.insert(charTab.inventory.weapons, {weapType=weapType, equipped=true})
 end
 
 function func.CharacterRestoreEnergy(charName, energyNum, frequency, maxAmount)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).	
+-- Обработчик ошибок (написать).	
 	
 	local energyNum = energyNum or 35;
 	local frequency = frequency or 10;
@@ -1560,7 +1560,7 @@ function func.CharacterRestoreEnergy(charName, energyNum, frequency, maxAmount)
 end
 
 function func.CharacterExpendEnergy(charName, energyNum, loop)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 	
 	if not func.ExistsCharacter(charName) or not exists(charName) or not exists(object(charName).vehname) then return; end;
 
@@ -1593,11 +1593,11 @@ function func.KillCharacter(name)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------------- РўР°РЅРє ---------------------------------------------------------
+------------------------------------------------------ Танк ---------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------- 
 
 function func.SpawnTank(name, brainType, properties, x, y, team, spawnTeam, dir, weap)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(name) ~= "string" then error("bad argument #1 to 'func.SpawnTank' (string expected, got "..type(name)..")", 2) end
 	if brainType ~= "ai" and brainType ~= "player_local" then error("bad argument #2 to 'func.SpawnTank' ('ai' or 'player_local' expected)", 2) end
 	if type(properties) ~= "table" then error("bad argument #3 to 'func.SpawnTank' (table expected, got "..type(properties)..")", 2) end
@@ -1610,7 +1610,7 @@ function func.SpawnTank(name, brainType, properties, x, y, team, spawnTeam, dir,
 	for i = 1, table.maxn(const.weapons) do if weap == const.weapons[i] then weapIsExisting = true; end; end
 	if not weapIsExisting and weap ~= nil and weap ~= "none" then error("bad argument #9 to 'func.SpawnTank' (kind of weapons expected)", 2) end
 	
--- РљРѕСЂСЂРµРєС‚РёСЂРѕРІРєР° Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Корректировка локальных переменных.
 	if type(properties.class) == "table" then temp.class_name = name.."_class"; classes[temp.class_name] = tcopy(properties.class); end
 	properties.on_damage = properties.on_damage or "";
 	local dir = dir or 0;
@@ -1631,24 +1631,24 @@ function func.SpawnTank(name, brainType, properties, x, y, team, spawnTeam, dir,
 	service(brainType, properties)
 	if x ~= nil and y ~= nil then actor("respawn_point", x, y, {name=name.."_spawn", dir=dir, team=spawnTeam}) end
 
--- РЎРѕР±С‹С‚РёСЏ СЃ Р·Р°РґРµСЂР¶РєРѕР№ РІРѕ РІСЂРµРјРµРЅРё.	
-	pushcmd(function() -- РќР°С†РµРїР»СЏРµРј РЅР° С‚Р°РЅРє РµРіРѕ РѕСЂСѓР¶РёРµ.
+-- События с задержкой во времени.	
+	pushcmd(function() -- Нацепляем на танк его оружие.
 		if weap ~= "none" and weap ~= nil then
 			actor(weap, 0, 0, {name=name.."_weap"})
 			equip(object(name).vehname, name.."_weap")
 			-- main.characters.weapons = {}
 		end;
-		object(name).team = team; -- РњРµРЅСЏРµРј РєРѕРјР°РЅРґСѓ.
+		object(name).team = team; -- Меняем команду.
 --		if exists(properties.vehname) then object(properties.vehname).on_damage = "func.tank.OnDamage(who, '"..properties.vehname.."')"; end;
-		if exists(name.."_spawn") then kill(name.."_spawn") end; -- РЈР±РёСЂР°РµС‚ СЃРїР°РІРЅ.
+		if exists(name.."_spawn") then kill(name.."_spawn") end; -- Убирает спавн.
 	end, 2.1)
 	
 	return properties;
 end
 
--- Р”РµР»Р°РµС‚ С‚Р°РЅРє РЅРµСѓСЏР·РІРёРјС‹Рј РЅР° РІСЂРµРјСЏ. Slava98.
+-- Делает танк неуязвимым на время. Slava98.
 function func.tank.GodMode(tankName, value, timer)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(tankName) ~= "string" then error("bad argument #1 to 'func.tank.GodMode' (string expected, got "..type(tankName)..")", 2) return; end;
 	if type(value) ~= "boolean" and value ~= nil then error("bad argument #2 to 'func.tank.GodMode' (boolean expected, got "..type(value)..")", 2) return; end;
 	if type(timer) ~= "number" and timer ~= nil then error("bad argument #3 to 'func.tank.GodMode' (number expected, got "..type(number)..")", 2) return; end;
@@ -1680,10 +1680,10 @@ function func.tank.GodMode(tankName, value, timer)
 end
 
 
--- РњРµРЅСЏРµС‚ РєР»Р°СЃСЃ Сѓ С‚Р°РЅРєР°. Р’РѕР·РјРѕР¶РЅРѕ РІРјРµСЃС‚Рѕ РЅР°Р·РІР°РЅРёСЏ РєР»Р°СЃСЃР° Р·Р°РґР°С‚СЊ СЃР°Рј РјР°СЃСЃРёРІ РєР»Р°СЃСЃР°. Р’РѕР·РІСЂР°С‰Р°РµС‚ РЅР°Р·РІР°РЅРёРµ РёР»Рё РјР°СЃСЃРёРІ РєР»Р°СЃСЃР°. Р”РћРџРРЎРђРўР¬. Slava98. 
--- РџСЂР°РІРёР»СЊРЅРѕ Р±СѓРґРµС‚ РѕС‚РЅРµСЃС‚Рё РєР°Рє РјРµС‚РѕРґ РѕР±СЉРµРєС‚Р° tank.
+-- Меняет класс у танка. Возможно вместо названия класса задать сам массив класса. Возвращает название или массив класса. ДОПИСАТЬ. Slava98. 
+-- Правильно будет отнести как метод объекта tank.
 function func.ChangeClass(tankName, class)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(tankName) ~= "string" then error("bad argument #1 to 'func.ChangeClass' (string expected, got "..type(tankName)..")", 2) return; end;
 	if type(class) ~= "string" and type(class) ~= "table" then error("bad argument #2 to 'func.ChangeClass' (string or table expected, got "..type(class)..")", 2) return; end;
 
@@ -1693,7 +1693,7 @@ function func.ChangeClass(tankName, class)
 	return class;
 end
 
--- Р’С‹РєРёРґС‹РІР°РµС‚ Р±РѕС‚Р° РёР· С‚Р°РЅРєР°. Slava98. *Рђ РІРІРѕРґРёС‚СЃСЏ Р°Р¶ NPC. Р§С‚Рѕ Р·Р° Р±СЂРµРґ? Slava98. 11.01.14. *РСЃРїСЂР°РІРёР». Slava98. 17.02.14.
+-- Выкидывает бота из танка. Slava98. *А вводится аж NPC. Что за бред? Slava98. 11.01.14. *Исправил. Slava98. 17.02.14.
 function func.DropBot(serviceName)
 	if exists(serviceName) and exists(object(serviceName).vehname) then
 		object(object(serviceName).vehname).playername = "";
@@ -1707,9 +1707,9 @@ end
 -------------------------------------------------- NPC -------------------------------------------------------------	
 ---------------------------------------------------------------------------------------------------------------------
 
--- РЎРѕР·РґР°С‘С‚ NPC. Slava98.
+-- Создаёт NPC. Slava98.
 function func.NPC.Create(npcName, x, y, dir, team, spawnTeam, tankTab, charTab, npcTab)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(npcName) ~= "string" then error("bad argument #1 to 'func.NPC.Create' (string expected, got "..type(npcName)..")", 2) end
 	if type(x) ~= "number" then error("bad argument #2 to 'func.NPC.Create' (number expected, got "..type(x)..")", 2) end
 	if type(y) ~= "number" then error("bad argument #3 to 'func.NPC.Create' (number expected, got "..type(y)..")", 2) end
@@ -1720,148 +1720,148 @@ function func.NPC.Create(npcName, x, y, dir, team, spawnTeam, tankTab, charTab, 
 	if type(charTab) ~= "table" and charTab ~= nil then error("bad argument #8 to 'func.NPC.Create' (table expected, got "..type(charTab)..")", 2) end
 	if type(npcTab) ~= "table" and npcTab ~= nil then error("bad argument #9 to 'func.NPC.Create' (table expected, got "..type(npcTab)..")", 2) end
 
--- РћР±СЊСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Обьявление локальных переменных.
 	local tankTab = tankTab or {};
 	local charTab = func.UniteTables(charTab, {
 		charType = "npc",
 	});
 
-	local npcTab = func.UniteTables({ -- РџР°СЂР°РјРµС‚СЂС‹ NPC.
-		healthToHeal = 200, -- РљРѕР»РёС‡РµСЃС‚РІРѕ Р·РґРѕСЂРѕРІСЊСЏ РґР»СЏ СЃР°РјРѕРёР·Р»РµС‡РµРЅРёСЏ.
-		useBattery = true, -- РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р»Рё СѓСЃРёР»РёС‚РµР»СЊ. Р’СЃРєРѕСЂРµ Р±СѓРґРµС‚ РЅРµ РЅСѓР¶РЅРѕ.
-		followingObject = "", -- РћР±СЉРµРєС‚, РїСЂРµСЃР»РµРґРѕРІР°РµРјС‹Р№ NPC.
-		-- РџСѓС‚Рё.
-		currentWay, -- РџСѓС‚СЊ, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ NPC СЃР»РµРґСѓРµС‚ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚.
-		mainWay, -- РџСѓС‚СЊ, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ NPC Р±СѓРґРµС‚ СЃР»РµРґРѕРІР°С‚СЊ РІ РѕС‚СЃСѓС‚СЃС‚РІРёРµ РїСЂРµРґС‹РґСѓС‰РµРіРѕ (РЅР°РїСЂРёРјРµСЂ, РїРѕСЃР»Рµ Р°С‚Р°РєРё).
-		------ РўРµС…РЅРёС‡РµСЃРєРёРµ (РІС‹СЃС‚Р°РІР»СЏСЋС‚СЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё).
-		wayFinishPointNum; -- РќРѕРјРµСЂ РїРѕСЃР»РµРґРЅРµР№ С‚РѕС‡РєРё РїСѓС‚Рё (РµСЃР»Рё РµРјСѓ РїСЂРёРєР°Р·Р°РЅРѕ РµС…Р°С‚СЊ РЅРµ РґРѕ РєРѕРЅС†Р° РїСѓС‚Рё, РЅР°РїСЂРёРјРµСЂ).
-		-- РђС‚Р°РєР°.
-		attackMode = "chase", -- РџСЂРёРЅС†РёРї Р°С‚Р°РєРё.
-		enemyDetectMode = true, -- Р’РєР»СЋС‡С‘РЅ Р»Рё СЂРµР¶РёРј РѕР±РЅР°СЂСѓР¶РµРЅРёСЏ РІСЂР°РіРѕРІ.
-		revengeToAttacker = true, -- РћС‚РІРµС‡Р°С‚СЊ Р»Рё РѕРіРЅС‘Рј.
-		pursueEnemy = true, -- РџСЂРµРєСЂР°С‚РёС‚СЊ Р»Рё Р°С‚Р°РєРѕРІР°С‚СЊ С†РµР»СЊ, РµСЃР»Рё РѕРЅР° РІС‹РµС…Р°Р»Р° Р·Р° РѕРїСЂРµРґРµР»С‘РЅРЅС‹Р№ СЂР°РґРёСѓСЃ.
-		onComming = "", -- Р’С‹РїРѕР»РЅСЏРµС‚СЃСЏ РїСЂРё РїСЂРёР±Р»РёР¶РµРЅРёРё Рє РІСЂР°РіСѓ (РµСЃР»Рё attackMode = 'goto_aim').
-		onAttack = "", -- Р’С‹РїРѕР»РЅСЏРµС‚СЃСЏ РїСЂРё Р°С‚Р°РєРµ.
-		detectRadius = 7, -- Р Р°СЃСЃС‚РѕСЏРЅРёРµ, РЅР° РєРѕС‚РѕСЂРѕРј NPC РјРѕР¶РµС‚ Р·Р°РјРµРЅРёС‚СЊ РІСЂР°РіР°. РџРѕРєР° РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ.
-		detectRadiusDelta = 6, -- Р Р°СЃСЃС‚РѕСЏРЅРёРµ, РЅР° РєРѕС‚РѕСЂРѕРј NPC С‚РµСЂСЏРµС‚ РІСЂР°РіР° РёР· РїРѕР»СЏ Р·СЂРµРЅРёСЏ. РџРѕРєР° РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ.
-		commingRadius = 2, -- Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РІСЂР°РіР°, РЅР° РєРѕС‚РѕСЂРѕРј СЃСЂР°Р±Р°С‚С‹РІР°РµС‚ onComming (РµСЃР»Рё attackMode = 'goto_aim').
-		callAllies = true, -- Р‘СѓРґРµС‚ Р»Рё NPC Р·РІР°С‚СЊ СЃРѕСЋР·РЅРёРєРѕРІ РїСЂРё Р°С‚Р°РєРµ.
-		callAlliesMaxDistance = 10, -- Р Р°СЃСЃС‚РѕСЏРЅРёРµ, РЅР° РєРѕС‚РѕСЂРѕРј NPC РјРѕР¶РµС‚ СЃР»С‹С€Р°С‚СЊ Рё Р·РІР°С‚СЊ СЃРѕСЋР·РЅРёРєРѕРІ.
-		canBeCalledByAllies = true, -- РњРѕРіСѓС‚ Р»Рё СЃРѕСЋР·РЅРёРєРё Р·РІР°С‚СЊ NPC.
-		canAttackBlindfold = true, -- РњРѕР¶РµС‚ Р»Рё NPC Р°С‚Р°РєРѕРІР°С‚СЊ РІСЃР»РµРїСѓСЋ, РµСЃР»Рё РІ РЅРµРіРѕ СЃС‚СЂРµР»СЏСЋС‚.
-		------ РўРµС…РЅРёС‡РµСЃРєРёРµ (РІС‹СЃС‚Р°РІР»СЏСЋС‚СЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё).
-		visibleEnemies = {}, -- РњР°СЃСЃРёРІ Р·Р°РјРµС‡Р°РЅРЅС‹С… РІСЂР°РіРѕРІ.
-		currentTarget, -- Р’СЂР°Рі, РєРѕС‚РѕСЂРѕРіРѕ NPC Р°С‚Р°РєСѓРµС‚ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚.
-		seeTarget, -- Р’РёРґРёС‚ Р»Рё NPC РІСЂР°РіР°.
+	local npcTab = func.UniteTables({ -- Параметры NPC.
+		healthToHeal = 200, -- Количество здоровья для самоизлечения.
+		useBattery = true, -- Использовать ли усилитель. Вскоре будет не нужно.
+		followingObject = "", -- Объект, преследоваемый NPC.
+		-- Пути.
+		currentWay, -- Путь, по которому NPC следует в данный момент.
+		mainWay, -- Путь, по которому NPC будет следовать в отсутствие предыдущего (например, после атаки).
+		------ Технические (выставляются автоматически).
+		wayFinishPointNum; -- Номер последней точки пути (если ему приказано ехать не до конца пути, например).
+		-- Атака.
+		attackMode = "chase", -- Принцип атаки.
+		enemyDetectMode = true, -- Включён ли режим обнаружения врагов.
+		revengeToAttacker = true, -- Отвечать ли огнём.
+		pursueEnemy = true, -- Прекратить ли атаковать цель, если она выехала за определённый радиус.
+		onComming = "", -- Выполняется при приближении к врагу (если attackMode = 'goto_aim').
+		onAttack = "", -- Выполняется при атаке.
+		detectRadius = 7, -- Расстояние, на котором NPC может заменить врага. Пока не используется.
+		detectRadiusDelta = 6, -- Расстояние, на котором NPC теряет врага из поля зрения. Пока не используется.
+		commingRadius = 2, -- Расстояние от врага, на котором срабатывает onComming (если attackMode = 'goto_aim').
+		callAllies = true, -- Будет ли NPC звать союзников при атаке.
+		callAlliesMaxDistance = 10, -- Расстояние, на котором NPC может слышать и звать союзников.
+		canBeCalledByAllies = true, -- Могут ли союзники звать NPC.
+		canAttackBlindfold = true, -- Может ли NPC атаковать вслепую, если в него стреляют.
+		------ Технические (выставляются автоматически).
+		visibleEnemies = {}, -- Массив замечанных врагов.
+		currentTarget, -- Враг, которого NPC атакует в данный момент.
+		seeTarget, -- Видит ли NPC врага.
 	}, npcTab);
 	
-	npcTab.attackSpeaks = func.UniteTables({ -- Р’С‹РєСЂРёРєРё РїРѕСЃРµР»РµРЅС†РµРІ РїСЂРё Р°С‚Р°РєРµ.
-		onBegin, -- РџСЂРё РЅР°С‡Р°Р»Рµ Р°С‚Р°РєРµ.
-		onLoop, -- Р’Рѕ РІСЂРµРјСЏ Р°С‚Р°РєРё.
-		onStopDestroyed, -- РџСЂРё СѓРЅРёС‡С‚РѕР¶РµРЅРёРё РІСЂР°РіР°.
-		onStopLost, -- РџСЂРё РїРѕС‚РµСЂРµ РІСЂР°РіР° РёР· РІРёРґР°.
-		file = main.levelpack.map, -- Р’ РєР°РєРѕРј С„Р°Р№Р»Рµ РѕРЅРё РЅР°С…РѕРґСЏС‚СЃСЏ.
-		probability = 1, -- Р’РµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РІС‹РєСЂРёРєР°.
-		loopInterval = 5, -- РРЅС‚РµСЂРІР°Р» РІС‹РєСЂРёРєРѕРІ РІРѕ РІСЂРµРјСЏ Р°С‚Р°РєРё.
+	npcTab.attackSpeaks = func.UniteTables({ -- Выкрики поселенцев при атаке.
+		onBegin, -- При начале атаке.
+		onLoop, -- Во время атаки.
+		onStopDestroyed, -- При уничтожении врага.
+		onStopLost, -- При потере врага из вида.
+		file = main.levelpack.map, -- В каком файле они находятся.
+		probability = 1, -- Вероятность выкрика.
+		loopInterval = 5, -- Интервал выкриков во время атаки.
 	}, func.DoTable(npcTab.attackSpeaks))
 	
 	npcTab.attackBehavior = func.DoTable(npcTab.attackBehavior);
 	
-	npcTab.attackBehavior.attackFirst = func.UniteTables({ -- РєР°РєРѕРіРѕ РІСЂР°РіР° СЃС‚Р°РЅРµС‚ Р°С‚Р°РєРѕРІР°С‚СЊ NPC СЃРЅР°С‡Р°Р»Р°;
-		withBiggestGun = 2.5, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° РІСЂР°РіР° СЃ СЃР°РјРѕР№ РјРѕС‰РЅРѕР№ РїСѓС€РєРѕР№;
-		withPoorestGun = 0.25, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° РІСЂР°РіР° СЃ СЃР°РјРѕР№ РїР»РѕС…РѕР№ РїСѓС€РєРѕР№;
-		withAverageGun = 1, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° РІСЂР°РіР° СЃРѕ СЃСЂРµРґРЅРµР№ РїСѓС€РєРѕР№.
-		heavyArmored = 1, -- СЃ РЅР°РёР±РѕР»СЊС€РёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РҐРџ (РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°Р»СЊРЅС‹С…);
-		lowArmored = 0.5, -- СЃ РЅР°РёРјРµРЅСЊС€РёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РҐРџ (РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°Р»СЊРЅС‹С…);
-		mediumArmored = 0.75, -- СЃРѕ СЃСЂРµРґРЅРёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РҐРџ (РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°Р»СЊРЅС‹С…);
-		withHighestRank = 2, -- СЃ РІС‹СЃРѕРєРёРј Р·РІР°РЅРёРµРј (РіР»Р°РІР°СЂРё, РєРѕРјР°РЅРґРёСЂС‹ Рё С‚.Рґ.);
-		withLowestRank = 0.5, -- СЃ РЅРёР·РєРёРј Р·РІР°РЅРёРµРј (СЂР°Р·Р±РѕР№РЅРёРєРё, РѕРїРѕР»С‡РµРЅС†С‹, Р±СЂРѕРЅРµРІРёРєРё);
-		withAverageRank = 1, -- СЃРѕ СЃСЂРµРґРЅРёРј Р·РІР°РЅРёРµРј (СЃРѕР»РґР°С‚С‹, РІРѕР№РЅС‹ Рё С‚.Рґ.);
-		withBoo = 1.5, -- СЃ СѓСЃРёР»РёС‚РµР»РµРј;
-		onShortestDistance = 2, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° РІСЂР°РіР° РЅР° Р±Р»РёР·РєРѕР№ РґРёСЃС‚Р°РЅС†РёРё;
-		onFarestDistance = 0.75, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° РІСЂР°РіР° РЅР° РґР°Р»СЊРЅРµР№ РґРёСЃС‚Р°РЅС†РёРё;
-		onAverageDistance = 1.5, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° РІСЂР°РіР° РЅР° СЃСЂРµРґРЅРµР№ РґРёСЃС‚Р°РЅС†РёРё;
-	}, func.DoTable(npcTab.attackBehavior.attackFirst)) -- РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ - 5, РїРµСЂРµРґ РїСЂРѕРІРµСЂРєРѕР№ Р°С‚СЂРёР±СѓС‚С‹, РїРѕРґС…РѕРґСЏС‰РёРµ РґР°РЅРЅРѕРјСѓ С‚Р°РЅРєСѓ СЃРєР»Р°РґС‹РІР°СЋС‚СЃСЏ;
+	npcTab.attackBehavior.attackFirst = func.UniteTables({ -- какого врага станет атаковать NPC сначала;
+		withBiggestGun = 2.5, -- атакует сначала врага с самой мощной пушкой;
+		withPoorestGun = 0.25, -- атакует сначала врага с самой плохой пушкой;
+		withAverageGun = 1, -- атакует сначала врага со средней пушкой.
+		heavyArmored = 1, -- с наибольшим количеством ХП (относительно остальных);
+		lowArmored = 0.5, -- с наименьшим количеством ХП (относительно остальных);
+		mediumArmored = 0.75, -- со средним количеством ХП (относительно остальных);
+		withHighestRank = 2, -- с высоким званием (главари, командиры и т.д.);
+		withLowestRank = 0.5, -- с низким званием (разбойники, ополченцы, броневики);
+		withAverageRank = 1, -- со средним званием (солдаты, войны и т.д.);
+		withBoo = 1.5, -- с усилителем;
+		onShortestDistance = 2, -- атакует сначала врага на близкой дистанции;
+		onFarestDistance = 0.75, -- атакует сначала врага на дальней дистанции;
+		onAverageDistance = 1.5, -- атакует сначала врага на средней дистанции;
+	}, func.DoTable(npcTab.attackBehavior.attackFirst)) -- максимальная вероятность - 5, перед проверкой атрибуты, подходящие данному танку складываются;
 	
-	npcTab.attackBehavior.attackFirst.vehTypes = func.UniteTables({ -- РєР°РєРѕРіРѕ РІСЂР°РіР° РїРѕ С‚РёРїСѓ РјР°С€РёРЅС‹ СЃС‚Р°РЅРµС‚ Р°С‚Р°РєРѕРІР°С‚СЊ NPC СЃРЅР°С‡Р°Р»Р°;
-		tank = 0, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° С‚Р°РЅРєРё;
-		excavator = 4, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° СЌРєСЃРєР°РІР°С‚РѕСЂС‹;
-		mine = 4, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° РјРёРЅС‹-РґСЂРѕРЅС‹ (РїРѕРєР° С‚Р°РєРёРµ РІ Р’РЎ РЅРµСЂРµР°Р»РёР·РѕРІР°РЅС‹, С‚Р°Рє С‡С‚Рѕ РїРµСЂРµРјРµРЅРЅР°СЏ РЅРё РЅР° С‡С‚Рѕ РЅРµ РІР»РёСЏРµС‚);
-		reamer = 4, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° С‚Р°РЅРєРё-РїСЂРѕС€РёРІР°С‚РµР»Рё РґР°СЃСЃРѕРІР°С‚РѕСЂРѕРІ;
-		fighter = 3, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° РёСЃС‚СЂРµР±РёС‚РµР»Рё;
+	npcTab.attackBehavior.attackFirst.vehTypes = func.UniteTables({ -- какого врага по типу машины станет атаковать NPC сначала;
+		tank = 0, -- атакует сначала танки;
+		excavator = 4, -- атакует сначала экскаваторы;
+		mine = 4, -- атакует сначала мины-дроны (пока такие в ВС нереализованы, так что переменная ни на что не влияет);
+		reamer = 4, -- атакует сначала танки-прошиватели дассоваторов;
+		fighter = 3, -- атакует сначала истребители;
 	}, func.DoTable(npcTab.attackBehavior.attackFirst.vehTypes))
 	
-	npcTab.attackBehavior.attackFirst.charTypes = func.UniteTables({ -- РєР°РєРѕРіРѕ РІСЂР°РіР° РїРѕ С‚РёРїСѓ РїРµСЂСЃРѕРЅР°Р¶Р° СЃС‚Р°РЅРµС‚ Р°С‚Р°РєРѕРІР°С‚СЊ NPC СЃРЅР°С‡Р°Р»Р°;
-		npc = 0, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° NPC;
-		player = 0, -- Р°С‚Р°РєСѓРµС‚ СЃРЅР°С‡Р°Р»Р° РёРіСЂРѕРєР°;
+	npcTab.attackBehavior.attackFirst.charTypes = func.UniteTables({ -- какого врага по типу персонажа станет атаковать NPC сначала;
+		npc = 0, -- атакует сначала NPC;
+		player = 0, -- атакует сначала игрока;
 	}, func.DoTable(npcTab.attackBehavior.attackFirst.vehTypes))
 	
-	npcTab.attackBehavior.useBooProbability = func.UniteTables({ -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ;
-		withBiggestGun = 1, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ РІСЂР°РіР° СЃ СЃР°РјРѕР№ РјРѕС‰РЅРѕР№ РїСѓС€РєРѕР№;
-		withPoorestGun = 0.25, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ РІСЂР°РіР° СЃ СЃР°РјРѕР№ РїР»РѕС…РѕР№ РїСѓС€РєРѕР№;
-		withAverageGun = 0.5, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ РІСЂР°РіР° СЃРѕ СЃСЂРµРґРЅРµР№ РїСѓС€РєРѕР№.
-		heavyArmored = 2.5, -- СЃ РЅР°РёР±РѕР»СЊС€РёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РҐРџ (РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°Р»СЊРЅС‹С…);
-		lowArmored = 0.25, -- СЃ РЅР°РёРјРµРЅСЊС€РёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РҐРџ (РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°Р»СЊРЅС‹С…);
-		mediumArmored = 0.75, -- СЃРѕ СЃСЂРµРґРЅРёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РҐРџ (РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°Р»СЊРЅС‹С…);
-		withHighestRank = 2, -- СЃ РІС‹СЃРѕРєРёРј Р·РІР°РЅРёРµРј (РіР»Р°РІР°СЂРё, РєРѕРјР°РЅРґРёСЂС‹ Рё С‚.Рґ.);
-		withLowestRank = 0.25, -- СЃ РЅРёР·РєРёРј Р·РІР°РЅРёРµРј (СЂР°Р·Р±РѕР№РЅРёРєРё, РѕРїРѕР»С‡РµРЅС†С‹, Р±СЂРѕРЅРµРІРёРєРё);
-		withAverageRank = 0.75, -- СЃРѕ СЃСЂРµРґРЅРёРј Р·РІР°РЅРёРµРј (СЃРѕР»РґР°С‚С‹, РІРѕР№РЅС‹ Рё С‚.Рґ.);
-		withBoo = 4, -- СЃ СѓСЃРёР»РёС‚РµР»РµРј;
-		onShortestDistance = 2, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ РІСЂР°РіР° РЅР° Р±Р»РёР·РєРѕР№ РґРёСЃС‚Р°РЅС†РёРё;
-		onFarestDistance = 0.75, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ РІСЂР°РіР° РЅР° РґР°Р»СЊРЅРµР№ РґРёСЃС‚Р°РЅС†РёРё;
-		onAverageDistance = 1.5, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ РІСЂР°РіР° РЅР° СЃСЂРµРґРЅРµР№ РґРёСЃС‚Р°РЅС†РёРё;
-	}, func.DoTable(npcTab.attackBehavior.useBattery)) -- РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ - 4, РїРµСЂРµРґ РїСЂРѕРІРµСЂРєРѕР№ Р°С‚СЂРёР±СѓС‚С‹, РїРѕРґС…РѕРґСЏС‰РёРµ РґР°РЅРЅРѕРјСѓ С‚Р°РЅРєСѓ СЃРєР»Р°РґС‹РІР°СЋС‚СЃСЏ;
+	npcTab.attackBehavior.useBooProbability = func.UniteTables({ -- вероятность использования усилителя;
+		withBiggestGun = 1, -- вероятность использования усилителя при виде врага с самой мощной пушкой;
+		withPoorestGun = 0.25, -- вероятность использования усилителя при виде врага с самой плохой пушкой;
+		withAverageGun = 0.5, -- вероятность использования усилителя при виде врага со средней пушкой.
+		heavyArmored = 2.5, -- с наибольшим количеством ХП (относительно остальных);
+		lowArmored = 0.25, -- с наименьшим количеством ХП (относительно остальных);
+		mediumArmored = 0.75, -- со средним количеством ХП (относительно остальных);
+		withHighestRank = 2, -- с высоким званием (главари, командиры и т.д.);
+		withLowestRank = 0.25, -- с низким званием (разбойники, ополченцы, броневики);
+		withAverageRank = 0.75, -- со средним званием (солдаты, войны и т.д.);
+		withBoo = 4, -- с усилителем;
+		onShortestDistance = 2, -- вероятность использования усилителя при виде врага на близкой дистанции;
+		onFarestDistance = 0.75, -- вероятность использования усилителя при виде врага на дальней дистанции;
+		onAverageDistance = 1.5, -- вероятность использования усилителя при виде врага на средней дистанции;
+	}, func.DoTable(npcTab.attackBehavior.useBattery)) -- максимальная вероятность - 4, перед проверкой атрибуты, подходящие данному танку складываются;
 	
-	npcTab.attackBehavior.useBooProbability.vehTypes = func.UniteTables({ -- РїСЂРё РІРёРґРµ РєР°РєРѕРіРѕ РІСЂР°РіР° РїРѕ С‚РёРїСѓ РјР°С€РёРЅС‹ NPC Р°РєС‚РёРІРёР·РёСЂСѓРµС‚ СѓСЃРёР»РёС‚РµР»СЊ;
-		tank = 0, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ С‚Р°РЅРєРѕРІ;
-		excavator = 4, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ СЌРєСЃРєР°РІР°С‚РѕСЂРѕРІ;
-		mine = 0, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ РјРёРЅ-РґСЂРѕРЅРѕРІ (РїРѕРєР° С‚Р°РєРёРµ РІ Р’РЎ РЅРµСЂРµР°Р»РёР·РѕРІР°РЅС‹, С‚Р°Рє С‡С‚Рѕ РїРµСЂРµРјРµРЅРЅР°СЏ РЅРё РЅР° С‡С‚Рѕ РЅРµ РІР»РёСЏРµС‚);
-		reamer = 4, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ С‚Р°РЅРєРѕРІ-РїСЂРѕС€РёРІР°С‚РµР»РµР№ РґР°СЃСЃРѕРІР°С‚РѕСЂРѕРІ;
-		fighter = 4, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ РёСЃС‚СЂРµР±РёС‚РµР»РµР№;
+	npcTab.attackBehavior.useBooProbability.vehTypes = func.UniteTables({ -- при виде какого врага по типу машины NPC активизирует усилитель;
+		tank = 0, -- вероятность использования усилителя при виде танков;
+		excavator = 4, -- вероятность использования усилителя при виде экскаваторов;
+		mine = 0, -- вероятность использования усилителя при виде мин-дронов (пока такие в ВС нереализованы, так что переменная ни на что не влияет);
+		reamer = 4, -- вероятность использования усилителя при виде танков-прошивателей дассоваторов;
+		fighter = 4, -- вероятность использования усилителя при виде истребителей;
 	}, func.DoTable(npcTab.attackBehavior.attackFirst.vehTypes))
 	
-	npcTab.attackBehavior.useBooProbability.charTypes = func.UniteTables({ -- РїСЂРё РІРёРґРµ РєР°РєРѕРіРѕ РІСЂР°РіР° РїРѕ С‚РёРїСѓ РїРµСЂСЃРѕРЅР°Р¶Р° NPC Р°РєС‚РёРІРёР·РёСЂСѓРµС‚ СѓСЃРёР»РёС‚РµР»СЊ;
-		npc = 0, -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ NPC;
-		player = 1; -- РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СѓСЃРёР»РёС‚РµР»СЏ РїСЂРё РІРёРґРµ РёРіСЂРѕРєР°;
+	npcTab.attackBehavior.useBooProbability.charTypes = func.UniteTables({ -- при виде какого врага по типу персонажа NPC активизирует усилитель;
+		npc = 0, -- вероятность использования усилителя при виде NPC;
+		player = 1; -- вероятность использования усилителя при виде игрока;
 	}, func.DoTable(npcTab.attackBehavior.attackFirst.vehTypes))
 	
-	npcTab.attackBehavior.distance = func.UniteTables({ -- РґРёСЃС‚Р°РЅС†РёСЏ, РєРѕС‚РѕСЂРѕР№ РїСЂРёРґРµСЂР¶РёРІР°РµС‚СЃСЏ NPC (Р±СѓРґРµС‚ РІС‹СЃС‡РёС‚С‹РІР°С‚СЊСЃСЏ СЃСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ);
-		withBiggestGun = 5, -- РїСЂРё Р°С‚Р°РєРµ РІСЂР°РіР° СЃ СЃР°РјРѕР№ РјРѕС‰РЅРѕР№ РїСѓС€РєРѕР№;
-		withPoorestGun = 2, -- РїСЂРё Р°С‚Р°РєРµ РІСЂР°РіР° СЃ СЃР°РјРѕР№ РїР»РѕС…РѕР№ РїСѓС€РєРѕР№;
-		withAverageGun = 4, -- РїСЂРё Р°С‚Р°РєРµ РІСЂР°РіР° СЃРѕ СЃСЂРµРґРЅРµР№ РїСѓС€РєРѕР№.
-		heavyArmored = 4, -- СЃ РЅР°РёР±РѕР»СЊС€РёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РҐРџ (РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°Р»СЊРЅС‹С…);
-		lowArmored = 2, -- СЃ РЅР°РёРјРµРЅСЊС€РёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РҐРџ (РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°Р»СЊРЅС‹С…);
-		mediumArmored = 3, -- СЃРѕ СЃСЂРµРґРЅРёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РҐРџ (РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°Р»СЊРЅС‹С…);
-		withHighestRank = 4, -- СЃ РІС‹СЃРѕРєРёРј Р·РІР°РЅРёРµРј (РіР»Р°РІР°СЂРё, РєРѕРјР°РЅРґРёСЂС‹ Рё С‚.Рґ.);
-		withLowestRank = 2, -- СЃ РЅРёР·РєРёРј Р·РІР°РЅРёРµРј (СЂР°Р·Р±РѕР№РЅРёРєРё, РѕРїРѕР»С‡РµРЅС†С‹, Р±СЂРѕРЅРµРІРёРєРё);
-		withAverageRank = 3, -- СЃРѕ СЃСЂРµРґРЅРёРј Р·РІР°РЅРёРµРј (СЃРѕР»РґР°С‚С‹, РІРѕР№РЅС‹ Рё С‚.Рґ.);
-		withBoo = 5, -- СЃ СѓСЃРёР»РёС‚РµР»РµРј;
+	npcTab.attackBehavior.distance = func.UniteTables({ -- дистанция, которой придерживается NPC (будет высчитываться среднее арифметическое);
+		withBiggestGun = 5, -- при атаке врага с самой мощной пушкой;
+		withPoorestGun = 2, -- при атаке врага с самой плохой пушкой;
+		withAverageGun = 4, -- при атаке врага со средней пушкой.
+		heavyArmored = 4, -- с наибольшим количеством ХП (относительно остальных);
+		lowArmored = 2, -- с наименьшим количеством ХП (относительно остальных);
+		mediumArmored = 3, -- со средним количеством ХП (относительно остальных);
+		withHighestRank = 4, -- с высоким званием (главари, командиры и т.д.);
+		withLowestRank = 2, -- с низким званием (разбойники, ополченцы, броневики);
+		withAverageRank = 3, -- со средним званием (солдаты, войны и т.д.);
+		withBoo = 5, -- с усилителем;
 	}, func.DoTable(npcTab.attackBehavior.distance))
 
-	npcTab.attackBehavior.useBooProbability.vehTypes = func.UniteTables({ -- РїСЂРё РІРёРґРµ РєР°РєРѕРіРѕ РІСЂР°РіР° РїРѕ С‚РёРїСѓ РјР°С€РёРЅС‹ NPC Р°РєС‚РёРІРёР·РёСЂСѓРµС‚ СѓСЃРёР»РёС‚РµР»СЊ;
-		tank = 0, -- РїСЂРё Р°С‚Р°РєРµ С‚Р°РЅРєРѕРІ;
-		excavator = 16, -- РїСЂРё Р°С‚Р°РєРµ СЌРєСЃРєР°РІР°С‚РѕСЂРѕРІ;
-		mine = 16, -- РїСЂРё Р°С‚Р°РєРµ РјРёРЅС‹-РґСЂРѕРЅРѕРІ (РїРѕРєР° С‚Р°РєРёРµ РІ Р’РЎ РЅРµСЂРµР°Р»РёР·РѕРІР°РЅС‹, С‚Р°Рє С‡С‚Рѕ РїРµСЂРµРјРµРЅРЅР°СЏ РЅРё РЅР° С‡С‚Рѕ РЅРµ РІР»РёСЏРµС‚);
-		reamer = 16, -- РїСЂРё Р°С‚Р°РєРµ С‚Р°РЅРєРѕРІ-РїСЂРѕС€РёРІР°С‚РµР»РµР№ РґР°СЃСЃРѕРІР°С‚РѕСЂРѕРІ;
-		fighter = 6, -- РїСЂРё Р°С‚Р°РєРµ РёСЃС‚СЂРµР±РёС‚РµР»РµР№;	
+	npcTab.attackBehavior.useBooProbability.vehTypes = func.UniteTables({ -- при виде какого врага по типу машины NPC активизирует усилитель;
+		tank = 0, -- при атаке танков;
+		excavator = 16, -- при атаке экскаваторов;
+		mine = 16, -- при атаке мины-дронов (пока такие в ВС нереализованы, так что переменная ни на что не влияет);
+		reamer = 16, -- при атаке танков-прошивателей дассоваторов;
+		fighter = 6, -- при атаке истребителей;	
 	}, func.DoTable(npcTab.attackBehavior.attackFirst.vehTypes))
 
-	npcTab.attackBehavior.useBooProbability.charTypes = func.UniteTables({ -- РїСЂРё РІРёРґРµ РєР°РєРѕРіРѕ РІСЂР°РіР° РїРѕ С‚РёРїСѓ РїРµСЂСЃРѕРЅР°Р¶Р° NPC Р°РєС‚РёРІРёР·РёСЂСѓРµС‚ СѓСЃРёР»РёС‚РµР»СЊ;
-		npc = 0, -- РїСЂРё Р°С‚Р°РєРµ NPC;
-		player = 4, -- РїСЂРё Р°С‚Р°РєРµ РёРіСЂРѕРєР°;
+	npcTab.attackBehavior.useBooProbability.charTypes = func.UniteTables({ -- при виде какого врага по типу персонажа NPC активизирует усилитель;
+		npc = 0, -- при атаке NPC;
+		player = 4, -- при атаке игрока;
 	}, func.DoTable(npcTab.attackBehavior.attackFirst.vehTypes))
 	
 	local team = team or 1;
 	local spawnteam = spawnteam or team;
 	
-	charTab = func.CreateCharacter(npcName, charTab); -- РЎРѕР·РґР°С‘Рј РЅРѕРІС‹Р№ С…Р°СЂР°РєС‚РµСЂ РґР»СЏ NPC.
+	charTab = func.CreateCharacter(npcName, charTab); -- Создаём новый характер для NPC.
 	debug.Print("| "..charTab.currentWeap.." was equiped on "..npcName)
-	func.SpawnTank(npcName, "ai", tankTab, x, y, team, spawnTeam, dir, charTab.currentWeap) -- РЎРѕР·РґР°С‘Рј С‚Р°РЅРє РґР»СЏ С…Р°СЂР°РєС‚РµСЂР°.
+	func.SpawnTank(npcName, "ai", tankTab, x, y, team, spawnTeam, dir, charTab.currentWeap) -- Создаём танк для характера.
 	
 	local tankName = object(npcName).vehname;
-	main.NPC.list[npcName] = npcTab; -- Р—Р°РЅРѕСЃРёРј РЅР°С€РµРіРѕ NPC РІ РјР°СЃСЃРёРІ РІСЃРµС… NPC.
+	main.NPC.list[npcName] = npcTab; -- Заносим нашего NPC в массив всех NPC.
 	
--- Р§Р°СЃС‚Рё С„СѓРЅРєС†РёРё СЃ Р·Р°РґРµСЂР¶РєРѕР№.
+-- Части функции с задержкой.
 	pushcmd(function()
 		if exists(tankName) then 
 			local tankName = object(npcName).vehname;
@@ -1877,13 +1877,13 @@ function func.NPC.Create(npcName, x, y, dir, team, spawnTeam, tankTab, charTab, 
 	end, 2.2)
 end
 
--- РџРѕР·РІРѕР»СЏРµС‚ Р·Р°РґР°С‚СЊ С†РµР»СЊ РґР»СЏ NPC. РџРѕР»РЅРѕСЃС‚СЊСЋ РїРµСЂРµРґРµР»Р°РЅРЅС‹Р№ РІР°СЂРёР°РЅС‚. Slava98. 03.01.14.
+-- Позволяет задать цель для NPC. Полностью переделанный вариант. Slava98. 03.01.14.
 function func.NPC.SetAim(npcName, x, y, g32, trigTab, killAfterEnter, killAfterLeave)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if not exists(npcName) then error("bad argument #1 to 'func.NPC.SetAim' (NPC '"..npc.."' does not exist)", 2) end;
 
--- РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Объявление локальных переменных.
 	if killAfterEnter == nil then killAfterEnter = true; end;
 	if killAfterLeave == nil then killAfterLeave = true; end;
 	local function Kill(condition)
@@ -1901,7 +1901,7 @@ function func.NPC.SetAim(npcName, x, y, g32, trigTab, killAfterEnter, killAfterL
 end
 
 function func.NPC.FollowWay(npcName, wayName, finishPointNum, onEnterFunc, onFinalFunc, wayPointNum, refresh)
---	РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+--	Обработчик ошибок (написать).
 
 	if not wayName and (not main.NPC.list[npcName].mainWay or main.NPC.list[npcName].mainWay == "") then return; end;
 	if refresh == nil then refresh = true; end;
@@ -1935,13 +1935,13 @@ function func.NPC.ClearWay(npcName)
 end
 
 function func.NPC.FollowObject(npcName, objName, trigTab, frequency, dir, length, correctAimPosition)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local frequency = frequency or 1;
 	local x, y;
 	local dir = dir or 5;
 	local multitriggerMode;
-	local function CorrectTrigPosition(dir) -- Р­С‚Р° С„СѓРЅРєС†РёСЏ РїРѕР·РІРѕР»СЏРµС‚ СЃРґРІРёРЅСѓС‚СЊ С‚СЂРёРіРіРµСЂРЅР° РЅСѓР¶РЅРѕРµ РјР°РїРµСЂСѓ РјРµСЃС‚Рѕ. Slava98. 02.01.14.
+	local function CorrectTrigPosition(dir) -- Эта функция позволяет сдвинуть триггерна нужное маперу место. Slava98. 02.01.14.
 		if     dir == "right"  or dir == 1 then x = x + length;
 		elseif dir == "bottom" or dir == 2 then y = y + length;
 		elseif dir == "left"   or dir == 3 then x = x - length;
@@ -1985,8 +1985,8 @@ function func.NPC.FollowObject(npcName, objName, trigTab, frequency, dir, length
 	Loop()
 end
 
--- РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ РїРѕРІСЂРµР¶РґРµРЅРёСЏ СЃРѕСЋР·РЅРёРєРѕРІ. Slava98. 
-function func.NPC.DamageOurWarrior(who, npc) -- РќР°РґРѕ Р±СѓРґРµС‚ РїРµСЂРµРґРµР»Р°С‚СЊ. Slava98. 29.03.13.
+-- Обработка события повреждения союзников. Slava98. 
+function func.NPC.DamageOurWarrior(who, npc) -- Надо будет переделать. Slava98. 29.03.13.
 	if who ~= nil then
         local attacker = who.name
 		local a = rawget(level.damagespeak, npc)
@@ -2014,9 +2014,9 @@ function func.NPC.DamageOurWarrior(who, npc) -- РќР°РґРѕ Р±СѓРґРµС‚ РїРµСЂРµРґРµ
 end
 
 function func.NPC.FollowPosition(npcName, x, y, distance, distanceDir, frequency)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).	
+-- Обработчик ошибок (написать).	
 
--- РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Объявление локальных переменных.
 	local frequency = frequency or 10;
 end
 
@@ -2026,14 +2026,14 @@ function func.NPC.EvaluateTarget(npcName, targetNum, atribute)
 	local formatedEnemies = {weapValue = {}, healthValue = {}, rankValue = {}, distanceValue = {}};
 	local npcTab = main.NPC.list[npcName];
 
-	-- Р”Р»СЏ РЅР°С‡Р°Р»Р° РЅСѓР¶РЅРѕ РЅР°Р№С‚Рё РІСЂР°РіРѕРІ СЃ РЅР°РёР±РѕР»СЊС€РёРјРё Рё РЅР°РёРјРµРЅСЊС€РёРјРё РѕРїСЂРµРґРµР»С‘РЅРЅС‹РјРё С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°РјРё.
+	-- Для начала нужно найти врагов с наибольшими и наименьшими определёнными характеристиками.
 	for targetNum, targetName in pairs(npcTab.visibleEnemies) do
 		formatedEnemies.weapValue[targetNum] = func.EvaluateWeap(main.characters[targetName].currentWeap);
 		formatedEnemies.healthValue[targetNum] = object(object(targetName).vehname).health;
 		formatedEnemies.rankValue[targetNum] = main.characters[targetName].rank;
 		formatedEnemies.distanceValue[targetNum] = func.GetDistance(object(npcName).vehname, object(targetName).vehname);
 	end;
-	-- РўРµРїРµСЂСЊ Р·Р°РґР°С‘Рј РЅСѓР¶РЅС‹Рµ РЅР°Рј РїРµСЂРµРјРµРЅРЅС‹Рµ. Р’СЂР°РіРё СЃРѕ СЃСЂРµРґРЅРёРјРё С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°РјРё РїРѕС‚РѕРј РЅР°С…РѕРґСЏС‚СЃСЏ РјРµС‚РѕРґРѕРј РёСЃРєР»СЋС‡РµРЅРёСЏ.
+	-- Теперь задаём нужные нам переменные. Враги со средними характеристиками потом находятся методом исключения.
 	local maxWeap = formatedEnemies.weapValue[func.ArrayMax(formatedEnemies.weapValue)];
 	local minWeap = formatedEnemies.weapValue[func.ArrayMin(formatedEnemies.weapValue)];
 	local maxHealth = formatedEnemies.healthValue[func.ArrayMax(formatedEnemies.healthValue)];
@@ -2043,14 +2043,14 @@ function func.NPC.EvaluateTarget(npcName, targetNum, atribute)
 	local maxDistance = formatedEnemies.distanceValue[func.ArrayMax(formatedEnemies.distanceValue)];
 	local minDistance = formatedEnemies.distanceValue[func.ArrayMin(formatedEnemies.distanceValue)];
 	local targetName = npcTab.visibleEnemies[targetNum];
-	-- РЎСЂР°РІРЅРёРІР°РµРј РЅР°С€РµРіРѕ РІСЂР°РіР°.
+	-- Сравниваем нашего врага.
 		if formatedEnemies.weapValue[targetNum] == maxWeap and formatedEnemies.weapValue[targetNum] > 1 then 
 		 count = count + npcTab.attackBehavior[atribute].withBiggestGun; debug.Print("| "..targetName.." has biggest gun", "attack");
 	elseif formatedEnemies.weapValue[targetNum] == minWeap then 
 		 count = count + npcTab.attackBehavior[atribute].withPoorestGun; debug.Print("| "..targetName.." has poorest gun", "attack");
 	else count = count + npcTab.attackBehavior[atribute].withAverageGun; debug.Print("| "..targetName.." has average gun", "attack");
 	end;
-	-- РќСѓР¶РЅРѕ СѓС‡РёС‚С‹РІР°С‚СЊ, С‡С‚Рѕ РҐРџ Сѓ С‚Р°РЅРєРѕРІ РјРѕРіСѓС‚ Р±С‹С‚СЊ СЃР°РјС‹Рµ СЂР°Р·РЅРѕРѕР±СЂР°Р·РЅС‹Рµ, С‚Р°Рє С‡С‚Рѕ РѕРєСЂСѓРіР»РёРј РёС… РґРѕ СЃРѕС‚РµРЅ.
+	-- Нужно учитывать, что ХП у танков могут быть самые разнообразные, так что округлим их до сотен.
 		if math.floor(formatedEnemies.healthValue[targetNum]/100) == math.floor(maxHealth/100) then 
 		 count = count + npcTab.attackBehavior[atribute].heavyArmored; debug.Print("| "..targetName.." is heavy armored", "attack");
 	elseif math.floor(formatedEnemies.healthValue[targetNum]/100) == math.floor(minHealth/100) then 
@@ -2069,19 +2069,19 @@ function func.NPC.EvaluateTarget(npcName, targetNum, atribute)
 		 count = count + npcTab.attackBehavior[atribute].onShortestDistance; debug.Print("| "..targetName.." is on a shortest distance", "attack");
 	else count = count + npcTab.attackBehavior[atribute].onAverageDistance; debug.Print("| "..targetName.." is on a average distance", "attack");
 	end;
-	-- РўРµРїРµСЂСЊ РЅСѓР¶РЅРѕ СЃРґРµР»Р°С‚СЊ С‚Р°РєР¶Рµ РїСЂРёР±Р°РІРєСѓ РІ Р·РЅР°С‡РµРЅРёРё Р°С‚Р°РєРё РѕС‚РґРµР»СЊРЅС‹Рј С‚РёРїР°Рј РјР°С€РёРЅ.
+	-- Теперь нужно сделать также прибавку в значении атаки отдельным типам машин.
 	for vehType, extraCount in pairs(npcTab.attackBehavior[atribute].vehTypes) do
 		if main.characters[targetName].vehType == vehType then
 			count = count + extraCount; debug.Print("| "..targetName.." has '"..vehType.."' vehchle type", "attack");
 		end;
 	end;
-	-- РћСЃРѕР±С‹Рµ РїР°СЂР°РјРµС‚СЂС‹ Р°С‚Р°РєРё РїРѕ С‚РёРїР°Рј РїРµСЂСЃРѕРЅР°Р¶Р°.
+	-- Особые параметры атаки по типам персонажа.
 	for charType, extraCount in pairs(npcTab.attackBehavior[atribute].charTypes) do
 		if main.characters[targetName].charType == charType then
 			count = count + extraCount; debug.Print("| "..targetName.." is character of '"..charType.."' type", "attack");
 		end;
 	end;
-	-- Р•СЃР»Рё Сѓ РІСЂР°РіР° РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ СѓСЃРёР»РёС‚РµР»СЊ.
+	-- Если у врага используется усилитель.
 	if main.characters[targetName].inventory.isActivatingBoo then 
 		count = count + npcTab.attackBehavior[atribute].withBoo; debug.Print("| "..targetName.." is using boo", "attack");
 	end;
@@ -2104,10 +2104,10 @@ function func.NPC.ChooseTarget(npcName)
 	return chosenTargetNum;
 end
 
-function func.NPC.Attack(f, npcName, who, frequency, n, targetIsDestroyed--[[, speaks={onBeginAttack={"", ""...}, onLoopAttack={}, onStopAttack={}, }]]) -- РќСѓР¶РЅРѕ СЃРґРµР»Р°С‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ СЂРµР¶РёРјРѕРІ: 1)РџСЂРµСЃР»РµРґРѕРІР°С‚СЊ РїСЂРѕС‚РёРІРЅРёРєР°; 2)РќРµ РїРѕРєРёРґР°С‚СЊ Р±Р°Р·Сѓ;
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+function func.NPC.Attack(f, npcName, who, frequency, n, targetIsDestroyed--[[, speaks={onBeginAttack={"", ""...}, onLoopAttack={}, onStopAttack={}, }]]) -- Нужно сделать несколько режимов: 1)Преследовать противника; 2)Не покидать базу;
+-- Обработчик ошибок (написать).
 
--- РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Объявление локальных переменных.
 	local frequency = frequency or 0.2;
 	local targetTank;-- = who.name;
 	local target;
@@ -2122,27 +2122,27 @@ function func.NPC.Attack(f, npcName, who, frequency, n, targetIsDestroyed--[[, s
 		if func.Search(npcTab.visibleEnemies, target) then return; end;
 		
 		debug.Print("| "..npcName.." is seeing "..target, "attack")
-		if math.random() <= npcTab.attackSpeaks.probability and npcTab.attackSpeaks.onBegin then func.object.Speak(object(npcName).vehname, func.Read({npcTab.attackSpeaks.file, npcTab.attackSpeaks.onBegin, "random"}), nil --[[Р—РґРµСЃСЊ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РєСЂР°СЃРЅР°СЏ С‚РµРєСЃС‚СѓСЂР°]]) end;
+		if math.random() <= npcTab.attackSpeaks.probability and npcTab.attackSpeaks.onBegin then func.object.Speak(object(npcName).vehname, func.Read({npcTab.attackSpeaks.file, npcTab.attackSpeaks.onBegin, "random"}), nil --[[Здесь должна быть красная текстура]]) end;
 		
 		table.insert(npcTab.visibleEnemies, target)
 		loadstring(npcTab.onAttack)()
-		-- Р•СЃР»Рё РІСЂР°РіРѕРІ Р±РѕР»СЊС€Рµ РѕРґРЅРѕРіРѕ, С‚Рѕ РІС‹Р±РёСЂР°РµС‚СЃСЏ РѕРґРёРЅ РёР· РЅРёС… РёСЃС…РѕРґСЏ РёР· РїСЂРµРґРїРѕС‡С‚РµРЅРёР№ NPC.
+		-- Если врагов больше одного, то выбирается один из них исходя из предпочтений NPC.
 		if #npcTab.visibleEnemies > 1 then
 			target = npcTab.visibleEnemies[func.NPC.ChooseTarget(npcName)];
 			targetTank = object(target).vehname;
 		end;
-		-- РђРєС‚РёРІРёСЂСѓРµС‚СЃСЏ Р±СѓСЃС‚РµСЂ, С‚Р°Рє Р¶Рµ РёСЃС…РѕРґСЏ РёР· РїСЂРµРґРїРѕС‡С‚РµРЅРёР№ NPC.
+		-- Активируется бустер, так же исходя из предпочтений NPC.
 		local useBooProbability = func.NPC.EvaluateTarget(npcName, func.Search(npcTab.visibleEnemies, target), "useBooProbability");
 		if math.random(1, 5) < useBooProbability then func.UseItem("boo", npcName) end;
-		-- РџРёС€РµС‚СЃСЏ СЃРѕРѕР±С‰РµРЅРёРµ Рѕ РЅР°С‡Р°Р»Рµ Р°С‚Р°РєРё.
+		-- Пишется сообщение о начале атаки.
 		if target ~= npcTab.currentTarget then
 			debug.Print("| "..npcName.." began attack on "..target, "attack")
 		end;
-		-- NPC Р·РѕРІС‘С‚ СЃРѕСЋР·РЅРёРєРѕРІ РЅР° РїРѕРјРѕС‰СЊ, РµСЃР»Рё С‚Р°РєРёРµ РµСЃС‚СЊ Рё РѕРЅРё РЅРµРґР°Р»РµС‡Рµ.
---[[		РџР°РјСЏС‚РєР°.
-		callAllies = true, -- Р‘СѓРґРµС‚ Р»Рё NPC Р·РІР°С‚СЊ СЃРѕСЋР·РЅРёРєРѕРІ РїСЂРё Р°С‚Р°РєРµ.
-		callAlliesMaxDistance = 10, -- Р Р°СЃСЃС‚РѕСЏРЅРёРµ, РЅР° РєРѕС‚РѕСЂРѕРј NPC РјРѕР¶РµС‚ СЃР»С‹С€Р°С‚СЊ Рё Р·РІР°С‚СЊ СЃРѕСЋР·РЅРёРєРѕРІ.
-		canBeCalledByAllies = true, -- РњРѕРіСѓС‚ Р»Рё СЃРѕСЋР·РЅРёРєРё Р·РІР°С‚СЊ NPC.]]
+		-- NPC зовёт союзников на помощь, если такие есть и они недалече.
+--[[		Памятка.
+		callAllies = true, -- Будет ли NPC звать союзников при атаке.
+		callAlliesMaxDistance = 10, -- Расстояние, на котором NPC может слышать и звать союзников.
+		canBeCalledByAllies = true, -- Могут ли союзники звать NPC.]]
 --		local bandmates = {};
 		for charName, charTab in pairs(main.characters) do
 			if charTab.group == main.characters[npcName].group and charTab.charType == "npc" and object(charName).team then
@@ -2153,7 +2153,7 @@ function func.NPC.Attack(f, npcName, who, frequency, n, targetIsDestroyed--[[, s
 				end;
 			end;
 		end;
-		-- Р’С‹Р±СЂР°РЅРЅС‹Р№ РІСЂР°Рі Р·Р°РЅРѕСЃРёС‚СЃСЏ РІ С‚Р°Р±Р»РёС†Сѓ РїР°СЂР°РјРµС‚СЂРѕРІ NPC, РЅР°С‡РёРЅР°РµС‚СЃСЏ С†РёРєР» Р°С‚Р°РєРё.
+		-- Выбранный враг заносится в таблицу параметров NPC, начинается цикл атаки.
 		npcTab.currentTarget = target;
 		func.NPC.Attack("loop", npcName, object(targetTank), frequency, 0)
 
@@ -2169,13 +2169,13 @@ function func.NPC.Attack(f, npcName, who, frequency, n, targetIsDestroyed--[[, s
 	elseif f == "stop" then
 		if not func.Search(npcTab.visibleEnemies, target) then return; end;
 		
-		if attackMode ~= "not_leave_position" then ai_stop(npcName) end; -- Р”СѓРјР°СЋ, РЅРµ СЃР»РµРґСѓРµС‚ СЌС‚РѕРіРѕ РґРµР»Р°С‚СЊ. Р‘РµР· СЌС‚РѕР№ СЃС‚СЂРѕС‡РєРё РёРЅС‚РµР»Р»РµРєС‚ NPC РЅР°РїРѕРјРёРЅР°РµС‚ РёРЅС‚РµР»Р»РµРєС‚ С‚СѓСЂРµР»Рё. Slava98. 06.09.13.
+		if attackMode ~= "not_leave_position" then ai_stop(npcName) end; -- Думаю, не следует этого делать. Без этой строчки интеллект NPC напоминает интеллект турели. Slava98. 06.09.13.
 		if func.object.borderTrigger.Exists(object(npcName).vehname.."_oncomming") then func.object.borderTrigger.Kill(object(npcName).vehname.."_oncomming") end;
 		debug.Print("| "..npcName.." stopped attack on "..target, "attack") 
 		if math.random() <= npcTab.attackSpeaks.probability and (npcTab.attackSpeaks.onStopDestroyed or npcTab.attackSpeaks.onStopLost) then
-			local speak; -- Р•СЃР»Рё РІСЂР°Рі СѓРЅРёС‡С‚РѕР¶РµРЅ, С‚Рѕ РіРѕРІРѕСЂСЏС‚СЃСЏ РѕРґРЅРё СЂРµРїР»РёРєРё, РµСЃР»Рё Р¶Рµ РѕРЅ РїСЂРѕСЃС‚Рѕ СѓС€С‘Р», С‚Рѕ РґСЂСѓРіРёРµ. Slava98. 23.02.14.
+			local speak; -- Если враг уничтожен, то говорятся одни реплики, если же он просто ушёл, то другие. Slava98. 23.02.14.
 			if targetIsDestroyed then speak = npcTab.attackSpeaks.onStopDestroyed; else speak = npcTab.attackSpeaks.onStopLost; end;
-			func.object.Speak(object(npcName).vehname, func.Read({npcTab.attackSpeaks.file, speak, "random"}), nil --[[Р—РґРµСЃСЊ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РєСЂР°СЃРЅР°СЏ С‚РµРєСЃС‚СѓСЂР°]]) 
+			func.object.Speak(object(npcName).vehname, func.Read({npcTab.attackSpeaks.file, speak, "random"}), nil --[[Здесь должна быть красная текстура]]) 
 		end;
 		table.remove(npcTab.visibleEnemies, func.Search(npcTab.visibleEnemies, target))
 		if #npcTab.visibleEnemies ~= 0 then return; end;
@@ -2191,7 +2191,7 @@ function func.NPC.Attack(f, npcName, who, frequency, n, targetIsDestroyed--[[, s
 		pushcmd(function() 
 			if targetTank and exists(targetTank) --[[and main.NPC.list[npc].letAttack]] then
 				n = n + 1;
-				if math.floor(frequency*n) == math.floor(npcTab.attackSpeaks.loopInterval) and math.random() <= npcTab.attackSpeaks.probability and npcTab.attackSpeaks.onLoop then n = 0; func.object.Speak(object(npcName).vehname, func.Read({npcTab.attackSpeaks.file, npcTab.attackSpeaks.onLoop, "random"}), nil --[[Р—РґРµСЃСЊ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РєСЂР°СЃРЅР°СЏ С‚РµРєСЃС‚СѓСЂР°]]) end;
+				if math.floor(frequency*n) == math.floor(npcTab.attackSpeaks.loopInterval) and math.random() <= npcTab.attackSpeaks.probability and npcTab.attackSpeaks.onLoop then n = 0; func.object.Speak(object(npcName).vehname, func.Read({npcTab.attackSpeaks.file, npcTab.attackSpeaks.onLoop, "random"}), nil --[[Здесь должна быть красная текстура]]) end;
 				func.NPC.Attack("loop", npcName, who, frequency, n)
 			elseif not targetTank then
 				func.NPC.Attack("stop", npcName, who, nil, nil, false)
@@ -2207,13 +2207,13 @@ function func.NPC.Attack(f, npcName, who, frequency, n, targetIsDestroyed--[[, s
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------------ РџСѓС‚Рё ----------------------------------------------------------
+----------------------------------------------------- Пути ----------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
 function func.way.Create(wayName, coordTab, g32, wayTab)--onEnterFunc, killAfterEnter, onLeaveFunc, killAfterLeave, actOnEveryTrig, isCicle)
---	РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+--	Обработчик ошибок (написать).
 
---	РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С… (РЅР°РїРёСЃР°С‚СЊ).
+--	Объявление локальных переменных (написать).
 	local wayTab = func.UniteTables({
 		onEnterFunc = "",
 		killAfterEnter = false,
@@ -2222,7 +2222,7 @@ function func.way.Create(wayName, coordTab, g32, wayTab)--onEnterFunc, killAfter
 		actOnEveryTrig = false,
 		isCicle = false,
 		active = true,
-		shortcut = false, -- Р РµС€РёР», С‡С‚Рѕ С‚РµРїРµСЂСЊ СЌС‚Рѕ СЃРѕРІСЃРµРј РЅРµ РЅСѓР¶РЅРѕ, С‚.Рє. РЅРµРІРѕР·РјРѕР¶РЅРѕ Р·Р°СЃС‚Р°РІРёС‚СЊ СЂР°Р±РѕС‚Р°С‚СЊ СЌС‚Рѕ РЅРѕСЂРјР°Р»СЊРЅРѕ. Slava98. 18.02.14.
+		shortcut = false, -- Решил, что теперь это совсем не нужно, т.к. невозможно заставить работать это нормально. Slava98. 18.02.14.
 		choseClosestPoint = false,
 		points = #coordTab,
 		radius = radius or 1,
@@ -2246,7 +2246,7 @@ function func.way.Create(wayName, coordTab, g32, wayTab)--onEnterFunc, killAfter
 --		local shortcutFunc = "";
 
 		level.ways[wayName] = wayTab;
---		main.NPC.list[npc].ways[wayName] = wayTab; -- РўРµРїРµСЂСЊ РїСѓС‚Рё РЅРµ РґРѕР»Р¶РЅС‹ Р·Р°РІРёСЃРµС‚СЊ РѕС‚ NPC. Slava98. 30.11.13.
+--		main.NPC.list[npc].ways[wayName] = wayTab; -- Теперь пути не должны зависеть от NPC. Slava98. 30.11.13.
 --		main.NPC.list[npc].currentWay = wayName;
 		
 		if i < #coordTab then
@@ -2269,7 +2269,7 @@ function func.way.Create(wayName, coordTab, g32, wayTab)--onEnterFunc, killAfter
 end
 
 function func.way.Kill(wayName)
---	РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+--	Обработчик ошибок (написать).
 
 
 	for i = 1, level.ways[wayName].points do
@@ -2278,8 +2278,8 @@ function func.way.Kill(wayName)
 	level.ways[wayName] = nil;
 end
 
--- РўРѕР»Рµ - СЌС‚Рѕ РґРѕР»Р¶РЅР° РѕСЃС‚Р°С‚СЊСЃСЏ С„СѓРЅРєС†РёРµР№ РїРѕСЃР»Рµ РІРІРµРґРµРЅРёСЏ РћРћРџ.
--- Р¤СѓРЅРєС†РёСЏ, РєРѕС‚РѕСЂР°СЏ РІС‹Р±РёСЂР°РµС‚ РёР· РІСЃРµС… С‚РѕС‡РµРє РїСѓС‚Рё Р±Р»РёР¶Р°Р№С€СѓСЋ Рє С‚Р°РЅРєСѓ РїРѕСЃР»Рµ СѓР¶Рµ РїСЂРѕРµР·С€РёС… С‚РѕС‡РµРє. Slava98. 11.12.13.
+-- Толе - это должна остаться функцией после введения ООП.
+-- Функция, которая выбирает из всех точек пути ближайшую к танку после уже проезших точек. Slava98. 11.12.13.
 function func.way.Shortcut(wayName, who, returnNum, currentWayPointNum, choseClosestPoint)
 	local trigCoordTab = {}; 
 	local tankCoordTab = {position(who.name)}; 
@@ -2293,7 +2293,7 @@ function func.way.Shortcut(wayName, who, returnNum, currentWayPointNum, choseClo
 			trigCoordTab[i].x, trigCoordTab[i].y = position(wayName.."_waytrig"..i); 
 			lengthTab[i] = math.sqrt((tankCoordTab[1] - trigCoordTab[i].x)^2 + (tankCoordTab[2] - trigCoordTab[i].y)^2); 
 		else
-			lengthTab[i] = 2^16; -- Р Р°СЃС‚РѕСЏРЅРёРµ РґРѕ С‚РѕС‡РєРё, РЅР° РєРѕС‚РѕСЂРѕРј СЃС‚РѕРёС‚ NPC СЂР°РІРЅРѕ 2^16. РўРѕ РµСЃС‚СЊ РЅР° РЅРµС‘ РѕРЅ РІСЂСЏРґ Р»Рё Р·Р°С…РѕС‡РµС‚ РµС…Р°С‚СЊ СЃРЅР°С‡Р°Р»Р°.
+			lengthTab[i] = 2^16; -- Растояние до точки, на котором стоит NPC равно 2^16. То есть на неё он вряд ли захочет ехать сначала.
 		end;
 	end; 
 	
@@ -2312,7 +2312,7 @@ function func.way.Shortcut(wayName, who, returnNum, currentWayPointNum, choseClo
 		end;
 	end;
 	
-	if currentWayPointNum --[[and choseClosestPoint]] then -- Р•СЃР»Рё С‚Р°РЅРє СЃС‚РѕРёС‚ РЅР° РєР°РєРѕР№-Р»РёР±Рѕ С‚РѕС‡РєРµ РїСѓС‚Рё Рё РµРјСѓ РґР°РЅР° РєРѕРјР°РЅРґР° РІС‹Р±РёСЂР°С‚СЊ Р±Р»РёР¶Р°Р№С€СѓСЋ С‚РѕС‡РєСѓ.
+	if currentWayPointNum --[[and choseClosestPoint]] then -- Если танк стоит на какой-либо точке пути и ему дана команда выбирать ближайшую точку.
 		local correctLengthTab = {};
 		for i = 1, #lengthTab do
 			if pointIsInCorrectWay(i) then correctLengthTab[i] = lengthTab[i];
@@ -2336,15 +2336,15 @@ function func.way.Shortcut(wayName, who, returnNum, currentWayPointNum, choseClo
 	return nextWayPoint;
 end
 
--- Р­С‚Рѕ С‚РѕР¶Рµ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ С„СѓРЅРєС†РёРµР№.
--- Р¤СѓРЅРєС†РёСЏ, РєРѕС‚РѕСЂР°СЏ РїСЂРёРєР°Р·С‹РІР°РµС‚ С‚Р°РЅРєСѓ РµР·Р¶Р°С‚СЊ РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ С‚РѕС‡РєСѓ. Slava98. 11.12.13.
+-- Это тоже должна быть функцией.
+-- Функция, которая приказывает танку езжать на следующую точку. Slava98. 11.12.13.
 function func.way.GotoNextTrig(wayName, who, existsNextPoint, nextWayPointNum, nextWayPoint, currentWayPointNum)  
 	local npcName = who.playername;
 	local npcTab = main.NPC.list[npcName];
 	local finishPointNum = npcTab.wayFinishPointNum;
 	local points = level.ways[wayName].points;
 	
-	if (not existsNextPoint and finishPointNum == points) or currentWayPointNum == finishPointNum then -- Р•СЃР»Рё С‚Р°РЅРє Р·Р°РєРѕРЅС‡РёР» СЃРІРѕР№ РїСѓС‚СЊ.
+	if (not existsNextPoint and finishPointNum == points) or currentWayPointNum == finishPointNum then -- Если танк закончил свой путь.
 		npcTab.nextWayPoint = nil; 
 		npcTab.currentWay = nil;
 		return;
@@ -2365,18 +2365,18 @@ function func.way.GotoNextTrig(wayName, who, existsNextPoint, nextWayPointNum, n
 end
 
 function func.way.Refresh(wayName)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	for i = 1, level.ways[wayName].points do func.object.Recreate(wayName.."_waytrig"..i); end;
 end
 
 --------------------------------------------------------------------------------------------------------------------
------------------------------------------------- РРіСЂРѕРє -------------------------------------------------------------
+------------------------------------------------ Игрок -------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------
 
--- РЎРѕРґР°С‘С‚ РёРіСЂРѕРєР°. Slava98.
+-- Содаёт игрока. Slava98.
 function func.player.Create(properties, team, spawnTeam, x, y, dir, charTab)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(properties) ~= "table" then error("bad argument #1 to 'func.player.Create' (table expected, got "..type(properties)..")", 2) return; end;
 	if type(team) ~= "number" then error("bad argument #2 to 'func.player.Create' (number expected, got "..type(team)..")", 2) return; end;
 	if type(spawnTeam) ~= "number" then error("bad argument #3 to 'func.player.Create' (number expected, got "..type(spawnTeam)..")", 2) return; end;
@@ -2397,17 +2397,17 @@ function func.player.Create(properties, team, spawnTeam, x, y, dir, charTab)
 	end;
 end
 
--- РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ РіРёР±РµР»Рё РёРіСЂРѕРєР°. 
+-- Обработка события гибели игрока. 
 function func.player.Die() 
 	func.player.isExist = false;
 	kill(const.playerName)
 	func.Play("lose")
 	level.Lose()
---	msgbox("Р’С‹ РїСЂРѕРёРіСЂР°Р»Рё!")
+--	msgbox("Вы проиграли!")
 end
 
 function func.player.ChoseWeap(weapType)
--- РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Объявление локальных переменных.
 	local charTab = main.characters[const.playerName]; 
 	local weapons = charTab.inventory.weapons;
 	
@@ -2419,13 +2419,13 @@ function func.player.ChoseWeap(weapType)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------- РўРµРєСЃС‚ --------------------------------------------------------------
+------------------------------------------------ Текст --------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
 function func.text.Create(textName, x, y, textTab)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
--- РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Объявление локальных переменных.
 	local textTab = func.UniteTables({
 		texture = "font_small",
 		text = "",
@@ -2448,7 +2448,7 @@ function func.text.Create(textName, x, y, textTab)
 end
 
 function func.text.Kill(textName)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	for i = 1, string.len(level.texts[textName].text) do
 		kill(textName.."_text"..i);
@@ -2457,7 +2457,7 @@ function func.text.Kill(textName)
 end
 
 function func.text.SetPosition(textName, x, y)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	for i = 1, string.len(level.texts[textName].text) do
 		local cTab = level.texts[textName].lettersCoordTab;
@@ -2469,7 +2469,7 @@ function func.text.SetPosition(textName, x, y)
 end
 
 function func.text.Exists(textName)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if type(level.texts[textName]) ~= "table" then return false; end;
 	
@@ -2480,11 +2480,11 @@ function func.text.Exists(textName)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------ РўР°Р№РјРµСЂ --------------------------------------------------------------
+----------------------------------------------- Таймер --------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
 function func.timer.Create(timerName, timerTab)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if not timerTab.StartFunc and timerTab.funcTab[1] then timerTab.StartFunc = timerTab.funcTab[1]; end;
 	if not timerTab.CircleFunc and timerTab.funcTab[2] then timerTab.CircleFunc = timerTab.funcTab[2]; end;
@@ -2533,12 +2533,12 @@ function func.timer.Play(timerName)
 		pushcmd(function()
 			if not timerFinished and timerTab.active then
 --				if timerTab.cleared then timerTab.cleared = false; return; end;
-				local command = Execute(timerTab.CircleFunc, 2); -- Р—Р°РїСѓСЃРєР°РµРј С„СѓРЅРєС†РёСЋ, РІС‹РїРѕР»РЅСЏСЋС‰СѓСЋСЃСЏ РєР°Р¶РґС‹Р№ С†РёРєР». Slava98. 20.01.14.
+				local command = Execute(timerTab.CircleFunc, 2); -- Запускаем функцию, выполняющуюся каждый цикл. Slava98. 20.01.14.
 				if command ~= "stop" then Loop() end;
 			end;
 		end, timerTab.period)
 	end;
-	local function isFinishedLoop() -- РџСЂРѕРІРµСЂРєР° Р·Р°РєРѕРЅС‡РµРЅРЅРѕСЃС‚Рё С‚Р°Р№РјРµСЂР°. Slava98. 03.02.14.
+	local function isFinishedLoop() -- Проверка законченности таймера. Slava98. 03.02.14.
 		local residual = timerTab.timer - timerTab.value;
 		if residual < 1 then timerTab.roundedPeriod = residual; end;
 		pushcmd(function()
@@ -2550,7 +2550,7 @@ function func.timer.Play(timerName)
 				timerTab.activated = false;
 				timerFinished = true;
 				func.timer.Clear(timerName)
-				Execute(timerTab.FinishFunc, 3) -- Р—Р°РїСѓСЃРєР°РµРј РєРѕРЅРµС‡РЅСѓСЋ С„СѓРЅРєС†РёСЋ. Slava98. 20.01.14.
+				Execute(timerTab.FinishFunc, 3) -- Запускаем конечную функцию. Slava98. 20.01.14.
 				if timerTab.loop then
 					timerTab.activated = true;
 					isFinishedLoop()
@@ -2563,16 +2563,16 @@ function func.timer.Play(timerName)
 		if timerTab.cleared then timerTab.cleared = true; return; end;
 		timerFinished = true;
 		func.timer.Clear(timerName)
-		Execute(timerTab.FinishFunc, 3) -- Р—Р°РїСѓСЃРєР°РµРј РєРѕРЅРµС‡РЅСѓСЋ С„СѓРЅРєС†РёСЋ. Slava98. 20.01.14.
+		Execute(timerTab.FinishFunc, 3) -- Запускаем конечную функцию. Slava98. 20.01.14.
 	end, timerTab.secondsLeft)]]
 	
---	if timerTab.secondsLeft ~= timerTab.timer then Execute(timerTab.StartFunc, 1) end; -- Р—Р°РїСѓСЃРєР°РµРј РЅР°С‡Р°Р»СЊРЅСѓСЋ С„СѓРЅРєС†РёСЋ. Slava98. 20.01.14.
+--	if timerTab.secondsLeft ~= timerTab.timer then Execute(timerTab.StartFunc, 1) end; -- Запускаем начальную функцию. Slava98. 20.01.14.
 	
 	if timerTab.breakable and timerTab.activated then return; end;
-	Execute(timerTab.StartFunc, 1) -- Р—Р°РїСѓСЃРєР°РµРј РЅР°С‡Р°Р»СЊРЅСѓСЋ С„СѓРЅРєС†РёСЋ. Slava98. 20.01.14.
+	Execute(timerTab.StartFunc, 1) -- Запускаем начальную функцию. Slava98. 20.01.14.
 	if timerTab.activated then --[[func.timer.Clear(timerName)]] return; end;
 	timerTab.activated = true;
-	Loop() -- Р—Р°РїСѓСЃРєР°РµРј С†РёРєР». Slava98. 20.01.14.
+	Loop() -- Запускаем цикл. Slava98. 20.01.14.
 	isFinishedLoop()
 end
 
@@ -2599,10 +2599,10 @@ function func.timer.Kill(timerName)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------- Р”СЂСѓРіРёРµ ------------------------------------------------------------
+------------------------------------------------ Другие ------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
--- Р¤СѓРЅРєС†РёСЏ РґРµС‚РѕРЅР°С†РёРё РјРёРЅС‹. Р”РѕР»Р¶РЅР° Р±С‹С‚СЊ С‚СѓС‚. VIRUS.
+-- Функция детонации мины. Должна быть тут. VIRUS.
 function func.MineDetonate(who) 
 	if who ~= nil then
 			damage(500, who)
@@ -2610,7 +2610,7 @@ function func.MineDetonate(who)
 	end;
 end
 
--- Р’С‹РІРѕРґРёС‚ РѕРєРѕС€РєРѕ СЃ РІС‹Р±РѕСЂРѕРј С‚Р°Р№РјРµСЂР° РґР»СЏ Р±РѕРјР±С‹. Slava98. 05.01.14.
+-- Выводит окошко с выбором таймера для бомбы. Slava98. 05.01.14.
 function func.BombTimer(timer)
 	local function SetPadej(num)
 		numTail = tonumber(string.sub(num, string.len(num)));
@@ -2628,15 +2628,15 @@ function func.BombTimer(timer)
 			option3 = ">"},	"bombbox")
 end
 
--- РЎС‚Р°РІРёС‚ Р±РѕРјР±Сѓ, РєР°Рє РїСЂРµРґРјРµС‚. Slava98.
+-- Ставит бомбу, как предмет. Slava98.
 function func.ActorBomb(name, x, y)
 	actor("tank", x, y, {name=name, class="bomb", skin="bomb", on_damage="local x, y = position('"..name.."'); func.Explosion(x, y, nil, nil, nil, 3000)"})
 end
 
--- РЎС‚Р°РІРёС‚ Р±РѕРјР±Сѓ, РєР°Рє РєРІРµСЃС‚РѕРІС‹Р№ РїСЂРµРґРјРµС‚ (РІС‹Р·С‹РІР°РµС‚СЃСЏ РЅР° СѓСЂРѕРІРЅРµ). Slava98.
--- РќР° Р·Р°РјРµС‚РєСѓ: С‚Р°РєР°СЏ Р±РѕРјР±Р° - РѕС‚РґРµР»СЊРЅС‹Р№ РѕР±СЉРµРєС‚. РџСЂРѕР±Р»РµРјР° РІ С‚РѕРј, С‡С‚Рѕ РёС… РґРІР° С‚РёРїР°. Slava98. 11.01.14.
+-- Ставит бомбу, как квестовый предмет (вызывается на уровне). Slava98.
+-- На заметку: такая бомба - отдельный объект. Проблема в том, что их два типа. Slava98. 11.01.14.
 function func.SetBomb(name, x, y, killed_objects, timer, get32)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if get32 then x = func.Get32(x); y = func.Get32(y); end
 	local timer = timer or 10;
@@ -2651,7 +2651,7 @@ function func.SetBomb(name, x, y, killed_objects, timer, get32)
 	pushcmd(function() kill(name.."_trig") end, timer + 0.2)
 end
 
--- Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅСѓСЋ С†РµРЅРЅРѕСЃС‚СЊ РѕСЂСѓР¶РёСЏ. Slava98. 02.03.14.
+-- Возвращает относительную ценность оружия. Slava98. 02.03.14.
 function func.EvaluateWeap(weapName)
 	if weapName == "weap_ram" or weapName == "none" then return 0;
 	elseif weapName == "weap_cannon" or weapName == "weap_minigun" or weapName == "weap_autocannon" or weapName == "weap_shotgun" then return 1;
@@ -2661,26 +2661,26 @@ function func.EvaluateWeap(weapName)
 	end;
 end
 
--- РЎС‚Р°СЂС‹Рµ С„СѓРЅРєС†РёРё, РµС‰С‘ СЃ РІРµСЂСЃРёРё 0.24. РџСЂРµРґСЃС‚Р°РІР»СЏСЋС‚ СЃРѕР±РѕР№ СЌРєСЃРїРµСЂРёРјРµРЅС‚Р°Р»СЊРЅСѓСЋ РІРµСЂСЃРёСЋ РџР­Р РљР°.
+-- Старые функции, ещё с версии 0.24. Представляют собой экспериментальную версию ПЭРКа.
 
-function func.GiveClassHealth(whom) --Р—Р°РјРµС‡Р°С‚РµР»СЊРЅР°СЏ С„СѓРЅРєС†РёСЏ, РєРѕС‚РѕСЂР°СЏ Р±РµСЂС‘С‚ Сѓ whom РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РґРѕСЂРѕРІСЊРµ
-	if whom == nil then error("Р’ С„СѓРЅРєС†РёРё main.GiveClassHealth(whom) РїРµСЂРµРјРµРЅРЅР°СЏ whom РЅРµ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ nil!", 3) end;
+function func.GiveClassHealth(whom) --Замечательная функция, которая берёт у whom начальное здоровье
+	if whom == nil then error("В функции main.GiveClassHealth(whom) переменная whom не должна быть nil!", 3) end;
 	if exists(whom) == false then 
-		error("РўР°РєРѕРіРѕ РѕР±СЉРµРєС‚Р° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!", 3) 
+		error("Такого объекта не существует!", 3) 
 	else
 		if objtype(whom) ~= "player_local" and objtype(whom) ~= "ai" then 
-			error("Р’ С„СѓРЅРєС†РёРё main.GiveClassHealth(whom) РїРµСЂРµРјРµРЅРЅР°СЏ whom РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РёРіСЂРѕРєРѕРј РёР»Рё Р±РѕС‚РѕРј (РЅРѕ РЅРµ С‚Р°РЅРєРѕРј!)", 3)
+			error("В функции main.GiveClassHealth(whom) переменная whom должна быть игроком или ботом (но не танком!)", 3)
 		else
 			local a = pget(whom, "class");
 			local s = rawget(classes, a);
 			local whomHealth = s.health;
-			if whomHealth == nil then error("Р’ С„СѓРЅРєС†РёРё main.GiveClassHealth(whom) РµСЃС‚СЊ РѕС€РёР±РєР°. Р•СЃР»Рё РІС‹ СЌС‚Рѕ С‡РёС‚Р°РµС‚Рµ, СЃРѕРѕР±С‰РёС‚Рµ РѕР± СЌС‚РѕРј РЅР° С„РѕСЂСѓРј РІ С‚РµРјСѓ РєР°РјРїР°РЅРёРё War System.", 3) end
+			if whomHealth == nil then error("В функции main.GiveClassHealth(whom) есть ошибка. Если вы это читаете, сообщите об этом на форум в тему кампании War System.", 3) end
 			return whomHealth;
 		end;
 	end;
 end
 
-function func.RestoreHealth(whom, num, amount, restoredHealth, maxAmount, frequency)  -- Р¤СѓРЅРєС†РёСЏ РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РїРѕСЃС‚РµРїРµРЅРЅРѕ Р·РґРѕСЂРѕРІСЊРµ Сѓ whom
+function func.RestoreHealth(whom, num, amount, restoredHealth, maxAmount, frequency)  -- Функция восстанавливает постепенно здоровье у whom
 	local frequency = frequency or 10;
 	local restoredHealth = restoredHealth or 25;
 	local maxAmount = maxAmount or 39;
@@ -2689,10 +2689,10 @@ function func.RestoreHealth(whom, num, amount, restoredHealth, maxAmount, freque
 		if whom == const.playerVehName then func.Message({"main", "msg_notices", 11}) end;
 		func.RestoreHealth(whom, 1, amount, restoredHealth, maxAmount, frequency)
 	else
-		if whom == nil then error("Р’ С„СѓРЅРєС†РёРё main.RestoreHealth(whom) РїРµСЂРµРјРµРЅРЅР°СЏ whom РЅРµ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ nil!", 2) end;
-		if exists(whom) == false then error("РўР°РєРѕРіРѕ РѕР±СЉРµРєС‚Р° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!", 32) 
+		if whom == nil then error("В функции main.RestoreHealth(whom) переменная whom не должна быть nil!", 2) end;
+		if exists(whom) == false then error("Такого объекта не существует!", 32) 
 		else
-			if objtype(whom) ~= "tank" then error("Р’ С„СѓРЅРєС†РёРё main.RestoreHealth(whom) РїРµСЂРµРјРµРЅРЅР°СЏ whom РґРѕР»Р¶РЅР° Р±С‹С‚СЊ С‚Р°РЅРєРѕРј (РЅРѕ РЅРµ РёРіСЂРѕРєРѕРј РёР»Рё Р±РѕС‚РѕРј!)", 2)
+			if objtype(whom) ~= "tank" then error("В функции main.RestoreHealth(whom) переменная whom должна быть танком (но не игроком или ботом!)", 2)
 			else
 				print(amount.." "..maxAmount)
 				if amount >= maxAmount then 
@@ -2715,7 +2715,7 @@ function func.RestoreHealth(whom, num, amount, restoredHealth, maxAmount, freque
 	end;
 end
 
--- Р§РёС‚Р°РµС‚ РґРёР°Р»РѕРі. РџРѕРєР° РїРѕСЃР»РµРґРЅСЏСЏ РІРµСЂСЃРёСЏ. Slava98.
+-- Читает диалог. Пока последняя версия. Slava98.
 function func.Read(...)
 	local args = {...};
 	local outputTab = {};
@@ -2725,7 +2725,7 @@ function func.Read(...)
 		
 		local output = level.dialog[dlg][level.dialog.lang][speaker][num];
 		local patchTab = func.DoTable(patchTab);
-	-- РўРµРїРµСЂСЊ РЅСѓР¶РЅРѕ РЅР°Р№С‚Рё Рё Р·Р°РјРµРЅРёС‚СЊ РЅСѓР¶РЅС‹Рµ РѕР±Р»Р°СЃС‚Рё РІ СЃС‚СЂРѕРєРµ РїР°С‚С‡Р°РјРё. Slava98. 04.01.14.
+	-- Теперь нужно найти и заменить нужные области в строке патчами. Slava98. 04.01.14.
 		output = string.gsub(output, "~(%w+)~", patchTab)
 		return output;
 	end;
@@ -2737,7 +2737,7 @@ function func.Read(...)
 		local num;
 		local patchTab;
 		
-	-- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+	-- Обработчик ошибок.
 		if type(args[i]) == "table" then
 			text = args[i]
 			dlg = text[1];
@@ -2752,7 +2752,7 @@ function func.Read(...)
 			if type(level.dialog[dlg]) ~= "table" then error("bad variable #1 in argument #"..i.."  to 'func.Read' (dialog '"..dlg.."' isn't exist)", 2) end;
 			if type(level.dialog[dlg][level.dialog.lang]) ~= "table" then error("bad arguments to 'func.Read' or problems with lang") end;
 			if type(level.dialog[dlg][level.dialog.lang][speaker]) ~= "table" then error("bad variable #2 in argument #"..i.." to 'func.Read' (speaker '"..speaker.."' does not exist)", 2) end;
-		--	Р”РµР»Р°РµРј РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ Р·Р°РґР°РІР°С‚СЊ РЅРѕРјРµСЂ СЂР°РЅРґРѕРјРЅРѕ. Slava98. 17.02.14.	
+		--	Делаем возможность задавать номер рандомно. Slava98. 17.02.14.	
 			if num == "random" then num = math.random(#level.dialog[dlg][level.dialog.lang][speaker]) end;
 			if type(level.dialog[dlg][level.dialog.lang][speaker][num]) ~= "string" then error("bad variable #3 in argument #1 to 'func.Read' (num '"..num.."' does not exist)", 2) end;
 		elseif type(args[i]) == "string" or type(args[i]) == "number" then 
@@ -2764,16 +2764,16 @@ function func.Read(...)
 	return table.concat(outputTab);
 end
 
--- Р’С‹РІРѕРґРёС‚ СЃРѕРѕР±С‰РµРЅРёРµ. Slava98.
+-- Выводит сообщение. Slava98.
 function func.Message(text, transmitToConsole)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(text) ~= "string" and type(text) ~= "table" then error("bad argument #1 to 'func.Message' (string or table expected, got "..type(text)..")", 2) return; end;
 	if type(transmitToConsole) ~= "boolean" and transmitToConsole ~= nil then error("bad argument #2 to 'func.Message' (boolean expected, got "..type(transmitToConsole)..")", 2) return; end;
 	
 	if transmitToConsole == nil then transmitToConsole = true; end;
 	
 	if type(text) == "table" then
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 		if type(text[1]) ~= "string" then error("bad variable #1 in argument #1 to 'func.Message' (string expected, got "..type(text[1])..")", 2) return; end;
 		if type(text[2]) ~= "string" then error("bad variable #2 in argument #1 to 'func.Message' (string expected, got "..type(text[2])..")", 2) return; end;
 		if type(text[3]) ~= "number" then error("bad variable #3 in argument #1 to 'func.Message' (number expected, got "..type(text[3])..")", 2) return; end;
@@ -2792,7 +2792,7 @@ function func.Message(text, transmitToConsole)
 	return text;
 end
 
--- Р’С‹РІРѕРґРёС‚ РѕРєРЅРѕ СЃ СЃРѕРѕР±С‰РµРЅРёРµРј. Slava98.
+-- Выводит окно с сообщением. Slava98.
 function func.MsgBox(text, msgTab, boxType)
 	if type(text) ~= "string" and type(text) ~= "table" then error("bad argument #1 to 'func.MsgBox' (string or table expected, got "..type(text)..")", 2) return; end;
 	if type(msgTab) ~= "table" and msgTab ~= nil then error("bad argument #2 to 'func.MsgBox' (table expected, got "..type(msgTab)..")", 2) return; end;
@@ -2808,7 +2808,7 @@ function func.MsgBox(text, msgTab, boxType)
 	end;
 	
 	if type(text) == "table" then
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 		if type(text[1]) ~= "string" then error("bad variable #1 in argument #1 to 'func.MsgBox' (string expected, got "..type(text[1])..")", 2) return; end;
 		if type(text[2]) ~= "string" then error("bad variable #2 in argument #1 to 'func.MsgBox' (string expected, got "..type(text[2])..")", 2) return; end;
 		if type(text[3]) ~= "number" then error("bad variable #3 in argument #1 to 'func.MsgBox' (number expected, got "..type(text[3])..")", 2) return; end;
@@ -2831,9 +2831,9 @@ function func.MsgBox(text, msgTab, boxType)
 	return text;
 end
 
--- РЎРѕР·РґР°С‘С‚ MsgBox, РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РЅРѕ РІС‹Р±СЂР°С‚СЊ РјРЅРѕР¶РµСЃС‚РІРѕ РІР°СЂРёР°РЅС‚РѕРІ РѕС‚РІРµС‚Р° РїРѕСЃСЂРµРґСЃС‚РІРѕРј РЅР°РґР°С‚РёСЏ РєРЅРѕРїРѕРє "Р’РІРµСЂС…", "Р’РЅРёР·" Рё "Р’С‹Р±СЂР°С‚СЊ".
+-- Создаёт MsgBox, в котором можно выбрать множество вариантов ответа посредством надатия кнопок "Вверх", "Вниз" и "Выбрать".
 function func.ListBox(text, sectionTab, chosedSectionNum, boxType, isButtonToSwitch, pointChar)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local chosedSectionNum = chosedSectionNum or 1;
 	local pointChar = pointChar or ">";
@@ -2884,15 +2884,15 @@ function func.ListBox(text, sectionTab, chosedSectionNum, boxType, isButtonToSwi
 	end;
 	
 	main.objects[boxType] = {text, sectionTab, chosedSectionNum, boxType, isButtonToSwitch, pointChar,
-		text = text, sectionTab = sectionTab, chosedSectionNum = chosedSectionNum, boxType = boxType, isButtonToSwitch = isButtonToSwitch, pointChar = pointChar}, -- Р­С‚Рѕ СЃРѕРІСЃРµРј РЅРµРїСЂР°РІРёР»СЊРЅРѕ, РЅРѕ РІСЃС‘ СЂР°РІРЅРѕ СЌС‚Рѕ РєРѕРіРґР°-РЅРёР±СѓРґСЊ СЃС‚Р°РЅРµС‚ РѕР±СЉРµРєС‚РѕРј. Slava98. 21.05.14.
+		text = text, sectionTab = sectionTab, chosedSectionNum = chosedSectionNum, boxType = boxType, isButtonToSwitch = isButtonToSwitch, pointChar = pointChar}, -- Это совсем неправильно, но всё равно это когда-нибудь станет объектом. Slava98. 21.05.14.
 	
 	func.MsgBox(finalText, {on_select="local boxTab = main.objects['"..boxType.."']; local sectionTab = boxTab[2]; local num = boxTab[3]; if n == 1 then if #sectionTab[num].stringTab > sectionTab[num].chosedStringNum then sectionTab[num].chosedStringNum = sectionTab[num].chosedStringNum + 1; else sectionTab[num].chosedStringNum = 1; if #sectionTab > num then boxTab[3] = num + 1; sectionTab[boxTab[3]].chosedStringNum = 1; elseif #sectionTab == num then boxTab[3] = 1; sectionTab[boxTab[3]].chosedStringNum = 1; end; end; func.ListBox(unpack(boxTab)); elseif n == 2 then if 1 < sectionTab[num].chosedStringNum then sectionTab[num].chosedStringNum = sectionTab[num].chosedStringNum - 1; else sectionTab[num].chosedStringNum = #sectionTab[num].stringTab; if 1 < num then boxTab[3] = num - 1; sectionTab[boxTab[3]].chosedStringNum = #sectionTab[boxTab[3]].stringTab; elseif 1 == num then boxTab[3]=#sectionTab; sectionTab[boxTab[3]].chosedStringNum = #sectionTab[boxTab[3]].stringTab; end; end; func.ListBox(unpack(boxTab)); elseif n == 3 then if type(sectionTab[boxTab[3]].funcTab[sectionTab[num].chosedStringNum]) == 'string' then loadstring(sectionTab[boxTab[3]].funcTab[sectionTab[num].chosedStringNum])() elseif type(sectionTab[num].funcTab[sectionTab[num].chosedStringNum]) == 'function' then sectionTab[num].funcTab[sectionTab[num].chosedStringNum](sectionTab[num].chosedStringNum) end; end" , option1=func.Read({"main", "menu", 39}), option2=func.Read({"main", "menu", 38}), option3=func.Read({"main", "menu", 40})}, boxType)
 	return chosedStringNum;
 end
 
--- РџСЂРѕРёРіСЂС‹РІР°РµС‚ С‚СЂРµРє. *РџС‹С‚Р°Р»СЃСЏ СЃРґРµР»Р°С‚СЊ РїР»Р°РІРЅС‹Р№ РїРµСЂРµС…РѕРґ РјСѓР·С‹РєРё, РЅР° РґР°РЅРЅРѕР№ РІРµСЂСЃРёРё РўР—РћР”Р° СЌС‚Рѕ РЅРµРІРѕР·РјРѕР¶РЅРѕ, С‚.Рє. РіСЂРѕРјРєРѕСЃС‚СЊ РјСѓР·С‹РєРё РѕР±РЅРѕРІР»СЏРµС‚СЃСЏ Р»РёС€СЊ РІ РЅР°С‡Р°Р»Рµ, Р° РЅРµ РЅР° РїСЂРѕС‚СЏР¶РµРЅРёРё РІСЃРµРіРѕ С‚СЂРµРєР°. Р—Р°Р±Р°Р¶РµРЅРѕ. РСЃРїСЂР°РІР»СЏС‚СЊ СЃРјС‹СЃР»Р° РЅРµС‚ РїРѕРє РЅРёРєР°РєРѕРіРѕ. Slava98. 28.02.14.
+-- Проигрывает трек. *Пытался сделать плавный переход музыки, на данной версии ТЗОДа это невозможно, т.к. громкость музыки обновляется лишь в начале, а не на протяжении всего трека. Забажено. Исправлять смысла нет пок никакого. Slava98. 28.02.14.
 function func.Play(musfile, smoothBeginning, smoothEnd)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if smoothBeginning ~= true then smoothBeginning = false; end;
 	if smoothEnd ~= false then smoothEnd = true; end;
@@ -2920,22 +2920,22 @@ function func.Play(musfile, smoothBeginning, smoothEnd)
 end
 
 function func.Play(musfile)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	main.music.currentTrack = musfile;
 	music("..\\campaign\\War System\\music\\"..main.music.currentTrack..".ogg")
 end
 
--- РџСЂРѕРёРіСЂС‹РІР°РµС‚ Р·РІСѓРє.
+-- Проигрывает звук.
 function func.Sound(musfile, obj)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
-	if not exists(const.playerVehName) then return; end; -- Р•СЃР»Рё РЅРµС‚ РёРіСЂРѕРєР°, С‚Рѕ Р·РІСѓРєРё, Рє СЃРѕР¶Р°Р»РµРЅРёСЋ, РЅРµ РїСЂРѕРёРіСЂС‹РІР°СЋС‚СЃСЏ.
+	if not exists(const.playerVehName) then return; end; -- Если нет игрока, то звуки, к сожалению, не проигрываются.
 	obj = obj or const.playerVehName;
 	play_sound(obj, "campaign\\War System\\sound\\"..musfile..".ogg")
 end
 
--- РњРµРЅСЏРµС‚ С‚РµРєСѓС‰СѓСЋ РјРёСЃСЃРёСЋ. Slava98.
+-- Меняет текущую миссию. Slava98.
 function func.MissionChange(a, i, text)
 	if type(text) ~= "string" and text ~= nil then func.PrintError("bad argument #1 to 'func.MissionChange' (string expected, got "..type(tab)..")") return; end;
 	if a == "main" then 
@@ -2966,12 +2966,12 @@ function func.MissionChange(a, i, text)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
-------------------------------------------- РЎР»СѓР¶РµР±РЅС‹Рµ С„СѓРЅРєС†РёРё -------------------------------------------------------
+------------------------------------------- Служебные функции -------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
--- РћР±СЉРµРґРёРЅСЏРµС‚ РґРІРµ С‚Р°Р±Р»РёС†С‹ РІ РѕРґРЅСѓ, РєРѕС‚РѕСЂСѓСЋ Рё РІРѕР·РІСЂР°С‰Р°РµС‚.
+-- Объединяет две таблицы в одну, которую и возвращает.
 function func.UniteTables(tab1, tab2)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 	if type(tab1) ~= "table" then error("bad argument #1 to 'func.UniteTables' (table expected, got "..type(tab1)..")", 2) return; end;
 	if type(tab2) ~= "table" then error("bad argument #2 to 'func.UniteTables' (table expected, got "..type(tab2)..")", 2) return; end;
 
@@ -2985,7 +2985,7 @@ function func.UniteTables(tab1, tab2)
 end
 
 function func.CopyTable(tab)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local ctab = {};
 	for i = 1, table.maxn(tab) do
@@ -2997,9 +2997,9 @@ function func.CopyTable(tab)
 	return ctab;
 end
 
--- РС‰РµС‚ СЌР»РµРјРµРЅС‚ РІ С‚Р°Р±Р»РёС†Рµ. Р’РѕР·РІСЂР°С‰Р°РµС‚ true РёР»Рё РЅРѕРјРµСЂ СЌР»РµРјРµРЅС‚Р° (РµСЃР»Рё СЌС‚Рѕ РјР°СЃСЃРёРІ) РїСЂРё СѓРґР°С‡Рµ РїРѕРёСЃРєР°, Рё false РїСЂРё РЅРµСѓРґР°С‡Рµ. 
+-- Ищет элемент в таблице. Возвращает true или номер элемента (если это массив) при удаче поиска, и false при неудаче. 
 function func.Search(tab, searched)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	for i = 1, table.maxn(tab) do
 		if tab[i] == searched then return i; end;
@@ -3015,9 +3015,9 @@ function func.ToBoolean(value)
 	if value then return true; else return false; end;
 end
 
--- Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ С‚Р°Р±Р»РёС†Рµ. Slava98.
+-- Возвращает количество элементов в таблице. Slava98.
 function func.ValueNumber(tab)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 	
 	local num = 0;
 	for n, v in pairs(tab) do
@@ -3026,16 +3026,16 @@ function func.ValueNumber(tab)
 	return num;
 end
 
--- Р•СЃР»Рё Р°СЂРіСѓРјРµРЅС‚ РЅРµ СЏРІР»СЏРµС‚СЃСЏ С‚Р°Р±Р»РёС†РµР№, С‚Рѕ РІРѕР·РІСЂР°С‰Р°РµС‚ РїСѓСЃС‚СѓСЋ С‚Р°Р±Р»РёС†Сѓ.
+-- Если аргумент не является таблицей, то возвращает пустую таблицу.
 function func.DoTable(tab)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if type(tab) ~= "table" then return {}; else return tab; end;
 end
 
--- Р’РѕР·РІСЂР°С‰Р°РµС‚ РЅРѕРјРµСЂ СЃР°РјРѕРіРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІ РјР°СЃСЃРёРІРµ. Slava98. 07.12.13.
+-- Возвращает номер самого максимального элемента в массиве. Slava98. 07.12.13.
 function func.ArrayMax(array)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local maxNum = array[1];
 	local elementNum = 1;
@@ -3045,9 +3045,9 @@ function func.ArrayMax(array)
 	return elementNum;
 end
 
--- Р’РѕР·РІСЂР°С‰Р°РµС‚ РЅРѕРјРµСЂ СЃР°РјРѕРіРѕ РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІ РјР°СЃСЃРёРІРµ. Slava98. 07.12.13.
+-- Возвращает номер самого минимального элемента в массиве. Slava98. 07.12.13.
 function func.ArrayMin(array)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local minNum = array[1];
 	local elementNum = 1;
@@ -3057,9 +3057,9 @@ function func.ArrayMin(array)
 	return elementNum;
 end
 
--- Р›РѕРіРёС‡РµСЃРєРёРµ С„СѓРЅРєС†РёРё. Р’ Р±СѓРґСѓС‰РµРј РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р·Р°РЅРµСЃС‚Рё РІ С‚Р°Р±Р»РёС†Сѓ logic.
+-- Логические функции. В будущем должны быть занести в таблицу logic.
 
--- Р’РѕР·РІСЂР°С‰Р°РµС‚ true РёР»Рё false СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј. Slava98.
+-- Возвращает true или false случайным образом. Slava98.
 function func.RandomBoolean()
 	if math.random(0, 1) == 1 then
 		return true;
@@ -3068,34 +3068,34 @@ function func.RandomBoolean()
 	end;
 end
 
--- Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРµСЂРІРѕРµ РёР»Рё РІС‚РѕСЂРѕРµ Р·РЅР°С‡РµРЅРёРµ СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј. Slava98.
+-- Возвращает первое или второе значение случайным образом. Slava98.
 function func.OrGate(firstValue, secondValue)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if math.random(0, 1) == 1 then return firstValue;
 	else return secondValue;
 	end;
 end
 
--- РРЅРІРµРЅСЂС‚РёСЂСѓРµС‚ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ. Slava98.
+-- Инвенртирует булевое значение. Slava98.
 function func.InvertBoolean(booVal)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if booVal then return false; else return true; end;
 end
 
 function func.Condition(booVal, valIfTrue, valIfFalse)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕРѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик оошибок (написать).
 
 	if booVal then return valIfTrue; else return valIfFalse; end;
 end
 
--- РџРѕР·РІРѕР»СЏРµС‚ СЃРѕР·РґР°С‚СЊ СЂРµРєСѓСЂСЃРёСЋ РЅР° РѕРїСЂРµРґРµР»С‘РЅРЅРѕРµ РІСЂРµРјСЏ СЃ РѕРїСЂРµРґРµР»С‘РЅРЅРѕР№ С‡Р°СЃС‚РѕС‚РѕР№, С‚Р°РєР¶Рµ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІ РєР°С‡РµСЃС‚РІРµ С‚Р°Р№РјРµСЂР°. Slava98. 27.12.13.
+-- Позволяет создать рекурсию на определённое время с определённой частотой, также можно использовать в качестве таймера. Slava98. 27.12.13.
 function func.Recmd(funcTab, argsTab, timer, frequency)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 	
 	local allowTimer = true;
-	if not funcTab.StartFunc and funcTab[1] then funcTab.StartFunc = funcTab[1]; end; -- Р”Р°РґРёРј РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РјР°РїРµСЂСѓ Р·Р°РЅРѕСЃРёС‚СЊ С„СѓРЅРєС†РёРё Р±РѕР»РµРµ СѓРґРѕР±РЅС‹ СЃРїРѕСЃРѕР±РѕРј. Slava98. 05.01.14.
+	if not funcTab.StartFunc and funcTab[1] then funcTab.StartFunc = funcTab[1]; end; -- Дадим возможность маперу заносить функции более удобны способом. Slava98. 05.01.14.
 	if not funcTab.CircleFunc and funcTab[2] then funcTab.CircleFunc = funcTab[2]; end;
 	if not funcTab.FinishFunc and funcTab[3] then funcTab.FinishFunc = funcTab[3]; end;
 	local funcTab = func.UniteTables({
@@ -3113,9 +3113,9 @@ function func.Recmd(funcTab, argsTab, timer, frequency)
 	pushcmd(function() allowTimer = false; end, timer)
 end
 
--- РЇРІР»СЏРµС‚СЃСЏ РїСЂРѕРІРµСЂРєРѕР№ СѓРґР°С‡Рё РіР»Р°РІРЅРѕРіРѕ РіРµСЂРѕСЏ. Slava98
+-- Является проверкой удачи главного героя. Slava98
 function func.CheckOfLuck(luck)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 	
 	if not exists(const.playerName) then return true; end;
 	if luck <= main.characters[const.playerName].ruleset.luck then
@@ -3125,9 +3125,9 @@ function func.CheckOfLuck(luck)
 	end;
 end
 
--- РџРѕР·РІРѕР»СЏРµС‚ Р·Р°РЅРµСЃС‚Рё С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РѕР±СЉРµРєС‚Р° РІ РјР°СЃСЃРёРІ (Р·Р°РїРѕРјРЅРёС‚СЊ РѕР±СЉРµРєС‚). Slava98.
+-- Позволяет занести характеристики объекта в массив (запомнить объект). Slava98.
 function func.ObjectCopy(obj)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	if exists(obj) then 
 		local link = object(obj);
@@ -3141,9 +3141,9 @@ function func.ObjectCopy(obj)
 	end;
 end
 
--- РџСЂРµРѕР±СЂР°Р·РѕРІС‹РІР°РµС‚ РјРµС‚Р°С‚Р°Р±Р»РёС†Сѓ СЃ РїСЂРѕРїРµСЂС‚Р°РјРё РІ РѕР±С‹С‡РЅСѓСЋ С‚Р°Р±Р»РёС†Сѓ, СЃ РєРѕС‚РѕСЂРѕР№ РјРѕР¶РµС‚ СЂР°Р±РѕС‚Р°С‚СЊ Р›СѓР°. Slava98.
+-- Преобразовывает метатаблицу с пропертами в обычную таблицу, с которой может работать Луа. Slava98.
 function func.PropertiesToTable(metatable)
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
 	local a = getmetatable(metatable);
 	local proptab = {};
@@ -3155,9 +3155,9 @@ function func.PropertiesToTable(metatable)
 	return proptab;
 end
 
--- РџРѕР·РІРѕР»СЏРµС‚ РёР· СЃРїРµС†РёР°Р»СЊРЅРѕРіРѕ РјР°СЃСЃРёРІР°, СЃРѕР·РґР°РЅРЅРѕРіРѕ С„СѓРЅРєС†РёРµР№ func.Remember РІРѕСЃСЃРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚ (РІСЃРїРѕРјРЅРёС‚СЊ РѕР±СЉРµРєС‚). Slava98.
-function func.ObjectPaste(tab, name, x, y) --name, x, y РїРѕРєР° РЅРµ СЂР°Р±РѕС‚Р°СЋС‚. Slava98. 28.05.13.
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Позволяет из специального массива, созданного функцией func.Remember воссоздать объект (вспомнить объект). Slava98.
+function func.ObjectPaste(tab, name, x, y) --name, x, y пока не работают. Slava98. 28.05.13.
+-- Обработчик ошибок (написать).
 
 	tab.link.name = name or tab.link.name;
 	tab.x = x or tab.x;
@@ -3169,11 +3169,11 @@ function func.ObjectPaste(tab, name, x, y) --name, x, y РїРѕРєР° РЅРµ СЂР°Р±РѕС‚
 	end;
 end
 
--- Р РµС€Р°РµС‚ СѓСЂР°РІРЅРµРЅРёСЏ. Slava98.
+-- Решает уравнения. Slava98.
 function func.SolveEquation(eqTab, minX, maxX, minY, maxY) -- {{"x+y", "5"}, {"x-y", "2"}}
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (РЅР°РїРёСЃР°С‚СЊ).
+-- Обработчик ошибок (написать).
 
--- РћР±СЉСЏРІР»РµРЅРёРµ Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С….
+-- Объявление локальных переменных.
 	local minX = minX or -1000;
 	local maxX = maxX or  1000;
 	local minY = minY or -1000;
@@ -3190,7 +3190,7 @@ function func.SolveEquation(eqTab, minX, maxX, minY, maxY) -- {{"x+y", "5"}, {"x
 	end;
 
 	for x = minX, maxX do
-		for y = minY, maxY do -- РњРѕР¶РЅРѕ СЂРµС€Р°С‚СЊ РїСЂРёРјРµСЂС‹ Рё Р±РµР· y. РўР°РєР¶Рµ СЃР»РµРґСѓРµС‚ РїСЂРµРґСѓСЃРјРѕС‚СЂРµС‚СЊ z.
+		for y = minY, maxY do -- Можно решать примеры и без y. Также следует предусмотреть z.
 			local cStr;
 			for i = 1, #eqFuncTab do
 				if i == 1 then cStr = "if eqFuncTab["..i.."][1] == eqFuncTab["..i.."][2]";
@@ -3204,8 +3204,8 @@ function func.SolveEquation(eqTab, minX, maxX, minY, maxY) -- {{"x+y", "5"}, {"x
 end
 
 ---------------------------------------------------------------------------------------------------------------------
--------------------------------------------- Р“РµРЅРµСЂР°С†РёСЏ СѓСЂРѕРІРЅСЏ -------------------------------------------------------
------------------------------------ (Р·Р°РјРѕСЂРѕР¶РµРЅРѕ РЅР° РЅРµРѕРїСЂРµРґРµР»С‘РЅРЅС‹Р№ СЃСЂРѕРє) ---------------------------------------------
+-------------------------------------------- Генерация уровня -------------------------------------------------------
+----------------------------------- (заморожено на неопределённый срок) ---------------------------------------------
 
 function func.gen.DrawLine(x1, x2, block, features)
 	
@@ -3249,7 +3249,7 @@ function func.gen.LmpRead(lmp)
 				text = text..char
 			else
 				rawset(val.a[i], rawget(values, val_num), text)
---				val.a[i][values[val_num]] = text; -- Р‘СѓРґСѓС‰РёР№ РІР°СЂРёР°РЅС‚. Slava98. 13.09.13.
+--				val.a[i][values[val_num]] = text; -- Будущий вариант. Slava98. 13.09.13.
 				if val_num ~= 4 then val_num = val_num + 1 else char = "" end
 				text = ""
 			end
@@ -3259,8 +3259,8 @@ function func.gen.LmpRead(lmp)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
-------------------------------------------------- Р—РѕРЅС‹ --------------------------------------------------------------
------------------------------------ (Р·Р°РјРѕСЂРѕР¶РµРЅРѕ РЅР° РЅРµРѕРїСЂРµРґРµР»С‘РЅРЅС‹Р№ СЃСЂРѕРє) ---------------------------------------------
+------------------------------------------------- Зоны --------------------------------------------------------------
+----------------------------------- (заморожено на неопределённый срок) ---------------------------------------------
 
 function func.ZoneLoop(zone)
 	for i = 1, table.maxn(main.NPC.list) do
@@ -3274,11 +3274,11 @@ end
 
 
 function func.CoordRectangleFix(coords1, coords2)
--- Р—Р°РјРµРЅСЏРµРј РЅРµРєРѕС‚РѕСЂС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ С„СѓРЅРєС†РёСЏ РІС‹РіР»СЏРґРµР»Р° РїРѕРЅСЏС‚РЅРµРµ.
+-- Заменяем некоторые переменные для того, чтобы функция выглядела понятнее.
 	coords1.x = coords1[1]; coords1.y = coords1[2];
 	coords2.x = coords2[1]; coords2.y = coords2[2];
 	
--- РћР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє.
+-- Обработчик ошибок.
 	if type(coords1) ~= "table" then error("bad argument #1 to 'func.CoordRectangleFix' (table expected, got "..type(coords1)..")") return; end
 	if type(coords2) ~= "table" then error("bad argument #2 to 'func.CoordRectangleFix' (table expected, got "..type(coords2)..")") return; end
 	if type(coords1.x) ~= "number" then error("bad variable #1 in argument #1 to 'func.CoordRectangleFix' (number expected, got "..type(coords1.x)..")", 2) return; end
@@ -3286,7 +3286,7 @@ function func.CoordRectangleFix(coords1, coords2)
 	if type(coords2.x) ~= "number" then error("bad variable #1 in argument #2 to 'func.CoordRectangleFix' (number expected, got "..type(coords2.x)..")", 2) return; end
 	if type(coords2.y) ~= "number" then error("bad variable #2 in argument #2 to 'func.CoordRectangleFix' (number expected, got "..type(coords2.y)..")", 2) return; end
 	
-	if coords2.x > coords1.x and coords2.y > coords1.y then return {coords1, coords2}; -- РџСЂР°РІРёР»СЊРЅС‹Р№ РІР°СЂРёР°РЅС‚.
+	if coords2.x > coords1.x and coords2.y > coords1.y then return {coords1, coords2}; -- Правильный вариант.
 	elseif coords2.x < coords1.x and coords2.y < coords1.y then return {coords2, coords1}; -- new-new_coords = {coords2, coords1}...
 	elseif coords2.x < coords1.x and coords2.y > coords1.y then new_coords1 = {coords1.x, coords2,y}; new_coords2 = {coords2.x, coords1,y} return {new_coords1, new_coords2};
 	elseif coords2.x > coords1.x and coords2.y < coords1.y then new_coords1 = {coords2.x, coords1,y}; new_coords2 = {coords1.x, coords2,y} return {new_coords1, new_coords2};
@@ -3294,8 +3294,8 @@ function func.CoordRectangleFix(coords1, coords2)
 end
 
 --------------------------------------------------------------------------------------------------------------------
-------------------------------------------- Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Р№ СѓСЂРѕРЅ -----------------------------------------------------
------------------------------------ (Р·Р°РјРѕСЂРѕР¶РµРЅРѕ РЅР° РЅРµРѕРїСЂРµРґРµР»С‘РЅРЅС‹Р№ СЃСЂРѕРє) ---------------------------------------------
+------------------------------------------- Дополнительный урон -----------------------------------------------------
+----------------------------------- (заморожено на неопределённый срок) ---------------------------------------------
 
 function func.tank.ExtraDamage(attacker, prey)
 	if attacker ~= nil and objtype(attacker.name) == "tank" then
@@ -3308,7 +3308,7 @@ end
 
 -------------------------------------------
 
--- РЎР°РјР°СЏ РЅСѓР¶РЅР°СЏ С„СѓРЅРєС†РёСЏ. Slava98.
+-- Самая нужная функция. Slava98.
 function func.Test()
 	
 end

@@ -1,50 +1,50 @@
 
---РџСЂРёСЃРІР°РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ РїРµСЂРµРјРµРЅРЅС‹Рј.
+--Присваиваем значения переменным.
 level.screenplay = {
---	energyCells = 0, -- РљРѕР»РёС‡РµСЃС‚РІРѕ Р±Р°С‚Р°СЂРµР№. РЈСЃС‚Р°СЂРµРІС€Р°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ.
-	isEnemyAttack = false, -- РџСЂРѕРёСЃС…РѕРґРёС‚ Р»Рё РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚ Р»Рё Р°С‚Р°РєР° РІСЂР°РіРѕРІ. РќРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ.
-	wasEnemyAttack = false, -- РџСЂРѕРёР·РѕС€Р»Р° Р»Рё Р°С‚Р°РєР° РІСЂР°РіРѕРІ.
-	statueIsDamaged = false, -- РџРѕРІСЂРµР¶РґРµРЅР° Р»Рё СЃС‚Р°С‚СѓСЏ РёР»Рё РµС‘ СЌСЃРєР°РІР°С‚РѕСЂС‹.
-	missionBoo = 0, -- Р­С‚Р°Рї Р·Р°РґР°РЅРёСЏ РїСЂРѕ Р±Р°С‚Р°СЂРµРё: 0 - РЅРµ РґР°РЅРѕ, 1 - РґР°РЅРѕ, 2 - РІС‹РїРѕР»РЅРµРЅРѕ, 3 - РѕСЃС‚Р°Р»СЃСЏ РµС‰С‘ РѕРґРёРЅ Р±СѓСЃС‚РµСЂ, 4 - РІСЃС‘ РґРѕСЃС‚Р°С‚Рѕ.
-	missionKey = 0, -- Р­С‚Р°Рї Р·Р°РґР°РЅРёСЏ РїСЂРѕ СЃРїСѓС‚РЅРёРєРѕРІСѓСЋ С‚Р°СЂРµР»РєСѓ: 0 - РЅРµ РґР°РЅРѕ, 1 - РґР°РЅРѕ, 2 - РІР·СЏС‚Р° РєР°СЂС‚Р°, 3 - РІС‹РїРѕР»РЅРµРЅРѕ.
-	enemyInSettle = 0, -- Р•СЃС‚СЊ Р»Рё РІСЂР°Рі РІ РїРѕСЃРµР»РµРЅРёРё. РќРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ.
-	keyIsGot = false, -- Р’Р·СЏС‚ Р»Рё РєР»СЋС‡ РїРѕСЃРµР»РµРЅС†РµРј. *РќРµ РґСѓРјР°СЋ, С‡С‚Рѕ СЃРµР№С‡Р°СЃ СЌС‚Рѕ Р°РєС‚СѓР°Р»СЊРЅРѕ. Slava98. 04.01.14.
-	oldTurretIsActive = false, -- Р‘СѓРґРµС‚ Р»Рё СЃС‚Р°СЂР°СЏ СЂР°РєРµС‚РЅРёС†Р° Р°РєС‚РёРІРёР·РёСЂРѕРІР°С‚СЊСЃСЏ РїСЂРё РґР°РјР°РіРµ.
-	ruinGeneratorIsActive = true; -- Р Р°Р±РѕС‚Р°РµС‚ Р»Рё СЃС‚Р°СЂС‹Р№ РіРµРЅРµСЂР°С‚РѕСЂ СЌРЅРµСЂРіРёРё.
-	eskavatorDropedBomb = false, -- Р’С‹РїР°Р»Р° Р»Рё Р±РѕРјР±Р° СЃ РѕРґРЅРѕРіРѕ РёР· СЌСЃРєР°РІР°С‚РѕСЂРѕРІ.
-	halosWasSpoke = false, -- РџРѕРіРѕРІРѕСЂРёР» Р»Рё РёРіСЂРѕРє СЃ РҐР°Р»РѕСЃРѕРј.
-	halosKnowsAboutDoor = false, -- Р—РЅР°РµС‚ Р»Рё РҐР°Р»РѕСЃ Рѕ С‚РѕРј, С‡С‚Рѕ РґРІРµСЂСЊ Р·Р°РіР»СЋС‡РёР»Рѕ.
-	halosHasGotBoo = false, -- РћС‚РґР°Р»Рё Р»Рё РјС‹ РҐР°Р»РѕСЃСѓ 4 Р±Р°С‚Р°СЂРµРё.
-	playerKnowsAboutTerminal = false, -- Р’РёРґРµР» Р»Рё РёРіСЂРѕРє РѕРїРёСЃР°РЅРёРµ С‚РµСЂРјРёРЅР°Р»Р°.
-	playerCanRideToSettle = false, -- РњРѕР¶РµС‚ Р»Рё РёРіСЂРѕРє Р·Р°РµС…Р°С‚СЊ РІ РїРѕСЃРµР»РµРЅРёРµ.
-	ourwarrior5WasTalked = false, -- РџРѕРіРѕРІРѕСЂРёР» Р»Рё РёРіСЂРѕРє СЃ Р Р°РЅРѕРЅРѕРј.
-	ranonIsNearSettle = false, -- РќР°С…РѕРґРёС‚СЃСЏ Р»Рё Р Р°РЅРѕРЅ РѕРєРѕР»Рѕ РїРѕСЃРµР»РµРЅРёСЏ.
-	playerMustPressPassword = false, -- Р”РѕР»Р¶РµРЅ Р»Рё РёРіСЂРѕРє РІРІРµСЃС‚Рё РїР°СЂРѕР»СЊ (РїРѕСЃР»Рµ РґРёР°Р»РѕРіР° Р Р°РЅРѕРЅР° СЃ РїРѕСЃРµР»РµРЅС†РµРј).
-	banditsAttackedPlayer = false, -- РђС‚Р°РєРѕРІР°Р»Рё Р»Рё Р±Р°РЅРґРёС‚С‹ РёРіСЂРѕРєР°.
-	ranonAttackedBandits = false, -- РђС‚Р°РєРѕРІР°Р» Р»Рё Р Р°РЅРѕРЅ Р±Р°РЅРґРёС‚РѕРІ.
+--	energyCells = 0, -- Количество батарей. Устаревшая переменная.
+	isEnemyAttack = false, -- Происходит ли в данный момент ли атака врагов. Не используется.
+	wasEnemyAttack = false, -- Произошла ли атака врагов.
+	statueIsDamaged = false, -- Повреждена ли статуя или её эскаваторы.
+	missionBoo = 0, -- Этап задания про батареи: 0 - не дано, 1 - дано, 2 - выполнено, 3 - остался ещё один бустер, 4 - всё достато.
+	missionKey = 0, -- Этап задания про спутниковую тарелку: 0 - не дано, 1 - дано, 2 - взята карта, 3 - выполнено.
+	enemyInSettle = 0, -- Есть ли враг в поселении. Не используется.
+	keyIsGot = false, -- Взят ли ключ поселенцем. *Не думаю, что сейчас это актуально. Slava98. 04.01.14.
+	oldTurretIsActive = false, -- Будет ли старая ракетница активизироваться при дамаге.
+	ruinGeneratorIsActive = true; -- Работает ли старый генератор энергии.
+	eskavatorDropedBomb = false, -- Выпала ли бомба с одного из эскаваторов.
+	halosWasSpoke = false, -- Поговорил ли игрок с Халосом.
+	halosKnowsAboutDoor = false, -- Знает ли Халос о том, что дверь заглючило.
+	halosHasGotBoo = false, -- Отдали ли мы Халосу 4 батареи.
+	playerKnowsAboutTerminal = false, -- Видел ли игрок описание терминала.
+	playerCanRideToSettle = false, -- Может ли игрок заехать в поселение.
+	ourwarrior5WasTalked = false, -- Поговорил ли игрок с Раноном.
+	ranonIsNearSettle = false, -- Находится ли Ранон около поселения.
+	playerMustPressPassword = false, -- Должен ли игрок ввести пароль (после диалога Ранона с поселенцем).
+	banditsAttackedPlayer = false, -- Атаковали ли бандиты игрока.
+	ranonAttackedBandits = false, -- Атаковал ли Ранон бандитов.
 };
 level.functions = {
-	sidedoorStatus = 4, -- Р‘РѕРєРѕРІР°СЏ РґРІРµСЂСЊ: 0 - Р·Р°РєСЂС‹С‚Рѕ, 1 - РѕС‚РєСЂС‹С‚Рѕ, 2 - РѕС‚РєСЂС‹РІР°РµС‚СЃСЏ, 3 - Р·Р°РєСЂС‹РІР°РµС‚СЃСЏ, 4 - РѕРїРµС‡Р°С‚Р°РЅРѕ.
-	tanksNearSettleNum = 0, -- РљРѕР»РёС‡РµСЃС‚РІРѕ С‚Р°РЅРєРѕРІ РїРµСЂРІРѕР№ РєРѕРјР°РЅРґС‹ Сѓ РїРѕСЃРµР»РµРЅРёСЏ.
-	silentSidedoor = false, -- Р‘РµСЃС€СѓРјРЅР°СЏ Р»Рё РґРІРµСЂСЊ РІ РїРѕСЃРµР»РµРЅРёРµ.
-	esc1BlewUp = false; -- Р’Р·РѕСЂРІР°Р»СЃСЏ Р»Рё РїРµСЂРІС‹Р№ СЌРєСЃРєР°РІР°С‚РѕСЂ.
-	esc2BlewUp = false; -- Р’Р·РѕСЂРІР°Р»СЃСЏ Р»Рё РІС‚РѕСЂРѕР№ СЌРєСЃРєР°РІР°С‚РѕСЂ.
-	esc3BlewUp = false; -- Р’Р·РѕСЂРІР°Р»СЃСЏ Р»Рё С‚СЂРµС‚РёР№ СЌРєСЃРєР°РІР°С‚РѕСЂ.
-	settleEnemy = "", -- РРјСЏ РІСЂР°РіР° РїРѕСЃРµР»РµРЅРёСЏ. РќРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ Рё РІРѕРѕР±С‰Рµ Р»СѓС‡С€Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РЅР°РґРѕ Р±С‹Р»Рѕ РјР°СЃСЃРёРІ, РЅР°РІРµСЂРЅРѕРµ.
-	settlersAreEnemies = false, -- Р’СЂР°Р¶РґРµР±РЅРѕ Р»Рё РѕС‚РЅРѕСЃСЏС‚СЃСЏ Рє РёРіСЂРѕРєСѓ РїРѕСЃРµР»РµРЅС†С‹.
-	settlersNearSettleNum = 0, -- Р§РёСЃР»Рѕ РїРѕСЃРµР»РµРЅС†РµРІ Сѓ РІС…РѕРґР° РІ РїРѕСЃРµР»РµРЅРёРµ.
+	sidedoorStatus = 4, -- Боковая дверь: 0 - закрыто, 1 - открыто, 2 - открывается, 3 - закрывается, 4 - опечатано.
+	tanksNearSettleNum = 0, -- Количество танков первой команды у поселения.
+	silentSidedoor = false, -- Бесшумная ли дверь в поселение.
+	esc1BlewUp = false; -- Взорвался ли первый экскаватор.
+	esc2BlewUp = false; -- Взорвался ли второй экскаватор.
+	esc3BlewUp = false; -- Взорвался ли третий экскаватор.
+	settleEnemy = "", -- Имя врага поселения. Не используется и вообще лучше использовать надо было массив, наверное.
+	settlersAreEnemies = false, -- Враждебно ли относятся к игроку поселенцы.
+	settlersNearSettleNum = 0, -- Число поселенцев у входа в поселение.
 	infolinkHealth = {
-		settle = 10, -- РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶РёР·РЅРµР№ Сѓ РёРЅС„РѕР»РёРЅРєР° РЅР° РІСЉРµР·РґРµ РІ Р±Р°Р·Сѓ.
-		tunnels = 10, -- РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶РёР·РЅРµР№ Сѓ РёРЅС„РѕР»РёРЅРєР° РЅР° РІСЉРµР·РґРµ РІ С‚СѓРЅРЅРµР»Рё РїРѕРґ Р±Р°Р·РѕР№.
-		ruins = 10, -- РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶РёР·РЅРµР№ Сѓ РёРЅС„РѕР»РёРЅРєР° РЅР° СЃРєР»Р°РґРµ РІ СЂСѓРёРЅР°С….		
+		settle = 10, -- Количество жизней у инфолинка на въезде в базу.
+		tunnels = 10, -- Количество жизней у инфолинка на въезде в туннели под базой.
+		ruins = 10, -- Количество жизней у инфолинка на складе в руинах.		
 	},
-	infolinkSettleHealth = 200, -- РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶РёР·РЅРµР№ Сѓ РёРЅС„РѕР»РёРЅРєР° РЅР° РІСЉРµР·РґРµ РІ Р±Р°Р·Сѓ.
-	infolinkTunnelsHealth = 200, -- РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶РёР·РЅРµР№ Сѓ РёРЅС„РѕР»РёРЅРєР° РЅР° РІСЉРµР·РґРµ РІ С‚СѓРЅРЅРµР»Рё РїРѕРґ Р±Р°Р·РѕР№.
-	infolinkRuinsHealth = 200, -- РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶РёР·РЅРµР№ Сѓ РёРЅС„РѕР»РёРЅРєР° РЅР° СЃРєР»Р°РґРµ РІ СЂСѓРёРЅР°С….
+	infolinkSettleHealth = 200, -- Количество жизней у инфолинка на въезде в базу.
+	infolinkTunnelsHealth = 200, -- Количество жизней у инфолинка на въезде в туннели под базой.
+	infolinkRuinsHealth = 200, -- Количество жизней у инфолинка на складе в руинах.
 };
 level.objects = {};
 level.zones = {
-	settle = {{1, 1}, {5, 5}}, -- РљРѕРѕСЂРґРёРЅР°С‚С‹ Р·РѕРЅС‹. РќРµ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ. Р—Р°РјРѕСЂРѕР¶РµРЅРѕ.
+	settle = {{1, 1}, {5, 5}}, -- Координаты зоны. Не используются. Заморожено.
 };
 level.talk = {
 	settlersTalkPart = 0,
@@ -64,7 +64,7 @@ level.attackSpeaks = {
 	bandits = {},
 };
 
--- Р—Р°РїРѕРјРёРЅР°РµРј РѕР±СЉРµРєС‚С‹, РєРѕС‚РѕСЂС‹Рµ РїРѕС‚РѕРј Р±СѓРґРµРј СѓР±РёСЂР°С‚СЊ Рё РІРѕР·РІСЂР°С‰Р°С‚СЊ РѕР±СЂР°С‚РЅРѕ. Slava98. 28.05.13.
+-- Запоминаем объекты, которые потом будем убирать и возвращать обратно. Slava98. 28.05.13.
 level.objects.saron1 = func.ObjectCopy("saron1");
 level.objects.a1 = func.ObjectCopy("a1");
 level.objects.a2 = func.ObjectCopy("a2");
@@ -100,10 +100,10 @@ func.GiveItem("boo", "ourwarrior4")
 func.NPC.Create("statue", 240, 944, 0, 2, 2, {skin="rebel_camouflage", class="default"}, {faction="cypher", rank=2,  group="statue", currentWeap="weap_rockets"}, {enemyDetectMode=false, revengeToAttacker=false, pursueEnemy=false})
 func.GiveItem("battery", "statue")
 
---РџРѕРєР° РѕС‚РєР»СЋС‡Сѓ, Р° С‚Рѕ СЂР°Р·РґСЂР°Р¶Р°РµС‚. Slava98.
+--Пока отключу, а то раздражает. Slava98.
 --func.dialog.Show("welcome", "map01", 1, "", "func.dialog.Show('welcome', 'map01', 2, '', '', 'OK')", "OK")
 
---Р”Р°Р»РµРµ СЃРѕР·РґР°С‘Рј СЂР°Р·Р»РёС‡РЅС‹Рµ С‚СЂРёРіРіРµСЂС‹.
+--Далее создаём различные триггеры.
 actor("trigger", 656, 256, {name="hint_trig1", only_human=1, radius=4, active=1, on_enter="func.Message({'map01', 'promt', 1}); kill(self)"})
 actor("trigger", 304, 1168, {name="hint_trig2", only_human=1, radius=1, active=1, on_enter="func.Message({'map01', 'promt', 4}); kill(self)"})
 actor("trigger", 304, 975, {name="hint_trig3", only_human=1, radius=3, active=1, on_enter="func.Message({'map01', 'promt', 5}); kill(self)"})
@@ -116,7 +116,7 @@ actor("trigger", 2186, 1069, {name="hint_trig9", only_human=1, radius=5, active=
 actor("trigger", 325, 2139, {name="hint_trig10", only_human=1, radius=5, active=1, on_enter="func.Message({'map01', 'promt', 14}); kill(self)"})
 actor("trigger", 848, 416, {name="d_trig", only_human=1, radius=1, active=1, on_enter="level.TerminalSpeak('settle', 'call')"})
 actor("trigger", 880, 544, {name="sidedoor_trig", radius=4, active=1, only_visible=0, on_enter="if object(who.playername).team == 1 then level.functions.tanksNearSettleNum = level.functions.tanksNearSettleNum + 1; if level.functions.sidedoorStatus ~= 2 and level.functions.sidedoorStatus ~= 3 and level.functions.sidedoorStatus ~= 4 then level.Door('sidedoor_open', level.functions.silentSidedoor); end; end", on_leave="if object(who.playername).team == 1 then level.functions.tanksNearSettleNum = level.functions.tanksNearSettleNum - 1; if level.functions.tanksNearSettleNum < 1 and level.functions.sidedoorStatus ~= 2 and level.functions.sidedoorStatus ~= 3 and level.functions.sidedoorStatus ~= 4 then level.Door('sidedoor_close', level.functions.silentSidedoor); end; end"})
---actor("trigger", 912, 544, {name="sidedoor_lag_trig", only_human=1, radius=2, active=0, only_visible=1, on_enter="message('РџРѕС…РѕР¶Рµ РґРІРµСЂСЊ Р·Р°РіР»СЋС‡РёР»Рѕ. РЎС‚СЂР°РЅРЅРѕ. РЇ Р·Р°Р№РјСѓСЃСЊ РµСЋ, СЃРѕРѕР±С‰РёС‚Рµ РєРѕРјРјР°РЅРґРёСЂСѓ, РїРѕР¶Р°Р»СѓР№СЃС‚Р°.') pset('c_trig', 'active', 1) kill('sidedoor_lag_trig')"})
+--actor("trigger", 912, 544, {name="sidedoor_lag_trig", only_human=1, radius=2, active=0, only_visible=1, on_enter="message('Похоже дверь заглючило. Странно. Я займусь ею, сообщите коммандиру, пожалуйста.') pset('c_trig', 'active', 1) kill('sidedoor_lag_trig')"})
 --actor("trigger", 880, 544, {name="open_trig", only_human=1, radius=4, active=1, on_enter="level.Door('sidedoor_open')"})
 --actor("trigger", 896, 544, {name="close_trig", only_human=1, radius=5, active=0, on_enter="level.Door('sidedoor_close')"})
 --actor("trigger", 1136, 555, {name="enemyinsettle_trig", only_human=0, radius=32, radius_delta=20, active=1, only_visible=1, on_enter="if who~=nil and object(who.playername).team~=1 and level.screenplay.enemyInSettle==0 then level.screenplay.enemyInSettle=1;level.screenplay.settleEnemy = who.name; level.WarriorsSetActive(1); level.LetDamageOurWarrior(0) end", on_leave="if who~=nil and object(who.playername).team~=1 and level.screenplay.enemyInSettle==1 then level.screenplay.enemyInSettle=0;level.WarriorsSetActive(0); level.LetDamageOurWarrior(1) end"})
@@ -138,15 +138,15 @@ actor("trigger", 788, 1229, {name="infolink_ruins_trig", on_shot="level.Infolink
 
 
 pushcmd(function() 
-	func.player.Create({class="player1", skin="ekivatorl", nick=func.Read({"map01", "nicks", 6})}, 1, 3, 80, 80, 0.785398, {faction="uew", rank=3}) --РўРѕР»СЊРєРѕ С‚РµРїРµСЂСЊ СЃРѕР·РґР°С‘Рј РёРіСЂРѕРєР°.
+	func.player.Create({class="player1", skin="ekivatorl", nick=func.Read({"map01", "nicks", 6})}, 1, 3, 80, 80, 0.785398, {faction="uew", rank=3}) --Только теперь создаём игрока.
 	func.NPC.Create("esc1", 160, 992, 6, 2, 2, {skin="eskavator", class="default"}, {faction="cypher", rank=1, group="statue", vehType="excavator"}, {detectRadius=15, detectRadiusDelta=16, enemyDetectMode=false, pursueEnemy=false, onComming="if who~=nil and not level.functions['esc1BlewUp'] and object(who.playername).team~=object('esc1').team then level.screenplay.Statue('creeper_boom', 1) end;", attackMode="goto_aim", healthToHeal=-1})
 	func.NPC.Create("esc2", 224, 1152, 5, 2, 2, {skin="eskavator", class="default"}, {faction="cypher", rank=1, group="statue", vehType="excavator"}, {detectRadius=15, detectRadiusDelta=16, enemyDetectMode=false, pursueEnemy=false, onComming="if who~=nil and not level.functions['esc2BlewUp'] and object(who.playername).team~=object('esc2').team then level.screenplay.Statue('creeper_boom', 2) end;", attackMode="goto_aim", healthToHeal=-1})
 	func.NPC.Create("esc3", 240, 832, 2, 2, 2, {skin="eskavator", class="default"}, {faction="cypher", rank=1, group="statue", vehType="excavator"}, {detectRadius=15, detectRadiusDelta=16, enemyDetectMode=false, pursueEnemy=false, onComming="if who~=nil and not level.functions['esc3BlewUp'] and object(who.playername).team~=object('esc3').team then level.screenplay.Statue('creeper_boom', 3) end;", attackMode="goto_aim", healthToHeal=-1})
 	func.NPC.FollowWay("ourwarrior1", "base_patrol1")
 	func.NPC.FollowWay("ourwarrior2", "base_patrol2")
 	func.NPC.FollowWay("ourwarrior4", "base_patrol4")
---	level.LetDamageOurWarrior(1) -- РўРµРїРµСЂСЊ, РєРѕРіРґР° РјС‹ Р±СѓРґРµРј СЃС‚СЂРµР»СЏС‚СЊ РїРѕ РїРѕСЃРµР»РµРЅС†Р°Рј, РѕРЅРё РїРѕСЃР»Рµ РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёР№ Р±СѓРґСѓС‚ РѕС‚СЃС‚СЂРµР»РёРІР°С‚СЊСЃСЏ. *РќРµ Р±СѓРґСѓС‚. Slava98. 24.08.13.
-	object("ourwarrior3_tank").on_damage = object("ourwarrior3_tank").on_damage.."; if who == nil then level.CrazyHalos() end" --РўР°Рє Р»СѓС‡С€Рµ Рё РїРѕРЅСЏС‚РЅРµРµ. Slava98.
+--	level.LetDamageOurWarrior(1) -- Теперь, когда мы будем стрелять по поселенцам, они после нескольких предупреждений будут отстреливаться. *Не будут. Slava98. 24.08.13.
+	object("ourwarrior3_tank").on_damage = object("ourwarrior3_tank").on_damage.."; if who == nil then level.CrazyHalos() end" --Так лучше и понятнее. Slava98.
 	func.spriteskin.Create("", {texture = "skin/ekivatorl"}, {tankName = "ourwarrior1_tank"})
 	func.spriteskin.Create("", {texture = "skin/ekivatorl"}, {tankName = "ourwarrior2_tank"})
 	func.spriteskin.Create("", {texture = "skin/ekivatorl_camouflage"}, {tankName = "ourwarrior3_tank"})
@@ -167,7 +167,7 @@ pushcmd(function()
 end, 2.4)
 
 pushcmd(function()
-	func.spriteskin.Create("", {texture = "skin/player"}, {tankName = "ourplayer_tank"}) -- РђРЅРёРјРёСЂСѓРµРј СЃРєРёРЅ Рё РёРіСЂРѕРєСѓ С‚РѕР¶Рµ.
+	func.spriteskin.Create("", {texture = "skin/player"}, {tankName = "ourplayer_tank"}) -- Анимируем скин и игроку тоже.
 	for i = 1, 5 do
 		if i ~= 3 then
 			func.timer.Create("ourwarrior"..i.."_talk", {timer = 3, breakable = true, funcTab = {"level.ways[main.NPC.list['ourwarrior"..i.."'].mainWay].active = false; ai_stop('ourwarrior"..i.."'); level.SpeakToPlayer('ourwarrior"..i.."'); pushcmd(function() local x1, y1 = position('ourwarrior"..i.."_tank'); local x2, y2 = position(const.playerVehName); func.object.SetRotation('ourwarrior"..i.."_tank', func.GetRadians(x1, y1, x2, y2), 100) end, 0.5)", nil, "level.ways[main.NPC.list['ourwarrior"..i.."'].mainWay].active = true; func.NPC.FollowWay('ourwarrior"..i.."')"}})

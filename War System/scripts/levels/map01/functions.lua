@@ -1,48 +1,48 @@
--- Функции первого уровня кампании ВС.
--- Отличается от screenplay.lua тем, что в нём содержатся функции, не имеющие прямого отношения к персонажам и скриптовым сценам.
+-- Р¤СѓРЅРєС†РёРё РїРµСЂРІРѕРіРѕ СѓСЂРѕРІРЅСЏ РєР°РјРїР°РЅРёРё Р’РЎ.
+-- РћС‚Р»РёС‡Р°РµС‚СЃСЏ РѕС‚ screenplay.lua С‚РµРј, С‡С‚Рѕ РІ РЅС‘Рј СЃРѕРґРµСЂР¶Р°С‚СЃСЏ С„СѓРЅРєС†РёРё, РЅРµ РёРјРµСЋС‰РёРµ РїСЂСЏРјРѕРіРѕ РѕС‚РЅРѕС€РµРЅРёСЏ Рє РїРµСЂСЃРѕРЅР°Р¶Р°Рј Рё СЃРєСЂРёРїС‚РѕРІС‹Рј СЃС†РµРЅР°Рј.
 
--- Сначала должны идти функции, которые вызываются стандартными функциями ВС, и которые должны быть на каждом уровне.
+-- РЎРЅР°С‡Р°Р»Р° РґРѕР»Р¶РЅС‹ РёРґС‚Рё С„СѓРЅРєС†РёРё, РєРѕС‚РѕСЂС‹Рµ РІС‹Р·С‹РІР°СЋС‚СЃСЏ СЃС‚Р°РЅРґР°СЂС‚РЅС‹РјРё С„СѓРЅРєС†РёСЏРјРё Р’РЎ, Рё РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ.
 
--- Обработка события поднятия предмета.
+-- РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ РїРѕРґРЅСЏС‚РёСЏ РїСЂРµРґРјРµС‚Р°.
 function level.OnPickup(name, item, character)
 	if level.screenplay.missionBoo == 1 and item == "battery" and character == const.playerName then
 		local energyCells = main.characters[const.playerName].inventory.items.boo;
---		level.screenplay.energyCells = level.screenplay.energyCells + 1; Думаю, следует сделать счётчик по батареям в инвентаре.
+--		level.screenplay.energyCells = level.screenplay.energyCells + 1; Р”СѓРјР°СЋ, СЃР»РµРґСѓРµС‚ СЃРґРµР»Р°С‚СЊ СЃС‡С‘С‚С‡РёРє РїРѕ Р±Р°С‚Р°СЂРµСЏРј РІ РёРЅРІРµРЅС‚Р°СЂРµ.
 		func.Message(func.Read({"map01", "energycells", 1}, energyCells, {"map01", "energycells", energyCells + 1}))
-		if energyCells == 4 then -- Если мы собрали все 4 батареи.
-			func.MissionChange("extra", "complete", func.Read("map01", "missions", 5)) -- Миссия выполнена.
-			pset("c_trig", "on_enter", "level.CommSpeak(1, 2)") -- Новый диалог командира.
-			level.screenplay.missionBoo = 2; -- Новый этап миссии Бу.
-			level.screenplay.BanditsAttack("show") -- Но нас уже поджидают бандиты.
+		if energyCells == 4 then -- Р•СЃР»Рё РјС‹ СЃРѕР±СЂР°Р»Рё РІСЃРµ 4 Р±Р°С‚Р°СЂРµРё.
+			func.MissionChange("extra", "complete", func.Read("map01", "missions", 5)) -- РњРёСЃСЃРёСЏ РІС‹РїРѕР»РЅРµРЅР°.
+			pset("c_trig", "on_enter", "level.CommSpeak(1, 2)") -- РќРѕРІС‹Р№ РґРёР°Р»РѕРі РєРѕРјР°РЅРґРёСЂР°.
+			level.screenplay.missionBoo = 2; -- РќРѕРІС‹Р№ СЌС‚Р°Рї РјРёСЃСЃРёРё Р‘Сѓ.
+			level.screenplay.BanditsAttack("show") -- РќРѕ РЅР°СЃ СѓР¶Рµ РїРѕРґР¶РёРґР°СЋС‚ Р±Р°РЅРґРёС‚С‹.
 		end;
 	elseif level.screenplay.missinboo == 3 and item == "battery" and name == const.playerName then
--- Теперь мы собрали точно все батареи. Миссия Бу окончена!
+-- РўРµРїРµСЂСЊ РјС‹ СЃРѕР±СЂР°Р»Рё С‚РѕС‡РЅРѕ РІСЃРµ Р±Р°С‚Р°СЂРµРё. РњРёСЃСЃРёСЏ Р‘Сѓ РѕРєРѕРЅС‡РµРЅР°!
 	end;
 	for i = 1, 5 do 
 		if level.screenplay.missionBoo == 1 and item == "battery" and name == "ourwarrior"..i then
-			level.functions.ourWarriorGotBoo = i; -- Если поселенец взял батарею, он нам её отдаст.
+			level.functions.ourWarriorGotBoo = i; -- Р•СЃР»Рё РїРѕСЃРµР»РµРЅРµС† РІР·СЏР» Р±Р°С‚Р°СЂРµСЋ, РѕРЅ РЅР°Рј РµС‘ РѕС‚РґР°СЃС‚.
 		end;
 	end;
 end
 
--- Обработка события активирования предмета.
+-- РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ Р°РєС‚РёРІРёСЂРѕРІР°РЅРёСЏ РїСЂРµРґРјРµС‚Р°.
 function level.UseItem(character, item)
 	if character == const.playerName then
-		if item == "bomb_activated" then -- Если игрок использует бомбу в определённых точках уровня, она будет взрывать определённые стены.
+		if item == "bomb_activated" then -- Р•СЃР»Рё РёРіСЂРѕРє РёСЃРїРѕР»СЊР·СѓРµС‚ Р±РѕРјР±Сѓ РІ РѕРїСЂРµРґРµР»С‘РЅРЅС‹С… С‚РѕС‡РєР°С… СѓСЂРѕРІРЅСЏ, РѕРЅР° Р±СѓРґРµС‚ РІР·СЂС‹РІР°С‚СЊ РѕРїСЂРµРґРµР»С‘РЅРЅС‹Рµ СЃС‚РµРЅС‹.
 			local x, y = position(object(const.playerName).vehname);
 			local x1, y1 = func.UnGet32(x), func.UnGet32(y)
-			if (x1 == 69 or x1 == 70) and (y1 == 40 or y1 == 41) then -- Стена к руинам.
+			if (x1 == 69 or x1 == 70) and (y1 == 40 or y1 == 41) then -- РЎС‚РµРЅР° Рє СЂСѓРёРЅР°Рј.
 				pushcmd(function() func.SetBomb("ruins_bomb", 70, 42, {"ruins_wall1", "ruins_wall2"}, main.characters[const.playerName].inventory.bombTime, true) end)
 				return true;
 			end;
-			-- Стена к бустеру (написать).
+			-- РЎС‚РµРЅР° Рє Р±СѓСЃС‚РµСЂСѓ (РЅР°РїРёСЃР°С‚СЊ).
 		elseif item == "key" then
 			local x, y = position(object(const.playerName).vehname);
 			local x1, y1 = func.UnGet32(x), func.UnGet32(y)
-			-- Разговор с Ороном (написать).
+			-- Р Р°Р·РіРѕРІРѕСЂ СЃ РћСЂРѕРЅРѕРј (РЅР°РїРёСЃР°С‚СЊ).
 		end;
 --[[elseif character == "esc1" or character == "esc2" or character == "esc3" then
-		if item == "bomb" then -- Экскаваторы активируют бомбу на 0 секунд.
+		if item == "bomb" then -- Р­РєСЃРєР°РІР°С‚РѕСЂС‹ Р°РєС‚РёРІРёСЂСѓСЋС‚ Р±РѕРјР±Сѓ РЅР° 0 СЃРµРєСѓРЅРґ.
 			temp.bombTimer = 0;
 			return false;
 		end;]]	
@@ -105,17 +105,17 @@ function level.SpeakToPlayer(npcName)
 	
 end
 
--- Обработка события смерти персонажей.
+-- РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ СЃРјРµСЂС‚Рё РїРµСЂСЃРѕРЅР°Р¶РµР№.
 function level.OnDie(name)
 
 end
 
--- Дальше идут функции, которые отвечают за различные механизмы на уровне.
+-- Р”Р°Р»СЊС€Рµ РёРґСѓС‚ С„СѓРЅРєС†РёРё, РєРѕС‚РѕСЂС‹Рµ РѕС‚РІРµС‡Р°СЋС‚ Р·Р° СЂР°Р·Р»РёС‡РЅС‹Рµ РјРµС…Р°РЅРёР·РјС‹ РЅР° СѓСЂРѕРІРЅРµ.
 
--- Взаимодействие с дверьми на уровне.
+-- Р’Р·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ РґРІРµСЂСЊРјРё РЅР° СѓСЂРѕРІРЅРµ.
 function level.Door(action, silent)
-	if action == "sidedoor_open" then -- Если нужно открыть дверь в поселение...
---		if level.functions.sidedoorStatus ~= 0 then return 0; end; -- Нужно, чтобы поселенцы смогли нормально проехать. Slava98. 12.06.14. 
+	if action == "sidedoor_open" then -- Р•СЃР»Рё РЅСѓР¶РЅРѕ РѕС‚РєСЂС‹С‚СЊ РґРІРµСЂСЊ РІ РїРѕСЃРµР»РµРЅРёРµ...
+--		if level.functions.sidedoorStatus ~= 0 then return 0; end; -- РќСѓР¶РЅРѕ, С‡С‚РѕР±С‹ РїРѕСЃРµР»РµРЅС†С‹ СЃРјРѕРіР»Рё РЅРѕСЂРјР°Р»СЊРЅРѕ РїСЂРѕРµС…Р°С‚СЊ. Slava98. 12.06.14. 
 --		if level.screenplay.halosHasGotBoo then level.Door("sidedoor_lagging") return; end;
 		if level.functions.sidedoorStatus == 4 then pushcmd(function() level.Door("sidedoor_open") end, 3) end;
 		level.functions.sidedoorStatus = 2;
@@ -140,8 +140,8 @@ function level.Door(action, silent)
 			if level.functions.sidedoorStatus == 1 then
 			level.Door("sidedoor_close") end 
 		end, 5)]]
-    elseif action == "sidedoor_close" then -- Если нужно закрыть дверь в поселение...
---		if level.functions.sidedoorStatus ~= 1 then return 0; end; -- Нужно, чтобы поселенцы смогли нормально проехать. Slava98. 12.06.14. 
+    elseif action == "sidedoor_close" then -- Р•СЃР»Рё РЅСѓР¶РЅРѕ Р·Р°РєСЂС‹С‚СЊ РґРІРµСЂСЊ РІ РїРѕСЃРµР»РµРЅРёРµ...
+--		if level.functions.sidedoorStatus ~= 1 then return 0; end; -- РќСѓР¶РЅРѕ, С‡С‚РѕР±С‹ РїРѕСЃРµР»РµРЅС†С‹ СЃРјРѕРіР»Рё РЅРѕСЂРјР°Р»СЊРЅРѕ РїСЂРѕРµС…Р°С‚СЊ. Slava98. 12.06.14. 
 		if level.functions.sidedoorStatus == 3 then pushcmd(function() level.Door("sidedoor_close") end, 3) end;
 		level.functions.sidedoorStatus = 3;
         pushcmd(function()     
@@ -161,7 +161,7 @@ function level.Door(action, silent)
 			end;
 		end, 2.5)
 --      pushcmd(function() pset("open_trig", "active", 1) --[[level.functions.sidedoorStatus = 2]] end, 3.5)
-    elseif action == "sidedoor_lagging" then -- "Лагание" главной двери поселения.
+    elseif action == "sidedoor_lagging" then -- "Р›Р°РіР°РЅРёРµ" РіР»Р°РІРЅРѕР№ РґРІРµСЂРё РїРѕСЃРµР»РµРЅРёСЏ.
 		level.functions.sidedoorStatus = 4;
 		pset("sidedoor_trig", "active", 0)
 		pset("c_trig", "on_enter", "level.CommSpeak(1, 6)")
@@ -171,11 +171,11 @@ function level.Door(action, silent)
 --[[	level.screenplay.player_knows_that_door_is_close = true
 		pset("c_trig", "active", 1)
         pushcmd(function() ai_march("ourwarrior1", 32*32, 16*32) end, 0.1)
-        pushcmd(function() message("Поселенец: Похоже, дверь заглючило. Пока подождите здесь.") end, 2)
+        pushcmd(function() message("РџРѕСЃРµР»РµРЅРµС†: РџРѕС…РѕР¶Рµ, РґРІРµСЂСЊ Р·Р°РіР»СЋС‡РёР»Рѕ. РџРѕРєР° РїРѕРґРѕР¶РґРёС‚Рµ Р·РґРµСЃСЊ.") end, 2)
         pushcmd(function() func.ActionWarrior(1, 2) end, 3)]]
-	--[[ Плазму нужно будет переписать потом, когда дойдем. VIRUS
+	--[[ РџР»Р°Р·РјСѓ РЅСѓР¶РЅРѕ Р±СѓРґРµС‚ РїРµСЂРµРїРёСЃР°С‚СЊ РїРѕС‚РѕРј, РєРѕРіРґР° РґРѕР№РґРµРј. VIRUS
     elseif action == "plazmadoor_open" then
-        pushcmd( function() message("Код принят!") end, 1)
+        pushcmd( function() message("РљРѕРґ РїСЂРёРЅСЏС‚!") end, 1)
         pushcmd( function() sound("dr3") end, 2)
         pushcmd( function() moveY(19,4,1,"plasmadoor_part",3,6,1) end, 2)       
     elseif action == "plazmadoor_close" then
@@ -186,7 +186,7 @@ function level.Door(action, silent)
         pset("plasmadoor_part4", "name", "br_ex4")
         pushcmd( function() sound("dr3") end, 0.2)
         pushcmd( function() moveY(19,4,7,"br_ex",1,4,-1) end, 0.2) ]]     
-    elseif action == "boodoor_open" and level.screenplay.missionBoo == 1 then -- Дверь к бустеру.
+    elseif action == "boodoor_open" and level.screenplay.missionBoo == 1 then -- Р”РІРµСЂСЊ Рє Р±СѓСЃС‚РµСЂСѓ.
 		if not silent then func.Sound("dr2_start") end;
 		func.Message({"map01", "promt", 3})
 		kill("boodoor_trig")
@@ -208,12 +208,12 @@ function level.Door(action, silent)
 			func.Move("boodoor_part5", 25, 47, true, 50)  
 			func.Move("boodoor_part6", 25, 48, true, 50) 
 		end, 3)
---			level.ShowMinigunTurrels() -- Вылезают турели.
+--			level.ShowMinigunTurrels() -- Р’С‹Р»РµР·Р°СЋС‚ С‚СѓСЂРµР»Рё.
 --  elseif action == "trig_move" then
 --          setposition("open_trig", 832, 540)
 --          pushcmd(function() setposition("open_trig", 910, 540) end, 1)
 --          pushcmd(function() level.Door("trig_move") end, 2)
-	elseif action == "warehouse_open" then -- Дверь на  склад поселения. *Что-то мне не очень нравится, хотелось бы что-нибудь поэпичнее. Slava98. 25.08.13.
+	elseif action == "warehouse_open" then -- Р”РІРµСЂСЊ РЅР°  СЃРєР»Р°Рґ РїРѕСЃРµР»РµРЅРёСЏ. *Р§С‚Рѕ-С‚Рѕ РјРЅРµ РЅРµ РѕС‡РµРЅСЊ РЅСЂР°РІРёС‚СЃСЏ, С…РѕС‚РµР»РѕСЃСЊ Р±С‹ С‡С‚Рѕ-РЅРёР±СѓРґСЊ РїРѕСЌРїРёС‡РЅРµРµ. Slava98. 25.08.13.
 		local time = func.Move("warehouse_door1", 63, 17, true, 50)
 		pushcmd(function() 
 				func.Move("warehouse_door2", 62, 17, true, 50)
@@ -247,7 +247,7 @@ function level.Door(action, silent)
         end;
 end
 
--- Обработка события уничтожения ящика в поселении.
+-- РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ СѓРЅРёС‡С‚РѕР¶РµРЅРёСЏ СЏС‰РёРєР° РІ РїРѕСЃРµР»РµРЅРёРё.
 function level.OnDestroyCrateInTheSettle()
 	if func.RandomBoolean() then
 		local settler;
@@ -271,7 +271,7 @@ function level.InfolinkOnDamage(name)
 		elseif name == "ruins" then
 			level.Door("boodoor_open")
 		elseif name == "tunnels" then
-			message("Вы сломали кнопку. Ай-яй-яй...")
+			message("Р’С‹ СЃР»РѕРјР°Р»Рё РєРЅРѕРїРєСѓ. РђР№-СЏР№-СЏР№...")
 		end;
 	else
 		level.functions.infolinkHealth[name] = level.functions.infolinkHealth[name] - 1;
@@ -280,39 +280,39 @@ end
 
 function level.HideRanon() 
 	kill("ourwarrior5")
---[[setposition("ourwarrior5_tank", 149, 1649) -- Хотел сделать с этим нечто другое, но это слишком заморочно, поэтому просто уберу Ранона с карты.
+--[[setposition("ourwarrior5_tank", 149, 1649) -- РҐРѕС‚РµР» СЃРґРµР»Р°С‚СЊ СЃ СЌС‚РёРј РЅРµС‡С‚Рѕ РґСЂСѓРіРѕРµ, РЅРѕ СЌС‚Рѕ СЃР»РёС€РєРѕРј Р·Р°РјРѕСЂРѕС‡РЅРѕ, РїРѕСЌС‚РѕРјСѓ РїСЂРѕСЃС‚Рѕ СѓР±РµСЂСѓ Р Р°РЅРѕРЅР° СЃ РєР°СЂС‚С‹.
 	object("teleport_ranon_trig1").active = 1;
 	object("teleport_ranon_trig1").on_enter = object("teleport_ranon_trig1").on_enter.."object('teleport_ranon_trig2').active=1;"
 	actor("trigger", 1387, 946, {name="teleport_ranon_trig2", radius=14, active=0, only_human=1, only_visible=0, on_enter="setposition('ourwarrior5_tank', 149, 1649);object('teleport_ranon_trig2').active=0; object('teleport_ranon_trig1').active=1;"})
 ]]
 end
 
--- Подготавливает уровень к квесту по сбору мусора.
+-- РџРѕРґРіРѕС‚Р°РІР»РёРІР°РµС‚ СѓСЂРѕРІРµРЅСЊ Рє РєРІРµСЃС‚Сѓ РїРѕ СЃР±РѕСЂСѓ РјСѓСЃРѕСЂР°.
 function level.GetMissionBoo()
 	func.MissionChange("extra", "complete", "")
 	func.MissionChange("extra", "add", func.Read("map01", "missions", 4))
 	level.screenplay.missionBoo = 1;
 
-	pset("b1", "max_health", 150) --Как-то тут всё не совсем правильно. Но я пока не буду с этим заморачиваться. Slava98.
+	pset("b1", "max_health", 150) --РљР°Рє-С‚Рѕ С‚СѓС‚ РІСЃС‘ РЅРµ СЃРѕРІСЃРµРј РїСЂР°РІРёР»СЊРЅРѕ. РќРѕ СЏ РїРѕРєР° РЅРµ Р±СѓРґСѓ СЃ СЌС‚РёРј Р·Р°РјРѕСЂР°С‡РёРІР°С‚СЊСЃСЏ. Slava98.
 	pset("b2", "max_health", 150)
 	pset("b1", "health", 150)
 	pset("b2", "health", 150)	
 
-	if exists("statue_tank") then object("statue_tank").max_health = 500; object("statue_tank").health = 500; end; -- У статуи сделаем рациональное количество жизней и даём ей в рот бустер. *Не даём. Рано ещё. Slava98. 25.08.13.
+	if exists("statue_tank") then object("statue_tank").max_health = 500; object("statue_tank").health = 500; end; -- РЈ СЃС‚Р°С‚СѓРё СЃРґРµР»Р°РµРј СЂР°С†РёРѕРЅР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р¶РёР·РЅРµР№ Рё РґР°С‘Рј РµР№ РІ СЂРѕС‚ Р±СѓСЃС‚РµСЂ. *РќРµ РґР°С‘Рј. Р Р°РЅРѕ РµС‰С‘. Slava98. 25.08.13.
 
-	kill("weapons_obj") -- Это тоже неплохо бы изменить.
+	kill("weapons_obj") -- Р­С‚Рѕ С‚РѕР¶Рµ РЅРµРїР»РѕС…Рѕ Р±С‹ РёР·РјРµРЅРёС‚СЊ.
 	for i = 1, 3 do kill("powersheild4_obj"..i) end;
 
 	pushcmd(function() pset("c_trig", "active", 1) end, 20)
 end
 
--- Вылезающие турели при взятии батареи из секретного хранилища.
+-- Р’С‹Р»РµР·Р°СЋС‰РёРµ С‚СѓСЂРµР»Рё РїСЂРё РІР·СЏС‚РёРё Р±Р°С‚Р°СЂРµРё РёР· СЃРµРєСЂРµС‚РЅРѕРіРѕ С…СЂР°РЅРёР»РёС‰Р°.
 function level.HiddenTurretActivate()
 	actor("turret_minigun", 923, 1529, {name = "hiddenturret1", dir = 4.71239})
 	actor("turret_minigun", 460, 1529, {name = "hiddenturret2", dir = 4.71239})
 end
 
--- Обработка события уничтожения генератора, питающего турели.
+-- РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ СѓРЅРёС‡С‚РѕР¶РµРЅРёСЏ РіРµРЅРµСЂР°С‚РѕСЂР°, РїРёС‚Р°СЋС‰РµРіРѕ С‚СѓСЂРµР»Рё.
 function level.OnDestroyGenerator()
 	level.screenplay.ruinGeneratorIsActive = false;
 	func.Message({"map01", "promt", 15})
@@ -320,7 +320,7 @@ function level.OnDestroyGenerator()
 	if exists("old_turret2") then object("old_turret2").team = 1; end;
 end
 
--- Обработка события повреждения ракетной турели.
+-- РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ РїРѕРІСЂРµР¶РґРµРЅРёСЏ СЂР°РєРµС‚РЅРѕР№ С‚СѓСЂРµР»Рё.
 function level.OnDamageTurret()
 	if not level.screenplay.oldTurretIsActive and level.screenplay.ruinGeneratorIsActive then 
 		object("old_turret2").team = 2;
@@ -330,15 +330,15 @@ function level.OnDamageTurret()
 end
 
 
--- Неиспользующиеся функции.
+-- РќРµРёСЃРїРѕР»СЊР·СѓСЋС‰РёРµСЃСЏ С„СѓРЅРєС†РёРё.
 
 function level.LetDamageOurWarrior(num)
     for i = 1, 4 do
         if num == nil then
                 return false;
         elseif num == 0 and exists("ourwarrior"..i) then
---              pset("ourwarrior"..i.."_tank", "on_damage", "func.ExtraDamage(who, self)") -- А это что за бред? Slava98. 21.08.13.
---              pset("ourwarrior"..i.."_tank", "on_damage", "level.OurWarriorsAttackPlayer()") -- Что за тупость? Slava98.
+--              pset("ourwarrior"..i.."_tank", "on_damage", "func.ExtraDamage(who, self)") -- Рђ СЌС‚Рѕ С‡С‚Рѕ Р·Р° Р±СЂРµРґ? Slava98. 21.08.13.
+--              pset("ourwarrior"..i.."_tank", "on_damage", "level.OurWarriorsAttackPlayer()") -- Р§С‚Рѕ Р·Р° С‚СѓРїРѕСЃС‚СЊ? Slava98.
         elseif num == 1 and exists("ourwarrior"..i) then
 -- 		        pset("ourwarrior"..i.."_tank", "on_damage", "func.ExtraDamage(who, self);func.NPC.DamageOurWarrior(who, 'ourwarrior"..i.."')")
 				if i ~= 3 then func.NPC.Action("ourwarrior"..i) else func.NPC.Action("ourwarrior3", nil, 2224, 64) end;
@@ -346,7 +346,7 @@ function level.LetDamageOurWarrior(num)
     end
 end
 
--- Следует полностью переделать. Оформить как одну из концовок ВС.
+-- РЎР»РµРґСѓРµС‚ РїРѕР»РЅРѕСЃС‚СЊСЋ РїРµСЂРµРґРµР»Р°С‚СЊ. РћС„РѕСЂРјРёС‚СЊ РєР°Рє РѕРґРЅСѓ РёР· РєРѕРЅС†РѕРІРѕРє Р’РЎ.
 function level.Lose()
     level.WarriorsSetActive(0)
 	level.LetDamageOurWarrior(1)
@@ -354,7 +354,7 @@ end
 
 
 function level.OurWarriorsAttack(npc)
-	level.WarriorsSetActive(1)--В любом случае поселенцы становятся активными. Slava98.
+	level.WarriorsSetActive(1)--Р’ Р»СЋР±РѕРј СЃР»СѓС‡Р°Рµ РїРѕСЃРµР»РµРЅС†С‹ СЃС‚Р°РЅРѕРІСЏС‚СЃСЏ Р°РєС‚РёРІРЅС‹РјРё. Slava98.
 	level.LetDamageOurWarrior(0)
 	if npc == "ourplayer" then
 		level.functions.settlersAreEnemies = true
@@ -374,9 +374,9 @@ function level.OurWarriorsAttack(npc)
 --              end
         end
 	elseif npc == "ourwarrior3" then
-		message("Поселенец: Ах ты, тупой командир!")
+		message("РџРѕСЃРµР»РµРЅРµС†: РђС… С‚С‹, С‚СѓРїРѕР№ РєРѕРјР°РЅРґРёСЂ!")
 	elseif object(npc).team == 2 then
-		message("Поселенец: ВРАГ! Убить его!")
+		message("РџРѕСЃРµР»РµРЅРµС†: Р’Р РђР“! РЈР±РёС‚СЊ РµРіРѕ!")
 	end
 end
 
@@ -401,11 +401,11 @@ function level.CrazyHalos()
 		if exists("halos_boo") then kill("halos_boo") end
 		actor("pu_booster", 0, 0, {name="halos_boo"})
 		if exists("ourwarrior3") then equip("ourwarrior3_tank", "halos_boo") end
-        message("Халос: ААААААААААААААА!!!!!!!!!!!")
+        message("РҐР°Р»РѕСЃ: РђРђРђРђРђРђРђРђРђРђРђРђРђРђРђ!!!!!!!!!!!")
 --      level.WarriorsSetActive(1)
 end
 
--- Переписать всё полностью.
+-- РџРµСЂРµРїРёСЃР°С‚СЊ РІСЃС‘ РїРѕР»РЅРѕСЃС‚СЊСЋ.
 --[[function level.OnDie(name)
 	if name == "ourwarrior3" and not level.screenplay.wasEnemyAttack then
 		if object("ourwarrior3").team == 3 then
@@ -421,7 +421,7 @@ end
 	end;
 end]]
 
---Спавнит батарею по указанным координатам.
+--РЎРїР°РІРЅРёС‚ Р±Р°С‚Р°СЂРµСЋ РїРѕ СѓРєР°Р·Р°РЅРЅС‹Рј РєРѕРѕСЂРґРёРЅР°С‚Р°Рј.
 function level.ShowBoo(x, y, num)
 	actor("user_sprite", x, y, {name="battery"..num, layer=10, animate=25, texture="pu_booster"})
 	actor("trigger", x, y, {name="battery"..num.."_trig", only_human=1, radius=1, active=1, on_enter="level.GetBoo("..num..")"})
@@ -438,7 +438,7 @@ function level.DoorRepairerCall()
 	pushcmd(function()
 		kill("saron1")
 		for i = 1, 3 do kill("a"..i) end
-		func.NPC.Create("door_repairer", "", "Ремонтник", "ekivator1", "eskavator", 1, "none", 1, 1, 1851, 51, 1.5708)
+		func.NPC.Create("door_repairer", "", "Р РµРјРѕРЅС‚РЅРёРє", "ekivator1", "eskavator", 1, "none", 1, 1, 1851, 51, 1.5708)
 	end, 0.1)
 	pushcmd(function() 
 		func.NPC.SetAim("door_repairer", 55, 17, "func.NPC.Action('door_repairer', nil, 30, 18, true)", true, "", false, true)
@@ -466,7 +466,7 @@ function level.IsEnemyInSettle()
 	pushcmd(function() level.IsEnemyInSettle() end, 0.1)
 end
 
--- Устарело.
+-- РЈСЃС‚Р°СЂРµР»Рѕ.
 function level.GetBoo(num)
 	if level.screenplay.missionBoo == 0 then return end
 	func.Sound("energy")
@@ -476,7 +476,7 @@ function level.GetBoo(num)
 	message(func.Read("map01", "energycells", 1)..level.screenplay.energyCells..func.Read("map01", "energycells", level.screenplay.energyCells + 1))
 	if level.screenplay.missionBoo == 1 and level.screenplay.energyCells == 4 and num ~= 4 then
 		func.MissionChange("extra", "complete", func.Read("map01", "missions", 5))
---		level.CommSpeak('exit') А какого, извините, хрена это здесь делает? Slava98. 28.03.13.
+--		level.CommSpeak('exit') Рђ РєР°РєРѕРіРѕ, РёР·РІРёРЅРёС‚Рµ, С…СЂРµРЅР° СЌС‚Рѕ Р·РґРµСЃСЊ РґРµР»Р°РµС‚? Slava98. 28.03.13.
 		pset("c_trig", "on_enter", "level.CommSpeak(1, 2)")
 		level.screenplay.missionBoo = 2;
 	elseif level.screenplay.missinboo == 3 and num == 4 then
@@ -491,20 +491,20 @@ function level.screenplay.BombActivate()
 	if (x == 69 or x == 70) and (y == 40 or y == 41) then
 		func.SetBomb("ruins_bomb", 70, 42, {"ruins_wall1", "ruins_wall2"}, 10, true)
 	else
-		service("msgbox", {text="\nЗдесь нельзя поставить бомбу.\n"})
+		service("msgbox", {text="\nР—РґРµСЃСЊ РЅРµР»СЊР·СЏ РїРѕСЃС‚Р°РІРёС‚СЊ Р±РѕРјР±Сѓ.\n"})
 	end
 end]]
 
 function level.screenplay.KeyActivate()
 	if a == a then
 	else
-		service("msgbox", {text="\nКлюч-карта здесь бесполезна.\n"})
+		service("msgbox", {text="\nРљР»СЋС‡-РєР°СЂС‚Р° Р·РґРµСЃСЊ Р±РµСЃРїРѕР»РµР·РЅР°.\n"})
 	end
 end
 
 function level.screenplay.BatteryActivate()
 	if a == a then
 	else
-		service("msgbox", {text="\nНевозможно здесь применить батарею.\n"})
+		service("msgbox", {text="\nРќРµРІРѕР·РјРѕР¶РЅРѕ Р·РґРµСЃСЊ РїСЂРёРјРµРЅРёС‚СЊ Р±Р°С‚Р°СЂРµСЋ.\n"})
 	end
 end

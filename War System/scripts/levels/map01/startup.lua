@@ -147,11 +147,11 @@ pushcmd(function()
 	func.NPC.FollowWay("ourwarrior4", "base_patrol4")
 --	level.LetDamageOurWarrior(1) -- Теперь, когда мы будем стрелять по поселенцам, они после нескольких предупреждений будут отстреливаться. *Не будут. Slava98. 24.08.13.
 	object("ourwarrior3_tank").on_damage = object("ourwarrior3_tank").on_damage.."; if who == nil then level.CrazyHalos() end" --Так лучше и понятнее. Slava98.
-	func.spriteskin.Create("", {texture = "skin/ekivatorl"}, {tankName = "ourwarrior1_tank"})
-	func.spriteskin.Create("", {texture = "skin/ekivatorl"}, {tankName = "ourwarrior2_tank"})
-	func.spriteskin.Create("", {texture = "skin/ekivatorl_camouflage"}, {tankName = "ourwarrior3_tank"})
-	func.spriteskin.Create("", {texture = "skin/ekivatorl_camouflage"}, {tankName = "ourwarrior4_tank"})
-	func.spriteskin.Create("", {texture = "skin/ekivatorl_camouflage"}, {tankName = "ourwarrior5_tank"})
+	func.extrasprite.Create("ourwarrior1_animskin", "ourwarrior1_tank", {texture="skin/ekivatorl"}, {})
+	func.extrasprite.Create("ourwarrior2_animskin", "ourwarrior2_tank", {texture="skin/ekivatorl"}, {})
+	func.extrasprite.Create("ourwarrior3_animskin", "ourwarrior3_tank", {texture="skin/ekivatorl_camouflage"}, {})
+	func.extrasprite.Create("ourwarrior4_animskin", "ourwarrior4_tank", {texture="skin/ekivatorl_camouflage"}, {})
+	func.extrasprite.Create("ourwarrior5_animskin", "ourwarrior5_tank", {texture="skin/ekivatorl_camouflage"}, {})
 	
 	func.ShowItem("key1", 175, 1080, true, nil, "key1")
 	func.ShowItem("battery", 750, 1385, true, nil, "boo3")
@@ -167,7 +167,7 @@ pushcmd(function()
 end, 2.4)
 
 pushcmd(function()
-	func.spriteskin.Create("", {texture = "skin/player"}, {tankName = "ourplayer_tank"}) -- Анимируем скин и игроку тоже.
+	func.extrasprite.Create(const.playerName.."_animskin", const.playerVehName, {texture = "skin/player"}, {})
 	for i = 1, 5 do
 		if i ~= 3 then
 			func.timer.Create("ourwarrior"..i.."_talk", {timer = 3, breakable = true, funcTab = {"level.ways[main.NPC.list['ourwarrior"..i.."'].mainWay].active = false; ai_stop('ourwarrior"..i.."'); level.SpeakToPlayer('ourwarrior"..i.."'); pushcmd(function() local x1, y1 = position('ourwarrior"..i.."_tank'); local x2, y2 = position(const.playerVehName); func.object.SetRotation('ourwarrior"..i.."_tank', func.GetRadians(x1, y1, x2, y2), 100) end, 0.5)", nil, "level.ways[main.NPC.list['ourwarrior"..i.."'].mainWay].active = true; func.NPC.FollowWay('ourwarrior"..i.."')"}})

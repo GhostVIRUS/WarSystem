@@ -185,9 +185,9 @@ function func.Move(name, x, y, g32, speed)
 	local x2 = x;
 	local y2 = y;
 
-	if g32 == true then
-	x2 = x2*32 - 16;
-	y2 = y2*32 - 16;
+	if g32 then
+		x2 = x2*32 - 16;
+		y2 = y2*32 - 16;
 	end;
 
 	local xCathetus = math.abs(x1 - x2);
@@ -311,14 +311,9 @@ function func.Destroy(obj)
 end
 
 -- Задаёт объекту имя с рандомным суффиксом.
-function func.MakeName(objType)
-	local name;
-	if objType then
-		name = objType..math.random(1, 10000);
-	else
-		name = tostring(math.random(1, 10000));
-	end;
-	if exists(name) then name = func.MakeName(objName, objType);
+function func.MakeName(wsObject)
+	local name = tostring(math.random(1, 10000));
+	if wsObject and level.objects[wsObject] or not wsObject and exists(name) then name = func.MakeName(wsObject);
 	else return name;
 	end;
 end;
@@ -329,6 +324,8 @@ function func.Exists(obj)
 	if type(obj) ~= "string" and type(obj) ~= "userdata" then error("bad argument #1 to 'func.Exists' (string or userdata expected, got "..type(objName)..")", 2) return; end;    
 
 	if type(obj) == "userdata" then
+		return xpcall(function() if obj.name then end; end, 1);
+--[[		
 		if not xpcall(function() if obj.name then end; end, 1) then return false; end;
 		if obj.name and obj.name ~= "" then
 			obj = obj.name;
@@ -339,7 +336,7 @@ function func.Exists(obj)
 			end;
 			obj.name = n;
 			obj = obj.name;
-		end;
+		end;]]
 	end;
 	return exists(obj);
 end
@@ -475,52 +472,59 @@ function func.object.borderTrigger.Exists(btName)
 end
 
 ---------------------------------------------------------------------------------------------------------------------
------------------------------------------------ Анимированный скин --------------------------------------------------
+--------------------------------------------- Дополнительный спрайт -------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------- 
 
--- Создаёт анимированный скин. Slava98. 02.01.14.
-function func.spriteskin.Create(asName, spriteTab, asTab)
--- Обработчик ошибок (написать).	
+-- Создаёт дополнительный спрайт объекту. Slava98. 02.01.14/04.08.14
+function func.extrasprite.Create(name, obj, spriteTab, esTab)
+-- Обработчик ошибок (написать).
 	
-	local asTab = func.UniteTables({
+	local esName = name or func.MakeName(true);
+	local esTab = func.UniteTables({
 		frequency = 0.00001,
-	}, asTab);
-	local tankName = asTab.tankName;
-	local x, y = position(tankName);
+		rotateSynch = true,
+		texture,
+	}, esTab);
+	local x, y = position(obj);
 	local spriteTab = func.UniteTables({
 		animate = 25,
-		rotation = object(tankName).rotation,
 		layer = 5,
 	}, spriteTab);
+	local texture;
+	local function GetRotateName(obj) -- Костыль. Slava98. 04.08.14
+		if objtype(obj) == "tank" or objtype(obj) == "user_sprite" or objtype(obj) == "crate" then return "rotation";
+		elseif objtype(obj) == "respawn_point" or string.sub(objtype(obj), 0, 3) == "weap" or string.sub(objtype(obj), 0, 3) == "turret" then return "dir";
+		end;
+	end;
 	local function Loop()
-		local asTab = level.objects[asName];
-		if not level.objects[asName] or not exists(tankName) then func.spriteskin.Kill(asName) return; end; -- Если объекта нет (он удалён) или нет танка, то цикл прекращается. Slava98. 02.01.14.
-		x, y = position(tankName) -- Обновим информацию насчёт позиции танка. Slava98. 02.01.14.
-		object(spriteTab.name).rotation = object(tankName).rotation -- И насчёт ротации тоже. Slava98. 02.01.14.
-		setposition(spriteTab.name, x, y)
-		asTab.objName = spriteTab.name;
-		pushcmd(Loop, asTab.frequency)
+		local esTab = level.objects[esName];
+		if not esTab then return; -- Если объекта или текстуры нет, то цикл прекращается. Slava98. 02.01.14/04.08.14
+		elseif not func.Exists(obj) or not func.Exists(texture) then func.extrasprite.Kill(esName) return; end;
+		texture.rotation = obj[GetRotateName(obj)] -- И насчёт ротации тоже. Slava98. 02.01.14/04.08.14
+		x, y = position(obj); -- Обновим информацию насчёт позиции объекта. Slava98. 02.01.14/04.08.14
+		esTab.texture = texture;
+		if name and not exists(name) then spriteTab.name = name; end;
+		setposition(texture, x, y)
+		pushcmd(Loop, esTab.frequency)
 	end;
 	
-	if asName == "" or nil then -- Несмотря на то, что я совсем не понимаю, зачем анимскину имя, ведь у каждого танка он и так один. Ну оставим, так сказать, это талантливым модмейкерам, которые, возможно, смогли бы что-нибудь сделать с этим интересное. Slava98. 02.01.14.
-		spriteTab.name = tankName.."_spriteskin";
-		asName = tankName.."_spriteskin";
-	else
-		spriteTab.name = tankName.."_"..asName.."_spriteskin";
-	end;
-	
-	func.KillIfExists(spriteTab.name)
-	object(tankName).skin = "null"; -- Делаем скин танка "пустым". Slava98. 02.01.14.
-	actor("user_sprite", x, y, spriteTab)
-	level.objects[asName] = asTab;
+	if type(obj) == "string" then obj = object(obj); end; -- Объект может быть, как ссылкой, так и строкой. Slava98. 04.08.14
+	if esTab.rotateSynch then spriteTab.rotation = obj[GetRotateName(obj)] end; -- Текстура может не копировать ротацию исходного объекта. Slava98. 04.08.14
+
+	texture = actor("user_sprite", x, y, spriteTab);
+	esTab.texture = texture; -- Ссылку нужно сохранить в таблицу спрайта. Slava98. 04.08.14
+	level.objects[esName] = esTab;
 	
 	Loop()
+	return esName;
 end
 
--- Убирает скин. Slava98. 02.01.14.
-function func.spriteskin.Kill(asName)
-	func.KillIfExists(level.objects[asName].objName)
-	level.objects[asName] = nil;
+-- Убирает спрайт. Slava98. 02.01.14/04.08.14
+function func.extrasprite.Kill(esName)
+	if not level.objects[esName] then error("bad argument #1 to 'func.extrasprite.Kill' (object '"..esName.."' doesn't exists)", 2) end;
+	
+	func.KillIfExists(level.objects[esName].texture)
+	level.objects[esName] = nil;
 end
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -585,14 +589,14 @@ function func.projectile.Create(projName, projTab, x, y)
 		local projTab = level.projectiles[projName];
 		local splash;
 		damage(projTab.damage, objLink)
---		if func.Exists(objLink) then -- А нужно ли? Slava98. 01.08.14.
+		if func.Exists(objLink) then
 			if obj == "tank" then
 --				func.tank.OnDamage(objLink, projTab) -- Такой функции ещё нет.
 			end;
 			if obj == "crate" or obj == "tank" and projTab.pushPower and projTab.pushingPower ~= 0 then
 				pushobj(objLink, projTab.dir, projTab.pushingPower)
 			end;
---		end;
+		end;
 		loadstring(projTab.onHit)()
 		if projTab.splashTab then 
 			splash = actor("user_sprite", x, y, projTab.splashTab);

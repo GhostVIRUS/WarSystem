@@ -152,28 +152,32 @@ function func.GetDistance(x1, y1, x2, y2)
 end
 
 -- Возвращает таблицу с координатами всех точек вокруг данной точки в определённом радиусе (в клетках). Slava98.
-function func.GetCicle(x, y, radius, isHollow, ignoreObstacles, ignoreMinus)
+function func.GetCicle(x, y, radius, isHollow, ignoreObstacles, ignoreMinus, step)
 -- Обработчик ошибок (написать).
 	
 	local ignoreObstacles; -- Игнорировать ли препятствия. Изначально false.
 	local ignoreMinus; -- Игнорировать ли отрицательные координаты. Изначально true.
 	local x1, y1 = x - radius, y - radius; -- Координаты верхней левой точки квадрата, в который вписан наш круг.
 	local x2, y2 = x + radius, y + radius; -- Координаты нижней правой точки того квадрата.
-	local sin45 = 0,5*math.sqrt(2);
-	local squaresNum = 2*math.pi()*radius;
+	local sin45 = 0.5*math.sqrt(2);
+	local squaresNum = math.floor(2*math.pi*radius);
+	local coordsTab = {};
 	if isHollow == nil then isHollow = true; end;
 	if ignoreMinus == nil then ignoreMinus = true; end;
 	if ignoreObstacles == nil then ignoreObstacles = true; end;
 	
-	for layer = radius, 1 do
-		for x1 = 1, squaresNum do
-			for y1 = 1, squaresNum do
-				local x2, y2 = math.sqrt(radius^2 - x^2), math.sqrt(radius^2 - y^2);
-				
-			end;
+	while radius ~= 1 do
+		radius = radius - 1;
+		local step = step or 90/(2 + radius);
+		for i = 0, 360, step do
+			local angle = i*math.pi/180;
+			local cx, cy = x*32 + radius*32*math.cos(angle), y*32 + radius*32*math.sin(angle);
+			table.insert(coordsTab, {func.UnGet32(cx), func.UnGet32(cy)})
 		end;
-	if isHollow then break; end;
+		if isHollow then break; end;
 	end;
+
+	return coordsTab;
 end
 
 -- Двигает объект в любом направлении. VIRUS. Modified by Assassin (Артур).
@@ -205,49 +209,6 @@ function func.Move(name, x, y, g32, speed)
 	return hypotenuse/speed;
 end
 
--- Постепенно разворачивает объект. *Переделать. Slava98. 10.02.14.
--- Криво, костыли, переделать опять. Asqwel (Fluffle Puff / Артур).
-function func.object.SetRotation(objName, rotation, frequency)
--- Обработчик ошибок.
-	if type(objName) ~= "string" then error("bad argument #1 to 'func.object.SetRotation' (string expected, got "..type(objName)..")", 2) return; end;    
-	if type(rotation) ~= "number" then error("bad argument #2 to 'func.object.SetRotation' (number expected, got "..type(rotation)..")", 2) return; end;  
-	if type(frequency) ~= "number" and frequency ~= nil then error("bad argument #3 to 'func.object.SetRotation' (number expected, got "..type(frequency)..")", 2) return; end;    
-	if type(active) ~= "boolean" and active ~= nil then error("bad argument #4 to 'func.object.SetRotation' (boolean expected, got "..type(active)..")", 2) return; end;  
-	
-	local frequency = frequency or 100;
-	local primordialRotation = object(objName).rotation;
-	local k = 1;
-	local alpha = math.abs(primordialRotation - rotation);
-	k = alpha/math.abs(alpha);
-	alpha = math.abs(alpha);
---	if alpha > math.pi then k = -1; end;
-	if alpha >= math.pi then alpha = math.pi*2 - alpha; end;
-	print(alpha, k)
---	if math.abs(object(objName).rotation - rotation) > math.abs(object(objName).rotation - rotation - math.pi) then k = -1; end;   
-	local function Loop()
-		if math.floor(object(objName).rotation*10) == math.floor(rotation*10) then return; end;
---		if math.floor(object(objName).rotation*10) == math.floor((primordialRotation + alpha)*10) then return; end;
-		if math.floor(object(objName).rotation*10) == math.floor(math.pi*2*10) and k == 1 then object(objName).rotation = 0;
-		elseif math.floor(object(objName).rotation*10) == 0 and k == -1 then object(objName).rotation = math.pi*2
-		end;
-		object(objName).rotation = object(objName).rotation + k*math.pi/90;
-		pushcmd(Loop, 1/frequency)
---[[	if math.floor(object(objName).rotation*10) == math.floor(rotation*10) then return; end;
-		if object(objName).rotation + k*math.pi/90 > 2*math.pi then
-			object(objName).rotation = object(objName).rotation + k*math.pi/90 - 2*math.pi
-		elseif object(objName).rotation + k*math.pi/90 < 0 then
-			object(objName).rotation = object(objName).rotation + k*math.pi/90 + 2*math.pi
-		else
-			object(objName).rotation = object(objName).rotation + k*math.pi/90;
-		end;
-			pushcmd(Loop, 1/frequency)]]
-	end;
-
-	Loop()
-	
-	return frequency*alpha/(math.pi/90); -- Возвращает время, за которое будет совершён поворот. Slava98. 01.03.14.
-end
-
 function func.object.GetRightDirection(dir1, dir2)
 -- Обработчик ошибок (написать).
 
@@ -270,10 +231,8 @@ function func.object.SetRotation(objName, rotation, frequency)
 	if type(frequency) ~= "number" and frequency ~= nil then error("bad argument #3 to 'func.object.SetRotation' (number expected, got "..type(frequency)..")", 2) return; end;    
 	if type(active) ~= "boolean" and active ~= nil then error("bad argument #4 to 'func.object.SetRotation' (boolean expected, got "..type(active)..")", 2) return; end;  
 
-	local k = 1;
+	local k = func.object.GetRightDirection(rotation, object(objName).rotation)
 	local alpha = rotation - object(objName).rotation;
-	if math.abs(alpha) > math.pi then k = k * -1; end;     
-	if alpha < 0 then k = k * -1; end;
 
 	local delta = k*math.pi/90;
 	local function Loop()

@@ -234,7 +234,7 @@ function func.object.SetRotation(objName, rotation, frequency)
 	local k = func.object.GetRightDirection(rotation, object(objName).rotation)
 	local alpha = rotation - object(objName).rotation;
 
-	local delta = k*math.pi/90;
+	local delta = k*math.rad(1);
 	local function Loop()
 		if math.floor(object(objName).rotation*10) == math.floor(rotation*10) then return; end;
 		local tmp = object(objName).rotation + delta;
@@ -242,6 +242,7 @@ function func.object.SetRotation(objName, rotation, frequency)
 		if tmp > math.pi*2 then tmp = tmp - math.pi*2
 		elseif tmp < 0 then tmp = tmp + math.pi*2; end;
 		object(objName).rotation = tmp;
+		print(tmp, delta, k, object(objName).rotation + delta)
 		
 		pushcmd(Loop, 1/frequency)
 	end;
@@ -452,7 +453,7 @@ function func.extrasprite.Create(name, obj, spriteTab, esTab)
 	local texture;
 	local function GetRotateName(obj) -- Костыль. Slava98. 04.08.14
 		if objtype(obj) == "tank" or objtype(obj) == "user_sprite" or objtype(obj) == "crate" then return "rotation";
-		elseif objtype(obj) == "respawn_point" or string.sub(objtype(obj), 0, 3) == "weap" or string.sub(objtype(obj), 0, 3) == "turret" then return "dir";
+		elseif objtype(obj) == "respawn_point" or string.sub(objtype(obj), 0, 4) == "weap" or string.sub(objtype(obj), 0, 4) == "turret" then return "dir";
 		end;
 	end;
 	local function Loop()
@@ -514,6 +515,7 @@ function func.projectile.Create(projName, projTab, x, y)
 			trailWidth = 1, -- Длина текстуры следа снаряда.
 			lifeTime = 5, -- Время жизни снаряда. 0 - вечно.
 			splashTime = 3, -- Время жизни декорации частиц от столкновения со стеной.
+			explosionTime = 1, -- Время жизни декорации взрыва.
 			detonateOnOwner = true, -- Взрывается ли снаряд, если столкнулся с хозяином. Только если хозяин имеется.
 			shootDown = false, -- Можно ли сбить снаряд.
 			health = 50, -- Здоровье снаряда, если shootDown.
@@ -585,8 +587,7 @@ function func.projectile.Create(projName, projTab, x, y)
 		end;
 		-- Отрисовка спрайта взрыва.
 		if projTab.explosionTab then
-			local timer = 10/projTab.explosionTab.animate or 1;
-			pushcmd(function() func.KillIfExists(explosion) end, timer)
+			pushcmd(function() func.KillIfExists(explosion) end, projTab.explosionTime)
 		end;
 	end;
 	local function Loop()
@@ -623,8 +624,14 @@ function func.projectile.Create(projName, projTab, x, y)
 		if projTab.homingFactor ~= 0 and projTab.target ~= "" then
 			local x2, y2 = position(projTab.target); -- Позиция противника.
 			local dirToTarget = func.GetRadians(x, y, x2, y2); -- Угол поворота к противнику.
+			print(dirToTarget)
 			local k = func.object.GetRightDirection(projTab.dir, dirToTarget); -- Коэффицент правильного направления снаряда.
-			projTab.dir = projTab.dir + 0.1*k*projTab.homingFactor*math.pi/90;
+			tmp = projTab.dir + 0.1*k*projTab.homingFactor*math.pi/90;
+			
+				if tmp > math.pi*2 then tmp = tmp - math.pi*2
+			elseif tmp < 0 then tmp = tmp + math.pi*2; end;
+			
+			projTab.dir = tmp;
 		end;
 		-- Передача личных данных текстуре из таблицы снаряда.
 		projTab.textureTab.rotation = projTab.dir;
@@ -648,7 +655,7 @@ function func.projectile.Create(projName, projTab, x, y)
 		x, y = x1, y1;
 		setposition(texture, x, y)
 		n = n + 1;
-		pushcmd(Loop, 1/projTab.speed)
+		pushcmd(Loop, 0.0001/projTab.speed)
 	end;
 	
 	-- Если разработчик карты вдруг забудет сделать animate у взрыва, то следует ему это напомнить. 

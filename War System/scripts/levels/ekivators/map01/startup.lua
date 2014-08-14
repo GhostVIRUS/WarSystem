@@ -69,7 +69,11 @@ level.objects.saron1 = func.ObjectCopy("saron1");
 level.objects.a1 = func.ObjectCopy("a1");
 level.objects.a2 = func.ObjectCopy("a2");
 level.objects.a3 = func.ObjectCopy("a3");
-	
+
+func.Play("mus5") -- Включаем музыку.
+loadtheme(const.scrDir.."/textures/map01.lua") -- Загружаем текстуры.
+conf.sv_nightmode = false;
+
 dofile(const.scrDir.."/dialogs/map01.lua")
 func.MissionChange("main", "add", func.Read({"map01", "missions", 1}))
 
@@ -125,7 +129,7 @@ actor("trigger", 2140, 65, {name="c_trig", only_human=1, radius=3, active=0, on_
 actor("trigger", 656, 240, {name="plazma_trig", only_human=1, radius=2, active=0, on_enter="level.Door('plazmadoor_open'); kill(self)"})
 actor("trigger", 560, 177, {name="plazmaexit_trig", only_human=1, radius=2, active=0, on_enter="level.Door('plazmadoor_close'); kill(self)"})
 actor("trigger", 770, 1390, {name="boodoor_trig", only_human=1, radius=6, active=1, only_visible=0, on_enter="level.Door('boodoor_open')"})
-actor("trigger", 256, 900, {name="excstare_trig", only_human=1, only_visible=0; radius=10, active=1, on_enter="for i = 1, 3 do local x1, y1 = position('esc'..i..'_tank'); local x2, y2 = position(const.playerVehName); local timer = func.object.SetRotation('esc'..i..'_tank', func.GetRadians(x1, y1, x2, y2), 100); pushcmd(function() level.screenplay.excavatorsCanStare = true; level.screenplay.Statue('stare_on_player', i) end, timer + 0.1); end", on_leave="level.screenplay.excavatorsCanStare = false"})
+actor("trigger", 256, 900, {name="excstare_trig", only_human=1, only_visible=0; radius=10, active=1, on_enter="for i = 1, 3 do local x1, y1 = position('esc'..i..'_tank'); local x2, y2 = position(const.playerVehName); local timer = func.object.SetDir('esc'..i..'_tank', func.GetRadians(x1, y1, x2, y2), 100); pushcmd(function() level.screenplay.excavatorsCanStare = true; level.screenplay.Statue('stare_on_player', i) end, timer + 0.1); end", on_leave="level.screenplay.excavatorsCanStare = false"})
 actor("trigger", 734, 1384, {name="hiddenturret_trig", only_human=1, radius=1, active=1, only_visible=1, on_enter="level.HiddenTurretActivate(); kill(self)"})
 actor("trigger", 624, 1688, {name="settlerkey_trig", only_human=1, radius=10, active=1, on_enter="level.screenplay.SettlerGetKey('call')"})
 actor("trigger", 2200, 1000, {name="settler_near_ruins_trig", only_human=1, radius=10, active=1, on_enter="if not level.screenplay.playerCanRideToSettle then level.screenplay.SettlerNearRuins('call') end"})
@@ -170,7 +174,7 @@ pushcmd(function()
 	func.extrasprite.Create(const.playerName.."_animskin", const.playerVehName, {texture = "skin/player"}, {})
 	for i = 1, 5 do
 		if i ~= 3 then
-			func.timer.Create("ourwarrior"..i.."_talk", {timer = 3, breakable = true, funcTab = {"level.ways[main.NPC.list['ourwarrior"..i.."'].mainWay].active = false; ai_stop('ourwarrior"..i.."'); level.SpeakToPlayer('ourwarrior"..i.."'); pushcmd(function() local x1, y1 = position('ourwarrior"..i.."_tank'); local x2, y2 = position(const.playerVehName); func.object.SetRotation('ourwarrior"..i.."_tank', func.GetRadians(x1, y1, x2, y2), 100) end, 0.5)", nil, "level.ways[main.NPC.list['ourwarrior"..i.."'].mainWay].active = true; func.NPC.FollowWay('ourwarrior"..i.."')"}})
+			func.timer.Create("ourwarrior"..i.."_talk", {timer = 3, breakable = true, funcTab = {"level.ways[main.NPC.list['ourwarrior"..i.."'].mainWay].active = false; ai_stop('ourwarrior"..i.."'); level.SpeakToPlayer('ourwarrior"..i.."'); pushcmd(function() local x1, y1 = position('ourwarrior"..i.."_tank'); local x2, y2 = position(const.playerVehName); func.object.SetDir('ourwarrior"..i.."_tank', func.GetRadians(x1, y1, x2, y2), 100) end, 0.5)", nil, "level.ways[main.NPC.list['ourwarrior"..i.."'].mainWay].active = true; func.NPC.FollowWay('ourwarrior"..i.."')"}})
 			func.object.borderTrigger.Create("ourwarrior"..i.."_talk", "ourwarrior"..i.."_tank", {radius = 2, only_human = 1, on_enter = "if not main.NPC.list['ourwarrior"..i.."'].isAttacking then func.timer.Play('ourwarrior"..i.."_talk') end"}, {dir = 6})
 		end;
 	end;

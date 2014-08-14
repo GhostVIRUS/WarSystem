@@ -60,7 +60,7 @@ function level.screenplay.Statue(event, num)
 		if not level.screenplay.excavatorsCanStare or level.screenplay.statueIsDamaged then return; end;
 		local x1, y1 = position("esc"..num.."_tank");
 		local x2, y2 = position(const.playerVehName);
-		object("esc"..num.."_tank").rotation = func.GetRadians(x1, y1, x2, y2);
+		object("esc"..num.."_tank").dir = func.GetRadians(x1, y1, x2, y2);
 		pushcmd(function() level.screenplay.Statue("stare_on_player", num) end, 0.01)
 	elseif event == "destroy" then
 		if level.screenplay.missionBoo == 1 then if func.CheckOfLuck(math.random(5, 7)) then func.GiveItem("healthpack", "statue") end; end;

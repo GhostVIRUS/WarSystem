@@ -224,25 +224,28 @@ end
 -- Постепенно разворачивает объект. *Переделать. Slava98. 10.02.14.
 -- Криво? Asqwel (Fluffle Puff / Артур).
 -- Попытка переделать для нужной системы коордиант. Asqwel (Fluffle Puff / Артур), Slava98. 01.03.14.
-function func.object.SetRotation(objName, rotation, frequency)
+function func.object.SetDir(objName, dir, frequency)
 -- Обработчик ошибок.
-	if type(objName) ~= "string" then error("bad argument #1 to 'func.object.SetRotation' (string expected, got "..type(objName)..")", 2) return; end;    
-	if type(rotation) ~= "number" then error("bad argument #2 to 'func.object.SetRotation' (number expected, got "..type(rotation)..")", 2) return; end;  
-	if type(frequency) ~= "number" and frequency ~= nil then error("bad argument #3 to 'func.object.SetRotation' (number expected, got "..type(frequency)..")", 2) return; end;    
-	if type(active) ~= "boolean" and active ~= nil then error("bad argument #4 to 'func.object.SetRotation' (boolean expected, got "..type(active)..")", 2) return; end;  
+	if type(objName) ~= "string" then error("bad argument #1 to 'func.object.SetDir' (string expected, got "..type(objName)..")", 2) return; end;    
+	if type(dir) ~= "number" then error("bad argument #2 to 'func.object.SetDir' (number expected, got "..type(dir)..")", 2) return; end;  
+	if type(frequency) ~= "number" and frequency ~= nil then error("bad argument #3 to 'func.object.SetDir' (number expected, got "..type(frequency)..")", 2) return; end;    
+	if type(active) ~= "boolean" and active ~= nil then error("bad argument #4 to 'func.object.SetDir' (boolean expected, got "..type(active)..")", 2) return; end;  
 
-	local k = func.object.GetRightDirection(rotation, object(objName).rotation)
-	local alpha = rotation - object(objName).rotation;
-
-	local delta = k*math.rad(1);
+	local k = func.object.GetRightDirection(dir, object(objName).dir)
+	local alpha = dir - object(objName).dir;
+	local delta = k*math.rad(2);
+	local function GetRotateName(obj) -- Костыль. Slava98. 04.08.14
+		if objtype(obj) == "user_sprite" or objtype(obj) == "crate" then return "rotation";
+		elseif objtype(obj) == "tank" or objtype(obj) == "respawn_point" or string.sub(objtype(obj), 0, 4) == "weap" or string.sub(objtype(obj), 0, 4) == "turret" then return "dir";
+		end;
+	end;
 	local function Loop()
-		if math.floor(object(objName).rotation*10) == math.floor(rotation*10) then return; end;
-		local tmp = object(objName).rotation + delta;
+		if math.floor(object(objName).dir*10) == math.floor(dir*10) then return; end;
+		local tmp = object(objName).dir + delta;
 		
 		if tmp > math.pi*2 then tmp = tmp - math.pi*2
 		elseif tmp < 0 then tmp = tmp + math.pi*2; end;
-		object(objName).rotation = tmp;
-		print(tmp, delta, k, object(objName).rotation + delta)
+		object(objName).dir = tmp;
 		
 		pushcmd(Loop, 1/frequency)
 	end;
@@ -452,8 +455,8 @@ function func.extrasprite.Create(name, obj, spriteTab, esTab)
 	}, spriteTab);
 	local texture;
 	local function GetRotateName(obj) -- Костыль. Slava98. 04.08.14
-		if objtype(obj) == "tank" or objtype(obj) == "user_sprite" or objtype(obj) == "crate" then return "rotation";
-		elseif objtype(obj) == "respawn_point" or string.sub(objtype(obj), 0, 4) == "weap" or string.sub(objtype(obj), 0, 4) == "turret" then return "dir";
+		if objtype(obj) == "user_sprite" or objtype(obj) == "crate" then return "rotation";
+		elseif objtype(obj) == "tank" or objtype(obj) == "respawn_point" or string.sub(objtype(obj), 0, 4) == "weap" or string.sub(objtype(obj), 0, 4) == "turret" then return "dir";
 		end;
 	end;
 	local function Loop()

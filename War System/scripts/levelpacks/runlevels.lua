@@ -1,7 +1,7 @@
-dofile(const.scrDir.."/levels/levelpacks.lua")
+dofile(const.scrDir.."/levelpacks/levelpacks.lua")
 for i = 1, table.maxn(main.levelpacks) do 
 	local levelpack = main.levelpacks[i] 
-	if levelpack~= nil then dofile(const.scrDir.."/levels/"..levelpack.."/info.lua") end
+	if levelpack~= nil then dofile(const.scrDir.."/levelpacks/"..levelpack.."/info.lua") end
 end
 
 main.levelpack.default = main.levelpack.default or "ekivators"
@@ -23,10 +23,10 @@ function main.levelpack.Circle(lp)
 	loadmap(const.mapsDir.."/"..main.levelpack.name.."/"..main.levelpack.map..".map")
 	main.menuservice = service("menu", {name="menu"})
 	main.menu.Show("main")
-	dofile(const.scrDir.."/levels/"..main.levelpack.name.."/"..main.levelpack.map.."/startup.lua")
-	dofile(const.scrDir.."/levels/"..main.levelpack.name.."/"..main.levelpack.map.."/screenplay.lua")
-	dofile(const.scrDir.."/levels/"..main.levelpack.name.."/"..main.levelpack.map.."/speaks.lua")
-	dofile(const.scrDir.."/levels/"..main.levelpack.name.."/"..main.levelpack.map.."/functions.lua")	
+	dofile(const.scrDir.."/levelpacks/"..main.levelpack.name.."/levels/"..main.levelpack.map.."/startup.lua")
+	dofile(const.scrDir.."/levelpacks/"..main.levelpack.name.."/levels/"..main.levelpack.map.."/screenplay.lua")
+	dofile(const.scrDir.."/levelpacks/"..main.levelpack.name.."/levels/"..main.levelpack.map.."/speaks.lua")
+	dofile(const.scrDir.."/levelpacks/"..main.levelpack.name.."/levels/"..main.levelpack.map.."/functions.lua")	
 	pause(false)
 	pushcmd(function() main.menu.OpenCloseMenu() pause(true) end, 0.2)
 end

@@ -5,3 +5,14 @@ main.levelpack.ekivators = {
 							level1 = "map01",
 							level2 = "map02",
 							}
+--[[
+return { 
+	name   = "Ёкиваторы",
+	type   = "race",
+	intro  = "intro",
+	maps = {
+		"map01",
+		"map02",
+	},
+}
+]]

@@ -42,6 +42,7 @@ main = { -- Главные глобальные переменные (не зависят от уровней).
 		inventoryChosedString = 4, -- Выбранный вариант в окошке инвентаря.
 		inventorySectionString = 2, -- Выбранная секция в окошке инвентаря.
 		}, -- 
+	lang = {},
 	levelpack = {}, -- Переменные и функции, относящиеся к левелпакам.
 	characters = {}, -- Массив с персонажами.
 	temp = {}, -- Временные переменные и функции.
@@ -50,7 +51,7 @@ main = { -- Главные глобальные переменные (не зависят от уровней).
 	timers = {},
 	music = { -- Переменные, связанные со звуком и музыкой.
 		currentTrack = "", -- Текущий трек. Не используется.
-		},
+	},
 }
 
 level = { -- Глобальные переменные, относящиеся к уровню.
@@ -61,7 +62,7 @@ level = { -- Глобальные переменные, относящиеся к уровню.
 	projectiles = {}, -- Снаряды, расположенные на уровне.
 	dialog = { -- Переменные, относящиеся к диалогам и локализациям.
 		lang = "russ", -- Текущий язык (русский).
-		},
+	},
 }
 
 func = { -- Переменные, которые относятся к функциям.
@@ -99,13 +100,6 @@ const = { -- Константы.
 
 shape = { -- Шаблоны.
 	inventory = { -- Изначальный инвентарь любого характера. *Изначально создавался для NPC, но я пришёл к выводу, что такой инвентарь должен быть у всех характеров, включая игрока. Slava98. 06.06.13.
---[[	healthpackNum = 0, 
-		booNum = 0,
-		bombNum = 0,
-		armorNum = 0,
-		keyNum = 0,
-		eyNum = 0,
-		mineNum = 0,]]
 		isSetWeap = false, -- Установлено ли уже оружие. Slava98. 31.12.13.
 		isActivated = {}, -- Активирован ли какой-либо предмет. Slava98. 29.05.14.
 		numOfPushed = {}, -- Количество поставленных в очередь предметов. Slava98. 29.05.14.
@@ -136,13 +130,11 @@ debug = {
 dofile(const.scrDir.."/main/menu.lua")
 dofile(const.scrDir.."/main/functions.lua")
 dofile(const.scrDir.."/main/classes.lua")
-dofile(const.scrDir.."/levels/runlevels.lua")
+dofile(const.scrDir.."/levelpacks/runlevels.lua")
 dofile(const.scrDir.."/dialogs/main.lua")
-loadtheme(const.scrDir.."/textures/map01.lua")
+loadtheme(const.campDir.."/textures/map01.lua")
 func.UnsetTempValues()
 
---main.menuservice = service("menu", {title="splash", name="menu", names="Игра|Игровые функции|Помощь", on_select="main.menu.Main(n)" } )
---main.menu.section = "menu"
 main.menuservice = service("menu", {name="menu"})
 main.menu.Show("main")
 func.Play("menu")

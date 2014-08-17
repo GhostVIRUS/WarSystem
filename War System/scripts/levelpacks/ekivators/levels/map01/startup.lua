@@ -71,7 +71,7 @@ level.objects.a2 = func.ObjectCopy("a2");
 level.objects.a3 = func.ObjectCopy("a3");
 
 func.Play("mus5") -- Включаем музыку.
-loadtheme(const.scrDir.."/textures/map01.lua") -- Загружаем текстуры.
+loadtheme(const.campDir.."/textures/map01.lua") -- Загружаем текстуры.
 conf.sv_nightmode = false;
 
 dofile(const.scrDir.."/dialogs/map01.lua")

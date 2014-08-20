@@ -53,7 +53,7 @@ end
 
 function main.menu.NewGame()
 	local lp = main.levelpack.default;
-	dofile("campaign/War System.lua")
+	dofile("campaign/War System/scripts/outdated/main/startup.lua")
 	main.levelpack.Run(lp)
 	pushcmd(function() main.menu.OpenCloseMenu() end, 0.2)
 end
@@ -898,16 +898,16 @@ end
 
 function main.menu.ReloadScripts()
 	if main.levelpack.map ~= nil then
-		dofile(const.scrDir.."/levels/"..main.levelpack.map.."/screenplay.lua")
-		dofile(const.scrDir.."/levels/"..main.levelpack.map.."/speaks.lua")
-		dofile(const.scrDir.."/levels/"..main.levelpack.map.."/functions.lua")
+		dofile(const.scrDir.."/levelpacks/"..main.levelpack.name.."/levels/"..main.levelpack.map.."/screenplay.lua")
+		dofile(const.scrDir.."/levelpacks/"..main.levelpack.name.."/levels/"..main.levelpack.map.."/speaks.lua")
+		dofile(const.scrDir.."/levelpacks/"..main.levelpack.name.."/levels/"..main.levelpack.map.."/functions.lua")	
 	end;
 	dofile(const.scrDir.."/main/menu.lua")
 	dofile(const.scrDir.."/main/functions.lua")
 	dofile(const.scrDir.."/main/classes.lua")
 	dofile(const.scrDir.."/levels/runlevels.lua")
 	dofile(const.scrDir.."/dialogs/main.lua")
-	loadtheme(const.scrDir.."/textures/map01.lua")
+	loadtheme(const.campDir.."/textures/map01.lua")
 --	dofile(const.scrDir.."/levels/"..main.levelpack.map.."/startup.lua")
 end
 

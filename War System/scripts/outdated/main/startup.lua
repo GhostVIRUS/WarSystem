@@ -94,7 +94,7 @@ const = { -- Константы.
 	playerVehName = "ourplayer_tank", -- Имя танка игрока.
 	weapons = {"weap_cannon", "weap_autocannon", "weap_minigun", "weap_rockets", "weap_ripper", "weap_ram", "weap_plazma", "weap_bfg", "weap_zippo"}, -- Возможные виды оружия.
 	campDir = "campaign//War System", -- Адрес папки кампании. Не используется.
-	scrDir  = "campaign//War System//scripts", -- Адрес папки скриптов.
+	scrDir  = "campaign//War System//scripts//outdated", -- Адрес папки скриптов.
 	mapsDir = "campaign//War System//maps", -- Адрес папки карт.
 } 
 
@@ -138,4 +138,4 @@ func.UnsetTempValues()
 main.menuservice = service("menu", {name="menu"})
 main.menu.Show("main")
 func.Play("menu")
-pushcmd( function() main.menuservice.open=1 end, 0.1)
+pushcmd(function() main.menuservice.open = 1 end, 0.1)

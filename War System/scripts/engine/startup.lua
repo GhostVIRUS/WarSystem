@@ -47,11 +47,11 @@ dbg.Print("\n", "engine")
 
 LoadEngineModule("tables")
 LoadEngineModule("functions")
-LoadEngineModule("objects")
 LoadEngineModule("texts")
 LoadEngineModule("levelpacks")
-LoadEngineModule("menu")
 LoadEngineModule("stages")
+LoadEngineModule("objects")
+LoadEngineModule("menu")
 LoadEngineModule("multiplayer")
 LoadEngineModule("autocomplete")
 
@@ -63,10 +63,12 @@ else
 end
 
 -- loading libs
-local libs = dirlist("campaign/War System/scripts/libs");
+local libs = dirlist(const.libPath);
 for i = 1, #libs do
-	libs[i] = string.gsub(libs[i], ".lua", "");
-	LoadLib(libs[i])
+	if string.sub(libs[i], string.len(libs[i]) - 3) == ".lua" then -- loading only lua-files
+		libs[i] = string.sub(libs[i], 1, string.len(libs[i]) - 4)
+		LoadLib(libs[i])
+	end;
 end
 
 pushcmd(function()

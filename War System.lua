@@ -1,1 +1,1 @@
-dofile("campaign/War System/scripts/main/startup.lua")
+dofile("campaign/War System/scripts/engine/startup.lua")

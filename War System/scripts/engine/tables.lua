@@ -1,8 +1,12 @@
 -- WarEngine. Таблицы со значениями.
 
-engine = {}
+engine = {
+	packages = {},
+}
 levelpacks = {
 	list = {},
+	loaded = "",
+	default = "ekivators",
 }
 texts = {}
 

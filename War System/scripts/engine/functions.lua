@@ -16,18 +16,20 @@ function checktype(argTab, typeTab, funcName)
 	for argNum = 1, #typeTab do
 		local argTp = type(argTab[argNum]); -- type of argument
 		local expTp = typeTab[argNum]; -- expected type
+		local isExtraArg = string.sub(expTp, string.len(expTp)) == "+"; -- types with "+" ending mean that argument can be nil
+		if isExtraArg then expTp = string.sub(expTp, 1, string.len(expTp) - 1) end; -- we must delete this "+"
 		if argTp ~= expTp then
 			if type(expTp) ~= "table" and type(argTp) ~= "table" then
-				local isExtraArg = string.sub(expTp, string.len(expTp)) == "+"; -- types with "+" ending mean that argument can be nil
-				if expTp and not isExtraArg then
+				if not isExtraArg or (argTp ~= "nil" and isExtraArg) then
 					error("bad argument #"..argNum.." to '"..funcName.."' ("..expTp.." expected, got "..argTp..")", 3);
 				end;
 			elseif type(expTp) == "table" and type(argTp) == "table" then -- we can check also table variables in arguments
 				for varNum = 1, #expTp do
 					local argTp = type(argTab[argNum][varNum]);
-					local expTp = expTp[varNum];
+					local expTp = type(expTab[argNum][varNum]);
 					local isExtraArg = string.sub(expTp, string.len(expTp)) == "+";
-					if argTp ~= expTp and expTp and not isExtraArg then
+					if isExtraArg then expTp = string.sub(expTp, 1, string.len(expTp) - 1) end;
+					if argTp ~= expTp and (not isExtraArg or (argTp ~= "nil" and isExtraArg)) then
 						error("bad variable #"..varNum.." in argument #"..argNum.." to '"..funcName.."' ("..expTp.." expected, got "..argTp..")", 3);
 					end;
 				end;
@@ -125,3 +127,13 @@ function engine.Unrequire(module, group, removeFromGlobal)
 	-- if there is no such module in the group
 	error("bad argument #2 to 'engine.Unrequire' (module '"..module.."' isn't loaded in group '"..group.."')", 2)
 end;
+
+-- Объединяет две таблицы в одну, которую и возвращает.
+function func.UniteTables(tab1, tab2)
+	checktype({tab1, tab2}, {"table", "table"}, "func.UniteTables");
+
+	for key, value in pairs(tab2) do 
+		tab1[key] = value;
+	end;
+	return tab1;
+end

@@ -3,12 +3,30 @@
 engine = {
 	packages = {},
 }
+
 levelpacks = {
 	list = {},
 	loaded = "",
-	default = "ekivators",
 }
-texts = {}
+
+texts = {
+	list = {},
+	langList = {},
+}
+
+language = {
+	list = {},
+	current = "",
+}
+
+func = {
+	
+}
+
+defaults = {
+	levepack = "ekivators",
+	language = "russ",
+}	
 
 const = { -- Константы.
 	playerName = "ourplayer", -- Имя игрока.

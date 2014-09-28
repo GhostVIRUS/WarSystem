@@ -16,11 +16,22 @@ function checktype(argTab, typeTab, funcName)
 	for argNum = 1, #typeTab do
 		local argTp = type(argTab[argNum]); -- type of argument
 		local expTp = typeTab[argNum]; -- expected type
-		local isExtraArg = string.sub(expTp, string.len(expTp)) == "+"; -- types with "+" ending mean that argument can be nil
-		if isExtraArg then expTp = string.sub(expTp, 1, string.len(expTp) - 1) end; -- we must delete this "+"
-		if argTp ~= expTp then
+		local typesTab = {};
+		local isError = true;
+--		local isExtraArg = string.sub(expTp, string.len(expTp)) == "+"; -- types with "+" ending mean that argument can be nil
+--		if isExtraArg then expTp = string.sub(expTp, 1, string.len(expTp) - 1) end; -- we must delete this "+"
+		table.insert(typesTab, string.sub(expTp, 1, string.find(expTp, "+")))
+		if string.find(typesTab[1], "+") then typesTab[1] = string.sub(expTp, 1, string.find(expTp, "+") - 1); end
+		for valType,_ in string.gmatch(expTp, "+(%w+)") do
+			table.insert(typesTab, valType);
+		end;
+		for _,valType in pairs(typesTab) do
+			if argTp == valType then isError = false; end;
+		end;
+		if isError then
 			if type(expTp) ~= "table" and type(argTp) ~= "table" then
 				if not isExtraArg or (argTp ~= "nil" and isExtraArg) then
+					local expTp = string.gsub(expTp, "+", " or ");
 					error("bad argument #"..argNum.." to '"..funcName.."' ("..expTp.." expected, got "..argTp..")", 3);
 				end;
 			elseif type(expTp) == "table" and type(argTp) == "table" then -- we can check also table variables in arguments
@@ -30,6 +41,7 @@ function checktype(argTab, typeTab, funcName)
 					local isExtraArg = string.sub(expTp, string.len(expTp)) == "+";
 					if isExtraArg then expTp = string.sub(expTp, 1, string.len(expTp) - 1) end;
 					if argTp ~= expTp and (not isExtraArg or (argTp ~= "nil" and isExtraArg)) then
+						local expTp = string.gsub(expTp, "+", " or ");
 						error("bad variable #"..varNum.." in argument #"..argNum.." to '"..funcName.."' ("..expTp.." expected, got "..argTp..")", 3);
 					end;
 				end;
@@ -49,7 +61,7 @@ end;]]
 
 -- returns array with files in given directory
 function dirlist(address, searchType)
-	checktype({address, searchType}, {"string", "string+"}, "dirlist");
+	checktype({address, searchType}, {"string", "string+nil"}, "dirlist");
 	address = string.gsub(address, "/", [[\]]); -- replaces standart lua slashes to cmd slashes
 	searchType = searchType or "files";
 	
@@ -72,7 +84,7 @@ function dirlist(address, searchType)
 end;
 
 function engine.Require(module, group)
-	checktype({module, group}, {"string", "string+"}, "engine.Require");
+	checktype({module, group}, {"string", "string+nil"}, "engine.Require");
 	group = group or "ungroupped";
 	
 	local returnVal;
@@ -99,7 +111,7 @@ function engine.Require(module, group)
 end;
 
 function engine.Unrequire(module, group, removeFromGlobal)
-	checktype({module, group, removeFromGlobal}, {"string", "string+", "boolean+"}, "engine.Unrequire");
+	checktype({module, group, removeFromGlobal}, {"string", "string+nil", "boolean+nil"}, "engine.Unrequire");
 	group = group or "ungroupped";
 	check(engine.packages[group] or group == "all", "bad argument #2 to 'engine.Unrequire' (group '"..group.."' does't exist)");
 	

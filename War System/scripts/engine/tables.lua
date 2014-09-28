@@ -16,7 +16,7 @@ texts = {
 
 language = {
 	list = {},
-	current = "",
+	current = "russ",
 }
 
 func = {

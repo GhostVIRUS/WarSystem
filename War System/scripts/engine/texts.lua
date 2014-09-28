@@ -36,11 +36,13 @@ local function LoadFile(file)
 	
 	file = string.sub(file, 1, string.len(file) - 4) -- cut ending of file
 	local textsList;
+	local lang = language.current;
 	local isLoaded, errorMsg = pcall(function() textsList = engine.Require(file) end);
 	if engine.packages.ungroupped[file] then engine.Unrequire(file) end;
 	
 	if type(textsList) == "table" then -- only if file returns table, it fills textlist
-		texts.list[lang] = func.UniteTables(texts.list[lang], textsList[lang]);
+		if type(texts.list[lang]) ~= "table" then texts.list[lang] = {}; end; -- if other files didn't load yet
+		texts.list[lang] = func.UniteTables(texts.list[lang], textsList);
 	elseif textsList == true then -- textsList == true only if file loaded without errors, but returns nothing
 		dbg.Print("| WARNING: Text file '"..file.."' wasn't loaded: file must return a table with texts", "engine");
 		return;
@@ -78,6 +80,6 @@ end;
 
 local langs = dirlist(const.txtPath, "directories");
 for _, dir in pairs(langs) do
-	LoadLang(dir)
-end
-language.Set(defaults.language) -- TODO: later it must load from config.dat
+	LoadLang(dir);
+end;
+language.Set(defaults.language); -- TODO: later it must load from config.dat

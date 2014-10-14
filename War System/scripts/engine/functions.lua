@@ -13,36 +13,54 @@ function checktype(argTab, typeTab, funcName)
 	check(type(typeTab) == "table", "bad argument #2 to 'checktype' (table expected, got "..type(typeTab)..")");
 	check(type(funcName) == "string", "bad argument #3 to 'checktype' (string expected, got "..type(funcName)..")");
 	
-	for argNum = 1, #typeTab do
+	for argNum = 1, #argTab do
+		if not typeTab[argNum] then -- fill nil ending of table, if it is
+			typeTab[argNum] = typeTab[argNum - 1];
+		end;
 		local argTp = type(argTab[argNum]); -- type of argument
 		local expTp = typeTab[argNum]; -- expected type
+		local argTp2;
+		local expTp2;
 		local typesTab = {};
 		local isError = true;
---		local isExtraArg = string.sub(expTp, string.len(expTp)) == "+"; -- types with "+" ending mean that argument can be nil
---		if isExtraArg then expTp = string.sub(expTp, 1, string.len(expTp) - 1) end; -- we must delete this "+"
-		table.insert(typesTab, string.sub(expTp, 1, string.find(expTp, "+")))
-		if string.find(typesTab[1], "+") then typesTab[1] = string.sub(expTp, 1, string.find(expTp, "+") - 1); end
-		for valType,_ in string.gmatch(expTp, "+(%w+)") do
-			table.insert(typesTab, valType);
-		end;
-		for _,valType in pairs(typesTab) do
-			if argTp == valType then isError = false; end;
+		local numberOfArguments = 1;
+		if type(expTp) == "table" and argTp == "table" then numberOfArguments = #argTp; end;
+		for varNum = 1, numberOfArguments do
+			if type(expTp) == "table" and argTp == "table" then
+				if not typeTab[argNum][varNum] then -- fill nil ending of table, if it is
+					typeTab[argNum][varNum] = typeTab[argNum][varNum - 1];
+				end;
+				argTp2 = type(argTab[argNum][varNum]);
+				expTp2 = typeTab[argNum][varNum];
+			else
+				argTp2 = argTp;
+				expTp2 = expTp;				
+			end;
+--			local isExtraArg = string.sub(expTp2, string.len(expTp2)) == "+"; -- types with "+" ending mean that argument can be nil
+--			if isExtraArg then expTp2 = string.sub(expTp2, 1, string.len(expTp2) - 1) end; -- we must delete this "+"
+			table.insert(typesTab, string.sub(expTp2, 1, string.find(expTp2, "+"))); -- checking on some expected types
+			if string.find(typesTab[1], "+") then typesTab[1] = string.sub(expTp2, 1, string.find(expTp2, "+") - 1); end
+			for valType,_ in string.gmatch(expTp2, "+(%w+)") do
+				table.insert(typesTab, valType);
+			end;
+			for _,valType in pairs(typesTab) do
+				if argTp2 == valType then isError = false; end;
+			end;
+			if isError then -- message error
+				break;
+			end;
 		end;
 		if isError then
-			if type(expTp) ~= "table" and type(argTp) ~= "table" then
+			if type(expTp) ~= "table" and argTp ~= "table" then
 				if not isExtraArg or (argTp ~= "nil" and isExtraArg) then
 					local expTp = string.gsub(expTp, "+", " or ");
 					error("bad argument #"..argNum.." to '"..funcName.."' ("..expTp.." expected, got "..argTp..")", 3);
 				end;
-			elseif type(expTp) == "table" and type(argTp) == "table" then -- we can check also table variables in arguments
-				for varNum = 1, #expTp do
-					local argTp = type(argTab[argNum][varNum]);
-					local expTp = type(expTab[argNum][varNum]);
-					local isExtraArg = string.sub(expTp, string.len(expTp)) == "+";
-					if isExtraArg then expTp = string.sub(expTp, 1, string.len(expTp) - 1) end;
-					if argTp ~= expTp and (not isExtraArg or (argTp ~= "nil" and isExtraArg)) then
-						local expTp = string.gsub(expTp, "+", " or ");
-						error("bad variable #"..varNum.." in argument #"..argNum.." to '"..funcName.."' ("..expTp.." expected, got "..argTp..")", 3);
+			elseif type(expTp) == "table" and argTp == "table" then -- we can check also table variables in arguments
+				for varNum = 1, #argTp do
+					if not isExtraArg or (argTp ~= "nil" and isExtraArg) then
+						local expTp2 = string.gsub(expTp2, "+", " or ");
+						error("bad variable #"..varNum.." in argument #"..argNum.." to '"..funcName.."' ("..expTp2.." expected, got "..argTp2..")", 3);
 					end;
 				end;
 			end;

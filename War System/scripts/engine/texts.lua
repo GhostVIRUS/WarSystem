@@ -71,7 +71,7 @@ function language.Set(lang)
 end;
 
 function texts.Refresh()
-
+	
 end;
 
 local function ReadText(args, argNum, text, num, patchTab)
@@ -82,11 +82,9 @@ local function ReadText(args, argNum, text, num, patchTab)
 	return output;
 end;
 
-function texts.Read(...)
-	local args = {...}; -- arguments
-	local outputTab = {}; -- output table
-	
-	checktype(args, {"string", "number", "table"}, "texts.Read")
+function texts.Read(text, num, patchTab)
+	checktype(text, num, patchTab, {"string", "number", "table+nil"}, "texts.Read")
+	local outputTab = {};
 	
 	for argNum = 1, #args do
 		local text = args[argNum][1];

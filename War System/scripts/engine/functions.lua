@@ -14,9 +14,9 @@ function checktype(argTab, typeTab, funcName)
 	check(type(funcName) == "string", "bad argument #3 to 'checktype' (string expected, got "..type(funcName)..")");
 	
 	for argNum = 1, #argTab do
-		if not typeTab[argNum] then -- fill nil ending of table, if it is
+--[[	if not typeTab[argNum] then -- fill nil ending of table, if it is
 			typeTab[argNum] = typeTab[argNum - 1];
-		end;
+		end;]]
 		local argTp = type(argTab[argNum]); -- type of argument
 		local expTp = typeTab[argNum]; -- expected type
 		local argTp2;

@@ -18,13 +18,22 @@ function dbg.Print(text, textType)
 	if dbg.canBePrinted[textType] then print(text) end;
 end
 
+function dbg.Reload()
+
+end
+
 local function LoadEngineModule(fileName)
 	local isLoaded, errorMsg = pcall(function() dofile("campaign/War System/scripts/engine/"..fileName..".lua") end);
 	if isLoaded then
 		dbg.Print("| Engine module '"..fileName.."' is loaded.", "engine")
 	else
 		local _, msgStart = string.find(errorMsg, ".lua"); -- we just remove useless information of error message
-		dbg.Print("| WARNING: Engine module '"..fileName.."' wasn't loaded:"..string.sub(errorMsg, msgStart + 2), "engine")
+		local _, fileNameStart = string.find(errorMsg, "/engine/"); -- if error was called by another engine file
+		if string.sub(errorMsg, fileNameStart + 1, msgStart - 4) == fileName then 
+			dbg.Print("| WARNING: Engine module '"..fileName.."' wasn't loaded:"..string.sub(errorMsg, msgStart + 2), "engine")
+		else
+			dbg.Print("| WARNING: Engine module '"..fileName.."' wasn't loaded: "..string.sub(errorMsg, fileNameStart + 1), "engine")	
+		end;
 		engineLoadingWasComplete = false;
 	end;
 end
@@ -71,8 +80,5 @@ for i = 1, #libs do
 	end;
 end;
 
-pushcmd(function()
-	dbg.Print("")
-	dbg.Print("| Loading stable version of War System.")
-	dofile("campaign/War System/scripts/outdated/main/startup.lua")
-end, 3)
+-- temply
+loadtheme("campaign/War System//textures/map01.lua")

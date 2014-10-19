@@ -83,21 +83,16 @@ local function ReadText(args, argNum, text, num, patchTab)
 end;
 
 function texts.Read(text, num, patchTab)
-	checktype(text, num, patchTab, {"string", "number", "table+nil"}, "texts.Read")
-	local outputTab = {};
+	checktype({text, num, patchTab}, {"string", "number", "table+nil"}, "texts.Read")
+
+	local output = "";
+	if num == "random" then num = math.random(#texts.langList[language.current][text]) end; -- ƒелаем возможность задавать номер рандомно. Slava98. 17.02.14.
+	check(type(texts.list[language.current]) == "table", "bad arguments to 'texts.Read' or problems with lang");
+	check(type(texts.list[language.current][text]) == "table", "bad argument #1  to 'texts.Read' (text '"..text.."' does not exist)");
+	check(type(texts.list[language.current][text][num]) == "string", "bad argument #2 to 'texts.Read' (number '"..num.."' in text '"..text.."' does not exist)")
+	output = ReadText(args, argNum, text, num, patchTab);
 	
-	for argNum = 1, #args do
-		local text = args[argNum][1];
-		local num = args[argNum][2];
-		local patchTab = args[argNum][3];
-		check(type(texts.list[language.current]) == "table", "bad arguments to 'texts.Read' or problems with lang");
-		check(type(texts.list[language.current][text]) == "table", "bad variable #1 in argument #"..argNum.."  to 'texts.Read' (text '"..text.."' does not exist)");
-		if num == "random" then num = math.random(#texts.langList[language.current][text]) end; -- ƒелаем возможность задавать номер рандомно. Slava98. 17.02.14.
-		check(type(texts.list[language.current][text][num]) == "string", "bad variable #3 in argument #"..argNum.." to 'texts.Read' (number '"..num.."' in text '"..text.."' does not exist)")
-		outputTab[argNum] = ReadText(args, argNum, text, num, patchTab);
-	end;
-	
-	return table.concat(outputTab);
+	return output;
 end;
 
 local langs = dirlist(const.txtPath, "directories");

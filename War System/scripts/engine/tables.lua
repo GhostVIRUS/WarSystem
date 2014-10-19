@@ -4,6 +4,16 @@ engine = {
 	packages = {},
 }
 
+menu = {
+	letUseInventory = false,
+	gameOptPage = 1,
+}
+
+defaults = {
+	levepack = "ekivators",
+	language = "russ",
+}	
+
 levelpacks = {
 	list = {},
 	loaded = "",
@@ -16,17 +26,16 @@ texts = {
 
 language = {
 	list = {},
-	current = "russ",
+	current = defaults.language,
 }
 
 func = {
 	
 }
 
-defaults = {
-	levepack = "ekivators",
-	language = "russ",
-}	
+main = {
+	godMode = false,
+}
 
 const = { -- Константы.
 	playerName = "ourplayer", -- Имя игрока.

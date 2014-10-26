@@ -23,7 +23,7 @@ function dbg.Reload()
 end
 
 local function LoadEngineModule(fileName)
-	local isLoaded, errorMsg = pcall(function() dofile("campaign/War System/scripts/engine/"..fileName..".lua") end);
+	local isLoaded, errorMsg = pcall(function() dofile("campaign/WarEngine/scripts/engine/"..fileName..".lua") end);
 	if isLoaded then
 		dbg.Print("| Engine module '"..fileName.."' is loaded.", "engine")
 	else
@@ -39,7 +39,7 @@ local function LoadEngineModule(fileName)
 end
 
 local function LoadLib(fileName)
-	local isLoaded, errorMsg = pcall(function() dofile("campaign/War System/scripts/libs/"..fileName..".lua") end)
+	local isLoaded, errorMsg = pcall(function() dofile(const.libPath..fileName..".lua") end)
 	if isLoaded then
 		dbg.Print("| Library '"..fileName.."' is loaded.", "engine")
 	else
@@ -54,11 +54,16 @@ dbg.Print("== WarEngine initialization ==", "engine")
 dbg.Print("==============================", "engine")
 dbg.Print("\n", "engine")
 
+-- setting of campaign directiory
+if not user.campaignDirectory or type(user.campaignDirectory) ~= "string" then
+	dbg.Print("| WARNING: Campaign direction not found. Please, set it to 'user.campaignDirectory' in startup-file of your campaign.", "engine")
+	user.campaignDirectory = "campaign/WarEngine/";
+end
+
 LoadEngineModule("tables")
 LoadEngineModule("functions")
 LoadEngineModule("texts")
 LoadEngineModule("levelpacks")
-LoadEngineModule("stages")
 LoadEngineModule("objects")
 LoadEngineModule("menu")
 LoadEngineModule("multiplayer")
@@ -80,5 +85,7 @@ for i = 1, #libs do
 	end;
 end;
 
+-- clearing temp values
+user.campaignDirectory = nil;
 -- temply
-loadtheme("campaign/War System//textures/map01.lua")
+--loadtheme("campaign/War System//textures/map01.lua")

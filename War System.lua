@@ -1,1 +1,0 @@
-dofile("campaign/War System/scripts/engine/startup.lua")

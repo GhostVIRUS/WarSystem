@@ -16,7 +16,7 @@ defaults = {
 
 levelpacks = {
 	list = {},
-	loaded = "",
+	loaded = defaults.levepack,
 }
 
 texts = {

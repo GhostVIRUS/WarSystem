@@ -1,7 +1,7 @@
 -- WarEngine. Объекты.
 
 function objects.Init()
-	package.path = "data/campaign/WarEngine/scripts/objects/?.lua;data/"..objPath.."?.lua" -- classes folders
+	package.path = "data/campaign/WarEngine/scripts/objects/?.lua;data/"..const.objPath.."?.lua" -- classes folders
 	objects.Class = engine.Require("middleclass", "classes");
 end
 

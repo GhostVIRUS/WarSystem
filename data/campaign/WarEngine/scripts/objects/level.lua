@@ -3,8 +3,8 @@
 objects.Init()
 
 -- declaring
-dbg.Print('- Requiring \'Level\' class')
-Level = objects.Class('Level')
+dbg.Print("| Requiring 'Level' class.", "objects")
+Level = objects.Class("Level")
 
 -- public methods
 function Level:initialize(id)
@@ -23,5 +23,5 @@ function Level:setMap(id)
 end
 
 function Level:run()
-	dofile(path.levels..self._id..'/init.lua')
+	dofile(const.lpkPath..levelpacks.loaded.."/"..self._id..'/init.lua')
 end

@@ -51,7 +51,7 @@ const = { -- Константы.
 	scrPath = user.campaignDirectory.."scripts/",
 	corPath = user.campaignDirectory.."scripts/core/",
 	libPath = user.campaignDirectory.."scripts/libs/",
-	objPath = user.campaignDirectory.."scripts/objects/",
+	clsPath = user.campaignDirectory.."scripts/classes/",
 	lpkPath = user.campaignDirectory.."scripts/levelpacks/",
 	txtPath = user.campaignDirectory.."scripts/texts/",
 	-- Other pathes.

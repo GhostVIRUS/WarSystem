@@ -6,7 +6,7 @@ local function LoadClass(class)
 end
 
 function objects.Init()
-	package.path = "data/campaign/WarEngine/scripts/objects/?.lua;data/campaign/WarEngine/scripts/objects/tzod/?.lua;data/"..const.objPath.."?.lua" -- classes folders
+	package.path = "data/campaign/WarEngine/scripts/classes/?.lua;data/campaign/WarEngine/scripts/classes/tzod/?.lua;data/"..const.clsPath.."?.lua" -- classes folders
 	objects.Class = engine.Require("middleclass", "classes");
 end
 

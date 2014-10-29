@@ -44,7 +44,7 @@ end
 
 local function _setClassMetatable(aClass)
   setmetatable(aClass, {
-    __tostring = function() return "class " .. aClass.name end,
+    __tostring = function() return "class '"..aClass.name.."'" end,
     __index    = aClass.static,
     __newindex = aClass.__instanceDict,
     __call     = function(self, ...) return self:new(...) end
@@ -57,6 +57,8 @@ local function _createClass(name, super)
 
   _setClassDictionariesMetatables(aClass)
   _setClassMetatable(aClass)
+  
+  objects.loaded[name] = aClass;
 
   return aClass
 end
@@ -64,7 +66,7 @@ end
 local function _createLookupMetamethod(aClass, name)
   return function(...)
     local method = aClass.super[name]
-    assert( type(method)=='function', tostring(aClass) .. " doesn't implement metamethod '" .. name .. "'" )
+    check( type(method)=='function', tostring(aClass) .. " doesn't implement metamethod '" .. name .. "'" )
     return method(...)
   end
 end
@@ -82,7 +84,7 @@ local function _setDefaultInitializeMethod(aClass, super)
 end
 
 local function _includeMixin(aClass, mixin)
-  assert(type(mixin)=='table', "mixin must be a table")
+  check(type(mixin)=='table', "mixin must be a table")
   for name,method in pairs(mixin) do
     if name ~= "included" and name ~= "static" then aClass[name] = method end
   end
@@ -102,7 +104,7 @@ Object.static.__metamethods = { '__add', '__call', '__concat', '__div', '__ipair
                                 '__tostring', '__unm'}
 
 function Object.static:allocate()
-  assert(type(self) == 'table', "Make sure that you are using 'Class:allocate' instead of 'Class.allocate'")
+  check(type(self) == 'table', "Make sure that you are using 'Class:allocate' instead of 'Class.allocate'")
   return setmetatable({ class = self }, self.__instanceDict)
 end
 
@@ -113,8 +115,8 @@ function Object.static:new(...)
 end
 
 function Object.static:subclass(name)
-  assert(type(self) == 'table', "Make sure that you are using 'Class:subclass' instead of 'Class.subclass'")
-  assert(type(name) == "string", "You must provide a name(string) for your class")
+  check(type(self) == 'table', "Make sure that you are using 'Class:subclass' instead of 'Class.subclass'")
+  check(type(name) == "string", "You must provide a name(string) for your class")
 
   local subclass = _createClass(name, self)
   _setClassMetamethods(subclass)
@@ -138,7 +140,7 @@ function Object.static:isSubclassOf(other)
 end
 
 function Object.static:include( ... )
-  assert(type(self) == 'table', "Make sure you that you are using 'Class:include' instead of 'Class.include'")
+  check(type(self) == 'table', "Make sure you that you are using 'Class:include' instead of 'Class.include'")
   for _,mixin in ipairs({...}) do _includeMixin(self, mixin) end
   return self
 end

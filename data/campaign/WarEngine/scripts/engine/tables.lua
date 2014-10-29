@@ -38,7 +38,7 @@ main = {
 }
 
 objects = {
-	
+	loaded = {},
 }
 
 const = { -- Константы.

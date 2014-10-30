@@ -4,7 +4,7 @@ objects.Init()
 engine.Require("entity", "classes")
 
 -- declaring
-dbg.Print("| Requiring \'Pickup\' class.", "objects")
+dbg.Print("| Requiring 'Pickup' class.", "objects")
 Pickup = objects.Class('Pickup', Entity)
 
 -- public methods

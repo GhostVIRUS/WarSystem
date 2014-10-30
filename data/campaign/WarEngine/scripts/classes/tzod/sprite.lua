@@ -34,6 +34,7 @@ function Sprite:follow(whoName, speed, iteration, copyDir) -- speed here and abo
 
 		if copyDir then
 			self._props["dir"] = object(whoName).dir;
+			self:_updateProps()
 		end
 		
 		self._isMoving = false

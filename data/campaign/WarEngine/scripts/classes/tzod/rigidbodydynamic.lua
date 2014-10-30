@@ -32,6 +32,7 @@ function RigidBodyDynamic:follow(whoName, speed, iteration, copyDir) -- speed he
 
 		if copyDir then
 			self._props["dir"] = object(whoName).dir;
+			self:_updateProps()
 		end
 		
 		self._isMoving = false

@@ -32,6 +32,9 @@ function checktype(argTab, typeTab, funcName)
 				end;
 				argTp2 = type(argTab[argNum][varNum]);
 				expTp2 = typeTab[argNum][varNum];
+			elseif type(expTp) == "table" and not argTp == "table" then
+				argTp2 = argTp;
+				expTp2 = "table";				
 			else
 				argTp2 = argTp;
 				expTp2 = expTp;				

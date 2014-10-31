@@ -13,6 +13,12 @@ function RigidBodyStatic:initialize(name, pos, props)
 
 end
 
+function RigidBodyStatic:damage(health)
+	checktype({health}, {"number"}, "RigidBodyStatic:damage")
+
+	damage(health, self.link)
+end
+
 -- TODO: Add on_damage, on_destroy auto-handlers
 
 ---===UserObject===---

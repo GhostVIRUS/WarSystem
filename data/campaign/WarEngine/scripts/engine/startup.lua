@@ -39,13 +39,23 @@ local function LoadEngineModule(fileName)
 	end;
 end
 
-local function LoadLib(fileName)
-	local isLoaded, errorMsg = pcall(function() dofile(const.libPath..fileName..".lua") end)
+local function LoadLib(fileName, path)
+	local isLoaded, errorMsg = pcall(function() dofile(path..fileName..".lua") end)
 	if isLoaded then
 		dbg.Print("| Library '"..fileName.."' is loaded.", "engine")
 	else
 		local _, msgStart = string.find(errorMsg, ".lua"); -- we just remove useless information of error message
 		dbg.Print("| WARNING: Library '"..fileName.."' wasn't loaded:"..string.sub(errorMsg, msgStart + 2), "engine")
+	end;
+end
+
+local function LoadLibs(path)
+	local libs = dirlist(path);
+	for i = 1, #libs do
+		if string.sub(libs[i], string.len(libs[i]) - 3) == ".lua" then -- loading only lua-files
+			libs[i] = string.sub(libs[i], 1, string.len(libs[i]) - 4)
+			LoadLib(libs[i], path)
+		end;
 	end;
 end
 
@@ -78,15 +88,8 @@ else
 end
 
 -- loading libs
-local libs = dirlist(const.libPath);
-for i = 1, #libs do
-	if string.sub(libs[i], string.len(libs[i]) - 3) == ".lua" then -- loading only lua-files
-		libs[i] = string.sub(libs[i], 1, string.len(libs[i]) - 4)
-		LoadLib(libs[i])
-	end;
-end;
+LoadLibs(const.elsPath)
+LoadLibs(const.libPath)
 
 -- clearing temp values
 user.campaignDirectory = nil;
--- temply
---loadtheme("campaign/War System//textures/map01.lua")

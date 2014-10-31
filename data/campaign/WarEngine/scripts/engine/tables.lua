@@ -48,6 +48,7 @@ const = { -- Константы.
 	cmpPath = user.campaignDirectory,
 	-- Scripts paths.
 	engPath = "campaign/WarEngine/scripts/engine/",
+	elsPath = "campaign/WarEngine/scripts/libs/",
 	scrPath = user.campaignDirectory.."scripts/",
 	corPath = user.campaignDirectory.."scripts/core/",
 	libPath = user.campaignDirectory.."scripts/libs/",

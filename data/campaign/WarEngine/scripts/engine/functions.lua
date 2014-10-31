@@ -26,15 +26,15 @@ function checktype(argTab, typeTab, funcName)
 		local numberOfArgs = 1;
 		if type(expTp) == "table" and argTp == "table" then numberOfArgs = #argTp; end;
 		for varNum = 1, numberOfArgs do
+			if type(expTp) == "table" and argTp ~= "table" then
+				expTp = "table";
+			end;
 			if type(expTp) == "table" and argTp == "table" then
 				if not typeTab[argNum][varNum] then -- fill nil ending of table, if it is
 					typeTab[argNum][varNum] = typeTab[argNum][varNum - 1];
 				end;
 				argTp2 = type(argTab[argNum][varNum]);
-				expTp2 = typeTab[argNum][varNum];
-			elseif type(expTp) == "table" and not argTp == "table" then
-				argTp2 = argTp;
-				expTp2 = "table";				
+				expTp2 = typeTab[argNum][varNum];				
 			else
 				argTp2 = argTp;
 				expTp2 = expTp;				
@@ -54,7 +54,7 @@ function checktype(argTab, typeTab, funcName)
 			end;
 		end;
 		if isError then
-			if type(argTp) ~= "table" and expTp ~= "table" then
+			if type(argTp) ~= "table" --[[and expTp ~= "table"]] then
 				if not isExtraArg or (argTp ~= "nil" and isExtraArg) then
 					local expTp = string.gsub(expTp, "+", " or ");
 					error("bad argument #"..argNum.." to '"..funcName.."' ("..expTp.." expected, got "..argTp..")", 3);
@@ -188,7 +188,7 @@ end
 
 -- Если аргумент не является таблицей, то возвращает пустую таблицу.
 function func.DoTable(tab)
-	checktype({tab}, {"table"}, "func.DoTable");
+	checktype({tab}, {"table+nil"}, "func.DoTable");
 
 	if type(tab) ~= "table" then
 		return {};

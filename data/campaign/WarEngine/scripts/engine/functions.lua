@@ -13,7 +13,7 @@ function checktype(argTab, typeTab, funcName)
 	check(type(typeTab) == "table", "bad argument #2 to 'checktype' (table expected, got "..type(typeTab)..")");
 	check(type(funcName) == "string", "bad argument #3 to 'checktype' (string expected, got "..type(funcName)..")");
 	
-	for argNum = 1, #argTab do
+	for argNum = 1, #typeTab do
 --[[	if not typeTab[argNum] then -- fill nil ending of table, if it is
 			typeTab[argNum] = typeTab[argNum - 1];
 		end;]]
@@ -23,9 +23,9 @@ function checktype(argTab, typeTab, funcName)
 		local expTp2;
 		local typesTab = {};
 		local isError = true;
-		local numberOfArguments = 1;
-		if type(expTp) == "table" and argTp == "table" then numberOfArguments = #argTp; end;
-		for varNum = 1, numberOfArguments do
+		local numberOfArgs = 1;
+		if type(expTp) == "table" and argTp == "table" then numberOfArgs = #argTp; end;
+		for varNum = 1, numberOfArgs do
 			if type(expTp) == "table" and argTp == "table" then
 				if not typeTab[argNum][varNum] then -- fill nil ending of table, if it is
 					typeTab[argNum][varNum] = typeTab[argNum][varNum - 1];
@@ -57,6 +57,10 @@ function checktype(argTab, typeTab, funcName)
 					error("bad argument #"..argNum.." to '"..funcName.."' ("..expTp.." expected, got "..argTp..")", 3);
 				end;
 			elseif type(arpTp) == "table" and expTp == "table" then -- we can check also table variables in arguments
+				local numberOfArgs = #argTp;
+				if numberOfArgs <= 0 then
+					numberOfArgs = #varTp;
+				end;
 				for varNum = 1, #argTp do
 					if not isExtraArg or (argTp ~= "nil" and isExtraArg) then
 						local expTp2 = string.gsub(expTp2, "+", " or ");

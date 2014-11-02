@@ -138,20 +138,21 @@ end;
 function engine.Unrequire(module, group, removeFromGlobal)
 	checktype({module, group, removeFromGlobal}, {"string", "string+nil", "boolean+nil"}, "engine.Unrequire");
 	group = group or "ungroupped";
+	local searchWasSuccessful;
 --	check(engine.packages[group] or group == "all", "bad argument #2 to 'engine.Unrequire' (group '"..group.."' does't exist)");
 	if not engine.packages[group] and group ~= "all" then return; end;
 	
 	if group == "all" then
-		for key,_ in pairs(engine.packages) do
+		for key,_ in pairs() do
 			engine.Unrequire(module, key, removeFromGlobal);
-			return true;
+			searchWasSuccessful = true;
 		end;
 	end;
 	
 	for key,_ in pairs(engine.packages[group]) do
 		if module == "all" then
 			engine.Unrequire(key, group, removeFromGlobal);
-			return true;
+			searchWasSuccessful = true;
 		else
 			if key == module then
 				package.loaded[module] = nil;
@@ -162,6 +163,8 @@ function engine.Unrequire(module, group, removeFromGlobal)
 		end;
 	end;
 
+	if searchWasSuccessful then return true; end;
+	
 	-- if there is no such module in the group
 	error("bad argument #2 to 'engine.Unrequire' (module '"..module.."' isn't loaded in group '"..group.."')", 2)
 end;

@@ -24,6 +24,11 @@ texts = {
 	langList = {},
 }
 
+-- i hope it's temply
+temp = {
+
+}
+
 language = {
 	list = {},
 	current = defaults.language,

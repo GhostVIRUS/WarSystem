@@ -34,9 +34,19 @@ function Service:setProperties(props) -- requires table property-value
 	return nil
 end
 
+function Service:setVisibility(value)
+	dbg.Print(self._name..":setVisibility()", "objects")
+	if value == true then
+		self:_show()
+	elseif value == false then
+		self:_hide()
+	end
+
+	return nil
+end
 
 -- conditionally private methods
-function Serivce:_saveProps()
+function Service:_saveProps()
 	dbg.Print(self._name..":_saveProps()", "objects")
 	local tempTable = getmetatable(self._link);
 	local property = "name";

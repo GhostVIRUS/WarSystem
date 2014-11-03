@@ -95,8 +95,7 @@ function ListBox:_onClickButton(n)
 				self._chosedSectionNum = 1;
 			end;
 		end;
-		self._props["text"] = self:_makeList()
-		self:_updateProps()
+		self.link["text"] = self:_makeList()
 		self:setVisibility(true)
 	elseif n == 2 then
 		if 1 < sectionTab[num].chosedStringNum then
@@ -111,8 +110,7 @@ function ListBox:_onClickButton(n)
 				self._chosedSectionNum = #sectionTab;
 			end;
 		end;
-		self._props["text"] = self:_makeList()
-		self:_updateProps()
+		self.link["text"] = self:_makeList()
 		self:setVisibility(true)
 	elseif n == 3 then
 		if type(sectionTab[self._chosedSectionNum].funcTab[sectionTab[num].chosedStringNum]) == 'string' then

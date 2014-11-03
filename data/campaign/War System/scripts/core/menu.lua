@@ -100,6 +100,6 @@ end;
 ---------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
-menu.Service = service("menu", {name="menu"});
+menu.service:setVisibility(true)
 menu.Show("main");
-pushcmd(function() menu.Service.open = 1; end, 0.1)
+pushcmd(function() menu.service.link.open = 1; end, 0.1)

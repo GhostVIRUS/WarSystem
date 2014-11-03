@@ -50,12 +50,12 @@ end
 -- conditionally private methods
 function Service:_saveProps()
 	dbg.Print(self._name..":_saveProps()", "objects")
-	local tempTable = getmetatable(self._link);
+	local tempTable = getmetatable(self.link);
 	local property = "name";
 
 	while property ~= nil do
-		self._props[property] = tempTable.__index(self._link, property)
-		property = tempTable.__next(self._link, property)
+		self._props[property] = tempTable.__index(self.link, property)
+		property = tempTable.__next(self.link, property)
 	end
 
 	return nil
@@ -63,7 +63,7 @@ end
 
 function Service:_show()
 	dbg.Print(self._name..":_show()", "objects")
-	self._link = service(self._objectType, self._props)
+	self.link = service(self._objectType, self._props)
 --	self._isVisible = true
 	self:_saveProps()
 
@@ -75,7 +75,7 @@ function Service:_hide()
 --	self._isVisible = false
 	self:_saveProps()
 	kill(self._link)
-	self._link = false
+	self.link = false
 
 	return nil
 end

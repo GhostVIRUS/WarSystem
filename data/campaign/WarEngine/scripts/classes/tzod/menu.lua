@@ -11,6 +11,10 @@ Menu = objects.Class('Menu', Service)
 function Menu:initialize(name, props)
 	Service.initialize(self, name, props)
 
+	-- public members
+	self.section = ""
+	
+	-- conditionally private members
 	self._objectType = "menu"
 end
 

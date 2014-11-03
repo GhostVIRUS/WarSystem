@@ -1,14 +1,18 @@
 -- WarEngine. Меню.
 
+objects.Init()
+engine.Require("menu", "classes")
+menu.service = Menu("menu");
+
 ---------------------------------------------------------------------------------------------------------------------
 --========================================== Рабочие функции ======================================================--
 ---------------------------------------------------------------------------------------------------------------------
 
 function menu.Refresh() -- Local?
-    if exists(menu.Service.name) == true then
-		menu.Service.names = menu.Service.names;
-        menu.Service.open = 1;
-        menu.Service.open = 1;
+    if func.Exists(menu.service.link) == true then
+		menu.service.link.names = menu.service.link.names;
+        menu.service.link.open = 1;
+        menu.service.link.open = 1;
     end;
 end
 
@@ -51,9 +55,9 @@ function menu.Set(section, namesTab, funcTab, title)
 		end;
 	end;
 
-	menu.Service.title = title;
-	menu.Service.names = names;
-	menu.Service.on_select = onSelect;
-	menu.section = section; -- 'Menu.section' in the future
+	menu.service.link.title = title;
+	menu.service.link.names = names;
+	menu.service.link.on_select = onSelect;
+	menu.service.section = section;
 	menu.Refresh();
 end;

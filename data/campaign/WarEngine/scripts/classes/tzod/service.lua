@@ -47,7 +47,7 @@ function Service:setVisibility(value)
 	return nil
 end
 
-function Service:refresh()
+function Service:Refresh()
 	self:_hide()
 	self:_show()
 end

@@ -47,6 +47,11 @@ function Service:setVisibility(value)
 	return nil
 end
 
+function Service:refresh()
+	self:_hide()
+	self:_show()
+end
+
 -- conditionally private methods
 function Service:_saveProps()
 	dbg.Print(self._name..":_saveProps()", "objects")

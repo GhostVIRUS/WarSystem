@@ -27,6 +27,12 @@ function ListBox:initialize(name, props, sectionTab, chosedSectionNum, pointChar
 	self._props["option3"] = texts.Read("other", 10)
 end
 
+function ListBox:refresh()
+	self._props["text"] = self:_makeList()
+	self:_hide()
+	self:_show()
+end
+
 -- conditionally private methods
 function ListBox:_makeList()
 	local text = self._text;

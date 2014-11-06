@@ -29,7 +29,7 @@ function Service:setProperties(props) -- requires table property-value
 		self._props[key] = value
 	end
 
-	if self.link then
+	if self:exists() then
 		self:_updateProps()
 	end
 
@@ -37,7 +37,7 @@ function Service:setProperties(props) -- requires table property-value
 end
 
 function Service:setVisibility(value)
-	dbg.Print(self._name..":setVisibility()", "objects")
+	dbg.Print(self._name..":setVisibility("..tostring(value)..")", "objects")
 	if value == true then
 		self:_show()
 	elseif value == false then
@@ -47,9 +47,25 @@ function Service:setVisibility(value)
 	return nil
 end
 
-function Service:Refresh()
-	self:_hide()
-	self:_show()
+function Service:refresh() -- use only if service is visiable
+	if self:exists() then
+		self:_hide()
+		self:_show()
+	end
+	
+	return nil
+end
+
+function Service:exists()
+	local existTest = xpcall(function() 
+		if self.link.name then -- crutch
+		end 
+	end, 1)
+	if existTest then
+		return true
+	else
+		return false
+	end
 end
 
 -- conditionally private methods
@@ -79,14 +95,14 @@ function Service:_hide()
 	dbg.Print(self._name..":_hide()", "objects")
 --	self._isVisible = false
 	self:_saveProps()
-	kill(self._link)
-	self.link = false
+	kill(self.link)
+	self.link = nil
 
 	return nil
 end
 
 function Service:_updateProps() -- updating real Service's properties from props
-	if self.link then
+	if self:exists() then
 		for key, value in pairs(self._props) do
 			self.link[key] = value
 		end

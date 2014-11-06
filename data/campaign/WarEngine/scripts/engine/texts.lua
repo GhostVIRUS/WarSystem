@@ -9,7 +9,9 @@ local function LoadLang(lang)
 	if engine.packages.ungroupped["info"] then engine.Unrequire("info") end;
 	
 	if type(info) == "table" then
-		language.list[lang] = info;
+		language.list[lang] = {};
+		language.list[lang].dir = info[1];
+		language.list[lang].name = info[2];
 	elseif info == true then -- info == true only if file loaded without errors, but returns nothing
 		dbg.Print("| WARNING: Language '"..lang.."' wasn't loaded: file must return a table with texts", "engine");
 		return;
@@ -76,7 +78,7 @@ end;
 
 local function ReadText(args, argNum, text, num, patchTab)
 	local output = texts.list[language.current][text][num];
-	local patchTab = func.DoTable(patchTab);
+	local patchTab = patchTab or {};
 	-- Теперь нужно найти и заменить нужные области в строке патчами. Slava98. 04.01.14.
 	output = string.gsub(output, "~(%w+)~", patchTab)
 	return output;

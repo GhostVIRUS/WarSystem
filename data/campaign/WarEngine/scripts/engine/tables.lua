@@ -7,6 +7,7 @@ engine = {
 menu = {
 	letUseInventory = false,
 	gameOptPage = 1,
+	optionsChosedString = 1,
 }
 
 defaults = {
@@ -16,7 +17,7 @@ defaults = {
 
 levelpacks = {
 	list = {},
-	loaded = defaults.levepack,
+	current = defaults.levepack,
 }
 
 texts = {
@@ -38,8 +39,9 @@ func = {
 	
 }
 
-main = {
+gameplay = {
 	godMode = false,
+	showPromt = true,
 }
 
 objects = {

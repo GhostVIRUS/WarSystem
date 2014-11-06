@@ -59,8 +59,41 @@ function menu.Devices()
 	menu.Demo()
 end;
 
+local function ChangeLevelpack()
+	
+end
+
+local function ChangeLanguage()
+	
+end
+
 function menu.Options() -- there will be controlled current language, levelpack, etc.
-	menu.Demo()
+	if menu.listbox:exists() then menu.listbox:setVisibility(false) end;
+	menu.listbox._text = texts.Read("msg_options", 1);
+	menu.listbox._sectionTab = {{
+		stringTab = {
+			texts.Read("msg_options", 2, {language = language.list[language.current].name}),
+			texts.Read("msg_options", 3, {levelpack = levelpacks.list[levelpacks.current].name}),
+			texts.Read("msg_options", 4, {promt = func.Condition(gameplay.showPromt, texts.Read("other", 14), texts.Read("other", 15))}),
+			texts.Read("other", 4),
+		},
+		funcTab = {
+			ChangeLevelpack,
+			ChangeLanguage,
+			function() 
+				gameplay.showPromt = not gameplay.showPromt;
+				menu.optionsChosedString = menu.listbox._sectionTab[1].chosedStringNum; 
+				menu.Options() 
+			end,
+			function() 
+				menu.listbox:setVisibility(false) 
+				menu.optionsChosedString = menu.listbox._sectionTab[1].chosedStringNum;
+			end,
+		},
+		chosedStringNum = menu.optionsChosedString,
+	}};
+	menu.listbox:setVisibility(true)
+	menu.listbox:refresh()
 end;
 
 function menu.InvCheat()
@@ -93,12 +126,16 @@ function menu.Show(section)
 		menu.Demo();
 --		menu.Set(section, {1, 2, 3, 4, -3}, {"menu.Show('help_history')", "menu.Show('help_boosts')", "menu.Show('help_things')", "menu.About()", "menu.Show('main')"}, "splash_help")
 	elseif section == "cheats" then 
-		menu.Set(section, {1, 2, 3, texts.Read("menu_cheats", 4, {godMode=func.Condition(main.godMode, texts.Read("other", 14), texts.Read("other", 15))}), -3}, {"dbg.Reload()", "menu.InvCheat()", "menu.ScrCheat()", "main.godMode = not main.godMode; menu.Show('cheats')", "menu.Show('gameopt_page"..menu.gameOptPage.."')"}, "splash_game")
+		menu.Set(section, {1, 2, 3, texts.Read("menu_cheats", 4, {godMode=func.Condition(gameplay.godMode, texts.Read("other", 14), texts.Read("other", 15))}), -3}, {"dbg.Reload()", "menu.InvCheat()", "menu.ScrCheat()", "gameplay.godMode = not gameplay.godMode; menu.Show('cheats')", "menu.Show('gameopt_page"..menu.gameOptPage.."')"}, "splash_game")
 	end;
 end;
 
 ---------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
+
+engine.Require("listbox", "classes")
+menu.listbox = ListBox("menu_listbox");
+menu.msgbox = MsgBox("menu_msgbox");
 
 menu.service:setVisibility(true)
 menu.Show("main");

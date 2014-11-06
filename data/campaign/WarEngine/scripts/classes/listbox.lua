@@ -11,7 +11,7 @@ ListBox = objects.Class("ListBox", MsgBox)
 function ListBox:initialize(name, props, sectionTab, chosedSectionNum, pointChar)
 	MsgBox:initialize(name, props)
 
-	self._sectionTab = sectionTab
+	self._sectionTab = sectionTab or {}
 	self._chosedSectionNum = chosedSectionNum or 1
 	self._pointChar = pointChar or ">"
 	self._text = self._props["text"]
@@ -27,8 +27,8 @@ function ListBox:initialize(name, props, sectionTab, chosedSectionNum, pointChar
 	self._props["option3"] = texts.Read("other", 10)
 end
 
-function ListBox:Refresh()
-	self._props["text"] = self:_makeList()
+function ListBox:refresh()
+	self.link["text"] = self:_makeList()
 	self:_hide()
 	self:_show()
 end
@@ -102,7 +102,7 @@ function ListBox:_onClickButton(n)
 			end;
 		end;
 		self.link["text"] = self:_makeList()
-		self:setVisibility(true)
+		self:refresh()
 	elseif n == 2 then
 		if 1 < sectionTab[num].chosedStringNum then
 			sectionTab[num].chosedStringNum = sectionTab[num].chosedStringNum - 1;
@@ -117,7 +117,7 @@ function ListBox:_onClickButton(n)
 			end;
 		end;
 		self.link["text"] = self:_makeList()
-		self:setVisibility(true)
+		self:refresh()
 	elseif n == 3 then
 		if type(sectionTab[self._chosedSectionNum].funcTab[sectionTab[num].chosedStringNum]) == 'string' then
 			loadstring(sectionTab[self._chosedSectionNum].funcTab[sectionTab[num].chosedStringNum])()

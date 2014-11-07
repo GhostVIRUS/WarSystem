@@ -8,7 +8,7 @@ menu.service = Menu("menu");
 --========================================== Рабочие функции ======================================================--
 ---------------------------------------------------------------------------------------------------------------------
 
-function menu.Refresh() -- Local?
+function menu.Refresh()
     if func.Exists(menu.service.link) == true then
 		menu.service.link.names = menu.service.link.names;
         menu.service.link.open = 1;

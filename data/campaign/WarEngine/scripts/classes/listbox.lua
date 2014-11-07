@@ -28,9 +28,11 @@ function ListBox:initialize(name, props, sectionTab, chosedSectionNum, pointChar
 end
 
 function ListBox:refresh()
-	self.link["text"] = self:_makeList()
-	self:_hide()
-	self:_show()
+	if self:exists() then
+		self.link["text"] = self:_makeList()
+		self:_hide()
+		self:_show()
+	end
 end
 
 -- conditionally private methods

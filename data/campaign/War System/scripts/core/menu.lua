@@ -60,26 +60,70 @@ function menu.Devices()
 end;
 
 local function ChangeLevelpack()
+	if menu.listbox:exists() then menu.listbox:setVisibility(false) end;
+	menu.listbox._text = texts.Read("msg_options", 20);
+	menu.listbox._sectionTab = {{
+		stringTab = {
+			
+		},
+		funcTab = {
+			
+		},
+	}};	
+	menu.listbox:setVisibility(true)
+	menu.listbox:refresh()
+end
+
+local function GetLanguagesTitleList()
+	local titleList = {};
 	
+	for _,langTab in pairs(language.list) do
+		table.insert(titleList, langTab.title)
+	end;
+	
+	return titleList;
+end
+
+local function GetLanguagesFuncList()
+	local funcList = {};
+	
+	for lang,_ in pairs(language.list) do
+		table.insert(funcList, function()
+			language.current = lang;
+			-- if don't found main.lua then error
+			language.Set(lang)
+--			texts.Refresh() -- recreates msgboxes, menues, texts; changes nicks of vechiles
+			menu.Options()
+		end)
+	end;
+	
+	return funcList;	
 end
 
 local function ChangeLanguage()
-	
+	if menu.listbox:exists() then menu.listbox:setVisibility(false) end;
+	menu.listbox._text = texts.Read("msg_options", 10);
+	menu.listbox._sectionTab = {{
+		stringTab = GetLanguagesTitleList(),
+		funcTab = GetLanguagesFuncList(),
+	}};
+	menu.listbox:setVisibility(true)
+	menu.listbox:refresh()
 end
 
-function menu.Options() -- there will be controlled current language, levelpack, etc.
+function menu.Options() -- there is controlled current language, levelpack, etc.
 	if menu.listbox:exists() then menu.listbox:setVisibility(false) end;
 	menu.listbox._text = texts.Read("msg_options", 1);
 	menu.listbox._sectionTab = {{
 		stringTab = {
-			texts.Read("msg_options", 2, {language = language.list[language.current].name}),
-			texts.Read("msg_options", 3, {levelpack = levelpacks.list[levelpacks.current].name}),
+			texts.Read("msg_options", 2, {language = language.list[language.current].title}),
+			texts.Read("msg_options", 3, {levelpack = levelpacks.list[levelpacks.current].title}),
 			texts.Read("msg_options", 4, {promt = func.Condition(gameplay.showPromt, texts.Read("other", 14), texts.Read("other", 15))}),
 			texts.Read("other", 4),
 		},
 		funcTab = {
-			ChangeLevelpack,
 			ChangeLanguage,
+			ChangeLevelpack,
 			function() 
 				gameplay.showPromt = not gameplay.showPromt;
 				menu.optionsChosedString = menu.listbox._sectionTab[1].chosedStringNum; 

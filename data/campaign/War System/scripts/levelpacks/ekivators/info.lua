@@ -1,6 +1,6 @@
 return { 
 	dir         = "ekivators",
-	name        = "Ёкиваторы",
+	title       = "Ёкиваторы",
 	type        = "race",
 	intro       = "intro",
 	maps        = {

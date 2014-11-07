@@ -91,7 +91,6 @@ local function GetLanguagesFuncList()
 		table.insert(funcList, function()
 			language.current = lang;
 			-- if don't found main.lua then error
-			language.Set(lang)
 --			texts.Refresh() -- recreates msgboxes, menues, texts; changes nicks of vechiles
 			menu.Options()
 		end)

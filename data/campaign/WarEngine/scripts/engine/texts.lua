@@ -10,8 +10,7 @@ local function LoadLang(lang)
 	
 	if type(info) == "table" then
 		language.list[lang] = {};
-		language.list[lang].dir = info[1];
-		language.list[lang].name = info[2];
+		language.list[lang].title = info[1];
 	elseif info == true then -- info == true only if file loaded without errors, but returns nothing
 		dbg.Print("| WARNING: Language '"..lang.."' wasn't loaded: file must return a table with texts", "engine");
 		return;
@@ -72,6 +71,7 @@ function language.Set(lang)
 	end;
 end;
 
+-- recreates msgboxes, menues, texts; changes nicks of vechiles
 function texts.Refresh()
 	
 end;

@@ -1,1 +1,1 @@
-return {"engl", "English"}
+return {"Русский"}

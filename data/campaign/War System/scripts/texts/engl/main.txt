@@ -46,10 +46,9 @@ return {
 		[10] = "Choose language:",
 	-- Choice of levelpack.
 		[20] = "Choose levelpack:",
-		[21] = "Type: ~lpType~",
-		[22] = "Description: ~description~",
-		[23] = "Number of levels: ~levelNum~",
-	-- Типы левелпаков.
+		[21] = "--==~title~==--\n\n Type: ~type~ \n Description: ~description~ \n Number of levels: ~levelsNum~",
+		[22] = "No",
+	-- Levelpack types.
 		[30] = "Race campaign",
 		[31] = "Single level",
 		[32] = "Custom campaign",

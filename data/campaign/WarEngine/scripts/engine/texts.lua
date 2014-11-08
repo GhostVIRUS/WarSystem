@@ -93,8 +93,18 @@ end;
 
 local function ReadText(args, argNum, sectionsList, section, num, patchTab)
 	local output = sectionsList[section][num];
-	local patchTab = patchTab or {}; -- Теперь нужно найти и заменить нужные области в строке патчами. Slava98. 04.01.14.
+	local patchTab = patchTab or {};
+	-- Теперь нужно найти и заменить нужные области в строке патчами. Slava98. 04.01.14.
 	output = string.gsub(output, "~(%w+)~", patchTab)
+	-- А также пробелами. Slava98. 08.11.14.
+	output = string.gsub (output, "#(%w+)#", 
+		function(spaces) 
+			spaces = tonumber(spaces);
+			if type(spaces) == "number" then
+				return string.rep(" ", spaces) 
+			end; 
+		end)
+
 	return output;
 end;
 

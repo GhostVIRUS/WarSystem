@@ -30,6 +30,9 @@ end
 function ListBox:refresh()
 	if self:exists() then
 		self.link["text"] = self:_makeList()
+		self.link["option1"] = texts.Read("other", 8)
+		self.link["option2"] = texts.Read("other", 9)
+		self.link["option3"] = texts.Read("other", 10)
 		self:_hide()
 		self:_show()
 	end

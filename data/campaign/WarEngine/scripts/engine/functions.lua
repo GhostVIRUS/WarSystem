@@ -143,12 +143,13 @@ function engine.Unrequire(module, group, removeFromGlobal)
 	if not engine.packages[group] and group ~= "all" then return; end;
 	
 	if group == "all" then
-		for key,_ in pairs() do
+		for key,_ in pairs(engine.packages) do
 			engine.Unrequire(module, key, removeFromGlobal);
 			searchWasSuccessful = true;
 		end;
 	end;
 	
+	print(group)
 	for key,_ in pairs(engine.packages[group]) do
 		if module == "all" then
 			engine.Unrequire(key, group, removeFromGlobal);
@@ -163,7 +164,7 @@ function engine.Unrequire(module, group, removeFromGlobal)
 		end;
 	end;
 
-	if searchWasSuccessful then return true; end;
+	if searchWasSuccessful or module == "all" then return true; end;
 	
 	-- if there is no such module in the group
 	error("bad argument #2 to 'engine.Unrequire' (module '"..module.."' isn't loaded in group '"..group.."')", 2)

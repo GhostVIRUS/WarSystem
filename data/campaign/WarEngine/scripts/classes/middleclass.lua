@@ -58,7 +58,7 @@ local function _createClass(name, super)
   _setClassDictionariesMetatables(aClass)
   _setClassMetatable(aClass)
   
-  objects.loaded[name] = aClass;
+  objects.classesLoaded[name] = aClass;
 
   return aClass
 end

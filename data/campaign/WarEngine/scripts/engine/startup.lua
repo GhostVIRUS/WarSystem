@@ -71,6 +71,13 @@ if not user.campaignDirectory or type(user.campaignDirectory) ~= "string" then
 	user.campaignDirectory = "campaign/WarEngine/";
 end
 
+-- clearing packages
+if type(engine) == "table" and type(engine.packages) == "table" and engine.Unrequire then
+	dbg.Print("| Clearing packages of last startup.", "engine")
+	engine.Unrequire("all", "all")
+end
+
+-- loading engine modules
 LoadEngineModule("tables")
 LoadEngineModule("functions")
 LoadEngineModule("texts")
@@ -88,7 +95,7 @@ else
 end
 
 -- loading libs
-LoadLibs(const.elsPath)
+LoadLibs(const.elbPath)
 LoadLibs(const.libPath)
 
 -- clearing temp values

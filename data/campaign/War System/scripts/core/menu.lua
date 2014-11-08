@@ -59,17 +59,64 @@ function menu.Devices()
 	menu.Demo()
 end;
 
-local function ChangeLevelpack()
+local function ShowLevelpackInfo(lpack)
+	if menu.msgbox:exists() then menu.msgbox:setVisibility(false) end;
+	menu.msgbox:setProperties({
+		text = texts.Read("msg_options", 21, {
+			title = levelpacks.list[lpack].title or lpack,
+			description = levelpacks.list[lpack].descriiption or texts.Read("msg_options", 22),
+			type = texts.Read("msg_options", 31), -- temply
+			levelsNum = 0, -- temply
+		}),
+		on_select = "if n == 1 then menu.ChangeLevelpack() else levelpacks.current = '"..lpack.."'; menu.Options(); end;",
+		option1 = texts.Read("other", 3),
+		option2 = texts.Read("other", 10),
+	})
+	
+	menu.msgbox:setVisibility(true)
+	menu.msgbox:refresh()
+end
+
+local function GetLevelpacksTitleList()
+	local titleList = {};
+	
+	for _,lpackTab in pairs(levelpacks.list) do
+		table.insert(titleList, lpackTab.title)
+	end;
+	
+	return titleList;
+end
+
+local function GetLevelpacksFuncList()
+	local funcList = {};
+	
+	for lpack,_ in pairs(levelpacks.list) do
+		table.insert(funcList, function()
+			ShowLevelpackInfo(lpack)
+		end)
+	end;
+	
+	return funcList;	
+end
+
+function menu.ChangeLevelpack()
 	if menu.listbox:exists() then menu.listbox:setVisibility(false) end;
 	menu.listbox._text = texts.Read("msg_options", 20);
 	menu.listbox._sectionTab = {{
-		stringTab = {
-			
+			stringTab = GetLevelpacksTitleList(),
+			funcTab = GetLevelpacksFuncList(),
 		},
-		funcTab = {
-			
+		{
+			stringTab = {
+				texts.Read("other", 3),
+			},
+			funcTab = {
+				menu.Options,
+			},		
 		},
-	}};	
+	};
+	
+	menu.listbox._chosedSectionNum = 1;
 	menu.listbox:setVisibility(true)
 	menu.listbox:refresh()
 end
@@ -99,13 +146,15 @@ local function GetLanguagesFuncList()
 	return funcList;	
 end
 
-local function ChangeLanguage()
+function menu.ChangeLanguage()
 	if menu.listbox:exists() then menu.listbox:setVisibility(false) end;
 	menu.listbox._text = texts.Read("msg_options", 10);
 	menu.listbox._sectionTab = {{
 		stringTab = GetLanguagesTitleList(),
 		funcTab = GetLanguagesFuncList(),
 	}};
+	
+	menu.listbox._chosedSectionNum = 1;
 	menu.listbox:setVisibility(true)
 	menu.listbox:refresh()
 end
@@ -121,8 +170,8 @@ function menu.Options() -- there is controlled current language, levelpack, etc.
 			texts.Read("other", 4),
 		},
 		funcTab = {
-			ChangeLanguage,
-			ChangeLevelpack,
+			menu.ChangeLanguage,
+			menu.ChangeLevelpack,
 			function() 
 				gameplay.showPromt = not gameplay.showPromt;
 				menu.optionsChosedString = menu.listbox._sectionTab[1].chosedStringNum; 
@@ -135,6 +184,8 @@ function menu.Options() -- there is controlled current language, levelpack, etc.
 		},
 		chosedStringNum = menu.optionsChosedString,
 	}};
+	
+	menu.listbox._chosedSectionNum = 1;
 	menu.listbox:setVisibility(true)
 	menu.listbox:refresh()
 end;

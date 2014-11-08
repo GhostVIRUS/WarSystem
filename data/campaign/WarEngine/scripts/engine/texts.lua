@@ -12,7 +12,7 @@ local function LoadFile(file, lang)
 		if type(texts.list[lang]) ~= "table" then texts.list[lang] = {}; end; -- if other files didn't load yet
 		texts.list[lang] = func.UniteTables(texts.list[lang], textsList);
 	elseif textsList == true then -- textsList == true only if file loaded without errors, but returns nothing
-		dbg.Print("| WARNING: Text file '"..file.."' wasn't loaded: file must return a table with texts", "engine");
+		dbg.Print("| WARNING: Text file '"..file.."' of language '"..lang.."' wasn't loaded: file must return a table with texts", "engine");
 		return false;
 	end;
 	
@@ -21,10 +21,10 @@ local function LoadFile(file, lang)
 	else
 		local _, msgStart = string.find(errorMsg, ".txt:"); -- we just remove useless information of error message
 		if not msgStart then 
-			dbg.Print("| WARNING: Text file '"..file.."' wasn't loaded: hmmm, it's strange", "engine"); 
+			dbg.Print("| WARNING: Text file '"..file.."' of language '"..lang.."' wasn't loaded: hmmm, it's strange", "engine"); 
 			return false; 
 		end;
-		dbg.Print("| WARNING: Text file '"..file.."' wasn't loaded: "..string.sub(errorMsg, msgStart - 8), "engine");
+		dbg.Print("| WARNING: Text file '"..file.."' of language '"..lang.."' wasn't loaded: "..string.sub(errorMsg, msgStart - 8), "engine");
 		return false;
 	end;
 end;
@@ -33,7 +33,6 @@ local function LoadLang(lang)
 	-- loading info-file of language
 	package.path = "data/"..const.txtPath..lang.."/info.lua";
 	
-	print(lang)
 	local info;
 	local loadingWasComplete = true;
 	local isLoaded, errorMsg = pcall(function() info = engine.Require("info") end);
@@ -107,7 +106,7 @@ function texts.Read(section, num, patchTab)
 	if num == "random" then num = math.random(#texts.langList[language.current][section]) end; -- ƒелаем возможность задавать номер рандомно. Slava98. 17.02.14.
 	check(type(sectionsList) == "table", "bad arguments to 'texts.Read' or problems with lang");
 	-- if current language haven't got this section or line, but it is in russian localization, we find it there
-	if (type(sectionsList[section]) ~= "table" and type(texts.list["russ"]) == "table") or (type(sectionsList[section][num]) ~= "string" and type(texts.list["russ"][section][num]) == "string") then
+	if (type(sectionsList[section]) ~= "table" and type(texts.list["russ"]) == "table") or ((type(sectionsList[section]) ~= "table" and type(texts.list["russ"]) == "table") and (type(sectionsList[section][num]) ~= "string" and type(texts.list["russ"][section][num]) == "string")) then
 		sectionsList = texts.list["russ"];
 	end;
 	check(type(sectionsList[section]) == "table", "bad argument #1  to 'texts.Read' (section '"..section.."' does not exist)");

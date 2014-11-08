@@ -30,9 +30,9 @@ function func.MsgBox(text, msgTab, boxType)
 	-- converts table to string
 	if type(text) == "table" then
 		checktype({text}, {{"string", "number"}}, "func.MsgBox");
-		check(type(texts.list[language.current]) == "table", "bad arguments to 'func.MsgBox' or problems with lang");
-		check(type(texts.list[language.current][text[1]]) == "table", "bad variable #1 in argument #1  to 'func.MsgBox' (text '"..text[1].."' does not exist)");
-		check(type(texts.list[language.current][text[1]][text[2]]) == "string", "bad variable #2 in argument #1 to 'func.MsgBox' (number '"..text[2].."' in text '"..text[1].."' does not exist)")
+		check(type(texts.list[optional.language]) == "table", "bad arguments to 'func.MsgBox' or problems with lang");
+		check(type(texts.list[optional.language][text[1]]) == "table", "bad variable #1 in argument #1  to 'func.MsgBox' (text '"..text[1].."' does not exist)");
+		check(type(texts.list[optional.language][text[1]][text[2]]) == "string", "bad variable #2 in argument #1 to 'func.MsgBox' (number '"..text[2].."' in text '"..text[1].."' does not exist)")
 		text = texts.Read(unpack(text));
 	end;
 	msgTab.text = text;

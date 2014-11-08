@@ -112,7 +112,9 @@ function texts.Read(section, num, patchTab)
 	checktype({section, num, patchTab}, {"string", "number", "table+nil"}, "texts.Read")
 
 	local output = "";
-	local sectionsList = func.DoTable(texts.list[language.current]);
+	check(type(optional) == "table", "you must set 'optional' table to use texts")
+	check(type(optional.language) == "string", "you must set 'optional.language' string to use texts")
+	local sectionsList = func.DoTable(texts.list[optional.language]);
 	if num == "random" then num = math.random(#texts.langList[language.current][section]) end; -- ƒелаем возможность задавать номер рандомно. Slava98. 17.02.14.
 	check(type(sectionsList) == "table", "bad arguments to 'texts.Read' or problems with lang");
 	-- if current language haven't got this section or line, but it is in russian localization, we find it there

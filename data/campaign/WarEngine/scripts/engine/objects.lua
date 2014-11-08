@@ -5,4 +5,4 @@ function objects.Init()
 	objects.Class = engine.Require("middleclass", "classes");
 end
 
-engine.Unrequire("all", "classes") -- unrequiring all classes
+-- engine.Unrequire("all", "classes") -- unrequiring all classes

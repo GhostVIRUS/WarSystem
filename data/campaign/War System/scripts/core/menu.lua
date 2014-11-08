@@ -68,7 +68,7 @@ local function ShowLevelpackInfo(lpack)
 			type = texts.Read("msg_options", 31), -- temply
 			levelsNum = 0, -- temply
 		}),
-		on_select = "if n == 1 then menu.ChangeLevelpack() else levelpacks.current = '"..lpack.."'; menu.Options(); end;",
+		on_select = "if n == 1 then menu.ChangeLevelpack() else optional.levelpack = '"..lpack.."'; menu.Options(); end;",
 		option1 = texts.Read("other", 3),
 		option2 = texts.Read("other", 10),
 	})
@@ -136,8 +136,8 @@ local function GetLanguagesFuncList()
 	
 	for lang,_ in pairs(language.list) do
 		table.insert(funcList, function()
-			language.current = lang;
-			-- if don't found main.lua then error
+			optional.language = lang;
+			menu.Show("main")
 --			texts.Refresh() -- recreates msgboxes, menues, texts; changes nicks of vechiles
 			menu.Options()
 		end)
@@ -164,8 +164,8 @@ function menu.Options() -- there is controlled current language, levelpack, etc.
 	menu.listbox._text = texts.Read("msg_options", 1);
 	menu.listbox._sectionTab = {{
 		stringTab = {
-			texts.Read("msg_options", 2, {language = language.list[language.current].title}),
-			texts.Read("msg_options", 3, {levelpack = levelpacks.list[levelpacks.current].title}),
+			texts.Read("msg_options", 2, {language = language.list[optional.language].title}),
+			texts.Read("msg_options", 3, {levelpack = levelpacks.list[optional.levelpack].title}),
 			texts.Read("msg_options", 4, {promt = func.Condition(gameplay.showPromt, texts.Read("other", 14), texts.Read("other", 15))}),
 			texts.Read("other", 4),
 		},

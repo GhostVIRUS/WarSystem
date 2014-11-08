@@ -1,5 +1,7 @@
 -- WarEngine. Функции движка.
 
+func = {};
+
 -- checks truth of condition; if false prints error
 function check(condition, msg)
 	if not condition then

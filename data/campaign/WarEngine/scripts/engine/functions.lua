@@ -149,6 +149,8 @@ function engine.Unrequire(module, group, removeFromGlobal)
 		end;
 	end;
 	
+	if searchWasSuccessful then return true; end;
+	
 	print(group)
 	for key,_ in pairs(engine.packages[group]) do
 		if module == "all" then

@@ -38,7 +38,7 @@ return {
 	},
 	msg_options = {
 	-- Main options menu.
-		[1] = "--== Настойки ==--",
+		[1] = "--== Options ==--",
 		[2] = "Language: ~language~",
 		[3] = "Levelpack: ~levelpack~",
 		[4] = "Promts: ~promt~",
@@ -46,7 +46,7 @@ return {
 		[10] = "Choose language:",
 	-- Choice of levelpack.
 		[20] = "Choose levelpack:",
-		[21] = "--==~title~==--\n\n Type: ~type~ \n Description: ~description~ \n Number of levels: ~levelsNum~",
+		[21] = "--== ~title~ ==--\n\n Type: ~type~ \n Description: ~description~ \n Number of levels: ~levelsNum~",
 		[22] = "No",
 	-- Levelpack types.
 		[30] = "Race campaign",

@@ -220,7 +220,7 @@ function menu.Show(section)
 		menu.Demo();
 --		menu.Set(section, {1, 2, 3, 4, -3}, {"menu.Show('help_history')", "menu.Show('help_boosts')", "menu.Show('help_things')", "menu.About()", "menu.Show('main')"}, "splash_help")
 	elseif section == "cheats" then 
-		menu.Set(section, {1, 2, 3, texts.Read("menu_cheats", 4, {godMode=func.Condition(gameplay.godMode, texts.Read("other", 14), texts.Read("other", 15))}), -3}, {"dbg.Reload()", "menu.InvCheat()", "menu.ScrCheat()", "gameplay.godMode = not gameplay.godMode; menu.Show('cheats')", "menu.Show('gameopt_page"..menu.gameOptPage.."')"}, "splash_game")
+		menu.Set(section, {1, 2, 3, texts.Read("menu_cheats", 4, {godMode=func.Condition(gameplay.godMode, texts.Read("other", 14), texts.Read("other", 15))}), -3}, {"engine.Reload(); menu.service:setVisibility(true); menu.Show('main')", "menu.InvCheat()", "menu.ScrCheat()", "gameplay.godMode = not gameplay.godMode; menu.Show('cheats')", "menu.Show('gameopt_page"..menu.gameOptPage.."')"}, "splash_game")
 	end;
 end;
 

@@ -60,4 +60,4 @@ function menu.Set(section, namesTab, funcTab, title)
 	menu.service.link.on_select = onSelect;
 	menu.service.section = section;
 	menu.Refresh();
-end;
+end

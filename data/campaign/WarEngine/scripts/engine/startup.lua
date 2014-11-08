@@ -78,8 +78,9 @@ if type(engine) == "table" and type(engine.packages) == "table" and engine.Unreq
 end
 
 -- loading engine modules
-LoadEngineModule("tables")
 LoadEngineModule("functions")
+LoadEngineModule("tables")
+LoadEngineModule("engine")
 LoadEngineModule("texts")
 LoadEngineModule("levelpacks")
 LoadEngineModule("objects")

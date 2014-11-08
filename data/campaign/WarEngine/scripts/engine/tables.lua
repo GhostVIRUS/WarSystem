@@ -1,55 +1,55 @@
 -- WarEngine. Таблицы со значениями.
 
-engine = {
+engine = func.UniteTable({
 	packages = {},
-}
+}, func.DoTable(engine))
 
-menu = {
+menu = func.UniteTable({
 	letUseInventory = false,
 	gameOptPage = 1,
 	optionsChosedString = 1,
-}
+}, func.DoTable(menu))
 
-defaults = {
+defaults = func.UniteTable({
 	levepack = "ekivators",
 	language = "russ",
-}	
+}, func.DoTable(defaults))
 
-levelpacks = {
+levelpacks = func.UniteTable({
 	list = {},
 	current = defaults.levepack,
-}
+}, func.DoTable(levelpacks))
 
-texts = {
+texts = func.UniteTable({
 	list = {},
 	langList = {},
-}
+}, func.DoTable(texts))
 
 -- i hope it's temply
-temp = {
+temp = func.UniteTable({
 
-}
+}, func.DoTable(temp))
 
-language = {
+language = func.UniteTable({
 	list = {},
 	current = defaults.language,
-}
+}, func.DoTable(language))
 
-func = {
+func = func.UniteTable({
 	
-}
+}, func.DoTable(func))
 
-gameplay = {
+gameplay = func.UniteTable({
 	godMode = false,
 	showPromt = true,
-}
+}, func.DoTable(gameplay))
 
-objects = {
+objects = func.UniteTable({
 	list = {},
 	classesLoaded = {},
-}
+}, func.DoTable(objects))
 
-const = { -- Константы.
+const = func.UniteTable({ -- Константы.
 	playerName = "ourplayer", -- Имя игрока.
 	playerVehName = "ourplayer_tank", -- Имя танка игрока.
 	weapons = {"weap_cannon", "weap_autocannon", "weap_minigun", "weap_rockets", "weap_ripper", "weap_ram", "weap_plazma", "weap_bfg", "weap_zippo"}, -- Возможные виды оружия.
@@ -66,4 +66,4 @@ const = { -- Константы.
 	-- Other pathes.
 	mapPath = user.campaignDirectory.."maps/",
 	texPath = user.campaignDirectory.."textures/",
-}
+}, func.DoTable(const))

@@ -10,7 +10,7 @@ dbg = {
 		main = true,
 		engine = true,
 		game = true,
-		objects = true,
+		objects = false,
 	},
 }
 

@@ -37,7 +37,7 @@ function Service:setProperties(props) -- requires table property-value
 end
 
 function Service:setVisibility(value)
-	dbg.Print(self._name..":setVisibility("..tostring(value)..")", "objects")
+	dbg.Print("| Setting visibility of '"..self._name.."' to "..tostring(value)..".", "objects")
 	if value == true then
 		self:_show()
 	elseif value == false then
@@ -70,7 +70,7 @@ end
 
 -- conditionally private methods
 function Service:_saveProps()
-	dbg.Print(self._name..":_saveProps()", "objects")
+	dbg.Print("| Saving props of '"..self._name.."'.", "objects")
 	local tempTable = getmetatable(self.link);
 	local property = "name";
 
@@ -83,7 +83,7 @@ function Service:_saveProps()
 end
 
 function Service:_show()
-	dbg.Print(self._name..":_show()", "objects")
+	dbg.Print("| Showing '"..self._name.."'.", "objects")
 	self.link = service(self._objectType, self._props)
 --	self._isVisible = true
 	self:_saveProps()
@@ -92,7 +92,7 @@ function Service:_show()
 end
 
 function Service:_hide()
-	dbg.Print(self._name..":_hide()", "objects")
+	dbg.Print("| Hidding '"..self._name.."'.", "objects")
 --	self._isVisible = false
 	self:_saveProps()
 	kill(self.link)

@@ -42,6 +42,7 @@ return {
 		[2] = "Language: ~language~",
 		[3] = "Levelpack: ~levelpack~",
 		[4] = "Promts: ~promt~",
+		[5] = "Reset options",
 	-- Choice of language.
 		[10] = "Choose language:",
 	-- Choice of levelpack.

@@ -1,52 +1,50 @@
 -- WarEngine. Таблицы со значениями.
 
-engine = func.UniteTables({
+engine = func.UniteTables(func.DoTable(engine), {
 	packages = {},
-}, func.DoTable(engine))
+})
 
-menu = func.UniteTables({
-	letUseInventory = false,
-	gameOptPage = 1,
-	optionsChosedString = 1,
-}, func.DoTable(menu))
+menu = func.UniteTables(func.DoTable(menu), {
 
-defaults = func.UniteTables({
+})
+
+defaults = func.UniteTables(func.DoTable(defaults), {
 	levepack = "ekivators",
 	language = "russ",
 	showPromt = true,
-}, func.DoTable(defaults))
+})
 
-levelpacks = func.UniteTables({
+levelpacks = func.UniteTables(func.DoTable(levelpacks), {
 	list = {},
 	current = defaults.levepack,
-}, func.DoTable(levelpacks))
+})
 
-texts = func.UniteTables({
+texts = func.UniteTables(func.DoTable(texts), {
 	list = {},
 	langList = {},
-}, func.DoTable(texts))
+})
 
 -- i hope it's temply
-temp = func.UniteTables({
+temp = func.UniteTables(func.DoTable(temp), {
 
-}, func.DoTable(temp))
+})
 
-language = func.UniteTables({
+language = func.UniteTables(func.DoTable(language), {
 	list = {},
 	current = defaults.language,
-}, func.DoTable(language))
+})
 
-gameplay = func.UniteTables({
+gameplay = func.UniteTables(func.DoTable(gameplay), {
 	godMode = false,
 	showPromt = defaults.showPromt,
-}, func.DoTable(gameplay))
+})
 
-objects = func.UniteTables({
+objects = func.UniteTables(func.DoTable(objects), {
 	list = {},
 	classesLoaded = {},
-}, func.DoTable(objects))
+})
 
-const = func.UniteTables({ -- Константы.
+const = func.UniteTables(func.DoTable(const), { -- Константы.
 	playerName = "ourplayer", -- Имя игрока.
 	playerVehName = "ourplayer_tank", -- Имя танка игрока.
 	weapons = {"weap_cannon", "weap_autocannon", "weap_minigun", "weap_rockets", "weap_ripper", "weap_ram", "weap_plazma", "weap_bfg", "weap_zippo"}, -- Возможные виды оружия.
@@ -63,4 +61,4 @@ const = func.UniteTables({ -- Константы.
 	-- Other pathes.
 	mapPath = user.campaignDirectory.."maps/",
 	texPath = user.campaignDirectory.."textures/",
-}, func.DoTable(const))
+})

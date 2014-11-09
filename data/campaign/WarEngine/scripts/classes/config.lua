@@ -7,12 +7,14 @@ dbg.Print("| Requiring 'Config' class.", "objects")
 Config = objects.Class("Config")
 
 -- public methods
-function Config:initialize(name, file, values)
+function Config:initialize(name, file, values, comment)
 
 	-- conditionally private members
 	self._name = name
 	self._file = file
 	self._values = values or {}
+	
+	self._comment = comment
 end
 
 function Config:load()
@@ -40,7 +42,7 @@ end
 function Config:save()
 	dbg.Print("| Saving config '"..self._file.."'", "engine")
 	local file = io.open(self._file, "w")
-	local output = "";
+	local output = self._comment.."\n" or ""
 	
 	for key, value in pairs(self._values) do
 		output = output..key.."="..tostring(value).."\n"

@@ -118,7 +118,7 @@ function texts.Read(section, num, patchTab)
 	if num == "random" then num = math.random(#texts.langList[language.current][section]) end; -- ƒелаем возможность задавать номер рандомно. Slava98. 17.02.14.
 	check(type(sectionsList) == "table", "bad arguments to 'texts.Read' or problems with lang");
 	-- if current language haven't got this section or line, but it is in russian localization, we find it there
-	if (type(sectionsList[section]) ~= "table" and type(texts.list["russ"]) == "table") or ((type(sectionsList[section]) ~= "table" and type(texts.list["russ"]) == "table") and (type(sectionsList[section][num]) ~= "string" and type(texts.list["russ"][section][num]) == "string")) then
+	if type(defaults.language) == "string" and ((type(sectionsList[section]) ~= "table" and type(texts.list[defaults.language]) == "table") or ((type(sectionsList[section]) == "table" and type(texts.list[defaults.language]) == "table") and (type(sectionsList[section][num]) ~= "string" and type(texts.list["russ"][section][num]) == "string"))) then
 		sectionsList = texts.list["russ"];
 	end;
 	check(type(sectionsList[section]) == "table", "bad argument #1  to 'texts.Read' (section '"..section.."' does not exist)");

@@ -137,6 +137,10 @@ function func.DoTable(tab)
 	if type(tab) ~= "table" then
 		return {};
 	else
-		return tab;
+		local newTab = {};
+		for key, value in pairs(tab) do 
+			newTab[key] = value;
+		end;
+		return newTab;
 	end;
 end

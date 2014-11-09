@@ -168,6 +168,7 @@ function menu.Options() -- there is controlled current language, levelpack, etc.
 			texts.Read("msg_options", 2, {language = language.list[optional.language].title}),
 			texts.Read("msg_options", 3, {levelpack = levelpacks.list[optional.levelpack].title}),
 			texts.Read("msg_options", 4, {promt = func.Condition(optional.showPromt, texts.Read("other", 14), texts.Read("other", 15))}),
+			texts.Read("msg_options", 5),
 			texts.Read("other", 4),
 		},
 		funcTab = {
@@ -178,6 +179,13 @@ function menu.Options() -- there is controlled current language, levelpack, etc.
 				main.config:save()
 				menu.optionsChosedString = menu.listbox._sectionTab[1].chosedStringNum; 
 				menu.Options() 
+			end,
+			function()
+				optional = func.DoTable(defaults)
+				main.config:save()
+				menu.optionsChosedString = menu.listbox._sectionTab[1].chosedStringNum;
+				menu.Show("main")
+				menu.Options()
 			end,
 			function() 
 				menu.listbox:setVisibility(false) 

@@ -2,16 +2,24 @@
 
 engine.Require("config", "classes")
 
-optional = { -- default values
+defaults = { -- default values
 	allowCheats = true,
+	showPromt = true,
 	levelpack = "ekivators",
 	language = "russ",
-	showPromt = true,
 }
 
+optional = func.DoTable(defaults);
+
 main = {
-	config = Config("main_conf", "data/"..const.cmpPath.."config.dat", optional),
+	config = Config("main_conf", "data/"..const.cmpPath.."config.dat", optional, "// War System configuration file. Config was generated automatically."),
 }
+
+menu = func.UniteTables(func.DoTable(menu), {
+	letUseInventory = false,
+	gameOptPage = 1,
+	optionsChosedString = 1,
+})
 
 conf.sv_nightmode = true;
 main.config:load()

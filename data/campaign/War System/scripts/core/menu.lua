@@ -213,11 +213,15 @@ function menu.Show(section)
 	elseif section == "game" then 
 		menu.Set(section, {1, 2, 3, -3}, {"menu.NewGame()", "menu.LoadGame()", "menu.Stages()", "menu.Show('main')"}, "splash_game")
 	elseif section == "gameopt_page1" then 
-		menu.gameOptPage = 1,
+		menu.gameOptPage = 1;
 		menu.Set(section, {1, 2, 3, -6, -3}, {"menu.Mail()", "menu.Inventory()", "menu.Missions()", "menu.Show('gameopt_page2')", "menu.Show('main')"}, "splash_gf")
 	elseif section == "gameopt_page2" then 
-		menu.gameOptPage = 2,
-		menu.Set(section, {-7, 1, 2, 4, -3}, {"menu.Show('gameopt_page1')", "menu.Demo()", "menu.Devices()", "menu.Show('cheats')", "menu.Show('main')"}, "splash_gf")
+		menu.gameOptPage = 2;
+		if optional.allowCheats then
+			menu.Set(section, {-7, 1, 2, 4, -3}, {"menu.Show('gameopt_page1')", "menu.Demo()", "menu.Devices()", "menu.Show('cheats')", "menu.Show('main')"}, "splash_gf")
+		else
+			menu.Set(section, {-7, 1, 2, -3}, {"menu.Show('gameopt_page1')", "menu.Demo()", "menu.Devices()", "menu.Show('main')"}, "splash_gf")
+		end;
 	elseif section == "help" then 
 		menu.Demo();
 --		menu.Set(section, {1, 2, 3, 4, -3}, {"menu.Show('help_history')", "menu.Show('help_boosts')", "menu.Show('help_things')", "menu.About()", "menu.Show('main')"}, "splash_help")

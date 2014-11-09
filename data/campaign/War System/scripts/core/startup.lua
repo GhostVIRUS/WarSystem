@@ -3,6 +3,7 @@
 engine.Require("config", "classes")
 
 optional = { -- default values
+	allowCheats = true,
 	levelpack = "ekivators",
 	language = "russ",
 	showPromt = true,

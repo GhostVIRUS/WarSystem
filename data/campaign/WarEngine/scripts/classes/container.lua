@@ -98,12 +98,19 @@ function Container:stopMoving() -- doesn't work at move()
 end
 
 function Container:runEntityMethod(entity, method, ...)
-	if entity then
-		local object = self._entities[entity]
+	local object = self._entities[entity]
+	
+	if entity and string.match(tostring(object), "(%a+)") == "instance" then -- if entity == object then it'll run method
 		Entity[method](object, ...)
-	else
-		for entity, object in pairs(self._entities) do
-			self:runEntityMethod(entity, method, ...)
+	elseif entity and string.match(tostring(entity), "(%a+)") == "class" then -- if entity == class then every instance'll run method
+		for ent, object in pairs(self._entities) do
+			if entity == object.class then
+				self:runEntityMethod(ent, method, ...)
+			end
+		end
+	elseif not entity -- else every object in container'll run method
+		for ent,_ in pairs(self._entities) do
+			self:runEntityMethod(ent, method, ...)
 		end
 	end
 	self:_calcuateIncontainerPos()

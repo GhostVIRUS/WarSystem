@@ -1,0 +1,5 @@
+return {
+	levelpack_ekivators = {
+		[1] = "Ёкиваторы",
+	}
+}

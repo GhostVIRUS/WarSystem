@@ -61,10 +61,12 @@ end;
 
 local function ShowLevelpackInfo(lpack)
 	if menu.msgbox:exists() then menu.msgbox:setVisibility(false) end;
+	local _,title = xpcall(function() return texts.Read(levelpacks.list[lpack].text, 1) end, 1);
+	local _,description = xpcall(function() return texts.Read(levelpacks.list[lpack].text, 2) end, 1);
 	menu.msgbox:setProperties({
 		text = texts.Read("msg_options", 21, {
-			title = levelpacks.list[lpack].title or lpack,
-			description = levelpacks.list[lpack].descriiption or texts.Read("msg_options", 22),
+			title = title or lpack,
+			description = description or texts.Read("msg_options", 22),
 			type = texts.Read("msg_options", 31), -- temply
 			levelsNum = 0, -- temply
 		}),
@@ -81,7 +83,8 @@ local function GetLevelpacksTitleList()
 	local titleList = {};
 	
 	for _,lpackTab in pairs(levelpacks.list) do
-		table.insert(titleList, lpackTab.title)
+		local _,levelpack = xpcall(function() return texts.Read(lpackTab.text, 1) end, 1);
+		table.insert(titleList, levelpack)
 	end;
 	
 	return titleList;
@@ -162,11 +165,12 @@ end
 
 function menu.Options() -- there is controlled current language, levelpack, etc.
 	if menu.listbox:exists() then menu.listbox:setVisibility(false) end;
+	local _,levelpack = xpcall(function() return texts.Read(levelpacks.list[optional.levelpack].text, 1) end, 1);
 	menu.listbox._text = texts.Read("msg_options", 1);
 	menu.listbox._sectionTab = {{
 		stringTab = {
 			texts.Read("msg_options", 2, {language = language.list[optional.language].title}),
-			texts.Read("msg_options", 3, {levelpack = levelpacks.list[optional.levelpack].title}),
+			texts.Read("msg_options", 3, {levelpack = levelpack}),
 			texts.Read("msg_options", 4, {promt = func.Condition(optional.showPromt, texts.Read("other", 14), texts.Read("other", 15))}),
 			texts.Read("msg_options", 5),
 			texts.Read("other", 4),

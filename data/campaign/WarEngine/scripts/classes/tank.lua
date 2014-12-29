@@ -11,5 +11,5 @@ Tank = objects.Class("Tank", Vehicle)
 function Tank:initialize(name, pos, props)
 	Vehicle:initialize(self, name, pos, props)
 
-	-- there will be character properties
+	-- there will be tank properties
 end

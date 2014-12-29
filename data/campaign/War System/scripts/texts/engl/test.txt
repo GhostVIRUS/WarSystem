@@ -1,6 +1,6 @@
 return {
 	levelpack_test = {
 		[1] = "Test",
-		[2] = "War System test map.\nIt shows some featuers of campaign.",
+		[2] = "War System test map.\nIt shows some features of campaign.",
 	}
 }

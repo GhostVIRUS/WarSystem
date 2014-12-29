@@ -17,6 +17,10 @@ function Container:initialize(name, pos, entities) -- entities = objects that co
 	self._incontainerPos = self:_calcuateIncontainerPos()
 end
 
+function Container:setPosition(pos)
+	self._pos = pos
+end
+
 function Container:getPosition()
 	return self._pos
 end
@@ -116,6 +120,15 @@ function Container:runEntityMethod(entity, method, ...)
 	self:_calcuateIncontainerPos()
 	
 	return nil
+end
+
+function Container:putObj(obj)
+	
+	return nil
+end
+
+function Container:getObj(obj)
+	return self._entities(obj)
 end
 
 function Container:_updatePos()

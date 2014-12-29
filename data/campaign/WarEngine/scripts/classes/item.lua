@@ -30,8 +30,8 @@ function Item:initialize(name, pos, props, storedItem)
 		owner = nil, -- tank dropping the item
 		}, props)
 	-- temply, i hope
-	local num = math.random(1, 10000);
-	temp[num] = self;
+	local num = math.random(1, 10000)
+	temp[num] = self
 	self._entities = {
 		trigger = Trigger(trigName, self._pos, {only_human = self._props.only_human,
 									  on_enter = "temp["..num.."]:pickup()", on_leave = "temp["..num.."]:drop()"}),

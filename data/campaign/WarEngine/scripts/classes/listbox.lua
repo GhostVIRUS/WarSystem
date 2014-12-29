@@ -18,7 +18,7 @@ function ListBox:initialize(name, props, sectionTab, chosedSectionNum, pointChar
 	
 	self._props["text"] = self:_makeList()
 	self._props["on_select"] = self._props["on_select"] or ""
-	-- temply, i hope
+	-- temporarity, i hope
 	local num = math.random(1, 10000);
 	temp[num] = self;
 	self._props["on_select"] = "ListBox._onClickButton(temp["..num.."], n); "..self._props["on_select"]

@@ -63,6 +63,8 @@ local function ShowLevelpackInfo(lpack)
 	if menu.msgbox:exists() then menu.msgbox:setVisibility(false) end;
 	local _,title = xpcall(function() return texts.Read(levelpacks.list[lpack].text, 1) end, 1);
 	local _,description = xpcall(function() return texts.Read(levelpacks.list[lpack].text, 2) end, 1);
+	if title == "error in error handling" then title = nil; end;
+	if description == "error in error handling" then description = nil; end;	
 	menu.msgbox:setProperties({
 		text = texts.Read("msg_options", 21, {
 			title = title or lpack,

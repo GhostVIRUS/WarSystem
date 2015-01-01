@@ -22,7 +22,7 @@ print('- Requiring \'Powerup\' class -')
 Powerup = class('Powerup', Pickup)
 
 -- public methods
-function Powerup:initialize(--[[name,]] pos, powerupType, props)
+function Powerup:initialize(--[[name,]] pos, props, powerupType)
 	Pickup.initialize(self, --[[name,]] pos, props)
 
 	self._objectType = powerupType 
@@ -36,7 +36,7 @@ print('- Requiring \'Weapon\' class -')
 Weapon = class('Weapon', Pickup)
 
 -- public methods
-function Weapon:initialize(--[[name,]] pos, weaponType, props)
+function Weapon:initialize(--[[name,]] pos, props, weaponType)
 	Pickup.initialize(self, --[[name,]] pos, props)
 
 	self._objectType = weaponType

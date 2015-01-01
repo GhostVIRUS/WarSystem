@@ -11,6 +11,7 @@ dbg = {
 		engine = true,
 		game = true,
 		objects = false,
+		map = true,
 	},
 }
 

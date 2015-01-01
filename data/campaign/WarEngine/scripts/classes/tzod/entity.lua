@@ -154,7 +154,7 @@ end
 
 function Entity:_show()
 	if self._props.name then
-		dbg.Print("'"..self._props.name.."' now is visible", "objects")
+		dbg.Print("'"..self._props.name.."' is visible now", "objects")
 	end
 	self._link = actor(self._objectType, self._pos.x, self._pos.y, self._props)
 	self._isVisible = true
@@ -165,7 +165,7 @@ end
 
 function Entity:_hide()
 	if self._props.name then
-		dbg.Print("'"..self._props.name.."' now is not visible", "objects")
+		dbg.Print("'"..self._props.name.."' is not visible now", "objects")
 	end
 	self._isVisible = false
 	self:_saveProps()

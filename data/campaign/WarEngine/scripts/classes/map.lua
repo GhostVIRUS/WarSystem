@@ -14,6 +14,7 @@ function Map:initialize(id, fileName)
 	self._id = id
 	self._fileName = fileName -- possibly should be merged with id
 
+	self._isBuilded = false
 	self._entities = {}
 	self._services = {}
 	self._containers = {}
@@ -21,21 +22,79 @@ function Map:initialize(id, fileName)
 	self._servicesSorted = {} -- objType.
 	self._entitiesNamed = {}
 	self._servicesNamed = {}
+	
+	self._containers._global = Container({x = 0, y = 0}, self._entities) -- put entities in a global container
 end
 
 function Map:build(pos)
+	if self._isBuilded then 
+		return false
+	end
+
 	if type(pos) == "table" and type(pos.x) == "number" and type(pos.y) == "number" then
 		self._containers._global:setPosition(pos)
 	end
 	self._containers._global:runEntityMethod(nil, "setVisibility", true)
+	self._isBuilded = true
 end
 
-function Map:convert()
+function Map:destroy()
+	if not self._isBuilded then
+		return false
+	end
 	
+	self._isBuilded = false
+end
+
+function Map:scan(size)
+	for x = 0, size[1] do
+		for y = 0, size[2] do
+			local x, y = func.GetPixel(x, y)
+			for objType, class in pairs(const.objectTypes) do
+				local link = findobj(objType, x, y)
+				if link then
+					local props = {}
+					local tempTable = getmetatable(link);
+					local property = "name";
+					while property ~= nil do
+						props[property] = tempTable.__index(link, property)
+						property = tempTable.__next(link, property)
+					end
+					dbg.Print("| Scaning '"..objType.."' on "..func.GetSquare(x)..", "..func.GetSquare(y), "map")
+					table.insert(self._entities, _G[class]({x = x, y = y}, props, objType))
+				end
+			end
+		end
+	end
+end
+
+function Map:load()
+	local data
+	local isLoaded, errorMsg = pcall(function() data = dofile(const.mapPath..self._fileName..".wsmap") end)
+	
+	if type(data) == "table" then
+		self:_read(data)
+	elseif not info and not errorMsg then -- if file loaded without errors, but returns nothing
+		dbg.Print("| WARNING: Map '"..self._id.."' wasn't loaded: file must return a table with texts", "engine")
+		return nil
+	end
+	
+	if isLoaded then
+		dbg.Print("| Map '"..self._id.."' is loaded.", "engine")
+	else
+		dbg.Print("| WARNING: Map '"..self._id.."' wasn't loaded: "..errorMsg, "engine")
+	end
+	return true
+end
+
+function Map:save(fileName, mapType)
+	checktype({fileName, mapType}, {"string", "nil"}, funcName)
+	check(type(size.x) == "number" and type(size.y) == "number", "bad argument #2 to 'Map:convert' (size.x and size.y must contain square coordinates)")
 end
 
 function Map:getEntity(x, y, objType)
 	local entities = self._entitiesSorted[x][y][objType]
+	
 	if type(entities) == "table" and #entities == 1 then
 		return entities[1]
 	else
@@ -45,6 +104,7 @@ end
 
 function Map:getService(objType)
 	local services = self._servicesSorted[objType]
+	
 	if type(services) == "table" and #services == 1 then
 		return services[1]
 	else
@@ -123,6 +183,11 @@ function Map:_read(data)
 			dbg.Print("| WARNING: First value of object table must be string and comprice class info", "engine")
 		elseif objects.CheckAffinity(_G[class], Service) then
 			local obj = _G[class](unpack(properties)) -- create this object
+			if obj._props.name then
+				dbg.Print("| Loading '"..class.." named '"..obj._props.name.."'", "map")
+			else
+				dbg.Print("| Loading '"..class.."'", "map")
+			end
 			if type(self._servicesSorted[class]) ~= "table" then
 				self._servicesSorted[class] = {}
 			end
@@ -135,10 +200,13 @@ function Map:_read(data)
 			local pos = properties[1]
 			pos.x = pos.x or pos[1]
 			pos.y = pos.y or pos[2]
-			print(#pos)
 			if #pos < 4 then
-				print(#pos < 4)
 				local obj = _G[class](unpack(properties)) -- create this object
+				if obj._props.name then
+					dbg.Print("| Loading '"..class.."' named '"..obj._props.name.."' on "..pos.x..", "..pos.y, "map")
+				else
+					dbg.Print("| Loading '"..class.."' on "..pos.x..", "..pos.y, "map")
+				end
 				if type(self._entitiesSorted[pos.x]) ~= "table" then
 					self._entitiesSorted[pos.x] = {}
 				end
@@ -159,6 +227,11 @@ function Map:_read(data)
 				for x = func.GetSquare(pos[1]), func.GetSquare(pos[3]) do
 					for y = func.GetSquare(pos[2]), func.GetSquare(pos[4]) do
 						local obj = _G[class]({x = func.GetPixel(x), y = func.GetPixel(y)}, unpack(properties)) -- create this object
+						if obj._props.name then
+							dbg.Print("| Loading '"..class.."' named '"..obj._props.name.."' on "..x..", "..y, "map")
+						else
+							dbg.Print("| Loading '"..class.."' on "..x..", "..y, "map")
+						end
 						table.insert(self._entities, obj)
 					end
 				end
@@ -171,27 +244,7 @@ function Map:_read(data)
 		end
 	end
 	
-	self._containers._global = Container({x = 0, y = 0}, self._entities) -- put entities in a global container
 	return nil
-end
-
-function Map:_load()
-	local data
-	local isLoaded, errorMsg = pcall(function() data = dofile(const.mapPath..self._fileName..".wsmap") end)
-	
-	if type(data) == "table" then
-		self:_read(data)
-	elseif not info and not errorMsg then -- if file loaded without errors, but returns nothing
-		dbg.Print("| WARNING: Map '"..self._id.."' wasn't loaded: file must return a table with texts", "engine")
-		return nil
-	end
-	
-	if isLoaded then
-		dbg.Print("| Map '"..self._id.."' is loaded.", "engine")
-	else
-		dbg.Print("| WARNING: Map '"..self._id.."' wasn't loaded: "..errorMsg, "engine")
-	end
-	return true
 end
 
 function Map:_unload()

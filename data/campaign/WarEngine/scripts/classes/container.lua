@@ -1,17 +1,16 @@
 ---===Сontainer===---
 -- includes
 objects.Init()
-engine.Require("Entity", "classes")
 
 -- declaring
 dbg.Print("| Requiring 'Container' class.")
 Container = objects.Class("Сontainer")
 
 -- public methods
-function Container:initialize(name, pos, entities) -- entities = objects that controlled by container
+function Container:initialize(pos, entities, id) -- entities = objects that controlled by container
 	
 	-- conditionally private members
-	self._name = name
+	self._id = id
 	self._pos = pos
 	self._entities = entities or {}
 	self._incontainerPos = self:_calcuateIncontainerPos()
@@ -26,7 +25,6 @@ function Container:getPosition()
 end
 
 function Container:getVector(pos) -- maybe should be renamed in getLine() or smth like that
---	print(self._name..':getVector()')
 	local xCathetus = pos.x - self._pos.x
 	local yCathetus = pos.y - self._pos.y
 	local hypotenuse = math.sqrt((xCathetus * xCathetus) + (yCathetus * yCathetus))
@@ -39,8 +37,6 @@ function Container:getVector(pos) -- maybe should be renamed in getLine() or smt
 end
 
 function Container:move(pos, parameters) -- parameters.time in seconds; if time = 0 works as setposition
-	dbg.Print(self._name..":move()"..tostring(self._allowMoving), "objects")
-
 	self._isMoving = true
 
 	local distance, angle = self:getVector(pos)
@@ -72,7 +68,6 @@ end
 
 function Container:follow(whoName, speed, iteration) -- speed here and above in px/sec
 	if iteration == 0 then
-		dbg.Print(self._name.."follow()", "objects")
 		self._allowMoving = true
 	end
 	self._isMoving = true
@@ -105,14 +100,15 @@ function Container:runEntityMethod(entity, method, ...)
 	local object = self._entities[entity]
 	
 	if entity and string.match(tostring(object), "(%a+)") == "instance" then -- if entity == object then it'll run method
-		Entity[method](object, ...)
+--		Entity[method](object, ...) -- such way we can call only entity functions, not functions of its children
+		object.class[method](object, ...)
 	elseif entity and string.match(tostring(entity), "(%a+)") == "class" then -- if entity == class then every instance'll run method
 		for ent, object in pairs(self._entities) do
 			if entity == object.class then
 				self:runEntityMethod(ent, method, ...)
 			end
 		end
-	elseif not entity -- else every object in container'll run method
+	elseif not entity then-- else every object in container'll run method
 		for ent,_ in pairs(self._entities) do
 			self:runEntityMethod(ent, method, ...)
 		end

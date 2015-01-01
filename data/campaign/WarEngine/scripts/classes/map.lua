@@ -3,7 +3,7 @@
 objects.Init()
 
 -- declaring
-dbg.Print("| Requiring 'Map' class.", "objects")
+dbg.Print("| Requiring 'Map' class.", "engine")
 engine.Require("container", "classes")
 Map = objects.Class("Map")
 
@@ -14,18 +14,20 @@ function Map:initialize(id, fileName)
 	self._id = id
 	self._fileName = fileName -- possibly should be merged with id
 
-	self._size = {}
 	self._entities = {}
 	self._services = {}
 	self._containers = {}
-	self._entitiesSorted = {} -- for optimization and lighter work with entities
-	self._servicesSorted = {}
+	self._entitiesSorted = {} -- for optimization and lighter work with entities -- x.y.objType.
+	self._servicesSorted = {} -- objType.
+	self._entitiesNamed = {}
+	self._servicesNamed = {}
 end
 
 function Map:build(pos)
-	self:_read()
-	self._containers._global:setPosition(pos)
-	self._containers._global:runEntityMethod(nil, "SetVisibility", true)
+	if type(pos) == "table" and type(pos.x) == "number" and type(pos.y) == "number" then
+		self._containers._global:setPosition(pos)
+	end
+	self._containers._global:runEntityMethod(nil, "setVisibility", true)
 end
 
 function Map:convert()
@@ -112,31 +114,73 @@ end
 	file:close()
 end]]
 
+function Map:_read(data)
+	for _,properties in pairs(data) do
+		-- reading data
+		local class = properties[1]
+		table.remove(properties, 1)
+		if type(class) ~= "string" then
+			dbg.Print("| WARNING: First value of object table must be string and comprice class info", "engine")
+		elseif objects.CheckAffinity(_G[class], Service) then
+			local obj = _G[class](unpack(properties)) -- create this object
+			if type(self._servicesSorted[class]) ~= "table" then
+				self._servicesSorted[class] = {}
+			end
+			table.insert(self._services, obj)
+			table.insert(self._servicesSorted[class], obj)
+			if type(properties[1]) == "table" and properties[1].name then
+				table.insert(self._servicesNamed[properties[1].name], obj)
+			end
+		elseif objects.CheckAffinity(_G[class], Entity) then
+			local pos = properties[1]
+			pos.x = pos.x or pos[1]
+			pos.y = pos.y or pos[2]
+			print(#pos)
+			if #pos < 4 then
+				print(#pos < 4)
+				local obj = _G[class](unpack(properties)) -- create this object
+				if type(self._entitiesSorted[pos.x]) ~= "table" then
+					self._entitiesSorted[pos.x] = {}
+				end
+				if type(self._entitiesSorted[pos.x][pos.y]) ~= "table" then
+					self._entitiesSorted[pos.x][pos.y] = {}
+				end
+				if type(self._entitiesSorted[pos.x][pos.y][class]) ~= "table" then
+					self._entitiesSorted[pos.x][pos.y][class] = {}
+				end
+				table.insert(self._entities, obj)
+				table.insert(self._entitiesSorted[pos.x][pos.y][class], obj)
+				if type(properties[2]) == "table" and properties[2].name then
+					table.insert(self._entitiesNamed[properties[2].name], obj)
+				end
+			elseif #pos >= 4 then
+				-- loading structure
+				table.remove(properties, 1)
+				for x = func.GetSquare(pos[1]), func.GetSquare(pos[3]) do
+					for y = func.GetSquare(pos[2]), func.GetSquare(pos[4]) do
+						local obj = _G[class]({x = func.GetPixel(x), y = func.GetPixel(y)}, unpack(properties)) -- create this object
+						table.insert(self._entities, obj)
+					end
+				end
+			end
+		elseif objects.CheckAffinity(_G[class], Container) then
+			local obj = _G[class](unpack(properties)) -- create this object
+			table.insert(self._containers, obj)
+		else
+			dbg.Print("| WARNING: Unknown type of object: "..class, "engine")
+		end
+	end
+	
+	self._containers._global = Container({x = 0, y = 0}, self._entities) -- put entities in a global container
+	return nil
+end
+
 function Map:_load()
 	local data
-	local isLoaded, errorMsg = pcall(function() data = dofile(self._fileName.."/info.lua") end)
+	local isLoaded, errorMsg = pcall(function() data = dofile(const.mapPath..self._fileName..".wsmap") end)
 	
 	if type(data) == "table" then
-		for _,obj in pairs(data) do
-			-- loading data
-			local class = obj[1]
-			table.remove(obj, 1)
-			if objects.CheckAffinity(class, Service) then
-				table.insert(self._services, _G[class](unpack(obj)))
-			elseif objects.CheckAffinity(class, Entity) then
-				local pos = obj[1]
-				if type(pos) == "table" and #pos < 4 then
-					table.insert(self._entities, _G[class](unpack(obj)))
-				elseif type(pos) == "table" and #pos >= 4 then
-					-- loading structure
-				end
-			elseif objects.CheckAffinity(class, Container) then
-				table.insert(self._containers, _G[class](unpack(obj)))
-			else
-				
-			end
-		end
-		self._containers._global = Container({x = 0, y = 0}, self._entities) -- put entities in a global container
+		self:_read(data)
 	elseif not info and not errorMsg then -- if file loaded without errors, but returns nothing
 		dbg.Print("| WARNING: Map '"..self._id.."' wasn't loaded: file must return a table with texts", "engine")
 		return nil
@@ -154,6 +198,6 @@ function Map:_unload()
 	
 end
 
-function Map:_write(fileName, mapType)
+function Map:_write(fileName, size, mapType)
 	
 end

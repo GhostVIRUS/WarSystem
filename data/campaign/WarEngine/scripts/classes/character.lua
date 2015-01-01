@@ -8,8 +8,8 @@ dbg.Print("| Requiring 'Character' class.")
 Character = objects.Class("Character", Service)
 
 -- public methods
-function Character:initialize(name, props)
-	Service:initialize(self, name, props)
+function Character:initialize(--[[name,]] props)
+	Service:initialize(self, --[[name,]] props)
 	
 	-- there will be character properties
 end

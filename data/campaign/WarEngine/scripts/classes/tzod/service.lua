@@ -7,15 +7,17 @@ dbg.Print("| Requiring 'Service' class.")
 Service = objects.Class("Service")
 
 -- public methods
-function Service:initialize(name, props)
+function Service:initialize(--[[name,]] props)
+	checktype({props}, {"table+nil"}, "Service")
+	
 	props = props or {};
-	props["name"] = props["name"] or name;
+--	props["name"] = props["name"] or name;
 
 	-- public members
 	self.link = false
 	
 	-- conditionally private members
-	self._name = name
+--	self._name = name
 --	self._isVisible = false
 	self._props = props
 
@@ -37,7 +39,9 @@ function Service:setProperties(props) -- requires table property-value
 end
 
 function Service:setVisibility(value)
-	dbg.Print("| Setting visibility of '"..self._name.."' to "..tostring(value)..".", "objects")
+	if self._props.name then
+		dbg.Print("| Setting visibility of '"..self._props.name.."' to "..tostring(value)..".", "objects")
+	end
 	if value == true then
 		self:_show()
 	elseif value == false then
@@ -70,7 +74,9 @@ end
 
 -- conditionally private methods
 function Service:_saveProps()
-	dbg.Print("| Saving props of '"..self._name.."'.", "objects")
+	if self._props.name then
+		dbg.Print("| Saving props of '"..self._props.name.."'.", "objects")
+	end
 	local tempTable = getmetatable(self.link);
 	local property = "name";
 
@@ -83,7 +89,9 @@ function Service:_saveProps()
 end
 
 function Service:_show()
-	dbg.Print("| Showing '"..self._name.."'.", "objects")
+	if self._props.name then
+		dbg.Print("| Showing '"..self._props.name.."'.", "objects")
+	end
 	self.link = service(self._objectType, self._props)
 --	self._isVisible = true
 	self:_saveProps()
@@ -92,7 +100,9 @@ function Service:_show()
 end
 
 function Service:_hide()
-	dbg.Print("| Hidding '"..self._name.."'.", "objects")
+	if self._props.name then
+		dbg.Print("| Hidding '"..self._props.name.."'.", "objects")
+	end
 --	self._isVisible = false
 	self:_saveProps()
 	kill(self.link)

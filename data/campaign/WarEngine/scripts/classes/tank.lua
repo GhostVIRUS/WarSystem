@@ -8,8 +8,8 @@ dbg.Print("| Requiring 'Tank' class.")
 Tank = objects.Class("Tank", Vehicle)
 
 -- public methods
-function Tank:initialize(name, pos, props)
-	Vehicle:initialize(self, name, pos, props)
+function Tank:initialize(--[[name,]] pos, props)
+	Vehicle:initialize(self, --[[name,]] pos, props)
 
 	-- there will be tank properties
 end

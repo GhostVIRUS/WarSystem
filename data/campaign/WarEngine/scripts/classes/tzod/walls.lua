@@ -9,8 +9,8 @@ dbg.Print("| Requiring \'Wall\' class.", "objects")
 Wall = objects.Class('Wall', RigidBodyStatic)
 
 -- public methods
-function Wall:initialize(name, pos, props)
-	RigidBodyStatic.initialize(self, name, pos, props)
+function Wall:initialize(--[[name,]] pos, props)
+	RigidBodyStatic.initialize(self, --[[name,]] pos, props)
 
 	return nil
 end

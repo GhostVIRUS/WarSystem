@@ -8,8 +8,8 @@ dbg.Print("| Requiring 'ListBox' class.")
 ListBox = objects.Class("ListBox", MsgBox)
 
 -- public methods
-function ListBox:initialize(name, props, sectionTab, chosedSectionNum, pointChar)
-	MsgBox:initialize(name, props)
+function ListBox:initialize(--[[name,]] props, sectionTab, chosedSectionNum, pointChar)
+	MsgBox:initialize(--[[name,]] props)
 
 	self._sectionTab = sectionTab or {}
 	self._chosedSectionNum = chosedSectionNum or 1

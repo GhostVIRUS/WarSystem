@@ -10,7 +10,7 @@ function engine.Require(module, group)
 		local _, msgStart = string.find(errorMsg, ".lua"); -- we just remove useless information of error message
 		local level = 2;
 		if string.find(errorMsg, "not found:") or string.find(errorMsg, "loop or previous error loading module") then
-			msgStart = msgStart + 6; -- it's just a strings magic, even don't try to understand it
+			msgStart = msgStart + 5; -- it's just a strings magic, even don't try to understand it
 		else
 			msgStart = 1;
 			level = math.huge; -- it's very huge level

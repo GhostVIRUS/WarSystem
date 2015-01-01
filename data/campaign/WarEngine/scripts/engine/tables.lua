@@ -61,4 +61,20 @@ const = func.UniteTables(func.DoTable(const), { -- Константы.
 	-- Other pathes.
 	mapPath = user.campaignDirectory.."maps/",
 	texPath = user.campaignDirectory.."textures/",
+	objectTypes = {
+		wall_concrete = "Concrete",
+		wall_brick = "Brick",
+--		water = "Water", -- !
+--		wood = "Wood", -- !
+		user_sprite = "Sprite",
+		user_object = "UserObject",
+--		spotlight = "Spotlight", -- !
+		trigger = "Trigger",
+--		respawn_point = "Respawn", -- !
+		tank = "Vehicle",
+		crate = "Crate",
+		turret = "Turret",
+		weap = "Weapon",
+		pu = "Pickup",
+	},
 })

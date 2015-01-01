@@ -7,10 +7,10 @@ dbg.Print("| Requiring 'Config' class.", "objects")
 Config = objects.Class("Config")
 
 -- public methods
-function Config:initialize(name, fileName, values, comment)
+function Config:initialize(id, fileName, values, comment)
 
 	-- conditionally private members
-	self._name = name
+	self._id = id
 	self._fileName = fileName
 	self._values = values or {}
 	

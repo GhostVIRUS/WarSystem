@@ -248,8 +248,8 @@ end;
 ---------------------------------------------------------------------------------------------------------------------
 
 engine.Require("listbox", "classes")
-menu.listbox = ListBox("menu_listbox");
-menu.msgbox = MsgBox("menu_msgbox");
+menu.listbox = ListBox({name = "menu_listbox"});
+menu.msgbox = MsgBox({name = "menu_msgbox"});
 
 menu.service:setVisibility(true)
 menu.Show("main");

@@ -8,15 +8,17 @@ dbg.Print("| Requiring 'RigidBodyDynamic' class.", "objects")
 RigidBodyDynamic = objects.Class('RigidBodyDynamic', RigidBodyStatic)
 
 -- public methods
-function RigidBodyDynamic:initialize(name, pos, props)
-	RigidBodyStatic.initialize(self, name, pos, props)
+function RigidBodyDynamic:initialize(--[[name,]] pos, props)
+	RigidBodyStatic.initialize(self, --[[name,]] pos, props)
 
 	
 end
 
 function RigidBodyDynamic:follow(whoName, speed, iteration, copyDir) -- speed here and above in px/sec
 	if iteration == 0 then
-		dbg.Print(self._name.."follow()", "objects")
+		if self._props.name then 
+			dbg.Print("| '"..self._props.name.."' follows '"..whoName.."'", "objects") 
+		send
 		self._allowMoving = true
 	end
 	self._isMoving = true

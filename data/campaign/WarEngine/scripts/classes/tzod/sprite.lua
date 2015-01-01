@@ -8,8 +8,8 @@ dbg.Print("| Requiring 'Sprite' class.")
 Sprite = objects.Class("Sprite", Entity)
 
 -- public methods
-function Sprite:initialize(name, pos, props)
-	Entity:initialize(self, name, pos, props)
+function Sprite:initialize(--[[name,]] pos, props)
+	Entity:initialize(self, --[[name,]] pos, props)
 
 
 	self._objectType = "user_sprite"
@@ -18,7 +18,9 @@ end
 
 function Sprite:follow(whoName, speed, iteration, copyDir) -- speed here and above in px/sec
 	if iteration == 0 then
-		dbg.Print(self._name.."follow()", "objects")
+		if self._props.name then
+			dbg.Print("| '"..self._props.name.."' follows '"..whoName.."'", "objects") 
+		end
 		self._allowMoving = true
 	end
 	self._isMoving = true

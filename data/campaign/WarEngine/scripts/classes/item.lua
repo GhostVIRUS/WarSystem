@@ -10,8 +10,8 @@ dbg.Print("| Requiring 'Item' class.")
 Item = objects.Class("Item", "Container") -- item, that is located in the map
 
 -- public methods
-function Item:initialize(name, pos, props, storedItem)
-	Container:initialize(name, pos)
+function Item:initialize(--[[name,]] pos, props, storedItem)
+	Container:initialize(--[[name,]] pos)
 
 	local trigName
 	local sprtName

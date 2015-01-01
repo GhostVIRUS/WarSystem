@@ -7,7 +7,7 @@ dbg.Print("| Requiring 'Inventory' class.")
 Inventory = objects.Class("Inventory")
 
 -- public methods
-function Inventory:initialize(id, items, weapons, keys, capacity)
+function Inventory:initialize(items, weapons, keys, capacity, id)
 
 	-- conditionally private members
 	self._id = id

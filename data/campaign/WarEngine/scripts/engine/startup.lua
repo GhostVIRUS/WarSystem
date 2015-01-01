@@ -28,13 +28,14 @@ local function LoadEngineModule(fileName)
 	if isLoaded then
 		dbg.Print("| Engine module '"..fileName.."' is loaded.", "engine")
 	else
-		local _, msgStart = string.find(errorMsg, ".lua"); -- we just remove useless information of error message
+--[[	local _, msgStart = string.find(errorMsg, ".lua"); -- we just remove useless information of error message
 		local _, fileNameStart = string.find(errorMsg, "/engine/"); -- if error was called by another engine file
 		if string.sub(errorMsg, fileNameStart + 1, msgStart - 4) == fileName then 
 			dbg.Print("| WARNING: Engine module '"..fileName.."' wasn't loaded:"..string.sub(errorMsg, msgStart + 2), "engine")
 		else
 			dbg.Print("| WARNING: Engine module '"..fileName.."' wasn't loaded: "..string.sub(errorMsg, fileNameStart + 1), "engine")	
-		end;
+		end;]]
+		dbg.Print("| WARNING: Engine module '"..fileName.."' wasn't loaded: "..errorMsg, "engine")
 		engineLoadingWasComplete = false;
 	end;
 end

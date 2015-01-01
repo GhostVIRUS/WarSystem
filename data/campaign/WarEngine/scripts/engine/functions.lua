@@ -144,3 +144,24 @@ function func.DoTable(tab)
 		return newTab;
 	end;
 end
+
+-- Функции преобразования одних координат ТЗОДа в другие. Основаны на функции Антикиллера. *Теперь позволяют обрабатывать неограниченное количество аргументов. Slava98. 30.12.13.
+function func.GetPixel(...)
+	local args = {...};
+	for i = 1, #args do
+		checktype({args[i]}, {"number"}, "func.GetPixel")
+		args[i] = ((args[i] - 1)*32) + 16;
+	end;
+	
+	return unpack(args);
+end
+
+function func.GetSquare(...)
+	local args = {...};
+	for i = 1, #args do
+		checktype({args[i]}, {"number"}, "func.GetSquare")
+		args[i] =  math.floor((math.floor(args[i]) - 16)/32 + 1);
+	end;
+	
+	return unpack(args);
+end

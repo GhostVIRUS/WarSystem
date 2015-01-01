@@ -7,12 +7,12 @@ dbg.Print("| Requiring 'Entity' class.", "objects")
 Entity = objects.Class("Entity")
 
 -- public methods
-function Entity:initialize(name, pos, props)
+function Entity:initialize(--[[name,]] pos, props)
 	props = props or {};
-	props["name"] = props["name"] or name;
+--	props["name"] = props["name"] or name;
 
 	-- conditionally private members
-	self._name = name
+--	self._name = name
 	self._pos = pos
 	self._link = link
 	self._isVisible = false
@@ -45,7 +45,6 @@ function Entity:setProperties(props) -- requires table property-value
 end
 
 function Entity:setVisibility(value)
-	dbg.Print(self._name..":setVisibility()", "objects")
 	if value == true then
 		self:_show()
 	elseif value == false then
@@ -56,7 +55,6 @@ function Entity:setVisibility(value)
 end
 
 function Entity:getVector(pos) -- maybe should be renamed in getLine() or smth like that
---	print(self._name..':getVector()')
 	local xCathetus = pos.x - self._pos.x
 	local yCathetus = pos.y - self._pos.y
 	local hypotenuse = math.sqrt((xCathetus * xCathetus) + (yCathetus * yCathetus))
@@ -69,7 +67,9 @@ function Entity:getVector(pos) -- maybe should be renamed in getLine() or smth l
 end
 
 function Entity:move(pos, parameters) -- parameters.time in seconds; if time = 0 works as setposition
-	dbg.Print(self._name..":move()"..tostring(self._allowMoving), "objects")
+	if self._props.name then
+		dbg.Print("'"..self._props.name.."' is moving", "objects")
+	end
 
 	self._isMoving = true
 
@@ -102,7 +102,9 @@ end
 
 function Entity:follow(whoName, speed, iteration) -- speed here and above in px/sec
 	if iteration == 0 then
-		dbg.Print(self._name.."follow()", "objects")
+		if self._props.name then
+			dbg.Print("'"..self._props.name.."' follows '"..whoName.."'", "objects")
+		end
 		self._allowMoving = true
 	end
 	self._isMoving = true
@@ -128,12 +130,17 @@ function Entity:follow(whoName, speed, iteration) -- speed here and above in px/
 end
 
 function Entity:stopMoving() -- doesn't work at move()
+	if self._props.name then
+		dbg.Print("'"..self._props.name.."' stopped", "objects")
+	end
 	self._allowMoving = false
 end
 
 -- conditionally private methods
 function Entity:_saveProps()
-	dbg.Print(self._name..":_saveProps()", "objects")
+	if self._props.name then
+		dbg.Print("'"..self._props.name.."' updates properties", "objects")
+	end
 	local tempTable = getmetatable(self._link);
 	local property = "name";
 
@@ -146,7 +153,9 @@ function Entity:_saveProps()
 end
 
 function Entity:_show()
-	dbg.Print(self._name..":_show()", "objects")
+	if self._props.name then
+		dbg.Print("'"..self._props.name.."' now is visible", "objects")
+	end
 	self._link = actor(self._objectType, self._pos.x, self._pos.y, self._props)
 	self._isVisible = true
 	self:_saveProps()
@@ -155,7 +164,9 @@ function Entity:_show()
 end
 
 function Entity:_hide()
-	dbg.Print(self._name..":_hide()", "objects")
+	if self._props.name then
+		dbg.Print("'"..self._props.name.."' now is not visible", "objects")
+	end
 	self._isVisible = false
 	self:_saveProps()
 	kill(self._link)
@@ -165,7 +176,6 @@ function Entity:_hide()
 end
 
 function Entity:_updatePos() -- updating real Entity's coords from props
---	dbg.Print(self._name..":_updatePos()", "objects") -- Floods a lot
 	if self._isVisible == true then
 		setposition(self._link, self._pos.x, self._pos.y)
 	end

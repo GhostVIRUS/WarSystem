@@ -31,10 +31,10 @@ function Config:load()
 			end
 			self._values[key] = value
 		end
+		file:close()
 	else
 		self:save()
 	end
-	file:close()
 	
 	return nil
 end

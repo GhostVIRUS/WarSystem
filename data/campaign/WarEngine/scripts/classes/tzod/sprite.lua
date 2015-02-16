@@ -35,7 +35,7 @@ function Sprite:follow(whoName, speed, iteration, copyDir) -- speed here and abo
 		end
 
 		if copyDir then
-			self._props["dir"] = object(whoName).dir;
+			self._props["rotation"] = object(whoName)["rotation"];
 			self:_updateProps()
 		end
 		

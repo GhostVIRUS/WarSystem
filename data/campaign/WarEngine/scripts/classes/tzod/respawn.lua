@@ -1,22 +1,22 @@
----===RigidBodyDynamic===---
+---===RespawnPoint===---
 -- includes
 objects.Init()
-engine.Require("rigidbody", "classes")
+engine.Require("entity", "classes")
 
 -- declaring
-dbg.Print("| Requiring 'RigidBodyDynamic' class.", "objects")
-RigidBodyDynamic = objects.Class('RigidBodyDynamic', RigidBodyStatic)
+dbg.Print("| Requiring 'RespawnPoint' class.")
+Sprite = objects.Class("RespawnPoint", Entity)
 
 -- public methods
-function RigidBodyDynamic:initialize(--[[name,]] pos, props)
-	RigidBodyStatic.initialize(self, --[[name,]] pos, props)
-	self:_detectPos()
-	
+function RespawnPoint:initialize(--[[name,]] pos, props)
+	Entity:initialize(self, --[[name,]] pos, props)
+
+	self._objectType = "respawn_point"
 end
 
-function RigidBodyDynamic:follow(whoName, speed, iteration, copyDir) -- speed here and above in px/sec
+function RespawnPoint:follow(whoName, speed, iteration, copyDir) -- speed here and above in px/sec
 	if iteration == 0 then
-		if self._props.name then 
+		if self._props.name then
 			dbg.Print("| '"..self._props.name.."' follows '"..whoName.."'", "objects") 
 		end
 		self._allowMoving = true
@@ -46,16 +46,4 @@ function RigidBodyDynamic:follow(whoName, speed, iteration, copyDir) -- speed he
 	end, 1/100)
 
 	return nil
-end
-
--- conditionally private members
-
-function RigidBodyDynamic:_detectPos()
-	if getpowervalue(self._link) > 1 then -- if object moves
-		self._pos = position(self._link)
-	else
-		return nil
-	end
-	
-	pushcmd(function() self:_detectPos() end, 0.001)
 end

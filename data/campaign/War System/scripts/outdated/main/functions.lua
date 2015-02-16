@@ -2083,8 +2083,8 @@ function func.NPC.EvaluateTarget(npcName, targetNum, atribute)
 		formatedEnemies.weapValue[targetNum] = func.EvaluateWeap(main.characters[targetName].currentWeap);
 		formatedEnemies.healthValue[targetNum] = object(object(targetName).vehname).health;
 		formatedEnemies.rankValue[targetNum] = main.characters[targetName].rank;
-		local x1, y1 = object(npcName).vehname;
-		local x2, y2 = object(targetName).vehname;
+		local x1, y1 = position(object(npcName).vehname);
+		local x2, y2 = position(object(targetName).vehname);
 		formatedEnemies.distanceValue[targetNum] = func.GetDistance(x1, y1, x2, y2);
 	end;
 	-- Теперь задаём нужные нам переменные. Враги со средними характеристиками потом находятся методом исключения.

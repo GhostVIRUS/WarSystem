@@ -8,15 +8,14 @@ Entity = objects.Class("Entity")
 
 -- public methods
 function Entity:initialize(--[[name,]] pos, props)
-	props = props or {};
 --	props["name"] = props["name"] or name;
 
 	-- conditionally private members
 --	self._name = name
 	self._pos = pos
-	self._link = link
+	self._link = nil
 	self._isVisible = false
-	self._props = props
+	self._props = props or {}
 
 	self._objectType = nil -- maybe this will not be needed
 

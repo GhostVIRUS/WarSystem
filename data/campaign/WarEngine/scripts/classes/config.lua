@@ -42,7 +42,7 @@ end
 function Config:save()
 	dbg.Print("| Saving config '"..self._fileName.."'", "engine")
 	local file = io.open(self._fileName, "w")
-	local output = self._comment.."\n" or ""
+	local output = xpcall(function() return self._comment.."\n" end) or ""
 	
 	for key, value in pairs(self._values) do
 		output = output..key.."="..tostring(value).."\n"

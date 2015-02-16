@@ -13,7 +13,7 @@ function Container:initialize(pos, entities, id) -- entities = objects that cont
 	self._id = id
 	self._pos = pos
 	self._entities = entities or {}
-	self._incontainerPos = self:_calcuateIncontainerPos()
+	self:_calcuateIncontainerPos()
 end
 
 function Container:setPosition(pos)
@@ -137,12 +137,9 @@ function Container:_updatePos()
 end
 
 function Container:_calcuateIncontainerPos()
-	local incontainerPos = {}
 	for entity, object in pairs(self._entities) do
-		incontainerPos[entity] = {}
-		incontainerPos[entity].x = object._pos.x - self._pos.x
-		incontainerPos[entity].y = object._pos.y - self._pos.y 
+		self._incontainerPos[entity] = {}
+		self._incontainerPos[entity].x = object._pos.x - self._pos.x
+		self._incontainerPos[entity].y = object._pos.y - self._pos.y 
 	end
-
-	return incontainerPos
 end

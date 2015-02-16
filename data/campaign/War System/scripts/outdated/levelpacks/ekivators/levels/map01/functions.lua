@@ -6,7 +6,7 @@
 -- Обработка события поднятия предмета.
 function level.OnPickup(name, item, character)
 	if level.screenplay.missionBoo == 1 and item == "battery" and character == const.playerName then
-		local energyCells = main.characters[const.playerName].inventory.items.boo;
+		local energyCells = main.characters[const.playerName].inventory.items.battery + 1 or 0;
 --		level.screenplay.energyCells = level.screenplay.energyCells + 1; Думаю, следует сделать счётчик по батареям в инвентаре.
 		func.Message(func.Read({"map01", "energycells", 1}, energyCells, {"map01", "energycells", energyCells + 1}))
 		if energyCells == 4 then -- Если мы собрали все 4 батареи.
@@ -15,11 +15,11 @@ function level.OnPickup(name, item, character)
 			level.screenplay.missionBoo = 2; -- Новый этап миссии Бу.
 			level.screenplay.BanditsAttack("show") -- Но нас уже поджидают бандиты.
 		end;
-	elseif level.screenplay.missinboo == 3 and item == "battery" and name == const.playerName then
+	elseif level.screenplay.missinboo == 3 and item == "battery" and character == const.playerName then
 -- Теперь мы собрали точно все батареи. Миссия Бу окончена!
 	end;
 	for i = 1, 5 do 
-		if level.screenplay.missionBoo == 1 and item == "battery" and name == "ourwarrior"..i then
+		if level.screenplay.missionBoo == 1 and item == "battery" and character == "ourwarrior"..i then
 			level.functions.ourWarriorGotBoo = i; -- Если поселенец взял батарею, он нам её отдаст.
 		end;
 	end;

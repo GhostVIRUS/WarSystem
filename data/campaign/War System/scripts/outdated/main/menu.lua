@@ -632,7 +632,7 @@ function main.menu.ItemInfo(item)
 		table.insert(stringTab, func.Read({"main", "inventory", 6}))
 		table.insert(funcTab, function() func.UseItem(item, const.playerName); end) 
 	else
-		if charTab.inventory.numOfPushed[item] or (not charTab.inventory.numOfPushed[item] or charTab.inventory.numOfPushed[item] < charTab.inventory.items[item] and (item == "healthpack" or item == "superhealthpack" or item == "boo" or item == "battery")) then
+		if charTab.inventory.items[item] > 1 and (not charTab.inventory.numOfPushed[item] or charTab.inventory.numOfPushed[item] and charTab.inventory.numOfPushed[item] < charTab.inventory.items[item]) and (item == "healthpack" or item == "superhealthpack" or item == "boo" or item == "battery") then
 			table.insert(stringTab, func.Read({"main", "inventory", 11}))
 			table.insert(funcTab, function() func.PushItemsBox(item) end)
 		end;

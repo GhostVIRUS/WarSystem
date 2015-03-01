@@ -3,17 +3,17 @@
 function level.CommSpeak(part, a)
 	pset('c_trig', 'active', 0)
 	if part == 0 then
-		if a == 1 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 2) elseif n==2 then level.CommSpeak(0, 15) elseif n==3 then level.CommSpeak(0, 7) end; object('ourwarrior3').nick = func.Read('map01', 'nicks', 2)", "1", "2", "3"}, "dlgbox")
+		if a == 1 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 2) elseif n==2 then level.CommSpeak(0, 15) elseif n==3 then level.CommSpeak(0, 7) end", "1", "2", "3"}, "dlgbox"); object("ourwarrior3").nick = func.Read({"map01", "nicks", 2})
 		elseif a == 2 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 14) elseif n==3 then level.CommSpeak(0, 6) end", "1", "2", "3"}, "dlgbox")
-		elseif a == 3 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 13) elseif n==2 then level.CommSpeak(0, 5) end", "1", "2"}, "dlgbox")
+		elseif a == 3 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 13) elseif n==2 then level.CommSpeak(0, 14) end", "1", "2"}, "dlgbox")
 		elseif a == 4 then func.MsgBox({"map01", "halos1", a}, {"level.screenplay.missionKey=1;level.CommSpeak('exit')"}, "dlgbox")
-		elseif a == 5 then func.MsxBox({"map01", "halos1", a}, {"level.screenplay.missionKey=1;level.CommSpeak('exit')"}, "dlgbox")
+		elseif a == 5 then func.MsgBox({"map01", "halos1", a}, {"level.screenplay.missionKey=1;level.CommSpeak('exit')"}, "dlgbox")
 		elseif a == 6 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 14) elseif n==3 then level.CommSpeak(0, 7) end", "1", "2", "3"}, "dlgbox")
 		elseif a == 7 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 14) elseif n==3 then level.CommSpeak(0, 8) end", "1", "2", "3"}, "dlgbox")
 		elseif a == 8 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 14) elseif n==3 then level.CommSpeak(0, 9) end", "1", "2", "3"}, "dlgbox")
 		elseif a == 9 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 14) elseif n==3 then level.CommSpeak(0, 10) end", "1", "2", "3"}, "dlgbox")
 		elseif a == 10 then func.MsgBox({"map01", "halos1", a}, {"level.CommSpeak(0, 11)", "1"}, "dlgbox")
-		elseif a == 11 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 12) elseif n==3 then level.OurWarriorsAttackPlayer('ourplayer_tank') end", "1", "2", "3"}, "dlgbox")
+		elseif a == 11 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 14) end", "1", "2"}, "dlgbox")
 		elseif a == 12 then func.MsgBox({"map01", "halos1", a}, {"level.CommSpeak('exit')"}, "dlgbox")
 		elseif a == 13 then func.MsgBox({"map01", "halos1", a}, {"level.GetMissionBoo(); level.CommSpeak('exit')"}, "dlgbox")
 		elseif a == 14 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 4) elseif n==3 then level.CommSpeak(0, 16) end", "1", "2", "3"}, "dlgbox")
@@ -21,13 +21,14 @@ function level.CommSpeak(part, a)
 		elseif a == 16 then func.MsgBox({"map01", "halos1", a}, {"level.CommSpeak(0, 4)"}, "dlgbox")
 		end;
 	elseif part == 1 then
-		if a == 1 then func.MsgBox(func.Read("map01", "halos2", a)..main.characters[const.playerName].inventory.items.boo..".", {"level.CommSpeak('exit')", "1"}, "dlgbox")
-		elseif a == 2 then func.MsgBox({"map01", "halos2", a}, {"func.ConfiscateItem('battery', const.playerName, 4); level.CommSpeak(1, 3)", "1"}, "dlgbox")
-		elseif a == 3 then func.MsgBox({"map01", "halos2", a}, {"if n==2 then level.CommSpeak(1, 4) else level.CommSpeak('exit') end", "1", "2"}, "dlgbox")
-		elseif a == 4 then func.MsgBox({"map01", "halos2", a}, {"if n==1 then level.CommSpeak('exit') elseif n==2 then level.CommSpeak('exit') end"}, "dlgbox")
+--		if a == 1 then func.MsgBox(func.Read("map01", "halos2", a)..main.characters[const.playerName].inventory.items.battery..".", {"level.CommSpeak('exit')", "1"}, "dlgbox")
+		if a == 1 then local n = math.random(1, 6); func.object.Speak("ourwarrior3_tank", {"map01", "halos_settler_speaks", n}); pushcmd(function() level.CommSpeak("exit") end, 3)
+		elseif a == 2 then func.MsgBox({"map01", "halos2", a}, {"func.ConfiscateItem('battery', const.playerName, 4); func.GiveItem('boo', const.playerName, 2); level.CommSpeak(1, 3)", "1"}, "dlgbox")
+		elseif a == 3 then func.MsgBox({"map01", "halos2", a}, {"if n==2 then level.CommSpeak(1, 4) else level.CommSpeak(1, 20) end", "1", "2"}, "dlgbox")
+		elseif a == 4 then func.MsgBox({"map01", "halos2", a}, {"level.CommSpeak(1, 20)", "1"}, "dlgbox")
 		elseif a == 5 then func.MsgBox({"map01", "halos2", a}, {"level.CommSpeak('exit')"}, "dlgbox")
-		elseif a == 6 then func.MsgBox({"map01", "halos2", a}, {"if n==1 then level.CommSpeak('exit') elseif n==2 then level.CommSpeak(1, 7) end", "1", "2"}, "dlgbox")
-		elseif a == 7 then func.MsgBox({"map01", "halos2", a}, {"level.CommSpeak(1, 8)", "1"}, "dlgbox")
+		elseif a == 6 then func.MsgBox({"map01", "halos2", a}, {"if level.screenplay.ranonAttackedBandits then level.CommSpeak(1, 7) else level.CommSpeak(1, 21) end", "1"}, "dlgbox")
+		elseif a == 7 then func.MsgBox({"map01", "halos2", a}, {"if n==2 then level.CommSpeak(1, 8) else level.CommSpeak('exit') end", "1", "2"}, "dlgbox")
 		elseif a == 8 then func.MsgBox({"map01", "halos2", a}, {"level.CommSpeak(1, 9)", "1"}, "dlgbox")
 		elseif a == 9 then func.MsgBox({"map01", "halos2", a}, {"level.CommSpeak(1, 10)", "1"}, "dlgbox")
 		elseif a == 10 then func.MsgBox({"map01", "halos2", a}, {"level.CommSpeak('exit')"}, "dlgbox")
@@ -37,6 +38,8 @@ function level.CommSpeak(part, a)
 		elseif a == 14 then func.MsgBox({"map01", "halos2", a}, {"level.CommSpeak('exit')"}, "dlgbox")
 		elseif a == 15 then func.MsgBox({"map01", "halos2", a}, {"level.CommSpeak('exit')"}, "dlgbox")
 		elseif a == 16 then func.MsgBox({"map01", "halos2", a}, {"level.CommSpeak('exit')"}, "dlgbox")
+		elseif a == 20 then func.MsgBox({"map01", "halos2", a}, {"func.GiveItem('bomb', const.playerName); level.CommSpeak('exit')"}, "dlgbox")
+		elseif a == 21 then func.MsgBox({"map01", "halos2", a}, {"level.CommSpeak('exit')", "1"}, "dlgbox")
 		end;
 	elseif part == "exit" then 
 		pushcmd(function() 
@@ -45,22 +48,22 @@ function level.CommSpeak(part, a)
 --          pset("c_trig", "on_enter", "level.CommSpeak(1, 1)") --Здесь потом другое будет. Slava98.
 			if level.screenplay.missionBoo == 1 then
 				pset("c_trig", "on_enter", "level.CommSpeak(1, 1)")
-			elseif level.screenplay.missionBoo == 2 then
-				pset("c_trig", "on_enter", "level.CommSpeak(1, 2)")
-				level.screenplay.halosHasGotBoo = true;
-				level.screenplay.missionBoo = 3;
-				message("Конец играбельной части.")
-			elseif level.screenplay.halosHasGotBoo then
-				if level.functions.sidedoorStatus ~= 4 then
+			elseif level.screenplay.missionBoo == 2 or level.screenplay.missionKey == 1 then
+--				kill("cklad") -- Надо переименовать. Определённо. Завтра займусь этим, если не пойду гулять с девушкой. Slava98. 25.08.13.
+				if not level.screenplay.halosHasGotBoos then
 					pset("c_trig", "on_enter", "level.CommSpeak(1, 5)")
+					level.screenplay.halosHasGotBoos = true;
+--					level.screenplay.missionBoo = 3;
+					level.Door("warehouse_open")
+					message("Конец играбельной части.")
 				else
-					level.DoorRepairerCall()
-				end;
-			elseif level.screenplay.missionKey == 1 then
---				pset("c_trig", "on_enter", "level.CommSpeak(1, 5)")
-				pset("c_trig", "active", 0)
-				kill("cklad") -- Надо переименовать. Определённо. Завтра займусь этим, если не пойду гулять с девушкой. Slava98. 25.08.13.
-				for i = 1, 3 do kill("w"..i) end;
+					if level.functions.sidedoorStatus ~= 4 then
+						pset("c_trig", "on_enter", "level.CommSpeak(1, 5)")
+					else
+						level.screenplay.DoorRepairerCall()
+						pushcmd(level.screenplay.Attack, 3)
+					end;
+				end
 			end;
 		end, 5)
 	end;
@@ -92,13 +95,22 @@ function level.SettlerSpeak(a)
 	elseif a == "tired" then func.object.Speak("ourwarrior1_tank", "map01", "settler_cutSceneSpeaks", 1, nil, 2); pushcmd(function() level.SettlerSpeak('angry') end, 2)                  
 	elseif a == "angry" then func.object.Speak("ourwarrior1_tank", "map01", "settler_cutSceneSpeaks", 2); level.screenplay.SettlerCall(a); --level.RioterAttack(3)   
 	elseif a == 5 then func.MsgBox({"map01", "settler_dlg", a}, {"level.TerminalSpeak('settle', 4)", "1"}, "dlgbox")
+	elseif a == "door_lagging" then
+		func.object.Speak("ourwarrior1_tank", {"map01", "settler_cutSceneSpeaks", 4}, 2.5)
+		pushcmd(function()
+			func.object.Speak("ourwarrior1_tank", {"map01", "settler_cutSceneSpeaks", 5})
+		end, 4)
+		pushcmd(function()
+			func.object.Speak("ourwarrior1_tank", {"map01", "settler_cutSceneSpeaks", 6})
+			func.NPC.FollowWay("ourwarrior1", "base_patrol1")
+		end, 20)
 	end;
 end
 
 function level.TerminalSpeak(terminal, a)
 	if terminal == "settle" then
 		if a == "call" then
-			if level.screenplay.playerKnowsAboutTerminal then func.Message(func.Read("map01", "promt", 2)); level.screenplay.playerKnowsAboutTerminal = true; end;
+			if level.screenplay.playerKnowsAboutTerminal then func.Message({"map01", "promt", 2}); level.screenplay.playerKnowsAboutTerminal = true; end;
 			if not level.screenplay.ourwarrior5WasTalked then level.TerminalSpeak("settle", 3)
 			elseif level.screenplay.playerMustPressPassword and not level.screenplay.playerCanRideToSettle then level.TerminalSpeak("settle", 4)
 			end;
@@ -110,24 +122,24 @@ function level.TerminalSpeak(terminal, a)
 end
 
 function level.RanonSpeak(a)
-	if a == 2 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.RanonSpeak(3) elseif n==2 then level.RanonSpeak(8) end", "1", "2"}, "dlgbox")
-	elseif a == 3 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.RanonSpeak(4) elseif n==2 then level.RanonSpeak(5) elseif n==3 then level.RanonSpeak(7) end", "1", "2", "3"}, "dlgbox")
-	elseif a == 4 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.screenplay.SettlerNearRuins('goto_settle') else level.RanonSpeak(6) end", "1", "2"}, "dlgbox")
-	elseif a == 5 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.screenplay.SettlerNearRuins('goto_settle') else level.screenplay.SettlerNearRuins('go_away') end", "1", "2"}, "dlgbox")
-	elseif a == 6 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.screenplay.SettlerNearRuins('goto_settle') else level.screenplay.SettlerNearRuins('go_away') end", "1", "2"}, "dlgbox")
-	elseif a == 7 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.screenplay.SettlerNearRuins('goto_settle') else level.screenplay.SettlerNearRuins('go_away') end", "1", "2"}, "dlgbox")
-	elseif a == 8 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.screenplay.SettlerNearRuins('go_away') elseif n==2 then level.RanonSpeak(20) elseif n==3 then level.RanonSpeak(9) end", "1", "2", "3"}, "dlgbox")
-	elseif a == 9 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.RanonSpeak(20) elseif n==2 then level.RanonSpeak(10) elseif n==3 then level.RanonSpeak(11) end", "1", "2", "3"}, "dlgbox")
-	elseif a == 10 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.screenplay.SettlerNearRuins('go_away') elseif n==2 then level.RanonSpeak(20) elseif n==3 then level.screenplay.SettlerNearRuins('attack_player') end", "1", "2", "3"}, "dlgbox")
-	elseif a == 11 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.RanonSpeak(12) elseif n==2 then level.RanonSpeak(19) elseif n==3 then level.RanonSpeak(20) end", "1", "2", "3"}, "dlgbox")
-	elseif a == 12 then func.MsgBox({"ranon", "map01", a}, {"level.RanonSpeak(13)", "1"}, "dlgbox")
-	elseif a == 13 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.RanonSpeak(14) elseif n==2 then level.RanonSpeak(15) elseif n==3 then level.RanonSpeak(16) end", "1", "2", "3"}, "dlgbox")
-	elseif a == 14 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.screenplay.SettlerNearRuins('attack_player') elseif n==2 then level.RanonSpeak(16) elseif n==3 then level.RanonSpeak(17) end", "1", "2", "3"}, "dlgbox")
-	elseif a == 15 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.screenplay.SettlerNearRuins('go_away') elseif n==2 then level.RanonSpeak(16) end", "1", "2"}, "dlgbox")
-	elseif a == 16 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.RanonSpeak(17) elseif n==2 then level.screenplay.SettlerNearRuins('go_away') elseif n==3 then level.RanonSpeak(18) end", "1", "2", "3"}, "dlgbox")
-	elseif a == 17 then func.MsgBox({"ranon", "map01", a}, {"level.screenplay.SettlerNearRuins('attack_player')", "1", "2", "3"}, "dlgbox")
-	elseif a == 18 then func.MsgBox({"ranon", "map01", a}, {"level.screenplay.SettlerNearRuins('show_boss')"}, "dlgbox")
-	elseif a == 19 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.screenplay.SettlerNearRuins('go_away') elseif n==2 then level.RanonSpeak(20) elseif n==3 then level.screenplay.SettlerNearRuins('attack_player') end", "1", "2", "3"}, "dlgbox")
-	elseif a == 20 then func.MsgBox({"ranon", "map01", a}, {"if n==1 then level.RanonSpeak(5) elseif n==2 then level.RanonSpeak(4) elseif n==3 then level.RanonSpeak(7) end", "1", "2", "3"}, "dlgbox")
+	if a == 2 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.RanonSpeak(3) elseif n==2 then level.RanonSpeak(8) end", "1", "2"}, "dlgbox")
+	elseif a == 3 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.RanonSpeak(4) elseif n==2 then level.RanonSpeak(5) elseif n==3 then level.RanonSpeak(7) end", "1", "2", "3"}, "dlgbox")
+	elseif a == 4 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.screenplay.SettlerNearRuins('goto_settle') else level.RanonSpeak(6) end", "1", "2"}, "dlgbox")
+	elseif a == 5 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.screenplay.SettlerNearRuins('goto_settle') else level.screenplay.SettlerNearRuins('go_away') end", "1", "2"}, "dlgbox")
+	elseif a == 6 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.screenplay.SettlerNearRuins('goto_settle') else level.screenplay.SettlerNearRuins('go_away') end", "1", "2"}, "dlgbox")
+	elseif a == 7 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.screenplay.SettlerNearRuins('goto_settle') else level.screenplay.SettlerNearRuins('go_away') end", "1", "2"}, "dlgbox")
+	elseif a == 8 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.screenplay.SettlerNearRuins('go_away') elseif n==2 then level.RanonSpeak(20) elseif n==3 then level.RanonSpeak(9) end", "1", "2", "3"}, "dlgbox")
+	elseif a == 9 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.RanonSpeak(20) elseif n==2 then level.RanonSpeak(10) elseif n==3 then level.RanonSpeak(11) end", "1", "2", "3"}, "dlgbox")
+	elseif a == 10 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.screenplay.SettlerNearRuins('go_away') elseif n==2 then level.RanonSpeak(20) elseif n==3 then level.screenplay.SettlerNearRuins('attack_player') end", "1", "2", "3"}, "dlgbox")
+	elseif a == 11 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.RanonSpeak(12) elseif n==2 then level.RanonSpeak(19) elseif n==3 then level.RanonSpeak(20) end", "1", "2", "3"}, "dlgbox")
+	elseif a == 12 then func.MsgBox({"map01", "ranon", a}, {"level.RanonSpeak(13)", "1"}, "dlgbox")
+	elseif a == 13 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.RanonSpeak(14) elseif n==2 then level.RanonSpeak(15) elseif n==3 then level.RanonSpeak(16) end", "1", "2", "3"}, "dlgbox")
+	elseif a == 14 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.screenplay.SettlerNearRuins('attack_player') elseif n==2 then level.RanonSpeak(16) elseif n==3 then level.RanonSpeak(17) end", "1", "2", "3"}, "dlgbox")
+	elseif a == 15 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.screenplay.SettlerNearRuins('go_away') elseif n==2 then level.RanonSpeak(16) end", "1", "2"}, "dlgbox")
+	elseif a == 16 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.RanonSpeak(17) elseif n==2 then level.screenplay.SettlerNearRuins('go_away') elseif n==3 then level.RanonSpeak(18) end", "1", "2", "3"}, "dlgbox")
+	elseif a == 17 then func.MsgBox({"map01", "ranon", a}, {"level.screenplay.SettlerNearRuins('attack_player')", "1", "2", "3"}, "dlgbox")
+	elseif a == 18 then func.MsgBox({"map01", "ranon", a}, {"level.screenplay.SettlerNearRuins('show_boss')"}, "dlgbox")
+	elseif a == 19 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.screenplay.SettlerNearRuins('go_away') elseif n==2 then level.RanonSpeak(20) elseif n==3 then level.screenplay.SettlerNearRuins('attack_player') end", "1", "2", "3"}, "dlgbox")
+	elseif a == 20 then func.MsgBox({"map01", "ranon", a}, {"if n==1 then level.RanonSpeak(5) elseif n==2 then level.RanonSpeak(4) elseif n==3 then level.RanonSpeak(7) end", "1", "2", "3"}, "dlgbox")
 	end;
 end

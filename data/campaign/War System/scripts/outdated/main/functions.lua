@@ -1236,7 +1236,7 @@ function func.inventory.UseHealthPack(character)
 		end;
 	end, 1/inventory.healTime*39)
 	
-	main.menu.Inventory()
+	if character == const.playerName then main.menu.Inventory() end
 	return main.characters[character].inventory.items.healthpack;
 end
 
@@ -1264,7 +1264,7 @@ function func.inventory.UseSuperHealthPack(character)
 		end;	
 	end, 1/inventory.healTime*2*120)
 
-	main.menu.Inventory()
+	if character == const.playerName then main.menu.Inventory() end
 	return main.characters[character].inventory.items.superhealthpack;
 end
 
@@ -1303,7 +1303,7 @@ function func.inventory.UseBoo(character)
 		end;
 	end, 22) -- После окончания его действия, мы можем вновь включить усилитель.
 
-	main.menu.Inventory()
+	if character == const.playerName then main.menu.Inventory() end
 	return main.characters[character].inventory.healthpackNum;
 end
 
@@ -1332,7 +1332,7 @@ function func.inventory.UseMine(character)
 		name=character.."_mine"..inventory.numberOfAcivatedMines.."_trig", 
 		on_leave="if func.ExistsCharacter('"..character.."') then main.characters['"..character.."'].inventory.isActivated['mine'] = false; end; kill('"..character.."_mine"..inventory.numberOfAcivatedMines.."'); kill('"..character.."_mine"..inventory.numberOfAcivatedMines.."_trig'); actor('pu_mine',"..x..", "..y..", {on_pickup = 'func.MineDetonate(who)'})" } )
 	
-	main.menu.Inventory()
+	if character == const.playerName then main.menu.Inventory() end
 	return main.characters[character].inventory.healthpackNum;
 end
 
@@ -1461,7 +1461,7 @@ function func.inventory.UseBattery(character)
 		end;
 	end, 8)
 
-	main.menu.Inventory()
+	if character == const.playerName then main.menu.Inventory() end
 	return main.characters[character].inventory.items.battery;
 end
 
@@ -1693,7 +1693,7 @@ function func.SpawnTank(name, brainType, properties, x, y, team, spawnTeam, dir,
 		object(name).team = team; -- Меняем команду.
 --		if exists(properties.vehname) then object(properties.vehname).on_damage = "func.tank.OnDamage(who, '"..properties.vehname.."')"; end;
 		if exists(name.."_spawn") then kill(name.."_spawn") end; -- Убирает спавн.
-	end, 2.1)
+	end, 2.3)
 	
 	return properties;
 end
@@ -1779,7 +1779,7 @@ function func.NPC.Create(npcName, x, y, dir, team, spawnTeam, tankTab, charTab, 
 	});
 
 	local npcTab = func.UniteTables({ -- Параметры NPC.
-		healthToHeal = 200, -- Количество здоровья для самоизлечения.
+		healthToHeal = 350, -- Количество здоровья для самоизлечения.
 		useBattery = true, -- Использовать ли усилитель. Вскоре будет не нужно.
 		followingObject = "", -- Объект, преследоваемый NPC.
 		-- Пути.
@@ -1917,7 +1917,7 @@ function func.NPC.Create(npcName, x, y, dir, team, spawnTeam, tankTab, charTab, 
 	pushcmd(function()
 		if exists(tankName) then 
 			local tankName = object(npcName).vehname;
-			local healFunc = "if exists('"..npcName.."') and main.NPC.list."..npcName..".healthToHeal~=nil and object('"..tankName.."').health < main.NPC.list."..npcName..".healthToHeal then local inventory = main.characters['"..npcName.."'].inventory; if not inventory.isActivated['healthpack'] and not inventory.isActivated['superhealthpack'] then if not inventory.isActivated['healthpack'] then func.UseItem('superhealthpack', '"..npcName.."') end; if not inventory.isActivated['superhealthpack'] then func.UseItem('healthpack', '"..npcName.."') end; end; end; ";
+			local healFunc = "if exists('"..npcName.."') and main.NPC.list."..npcName..".healthToHeal~=nil and object('"..tankName.."').health < main.NPC.list."..npcName..".healthToHeal then local inventory = main.characters['"..npcName.."'].inventory; if not inventory.isActivated['healthpack'] and not inventory.isActivated['superhealthpack'] then func.UseItem('superhealthpack', '"..npcName.."') func.UseItem('healthpack', '"..npcName.."') end; end; ";
 			local useBatteryFunc = "if exists('"..npcName.."') and who~=nil and object(who.playername).team~=object('"..npcName.."').team and main.NPC.list."..npcName..".useBattery then func.UseItem('boo', '"..npcName.."') end; ";
 			local attackFunc = "if who~=nil and exists(who.playername) and exists('"..npcName.."') and object(who.playername).team~=object('"..npcName.."').team and main.NPC.list['"..npcName.."'].revengeToAttacker then func.NPC.Attack('attack', '"..npcName.."', who, 0.2); end;";
 			object(tankName).on_damage = healFunc..useBatteryFunc..attackFunc..object(tankName).on_damage;
@@ -2320,7 +2320,7 @@ function func.way.Create(wayName, coordTab, g32, wayTab)--onEnterFunc, killAfter
 --		if i ~= #coordTab or i == #coordTab and wayTab.isCicle then existsNextPoint = true; end; --gotoNextTrigFunc = "; for i = 1, #level.ways['"..wayName.."'].allowedNPCs do if who.playername == level.ways['"..wayName.."'].allowedNPCs[i] then local npcName = level.ways['"..wayName.."'].allowedNPCs[i]; nextWayPoint = nextWayPoint or '"..wayName.."_waytrig"..nextWayPointNum.."'; main.NPC.list[npcName].nextWayPoint = nextWayPoint; local x, y = position(nextWayPoint); ai_march(npcName, x, y) end; end; "; end;
 --		if wayTab.shortcut then shortcutFunc = "; local trigCoordTab = {}; local tankCoordTab = {position(who.name)}; local lengthTab = {}; for i = 1, level.ways['"..wayName.."'].points do trigCoordTab[i] = {}; trigCoordTab[i].x, trigCoordTab[i].y = position('"..wayName.."_waytrig'..i); lengthTab[i] = math.sqrt((tankCoordTab[1] - trigCoordTab[i].x)^2 + (tankCoordTab[2] - trigCoordTab[i].y)^2); end; local nextWayPoint = '"..wayName.."_waytrig'..func.ArrayMin(lengthTab); a = lengthTab"; end;
 
-		actor("trigger", coordTab[i].x, coordTab[i].y, {name = wayName.."_waytrig"..i, on_enter = "local wayTab = level.ways['"..wayName.."']; local IsAllowed = function() for i = 1, #wayTab.allowedNPCs do if who.playername == wayTab.allowedNPCs[i] then return true; end; end; end; if not who or not IsAllowed() or not wayTab.active then return; end; if wayTab.isCicle then main.NPC.list[who.playername].wayFinishPointNum = nil; end; local nextWayPoint; local currentWayPointNum = "..i.."; if wayTab.shortcut then nextWayPoint = func.way.Shortcut('"..wayName.."', who, nil, currentWayPointNum, wayTab.choseClosestPoint); end;"..onEnterFunc.." func.way.GotoNextTrig('"..wayName.."', who, "..tostring(existsNextPoint)..", "..nextWayPointNum..", nextWayPoint, currentWayPointNum); if currentWayPointNum == wayTab.points and not wayTab.isCicle then wayTab.allowedNPCs[func.Search(wayTab.allowedNPCs, who.playername)] = nil; if wayTab.killAfterEnter then func.NPC.KillWay('"..wayName.."'); end; end;", radius=wayTab.radius}) --"ourwarrior1_baseact_waytrig1"
+		actor("trigger", coordTab[i].x, coordTab[i].y, {name = wayName.."_waytrig"..i, on_enter = "local wayTab = level.ways['"..wayName.."']; local IsAllowed = function() for i = 1, #wayTab.allowedNPCs do if who.playername == wayTab.allowedNPCs[i] then return true; end; end; end; if not who or not IsAllowed() or not wayTab.active then return; end; if wayTab.isCicle then main.NPC.list[who.playername].wayFinishPointNum = nil; end; local nextWayPoint; local currentWayPointNum = "..i.."; if wayTab.shortcut then nextWayPoint = func.way.Shortcut('"..wayName.."', who, nil, currentWayPointNum, wayTab.choseClosestPoint); end;"..onEnterFunc.." func.way.GotoNextTrig('"..wayName.."', who, "..tostring(existsNextPoint)..", "..nextWayPointNum..", nextWayPoint, currentWayPointNum); if currentWayPointNum == wayTab.points and not wayTab.isCicle then wayTab.allowedNPCs[func.Search(wayTab.allowedNPCs, who.playername)] = nil; end; if wayTab.killAfterEnter then kill(self); end;", radius=wayTab.radius}) --"ourwarrior1_baseact_waytrig1"
 	end;
 end
 

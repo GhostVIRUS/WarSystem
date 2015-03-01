@@ -6,7 +6,8 @@
 -- Обработка события поднятия предмета.
 function level.OnPickup(name, item, character)
 	if level.screenplay.missionBoo == 1 and item == "battery" and character == const.playerName then
-		local energyCells = main.characters[const.playerName].inventory.items.battery + 1 or 0;
+		local energyCells = main.characters[const.playerName].inventory.items.battery or 0;
+		energyCells = energyCells + 1;
 --		level.screenplay.energyCells = level.screenplay.energyCells + 1; Думаю, следует сделать счётчик по батареям в инвентаре.
 		func.Message(func.Read({"map01", "energycells", 1}, energyCells, {"map01", "energycells", energyCells + 1}))
 		if energyCells == 4 then -- Если мы собрали все 4 батареи.
@@ -83,7 +84,7 @@ function level.SpeakToPlayer(npcName)
 		end;
 	end;
 
-	if speak == "settler" then
+	if speak == "settler" and not level.screenplay.isEnemyAttack then
 		if npcName == "ourwarrior5" and level.screenplay.ranonAttackedBandits then
 			func.object.Speak(object(npcName).vehname, {"map01", "settler_speaks", func.OrGate(math.random(6, 8), math.random(16, 17))})
 			return;
@@ -116,7 +117,7 @@ end
 function level.Door(action, silent)
 	if action == "sidedoor_open" then -- Если нужно открыть дверь в поселение...
 --		if level.functions.sidedoorStatus ~= 0 then return 0; end; -- Нужно, чтобы поселенцы смогли нормально проехать. Slava98. 12.06.14. 
---		if level.screenplay.halosHasGotBoo then level.Door("sidedoor_lagging") return; end;
+		if level.screenplay.halosHasGotBoos or level.screenplay.missionKey == 1 then level.Door("sidedoor_lagging") return; end;
 		if level.functions.sidedoorStatus == 4 then pushcmd(function() level.Door("sidedoor_open") end, 3) end;
 		level.functions.sidedoorStatus = 2;
         pushcmd(function()     
@@ -165,8 +166,10 @@ function level.Door(action, silent)
 		level.functions.sidedoorStatus = 4;
 		pset("sidedoor_trig", "active", 0)
 		pset("c_trig", "on_enter", "level.CommSpeak(1, 6)")
-		func.NPC.StopAction("ourwarrior1", 0)
-		pushcmd(function() func.NPC.SetAim("ourwarrior1", 30, 12, "func.Message({'map01', 'settler_dlg', 7})", true, "", false, true) end, 1)		
+		func.NPC.StopWay("ourwarrior1")
+		pushcmd(function() 
+			func.NPC.SetAim("ourwarrior1", 30, 12, true, {on_enter="level.SettlerSpeak('door_lagging')"})
+		end, 1)		
 --  	pset("sidedoor_lag_trig", "active", 1)
 --[[	level.screenplay.player_knows_that_door_is_close = true
 		pset("c_trig", "active", 1)
@@ -303,7 +306,12 @@ function level.GetMissionBoo()
 	kill("weapons_obj") -- Это тоже неплохо бы изменить.
 	for i = 1, 3 do kill("powersheild4_obj"..i) end;
 
-	pushcmd(function() pset("c_trig", "active", 1) end, 20)
+	pushcmd(function() pset("c_trig", "active", 1) end, 10)
+end
+
+function level.GetMissionKey()
+	kill("weapons_obj") -- Это тоже неплохо бы изменить.
+	for i = 1, 3 do kill("powersheild4_obj"..i) end;
 end
 
 -- Вылезающие турели при взятии батареи из секретного хранилища.
@@ -434,20 +442,17 @@ function level.PlayerDetect()
 	end;
 end
 
-function level.DoorRepairerCall()
-	pushcmd(function()
-		kill("saron1")
-		for i = 1, 3 do kill("a"..i) end
-		func.NPC.Create("door_repairer", "", "Ремонтник", "ekivator1", "eskavator", 1, "none", 1, 1, 1851, 51, 1.5708)
-	end, 0.1)
+function level.UpLaserOpen(timer)
+	timer = timer or 4
+
+	kill("settle_obj3")
+	for i = 1, 3 do kill("powersheild3_obj"..i) end
+
 	pushcmd(function() 
-		func.NPC.SetAim("door_repairer", 55, 17, "func.NPC.Action('door_repairer', nil, 30, 18, true)", true, "", false, true)
-	end, 2.5)
-	pushcmd(function() 
-		func.ObjectPaste(level.objects.saron1)
-		func.ObjectPaste(level.objects.a1)
-		func.ObjectPaste(level.objects.a2)
-		func.ObjectPaste(level.objects.a3)
+		func.ObjectPaste(level.objects.settle_obj3)
+		func.ObjectPaste(level.objects.powersheild3_obj1)
+		func.ObjectPaste(level.objects.powersheild3_obj2)
+		func.ObjectPaste(level.objects.powersheild3_obj3)
 	end, 4)
 end
 

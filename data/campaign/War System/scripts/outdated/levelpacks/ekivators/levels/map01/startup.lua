@@ -65,10 +65,10 @@ level.attackSpeaks = {
 };
 
 -- Запоминаем объекты, которые потом будем убирать и возвращать обратно. Slava98. 28.05.13.
-level.objects.saron1 = func.ObjectCopy("saron1");
-level.objects.a1 = func.ObjectCopy("a1");
-level.objects.a2 = func.ObjectCopy("a2");
-level.objects.a3 = func.ObjectCopy("a3");
+level.objects.settle_obj3 = func.ObjectCopy("settle_obj3");
+level.objects.powersheild3_obj1 = func.ObjectCopy("powersheild3_obj1");
+level.objects.powersheild3_obj2 = func.ObjectCopy("powersheild3_obj2");
+level.objects.powersheild3_obj3 = func.ObjectCopy("powersheild3_obj3");
 
 func.Play("mus5") -- Включаем музыку.
 loadtheme(const.campDir.."/textures/map01.lua") -- Загружаем текстуры.
@@ -106,6 +106,9 @@ func.GiveItem("battery", "statue")
 
 --Пока отключу, а то раздражает. Slava98.
 --func.dialog.Show("welcome", "map01", 1, "", "func.dialog.Show('welcome', 'map01', 2, '', '', 'OK')", "OK")
+pushcmd(function() 
+	func.MsgBox({"map01", "welcome", 3}, {"if n==1 then main.characters[const.playerName].devices.isActivated['arc'] = not main.characters[const.playerName].devices.isActivated['arc'] end", "Да", "Нет"}, "msbox")
+end, 3)
 
 --Далее создаём различные триггеры.
 actor("trigger", 656, 256, {name="hint_trig1", only_human=1, radius=4, active=1, on_enter="func.Message({'map01', 'promt', 1}); kill(self)"})
@@ -133,7 +136,7 @@ actor("trigger", 256, 900, {name="excstare_trig", only_human=1, only_visible=0; 
 actor("trigger", 734, 1384, {name="hiddenturret_trig", only_human=1, radius=1, active=1, only_visible=1, on_enter="level.HiddenTurretActivate(); kill(self)"})
 actor("trigger", 624, 1688, {name="settlerkey_trig", only_human=1, radius=10, active=1, on_enter="level.screenplay.SettlerGetKey('call')"})
 actor("trigger", 2200, 1000, {name="settler_near_ruins_trig", only_human=1, radius=10, active=1, on_enter="if not level.screenplay.playerCanRideToSettle then level.screenplay.SettlerNearRuins('call') end"})
-actor("trigger", 2098, 69, {name="change_halos_name_trig", only_human=1, radius=2, active=1, on_enter="object('ourwarrior3').nick = func.Read({'map01', 'nicks', 2}); kill(self)"})
+--actor("trigger", 2098, 69, {name="change_halos_name_trig", only_human=1, radius=2, active=1, on_enter="object('ourwarrior3').nick = func.Read({'map01', 'nicks', 2}); kill(self)"})
 actor("trigger", 1998, 1703, {name="teleport_ranon_trig1", only_human=1, radius=10, active=1, on_enter="setposition('ourwarrior5_tank', 72, 586); object(self).active=0;"})
 actor("trigger", 799, 544, {name="settler_is_out_settle_trig", radius=3, active=1, on_enter="for i = 1, 4 do if object(who).playername == 'ourwarrior'..i then local npcTab = main.NPC.list[object(who).playername]; npcTab.currentWay = 'settler_return'; end; end"})
 actor("trigger", 855, 420, {name="infolink_settle_trig", on_shot="level.InfolinkOnDamage('settle')"})

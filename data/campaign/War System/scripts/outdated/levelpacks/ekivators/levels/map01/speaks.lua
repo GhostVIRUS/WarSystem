@@ -6,8 +6,8 @@ function level.CommSpeak(part, a)
 		if a == 1 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 2) elseif n==2 then level.CommSpeak(0, 15) elseif n==3 then level.CommSpeak(0, 7) end", "1", "2", "3"}, "dlgbox"); object("ourwarrior3").nick = func.Read({"map01", "nicks", 2})
 		elseif a == 2 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 14) elseif n==3 then level.CommSpeak(0, 6) end", "1", "2", "3"}, "dlgbox")
 		elseif a == 3 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 13) elseif n==2 then level.CommSpeak(0, 14) end", "1", "2"}, "dlgbox")
-		elseif a == 4 then func.MsgBox({"map01", "halos1", a}, {"level.screenplay.missionKey=1;level.CommSpeak('exit')"}, "dlgbox")
-		elseif a == 5 then func.MsgBox({"map01", "halos1", a}, {"level.screenplay.missionKey=1;level.CommSpeak('exit')"}, "dlgbox")
+		elseif a == 4 then func.MsgBox({"map01", "halos1", a}, {"level.GetMissionKey(); level.screenplay.missionKey=1;level.CommSpeak('exit')"}, "dlgbox")
+		elseif a == 5 then func.MsgBox({"map01", "halos1", a}, {"level.GetMissionKey(); level.screenplay.missionKey=1;level.CommSpeak('exit')"}, "dlgbox")
 		elseif a == 6 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 14) elseif n==3 then level.CommSpeak(0, 7) end", "1", "2", "3"}, "dlgbox")
 		elseif a == 7 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 14) elseif n==3 then level.CommSpeak(0, 8) end", "1", "2", "3"}, "dlgbox")
 		elseif a == 8 then func.MsgBox({"map01", "halos1", a}, {"if n==1 then level.CommSpeak(0, 3) elseif n==2 then level.CommSpeak(0, 14) elseif n==3 then level.CommSpeak(0, 9) end", "1", "2", "3"}, "dlgbox")
@@ -55,7 +55,6 @@ function level.CommSpeak(part, a)
 					level.screenplay.halosHasGotBoos = true;
 --					level.screenplay.missionBoo = 3;
 					level.Door("warehouse_open")
-					message("Конец играбельной части.")
 				else
 					if level.functions.sidedoorStatus ~= 4 then
 						pset("c_trig", "on_enter", "level.CommSpeak(1, 5)")
@@ -96,7 +95,7 @@ function level.SettlerSpeak(a)
 	elseif a == "angry" then func.object.Speak("ourwarrior1_tank", "map01", "settler_cutSceneSpeaks", 2); level.screenplay.SettlerCall(a); --level.RioterAttack(3)   
 	elseif a == 5 then func.MsgBox({"map01", "settler_dlg", a}, {"level.TerminalSpeak('settle', 4)", "1"}, "dlgbox")
 	elseif a == "door_lagging" then
-		func.object.Speak("ourwarrior1_tank", {"map01", "settler_cutSceneSpeaks", 4}, 2.5)
+		func.object.Speak("ourwarrior1_tank", {"map01", "settler_cutSceneSpeaks", 4}, 1)
 		pushcmd(function()
 			func.object.Speak("ourwarrior1_tank", {"map01", "settler_cutSceneSpeaks", 5})
 		end, 4)

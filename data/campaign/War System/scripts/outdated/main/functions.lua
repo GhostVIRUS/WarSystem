@@ -384,13 +384,13 @@ function func.object.borderTrigger.Create(btName, objName, trigTab, btTab)
 		local btTab = level.objects[btName];
 		if not btTab or not exists(objName) then if func.object.borderTrigger.Exists(btName) then func.object.borderTrigger.Kill(btName) end; return; end;
 		if multitriggerMode then -- Объект должен управлять и несколькими триггерами, это необходимо предусмотреть. Slava98. 02.01.14.
-		btTab.objName = {}; -- В данном случае придётся сделать имя массивом. Это не критично, всё равно мы только публикуем туда данные. Slava98. 02.01.14.
-			for i = 1, 4 do
-				x, y = position(objName);
-				CorrectTrigPosition(i)
-				setposition(trigName..i, x, y)
-				btTab.objName[i] = trigName..i;
-			end;
+			btTab.objName = {}; -- В данном случае придётся сделать имя массивом. Это не критично, всё равно мы только публикуем туда данные. Slava98. 02.01.14.
+				for i = 1, 4 do
+					x, y = position(objName);
+					CorrectTrigPosition(i)
+					setposition(trigName..i, x, y)
+					btTab.objName[i] = trigName..i;
+				end;
 		else
 			x, y = position(objName); -- Обновляем позицию объекта. Slava98. 02.01.14.
 			setposition(trigTab.name, x, y)
@@ -1794,8 +1794,8 @@ function func.NPC.Create(npcName, x, y, dir, team, spawnTeam, tankTab, charTab, 
 		pursueEnemy = true, -- Прекратить ли атаковать цель, если она выехала за определённый радиус.
 		onComming = "", -- Выполняется при приближении к врагу (если attackMode = 'goto_aim').
 		onAttack = "", -- Выполняется при атаке.
-		detectRadius = 7, -- Расстояние, на котором NPC может заменить врага. Пока не используется.
-		detectRadiusDelta = 6, -- Расстояние, на котором NPC теряет врага из поля зрения. Пока не используется.
+		detectRadius = 6, -- Расстояние, на котором NPC может заменить врага. Пока не используется.
+		detectRadiusDelta = 3, -- Расстояние, на котором NPC теряет врага из поля зрения. Пока не используется.
 		commingRadius = 2, -- Расстояние от врага, на котором срабатывает onComming (если attackMode = 'goto_aim').
 		callAllies = true, -- Будет ли NPC звать союзников при атаке.
 		callAlliesMaxDistance = 10, -- Расстояние, на котором NPC может слышать и звать союзников.
@@ -1923,8 +1923,8 @@ function func.NPC.Create(npcName, x, y, dir, team, spawnTeam, tankTab, charTab, 
 			object(tankName).on_damage = healFunc..useBatteryFunc..attackFunc..object(tankName).on_damage;
 			debug.Print("| "..tankName.." was spawned")
 			
-			func.object.borderTrigger.Create(tankName.."_enemydetect_leave", tankName, {on_enter="if who~=nil and exists('"..npcName.."') and exists(who.playername) and object(who.playername).team~=object('"..npcName.."').team and main.NPC.list['"..npcName.."'].pursueEnemy and main.NPC.list['"..npcName.."'].enemyDetectMode then npcTab = main.NPC.list['"..npcName.."']; if npcTab.canAttackBlindfold and not npcTab.seeTarget then return; end; func.NPC.Attack('attack', '"..npcName.."', who, 0.2); npcTab.seeTarget = false; end;"; only_human=0, radius=npcTab.detectRadius}, {dir=6, length=1})
-			func.object.borderTrigger.Create(tankName.."_enemydetect", tankName, {on_enter="if who~=nil and exists('"..npcName.."') and exists(who.playername) and object(who.playername).team~=object('"..npcName.."').team then func.NPC.Attack('stop', '"..npcName.."', who); main.NPC.list['"..npcName.."'].seeTarget = true; end;"; only_human=0, radius=npcTab.detectRadiusDelta}, {dir=6, length=1})
+			func.object.borderTrigger.Create(tankName.."_enemydetect_leave", tankName, {on_enter="if who~=nil and exists('"..npcName.."') and exists(who.playername) and object(who.playername).team~=object('"..npcName.."').team and main.NPC.list['"..npcName.."'].pursueEnemy and main.NPC.list['"..npcName.."'].enemyDetectMode then npcTab = main.NPC.list['"..npcName.."']; if npcTab.canAttackBlindfold and not npcTab.seeTarget then return; end; func.NPC.Attack('attack', '"..npcName.."', who, 0.2); npcTab.seeTarget = false; end;"; only_human=0, radius=1}, {dir=6, length=func.Get32(npcTab.detectRadius)})
+			func.object.borderTrigger.Create(tankName.."_enemydetect", tankName, {on_enter="if who~=nil and exists('"..npcName.."') and exists(who.playername) and object(who.playername).team~=object('"..npcName.."').team then func.NPC.Attack('stop', '"..npcName.."', who); main.NPC.list['"..npcName.."'].seeTarget = true; end;"; only_human=0, radius=1}, {dir=6, length=func.Get32(npcTab.detectRadiusDelta)})
 		end;
 	end, 2.2)
 end
@@ -1955,9 +1955,11 @@ end
 function func.NPC.FollowWay(npcName, wayName, finishPointNum, onEnterFunc, onFinalFunc, wayPointNum, refresh)
 --	Обработчик ошибок (написать).
 
-	if not wayName and (not main.NPC.list[npcName].mainWay or main.NPC.list[npcName].mainWay == "") then return; end;
+--	if not wayName and (not main.NPC.list[npcName].mainWay or main.NPC.list[npcName].mainWay == "") then return; end;
 	if refresh == nil then refresh = true; end;
 	local wayName = wayName or main.NPC.list[npcName].currentWay or main.NPC.list[npcName].mainWay;
+	if not wayName or wayName == "" then return end
+	
 	local wayPointNum = wayPointNum or 1;
 	local vehObj = object(object(npcName).vehname);
 --	local finishPoint = finishPoint or wayName.."_waytrig"..level.ways[wayName].points; 
@@ -1977,6 +1979,7 @@ end
 
 function func.NPC.StopWay(npcName)
 	local wayName = main.NPC.list[npcName].currentWay;
+	main.NPC.list[npcName].currentWay = "";
 	for i = 1, #level.ways[wayName].allowedNPCs do
 		if level.ways[wayName].allowedNPCs[i] == npcName then table.remove(level.ways[wayName].allowedNPCs, func.Search(level.ways[wayName].allowedNPCs, npcName)) end;
 	end;
@@ -2320,7 +2323,7 @@ function func.way.Create(wayName, coordTab, g32, wayTab)--onEnterFunc, killAfter
 --		if i ~= #coordTab or i == #coordTab and wayTab.isCicle then existsNextPoint = true; end; --gotoNextTrigFunc = "; for i = 1, #level.ways['"..wayName.."'].allowedNPCs do if who.playername == level.ways['"..wayName.."'].allowedNPCs[i] then local npcName = level.ways['"..wayName.."'].allowedNPCs[i]; nextWayPoint = nextWayPoint or '"..wayName.."_waytrig"..nextWayPointNum.."'; main.NPC.list[npcName].nextWayPoint = nextWayPoint; local x, y = position(nextWayPoint); ai_march(npcName, x, y) end; end; "; end;
 --		if wayTab.shortcut then shortcutFunc = "; local trigCoordTab = {}; local tankCoordTab = {position(who.name)}; local lengthTab = {}; for i = 1, level.ways['"..wayName.."'].points do trigCoordTab[i] = {}; trigCoordTab[i].x, trigCoordTab[i].y = position('"..wayName.."_waytrig'..i); lengthTab[i] = math.sqrt((tankCoordTab[1] - trigCoordTab[i].x)^2 + (tankCoordTab[2] - trigCoordTab[i].y)^2); end; local nextWayPoint = '"..wayName.."_waytrig'..func.ArrayMin(lengthTab); a = lengthTab"; end;
 
-		actor("trigger", coordTab[i].x, coordTab[i].y, {name = wayName.."_waytrig"..i, on_enter = "local wayTab = level.ways['"..wayName.."']; local IsAllowed = function() for i = 1, #wayTab.allowedNPCs do if who.playername == wayTab.allowedNPCs[i] then return true; end; end; end; if not who or not IsAllowed() or not wayTab.active then return; end; if wayTab.isCicle then main.NPC.list[who.playername].wayFinishPointNum = nil; end; local nextWayPoint; local currentWayPointNum = "..i.."; if wayTab.shortcut then nextWayPoint = func.way.Shortcut('"..wayName.."', who, nil, currentWayPointNum, wayTab.choseClosestPoint); end;"..onEnterFunc.." func.way.GotoNextTrig('"..wayName.."', who, "..tostring(existsNextPoint)..", "..nextWayPointNum..", nextWayPoint, currentWayPointNum); if currentWayPointNum == wayTab.points and not wayTab.isCicle then wayTab.allowedNPCs[func.Search(wayTab.allowedNPCs, who.playername)] = nil; end; if wayTab.killAfterEnter then kill(self); end;", radius=wayTab.radius}) --"ourwarrior1_baseact_waytrig1"
+		actor("trigger", coordTab[i].x, coordTab[i].y, {name = wayName.."_waytrig"..i, on_enter = "local wayTab = level.ways['"..wayName.."']; local IsAllowed = function() for i = 1, #wayTab.allowedNPCs do if who.playername == wayTab.allowedNPCs[i] then return true; end; end; end; if not who or not IsAllowed() or not wayTab.active then return; end; if main.NPC.list[who.playername].currentWay ~= '"..wayName.."' then return; end; if wayTab.isCicle then main.NPC.list[who.playername].wayFinishPointNum = nil; end; local nextWayPoint; local currentWayPointNum = "..i.."; if wayTab.shortcut then nextWayPoint = func.way.Shortcut('"..wayName.."', who, nil, currentWayPointNum, wayTab.choseClosestPoint); end;"..onEnterFunc.." func.way.GotoNextTrig('"..wayName.."', who, "..tostring(existsNextPoint)..", "..nextWayPointNum..", nextWayPoint, currentWayPointNum); if currentWayPointNum == wayTab.points and not wayTab.isCicle then wayTab.allowedNPCs[func.Search(wayTab.allowedNPCs, who.playername)] = nil; end; if wayTab.killAfterEnter then kill(self); end;", radius=wayTab.radius}) --"ourwarrior1_baseact_waytrig1"
 	end;
 end
 

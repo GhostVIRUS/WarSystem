@@ -13,6 +13,7 @@ function Container:initialize(pos, entities, id) -- entities = objects that cont
 	self._id = id
 	self._pos = pos
 	self._entities = entities or {}
+	self._incontainerPos = {}
 	self:_calcuateIncontainerPos()
 end
 

@@ -41,8 +41,8 @@ dbg.Print("| Requiring 'Concrete' class.", "objects")
 Concrete = objects.Class('Concrete', Wall)
 
 -- public methods
-function Concrete:initialize(name, pos, props)
-	Wall.initialize(self, name, pos, props)
+function Concrete:initialize(--[[name,]] pos, props)
+	Wall.initialize(self,--[[ name,]] pos, props)
 
 	self._objectType = "wall_concrete"
 	
@@ -62,8 +62,8 @@ dbg.Print("| Requiring 'Brick' class.")
 Brick = objects.Class('Brick', Wall)
 
 -- public methods
-function Brick:initialize(name, pos, props)
-	Wall.initialize(self, name, pos, props)
+function Brick:initialize(--[[name,]] pos, props)
+	Wall.initialize(self,--[[ name,]] pos, props)
 
 	self._objectType = "wall_brick"
 	

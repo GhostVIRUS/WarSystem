@@ -23,6 +23,9 @@ function Entity:initialize(--[[name,]] pos, props)
 	self._isMoving = false
 
 	self._texture = 'classic' -- for future
+	
+	pos.x = pos.x or pos[1] -- for lighter way to enter coords
+	pos.y = pos.y or pos[2]
 
 	return nil
 end

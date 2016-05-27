@@ -1,4 +1,6 @@
 return {
+ main = {
  {"Concrete", {10, 10}, {corner=4}},
  {"Concrete", {48, 80, 48, 307}},
+ }
 }
